@@ -1,0 +1,68 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body class="body">
+    <div class="container" >
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+        </div>
+        <div class="col-md-12 mx-auto">
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card-body">
+                         <div class="container mx-auto" >
+                              <img class="img-fluid" src="{% static 'img/add-user.png' %}" alt="Imagem Responsiva">
+                              <div class="card-body">
+                                    <a href="{% url 'cadastro_funcionario' %}" class="btn btn-primary">Cadastrar Funcionario</a>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                         <div class="container mx-auto" >
+                             <img class="img-fluid" src="{% static 'img/add-user.png' %}" alt="Imagem Responsiva">
+                             <div class="card-body">
+                                 <a href="{% url 'cadastro_docente' %}" class="btn btn-primary">Cadastrar Docente</a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                         <div class="container mx-auto" >
+                             <img class="card-img-top" src="{% static 'img/add-user.png' %}" alt="Card image cap">
+                             <div class="card-body">
+                                 <a href="{% url 'cadastro_discente' %}" class="btn btn-primary">Cadastrar Discente</a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                         <div class="container mx-auto" >
+                             <img class="img-fluid" src="{% static 'img/add-user.png' %}" alt="Imagem Responsiva">
+                             <div class="card-body">
+                                    <a href="{% url 'cadastro_disciplina' %}" class="btn btn-primary">Cadastrar Disciplina</a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                         <div class="container mx-auto" >
+                              <img class="img-fluid" src="{% static 'img/add-user.png' %}" alt="Imagem Responsiva">
+                              <div class="card-body">
+                                    <a href="{% url 'disciplinas' %}" class="btn btn-primary">Disciplinas Cadastradas</a>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+                        </div>
+        </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+    {% block content %}
+        <div class="container-fluid">
+            <div class="row" mx-auto>
+                <h1><b>{{ disciplina.nome }}</b></h1>
+                <div class="col-md-3 mx-auto">
+                    <p><b>Nome:</b> {{ disciplina.nome}}</p>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <p><b>Código Disciplina:</b>  {{ disciplina.codigo }}</p>
+                </div>
+                <div class="col-md-5 mx-auto">
+                    <p><b>Periodo:</b>  {{ disciplina.periodo }}</p></p>
+                </div>
+            </div>
+            <div class="row" mx-auto>
+                <div class="col-md-3 mx-auto">
+                    <p><b>Matricula Docente:</b>  {{ disciplina.matricula_docente }}</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="container-fluid py-1">
+            <div class="col-md-4 ml-auto"
+                <div class="row" >
+                    <div class="botao_voltar_excluir">
+                        <a href="{% url 'disciplinas' %}"class="btn btn-secondary btn-sm ">Voltar</a>
+                        <a href="{% url 'disciplina_delete' disciplina.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endblock content %}

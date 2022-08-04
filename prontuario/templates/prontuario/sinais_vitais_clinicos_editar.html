@@ -1,0 +1,105 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>SINAIS VITAIS CLÍNICOS</b>
+            </h1>
+            <form method="POST" action=".">
+                {% csrf_token %}
+                 <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Criado em:</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Antecedentes Familiares</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.antecedentes_familiares }}" name="antecedentes_familiares">{{ object.antecedentes_familiares }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Medicamentos em Uso</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.medicamentos_em_uso }}" name="medicamentos_em_uso">{{ object.medicamentos_em_uso }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Cirurgias Anteriores</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.cirurgias_anteriores }}" name="cirurgias_anteriores">{{ object.cirurgias_anteriores }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Cardiacos</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_cardiacos }}" name="problemas_cardiacos">{{ object.problemas_cardiacos }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Gastrointestinais</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_gastrointestinais }}" name="problemas_gastrointestinais">{{ object.problemas_gastrointestinais }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Alterações Sanguineas</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alteracoes_sanguineas }}" name="alteracoes_sanguineas">{{ object.alteracoes_sanguineas }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Enfermidades Osseas</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.enfermidades_osseas }}" name="enfermidades_osseas">{{ object.enfermidades_osseas }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Pulmonares</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_pulmonares }}" name="problemas_pulmonares">{{ object.problemas_pulmonares }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Alergias</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alergias }}" name="alergias">{{ object.alergias }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Hábitos</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.habitos }}" name="habitos">{{ object.habitos }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.observacao }}" name="observacao">{{ object.observacao }}</textarea>
+                    </div>
+                </div>
+                <div class="mr-1 text-right">
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
+                    <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                        <span class="text">Voltar</span>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

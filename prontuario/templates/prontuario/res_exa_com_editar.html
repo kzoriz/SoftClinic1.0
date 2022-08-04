@@ -1,0 +1,52 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <b>ANAMNESE</b>
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Data</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" name="prontuario" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label></label>
+                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" value="{{ object.anamnese }}" name="anamnese">{{ object.anamnese }}</textarea>
+                    </div>
+                </div>
+                <div class="mr-1 text-right">
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
+                    <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-secondary text-white" type="text">Voltar
+
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

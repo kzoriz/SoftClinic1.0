@@ -1,0 +1,809 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Paciente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dados-medicos-tab" data-toggle="tab" href="#dados-medicos" role="tab" aria-controls="dados-medicos" aria-selected="false">Dados Medico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" id="saude-tab" data-toggle="tab" href="#saude" role="tab" aria-controls="saude" aria-selected="false">Saude</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" id="exam-tab" data-toggle="tab" href="#exam" role="tab" aria-controls="exam" aria-selected="false">Exame Físico IB</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="plan-tab" data-toggle="tab" href="#plan" role="tab" aria-controls="plan" aria-selected="false">Plano Tratamento</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="cond-tab" data-toggle="tab" href="#cond" role="tab" aria-controls="cond" aria-selected="false">Cond Oclusal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="odon-tab" data-toggle="tab" href="#odon" role="tab" aria-controls="odon" aria-selected="false">Odontograma</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="psr-tab" data-toggle="tab" href="#psr" role="tab" aria-controls="psr" aria-selected="false">PSR</a>
+              </li>
+            </ul>
+            <! ####### Dados Paciente ##########>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+                  <br>
+                  <form method="POST" action=".">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label  class="requiredField">Nome<span class="asteriskField">*</span> </label>
+                                <input type="text"  value="{{ object.nome }}" name="nome" class="textinput textInput form-control" id="id_nome_social">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Nome Social</label>
+                                <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Data de nascimento</label>
+                                <input type="text" class="form-control" value="{{ object.data_nascimento }}" name="data_nascimento" >
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Sexo Biologico</label>
+                                <div class="">
+                                    <select name="sexo_biologico" class="select form-control" id="id_sexo_biologico">
+                                        <option value="{{ object.sexo_biologico }}">{{ object.sexo_biologico }}</option>
+                                        <option value="MASCULINO">Masculino</option>
+                                        <option value="FEMININO">Feminino</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>RG</label>
+                            <input type="text" class="form-control" value="{{ object.rg}}" name="rg">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>CPF</label>
+                            <input type="text" class="form-control" value="{{ object.cpf }}" name="cpf">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Raça</label>
+                            <div class="">
+                                <select name="raca" class="select form-control">
+                                    <option value="{{ object.raca }}">{{ object.raca }}</option>
+                                    <option value="BRANCO">Branco</option>
+                                    <option value="PARDO">Pardo</option>
+                                    <option value="INDIGENA">Indígena</option>
+                                    <option value="AMARELO">Amarelo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Estado Civil</label>
+                            <div class="">
+                                <select name="estado_civil" class="select form-control">
+                                    <option value="{{ object.estado_civil }}">{{ object.estado_civil }}</option>
+                                    <option value="SOLTEIRO">SOLTEIRO</option>
+                                    <option value="CASADO">CASADO</option>
+                                    <option value="SEPARADO">SEPARADO</option>
+                                    <option value="DIVORCIADO">DIVORCIADO</option>
+                                    <option value="VIUVO">VIUVO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Grau de Instrução</label>
+                            <div class="">
+                                <select name="grau_instrucao" class="select form-control">
+                                    <option value="{{ object.grau_instrucao }}">{{ object.grau_instrucao }}</option>
+                                    <option value="Analfabeto">Analfabeto</option>
+                                    <option value="5º Ano Incompleto">5º Ano Incompleto</option>
+                                    <option value="5º Ano Completo">5º Ano Completo</option>
+                                    <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+                                    <option value="Fundamental Completo">Fundamental Completo</option>
+                                    <option value="Medio Incompleto">Médio Incompleto</option>
+                                    <option value="Médio Completo">Médio Completo</option>
+                                    <option value="Superior Incompleto">Superior Incompleto</option>
+                                    <option value="Superior Completo">Superior Completo</option>
+                                    <option value="Mestrado">Mestrado</option>
+                                    <option value="Doutorado">Doutorado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Endereço</label>
+                            <input type="text" class="form-control" value="{{ object.endereco }}" name="endereco">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Cep</label>
+                            <input type="text" class="form-control" value="{{ object.cep}}" name="cep">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Bairro</label>
+                            <input type="text" class="form-control" value="{{ object.bairro }}" name="bairro">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Cidade</label>
+                            <input type="text" class="form-control" value="{{ object.cidade }}" name="cidade">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>UF</label>
+                            <div class="">
+                                <select name="uf" class="select form-control">
+                                    <option value="{{ object.uf }}">{{ object.uf }}</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="TO">Tocantins</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control" value="{{ object.telefone_celular }}" name="telefone_celular">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Prontuario</label>
+                            <input type="text" class="form-control" value="{{ prontuario.num_prontuario }}" name="prontuario"disabled>
+                        </div>
+                    </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Informações Complementares</label>
+                    <textarea type="textarea" cols="40" rows="10" class="textarea form-control"  value="{{ object.informacoes_complementares }}" name="informacoes_complementares">{{ object.informacoes_complementares }}</textarea>
+                </div>
+            </div>
+                <div class="mr-1 text-right">
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
+                    <a href="{% url 'paciente_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                        <span class="text">Voltar</span>
+                    </a>
+                </div>
+
+                <div class="mr-1 text-right">
+                    <a href="{% url 'paciente_editar' object.pk %}" class="btn btn-warning text-white" type="button">
+                        <span class="text">Atualizar</span>
+                    </a>
+                    <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                        <span class="text">Voltar</span>
+                    </a>
+                    <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                        <span class="text">Excluir</span>
+                    </a>
+                </div>
+                </div>
+                <!########## Anamnese ###############>
+              <div class="tab-pane fade" id="dados-medicos" role="tabpanel" aria-labelledby="dados-medicos-tab">
+                  <br>
+                  <h1>{{ object.nome }}</h1>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>anamnese</label>
+                                <textarea type="textarea" cols="40" rows="10" class="textarea form-control"  value="{{ anam.anamnese }}" name="anamnese">{{ anam.anamnese }}</textarea>
+                            </div>
+                        </div>
+                        <div class="mr-1 text-right">
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
+                    <a href="{% url 'paciente_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                        <span class="text">Voltar</span>
+                    </a>
+                </div>
+                  </form>
+
+            <div class="mr-1 text-right">
+                <a href="#" class="btn btn-warning text-white" type="button">
+                    <span class="text">Editar Paciente</span>
+                </a>
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+            </div>
+              </div>
+                <!######## MEDICAMENTOS #############>
+              <div class="tab-pane fade" id="medicamentos" role="tabpanel" aria-labelledby="medicamentos-tab">
+                  <br>
+                  <h1>{{ object.nome }}</h1>
+    		<form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ med.prontuario }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Medicamento</label>
+                        <input type="text" class="form-control" value="{{ med.medicamento }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Cirurgia Realizada</label>
+                        <input type="text" class="form-control" value="{{ med.cirur_real }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>DST</label>
+                        <input type="text" class="form-control" value="{{ med.dst }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Anticoncepcionais</label>
+                        <input type="text" class="form-control" value="{{ med.anticoncepcional }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Cardiopatias</label>
+                        <input type="text" class="form-control" value="{{ med.cardiopatia}}" disabled>
+                    </div>
+
+
+                </div>
+            </form>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Problemas Gastricos</label>
+                        <input type="text" class="form-control" value="{{ med.prob_gastri }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Problemas Pulmonares</label>
+                        <input type="text" class="form-control" value="{{ med.prob_pulmo }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Alterações Sanguineas</label>
+                        <input type="text" class="form-control" value="{{ med.alt_sang }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Infermidades Osséa Inflamatorias</label>
+                        <input type="text" class="form-control" value="{{ med.enf_ossea_infla}}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Hábitos</label>
+                        <input type="text" class="form-control" value="{{ med.habitos }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Alergias</label>
+                        <input type="text" class="form-control" value="{{ med.alergias }}" disabled>
+                    </div>
+                </div>
+                <!--
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>UF</label>
+                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ prontuario.num_prontuario}}" disabled>
+                    </div>
+                </div>
+                -->
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'med_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Editar Paciente</span>
+                </a>
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+                <!--
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                -->
+            </div>
+              </div>
+               <!########### SAUDE ###############>
+                <div class="tab-pane fade" id="saude" role="tabpanel" aria-labelledby="saude-tab">
+                    <br>
+                    <h1>{{ object.nome }}</h1>
+    		<form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ sau.prontuario }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Diabetes</label>
+                        <input type="text" class="form-control" value="{{ sau.diabetes }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Gravida</label>
+                        <input type="text" class="form-control" value="{{ sau.gravida }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Planeja Gravidez</label>
+                        <input type="text" class="form-control" value="{{ sau.plan_grav }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Hipertensão</label>
+                        <input type="text" class="form-control" value="{{ sau.hipertensao }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Sangramento</label>
+                        <input type="text" class="form-control" value="{{ sau.sangramento}}" disabled>
+                    </div>
+
+
+                </div>
+            </form>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Epilepsia</label>
+                        <input type="text" class="form-control" value="{{ sau.epilepsia }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Problemas Renais</label>
+                        <input type="text" class="form-control" value="{{ sau.prob_ren }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Doença Mental</label>
+                        <input type="text" class="form-control" value="{{ sau.doenc_mental }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Radio Terapia</label>
+                        <input type="text" class="form-control" value="{{ sau.rad_terapia }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Quimioterapia</label>
+                        <input type="text" class="form-control" value="{{ sau.qui_terapia }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Hepatite</label>
+                        <input type="text" class="form-control" value="{{ sau.hepatite }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Articulações</label>
+                        <input type="text" class="form-control" value="{{ sau.articulacao }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Prótese</label>
+                        <input type="text" class="form-control" value="{{ sau.protese }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>HIV</label>
+                        <input type="text" class="form-control" value="{{ sau.hiv }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Fumante</label>
+                        <input type="text" class="form-control" value="{{ sau.fumante }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Herpes</label>
+                        <input type="text" class="form-control" value="{{ sau.herpes }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Bebida</label>
+                        <input type="text" class="form-control" value="{{ sau.bebida }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Informações Adicionais</label>
+                        <input type="text" class="form-control" value="{{ sau.inf_add }}" disabled>
+                    </div>
+                    <!--
+                    <div class="form-group col-md-4">
+                        <label>Prótese</label>
+                        <input type="text" class="form-control" value="{{ sau.protese }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>HIV</label>
+                        <input type="text" class="form-control" value="{{ sau.hiv }}" disabled>
+                    </div>
+                    -->
+                </div>
+                <!--
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>UF</label>
+                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ prontuario.num_prontuario}}" disabled>
+                    </div>
+                </div>
+                -->
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'sau_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Editar Paciente</span>
+                </a>
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+                <!--
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                -->
+            </div>
+                </div>
+                <!-######### Exame Fisico IB ######### ->
+                <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
+                    <br>
+
+                      <h1>{{ object.nome }}</h1>
+
+    		<form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ sau.prontuario }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>ATM</label>
+                        <input type="text" class="form-control" value="{{ exam.atm }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Labio Superior</label>
+                        <input type="text" class="form-control" value="{{ exam.lab_sup }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Labio Inferior</label>
+                        <input type="text" class="form-control" value="{{ exam.lab_inf }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Comissura Labial</label>
+                        <input type="text" class="form-control" value="{{ exam.com_labial }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Mucosa Jugal</label>
+                        <input type="text" class="form-control" value="{{ exam.muc_jugal }}" disabled>
+                    </div>
+                </div>
+            </form>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Palado Duro</label>
+                        <input type="text" class="form-control" value="{{ exam.palato_duro }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Palato Mole</label>
+                        <input type="text" class="form-control" value="{{ exam.palato_mole }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Tonsilas</label>
+                        <input type="text" class="form-control" value="{{ exam.tonsilas }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Higiene Oral</label>
+                        <input type="text" class="form-control" value="{{ exam.hig_oral }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Sangramento Gengival</label>
+                        <input type="text" class="form-control" value="{{ exam.sang_gengival }}" disabled>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Calculo</label>
+                        <input type="text" class="form-control" value="{{ exam.calculo }}" disabled>
+                    </div>
+                </div>
+            </form>
+             <div class="mr-1 text-right">
+                <a href="{% url 'exam_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Editar Paciente</span>
+                </a>
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+                <!--
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                -->
+            </div>
+                </div>
+                <! ######### Plano Tratamento ###########>
+                <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+                    <br>
+
+                      <h1>{{ object.nome }}</h1>
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Prontuário</label>
+                                <input type="text" class="form-control" value="{{ plan.prontuario }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Região do Dente</label>
+                                <input type="text" class="form-control" value="{{ plan.reg_dente }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Procedimento</label>
+                                <input type="text" class="textarea form-control" value="{{ plan.procedimento }}" disabled>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Higiene Oral</label>
+                                <input type="text" class="form-control" value="{{ exam.hig_oral }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sangramento Gengival</label>
+                                <input type="text" class="form-control" value="{{ exam.sang_gengival }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Calculo</label>
+                                <input type="text" class="form-control" value="{{ exam.calculo }}" disabled>
+                            </div>
+                        </div>
+                        -->
+                    </form>
+                    <div class="mr-1 text-right">
+                        <a href="{% url 'plan_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                            <span class="text">Editar Paciente</span>
+                        </a>
+                        <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                            <span class="text">Voltar</span>
+                        </a>
+                        <!--
+                        <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                            <span class="text">Excluir</span>
+                        </a>
+                        -->
+                    </div>
+                </div>
+                <! ######### Cond Oclusal ###########>
+                <div class="tab-pane fade" id="cond" role="tabpanel" aria-labelledby="cond-tab">
+                    <br>
+
+                      <h1>{{ object.nome }}</h1>
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Prontuário</label>
+                                <input type="text" class="form-control" value="{{ cond.prontuario }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Tipo CO</label>
+                                <input type="text" class="form-control" value="{{ cond.tipo_co }}" disabled>
+                            </div>
+                        </div>
+                        <!--
+                            <div class="form-group col-md-4">
+                                <label>Procedimento</label>
+                                <input type="text" class="form-control" value="{{ plan.procedimento }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Higiene Oral</label>
+                                <input type="text" class="form-control" value="{{ exam.hig_oral }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sangramento Gengival</label>
+                                <input type="text" class="form-control" value="{{ exam.sang_gengival }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Calculo</label>
+                                <input type="text" class="form-control" value="{{ exam.calculo }}" disabled>
+                            </div>
+                        </div>
+                        -->
+                    </form>
+                    <div class="mr-1 text-right">
+                        <a href="#" class="btn btn-warning text-white" type="button">
+                            <span class="text">Editar Paciente</span>
+                        </a>
+                        <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                            <span class="text">Voltar</span>
+                        </a>
+                        <!--
+                        <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                            <span class="text">Excluir</span>
+                        </a>
+                        -->
+                    </div>
+                </div>
+                <! ######### Odontograma ###########>
+                <div class="tab-pane fade" id="odon" role="tabpanel" aria-labelledby="odon-tab">
+                    <br>
+
+                      <h1>{{ object.nome }}</h1>
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Prontuário</label>
+                                <input type="text" class="form-control" value="{{ odon.prontuario }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Dente</label>
+                                <input type="text" class="form-control" value="{{ odon.dente }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Condição</label>
+                                <input type="text" class="form-control" value="{{ odon.condicao }}" disabled>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Higiene Oral</label>
+                                <input type="text" class="form-control" value="{{ exam.hig_oral }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sangramento Gengival</label>
+                                <input type="text" class="form-control" value="{{ exam.sang_gengival }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Calculo</label>
+                                <input type="text" class="form-control" value="{{ exam.calculo }}" disabled>
+                            </div>
+                        </div>
+                        -->
+                    </form>
+                    <div class="mr-1 text-right">
+                        <a href="#" class="btn btn-warning text-white" type="button">
+                            <span class="text">Editar Paciente</span>
+                        </a>
+                        <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                            <span class="text">Voltar</span>
+                        </a>
+                        <!--
+                        <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                            <span class="text">Excluir</span>
+                        </a>
+                        -->
+                    </div>
+                </div>
+                 <! ######### PSR ###########>
+                <div class="tab-pane fade" id="psr" role="tabpanel" aria-labelledby="psr-tab">
+                    <br>
+                      <h1>{{ object.nome }}</h1>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Prontuário</label>
+                                <input type="text" class="form-control" value="{{ psr.prontuario }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sextante</label>
+                                <input type="text" class="form-control" value="{{ psr.sextante }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Classificação</label>
+                                <input type="text" class="form-control" value="{{ psr.classificacao }}" disabled>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Higiene Oral</label>
+                                <input type="text" class="form-control" value="{{ exam.hig_oral }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sangramento Gengival</label>
+                                <input type="text" class="form-control" value="{{ exam.sang_gengival }}" disabled>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Calculo</label>
+                                <input type="text" class="form-control" value="{{ exam.calculo }}" disabled>
+                            </div>
+                        </div>
+                        -->
+                    </form>
+                    <div class="mr-1 text-right">
+                        <a href="#" class="btn btn-warning text-white" type="button">
+                            <span class="text">Editar Paciente</span>
+                        </a>
+                        <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                            <span class="text">Voltar</span>
+                        </a>
+                        <!--
+                        <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                            <span class="text">Excluir</span>
+                        </a>
+                        -->
+                    </div>
+                </div>
+                <! ######### procedimento ###########>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

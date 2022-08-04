@@ -1,0 +1,208 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% block content%}
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"></h1>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h1 class="mb-3 text-primary">
+                <b>INFORMAÇÕES DO PACIENTE</b>
+            </h1>
+            <!--
+            <h4 class="mb-3 text-primary">
+                Formulário Para Registro de Novo Paciente
+            </h4>
+            <p class="mb-5 ml-1">
+                <small>
+                O asterisco (*) indica que o campo é obrigatório
+                </small>
+            </p>
+            -->
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Prontuario</label>
+                    <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Atualizado em:</label>
+                    <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Criado em:</label>
+                    <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label  class="requiredField">Nome<span class="asteriskField">*</span> </label>
+                    <input type="text"  value="{{ object.nome }}" name="nome" class="textinput textInput form-control" id="id_nome_social">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Nome Social</label>
+                    <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Data de nascimento</label>
+                    <input type="text" class="form-control" value="{{ object.data_nascimento }}" name="data_nascimento" >
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Sexo Biologico</label>
+                    <div class="">
+                        <select name="sexo_biologico" class="select form-control" id="id_sexo_biologico">
+                            <option value="{{ object.sexo_biologico }}">{{ object.sexo_biologico }}</option>
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>RG</label>
+                    <input type="text" class="form-control" value="{{ object.rg}}" name="rg">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>CPF</label>
+                    <input type="text" class="form-control" value="{{ object.cpf }}" name="cpf">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Raça</label>
+                    <div class="">
+                        <select name="raca" class="select form-control">
+                            <option value="{{ object.raca }}">{{ object.raca }}</option>
+                            <option value="BRANCO">Branco</option>
+                            <option value="PARDO">Pardo</option>
+                            <option value="INDIGENA">Indígena</option>
+                            <option value="AMARELO">Amarelo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Estado Civil</label>
+                    <div class="">
+                        <select name="estado_civil" class="select form-control">
+                            <option value="{{ object.estado_civil }}">{{ object.estado_civil }}</option>
+                            <option value="SOLTEIRO">SOLTEIRO</option>
+                            <option value="CASADO">CASADO</option>
+                            <option value="SEPARADO">SEPARADO</option>
+                            <option value="DIVORCIADO">DIVORCIADO</option>
+                            <option value="VIUVO">VIUVO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Grau de Instrução</label>
+                    <div class="">
+                        <select name="grau_instrucao" class="select form-control">
+                            <option value="{{ object.grau_instrucao }}">{{ object.grau_instrucao }}</option>
+                            <option value="Analfabeto">Analfabeto</option>
+                            <option value="5º Ano Incompleto">5º Ano Incompleto</option>
+                            <option value="5º Ano Completo">5º Ano Completo</option>
+                            <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+                            <option value="Fundamental Completo">Fundamental Completo</option>
+                            <option value="Medio Incompleto">Médio Incompleto</option>
+                            <option value="Médio Completo">Médio Completo</option>
+                            <option value="Superior Incompleto">Superior Incompleto</option>
+                            <option value="Superior Completo">Superior Completo</option>
+                            <option value="Mestrado">Mestrado</option>
+                            <option value="Doutorado">Doutorado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Endereço</label>
+                    <input type="text" class="form-control" value="{{ object.endereco }}" name="endereco">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Cep</label>
+                    <input type="text" class="form-control" value="{{ object.cep}}" name="cep">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" value="{{ object.bairro }}" name="bairro">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control" value="{{ object.cidade }}" name="cidade">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>UF</label>
+                    <div class="">
+                        <select name="uf" class="select form-control">
+                            <option value="{{ object.uf }}">{{ object.uf }}</option>
+                            <option value="AC">Acre</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="PR">Paraná</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="TO">Tocantins</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Telefone</label>
+                    <input type="text" class="form-control" value="{{ object.telefone_celular }}" name="telefone_celular">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Prontuario</label>
+                    <input type="text" class="form-control" value="{{ prontuario.num_prontuario }}" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Informações Complementares</label>
+                    <textarea type="textarea" cols="40" rows="10" class="textarea form-control"  value="{{ object.informacoes_complementares }}" name="informacoes_complementares">{{ object.informacoes_complementares }}</textarea>
+                </div>
+            </div>
+                <div class="mr-1 text-right">
+                    <a href="{% url 'paciente_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                        <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span>
+                        Cancelar
+                    </a>
+                     <button type="submit" class="btn btn-primary text-white ">OK</button>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content%}

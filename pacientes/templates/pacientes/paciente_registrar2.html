@@ -1,0 +1,317 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"></h1>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="mb-3 text-primary">
+                Formulário Para Registro de Novo Paciente
+            </h4>
+            <p class="mb-5 ml-1">
+                <small>
+                O asterisco (*) indica que o campo é obrigatório
+                </small>
+            </p>
+        <form method="post" action="{% url 'paciente_registrar' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>Nome </label>
+                    <input type="text" class="form-control" value="{{ object.nome }}" name="nome">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Nome Social</label>
+                    <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Data de nascimento</label>
+                    <input type="Date" class="form-control" id="id_data" value="{{ object.data_nascimento }}" name="data_nascimento">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Sexo Biologico</label>
+                    <div class="">
+                        <select name="sexo_biologico" class="select form-control" id="id_sexo_biologico">
+                            <option value="---------">---------</option>
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>RG</label>
+                    <input type="text" class="form-control" value="{{ object.rg}}" name="rg">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>CPF</label>
+                    <input type="text" class="form-control" id="id_cpf" value="{{ object.cpf }}" name="cpf">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Raça</label>
+                    <div class="">
+                        <select name="raca" class="select form-control">
+                            <option value="">---------</option>
+                            <option value="BRANCO">Branco</option>
+                            <option value="PARDO">Pardo</option>
+                            <option value="INDIGENA">Indígena</option>
+                            <option value="AMARELO">Amarelo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Estado Civil</label>
+                    <div class="">
+                        <select name="estado_civil" class="select form-control">
+                            <option value="">---------</option>
+                            <option value="SOLTEIRO">SOLTEIRO</option>
+                            <option value="CASADO">CASADO</option>
+                            <option value="SEPARADO">SEPARADO</option>
+                            <option value="DIVORCIADO">DIVORCIADO</option>
+                            <option value="VIUVO">VIUVO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Grau de Instrução</label>
+                    <div class="">
+                        <select name="grau_instrucao" class="select form-control">
+                            <option value="">---------</option>
+                            <option value="Analfabeto">Analfabeto</option>
+                            <option value="5º Ano Incompleto">5º Ano Incompleto</option>
+                            <option value="5º Ano Completo">5º Ano Completo</option>
+                            <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+                            <option value="Fundamental Completo">Fundamental Completo</option>
+                            <option value="Medio Incompleto">Médio Incompleto</option>
+                            <option value="Médio Completo">Médio Completo</option>
+                            <option value="Superior Incompleto">Superior Incompleto</option>
+                            <option value="Superior Completo">Superior Completo</option>
+                            <option value="Mestrado">Mestrado</option>
+                            <option value="Doutorado">Doutorado</option>
+                        </select>
+                    </div>
+                </div>
+                  <div class="form-group col-md-4">
+                    <label>Cep</label>
+                    <input type="text" class="form-control" id="id_cep" value="{{ object.cep}}" name="cep">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Logradouro</label>
+                    <input type="text" class="form-control" id="id_rua" value="{{ object.endereco }}" name="endereco">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" id="id_bairro" value="{{ object.bairro }}" name="bairro">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control" id="id_cidade" value="{{ object.cidade }}" name="cidade">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>UF</label>
+                    <div class="">
+                        <select name="uf" id="id_uf" class="select form-control">
+                            <option value="">---------</option>
+                            <option value="AC">Acre</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="PR">Paraná</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="TO">Tocantins</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Telefone</label>
+                    <input type="text" class="form-control" id="id_telefone" value="{{ object.telefone_celular }}" name="telefone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Prontuario</label>
+                    <input type="text" class="form-control" value="{{ prontuario.num_prontuario}}" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Informações Complementares</label>
+                    <textarea type="textarea" cols="40" rows="10" class="textarea form-control" value="{{ object.informacoes_complementares }}" name="informacoes_complementares"></textarea>
+                </div>
+            </div>
+                <div class="mr-1 text-right">
+                    <button type="submit" class="btn btn-primary text-white ">Cadastrar</button>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content%}
+{% block scripts %}
+<script type="text/javascript">
+
+$(function(){
+    function limpa_cpf() {
+                // Limpa valores do formulário de cep.
+                $("#id_cpf").val("");
+
+            }
+    //Executa a requisição quando o campo username perder o foco
+    $('#id_cpf').blur(function()
+    {
+        var cpf = $('#id_cpf').val().replace(/[^0-9]/g, '').toString();
+
+        if( cpf.length == 11 )
+        {
+            var v = [];
+
+            //Calcula o primeiro dígito de verificação.
+            v[0] = 1 * cpf[0] + 2 * cpf[1] + 3 * cpf[2];
+            v[0] += 4 * cpf[3] + 5 * cpf[4] + 6 * cpf[5];
+            v[0] += 7 * cpf[6] + 8 * cpf[7] + 9 * cpf[8];
+            v[0] = v[0] % 11;
+            v[0] = v[0] % 10;
+
+            //Calcula o segundo dígito de verificação.
+            v[1] = 1 * cpf[1] + 2 * cpf[2] + 3 * cpf[3];
+            v[1] += 4 * cpf[4] + 5 * cpf[5] + 6 * cpf[6];
+            v[1] += 7 * cpf[7] + 8 * cpf[8] + 9 * v[0];
+            v[1] = v[1] % 11;
+            v[1] = v[1] % 10;
+
+            //Retorna Verdadeiro se os dígitos de verificação são os esperados.
+            if ( (v[0] != cpf[9]) || (v[1] != cpf[10]) )
+            {
+                limpa_cpf();
+                alert('CPF inválido: ' + cpf);
+            }
+        }
+        else
+        {
+            limpa_cpf();
+            alert('CPF inválido:' + cpf);
+        }
+    });
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    <!-- Adicionando Javascript -->
+<script>
+    $(document).ready(function() {
+
+        function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+            $("#id_rua").val("");
+            $("#id_bairro").val("");
+            $("#id_cidade").val("");
+            $("#id_uf").val("");
+            $("#ibge").val("");
+        }
+
+        //Quando o campo cep perde o foco.
+        $("#id_cep").blur(function() {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = $(this).val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    $("#id_rua").val("...");
+                    $("#id_bairro").val("...");
+                    $("#id_cidade").val("...");
+                    $("#id_uf").val("...");
+                    $("#ibge").val("...");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                        if (!("erro" in dados)) {
+                            //Atualiza os campos com os valores da consulta.
+                            $("#id_rua").val(dados.logradouro);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_cidade").val(dados.localidade);
+                            $("#id_uf").val(dados.uf);
+                            $("#ibge").val(dados.ibge);
+                        } //end if.
+                        else {
+                            //CEP pesquisado não foi encontrado.
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        });
+    });
+
+    </script>
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+
+        $("#id_dat").mask("00/00/0000");
+        $('#id_cep').mask('00000-000');
+        $('#id_cpf').mask('000.000.000-00');
+        $('#id_telefone').mask('(00) 00000-0000');
+        });
+</script>
+<script src="{% static 'js/valida_cpf.js' %}"></script>
+
+{% endblock scripts %}

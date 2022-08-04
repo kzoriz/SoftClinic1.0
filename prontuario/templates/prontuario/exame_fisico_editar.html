@@ -1,0 +1,99 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>EXAME FÍSICO</b>
+            </h1>
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}"disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{object.updated_at}}" name="" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Criado em:</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Nódulos Linfáticos</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.nodulos_linfaticos }}" name="nodulos_linfaticos">{{ object.nodulos_linfaticos }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Amigdalas</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.amigdalas }}" name="amigdalas">{{ object.amigdalas }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Trigono Retromolar</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.trigono_retromolar }}" name="trigono_retromolar">{{ object.trigono_retromolar }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Palato Duro</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.palato_duro }}" name="palato_duro">{{ object.palato_duro }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Palato Mole</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.palato_mole }}" name="palato_mole">{{ object.palato_mole }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Lábios</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.labios }}" name="labios">{{ object.labios }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Pele</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.pele }}" name="pele">{{ object.pele }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>ATM</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.atm }}" name="atm">{{ object.atm }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Vestíbulo</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.vestibulo }}" name="vestibulo">{{ object.vestibulo }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Higiene Bucal</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.higiene_bucal }}" name="higiene_bucal">{{ object.higiene_bucal }}</textarea>
+                    </div>
+                </div>
+                <div class="mr-1 text-right">
+                    <a href="{% url 'exa_fis_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                        <span class="text">Cancelar</span>
+                    </a>
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

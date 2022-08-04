@@ -1,0 +1,128 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>INFORMAÇÕES DO PACIENTE</b>
+            </h1>
+            <form>
+                <div class="form-row">
+                   <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}"  disabled>
+                   </div>
+                   <div class="form-group col-md-4">
+                        <label>Criado em:</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}"  disabled>
+                   </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" value="{{ object.nome}}" name="nome" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Nome Social</label>
+                        <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Data de nascimento</label>
+                        <input type="text" class="form-control" value="{{ object.data_nascimento }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Sexo Biologico</label>
+                        <input type="text" class="form-control" value="{{ object.sexo_biologico }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>RG</label>
+                        <input type="text" class="form-control" value="{{ object.rg}}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>CPF</label>
+                        <input type="text" class="form-control" value="{{ object.cpf }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Raça</label>
+                        <input type="text" class="form-control" value="{{ object.raca}}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Estado Civil</label>
+                        <input type="text" class="form-control" value="{{ object.estado_civil }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Grau de instrução</label>
+                        <input type="text" class="form-control" value="{{ object.grau_instrucao }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Endereço</label>
+                        <input type="text" class="form-control" value="{{ object.endereco }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Cep</label>
+                        <input type="text" class="form-control" value="{{ object.cep}}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Bairro</label>
+                        <input type="text" class="form-control" value="{{ object.bairro }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Cidade</label>
+                        <input type="text" class="form-control" value="{{ object.cidade }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>UF</label>
+                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ prontuario }}" disabled>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Informações Complementares</label>
+                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" value="{{ object.informacoes_complementares }}" disabled>{{ object.informacoes_complementares }}</textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+                <a href="{% url 'paciente_editar' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Atualizar</span>
+                </a>
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Proximo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

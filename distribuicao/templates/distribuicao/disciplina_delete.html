@@ -1,0 +1,20 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="col-md-6 mx-auto">
+        <h3><b>Excluir Disciplina</b></h3>
+        <p class="lead">Tem certeza que deseja excluir a Disciplina?</p>
+        <h3><p><strong>{{object.nome}}</strong> ?</p></h3>
+        <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <div class="col-md-6 ml-auto">
+                <a class="btn btn-secondary btn-sm" href= "{% url 'disciplina_detalhes' disciplina.pk %}" >Cancelar</a>
+                <input  class="btn btn-danger btn-sm"  type="submit" value="Excluir">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

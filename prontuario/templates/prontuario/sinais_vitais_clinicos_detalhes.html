@@ -1,0 +1,116 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>SINAIS VITAIS CLÍNICOS</b>
+            </h1>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at"
+                               disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Data</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at"
+                               disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Pressão Arterial</label>
+                        <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.pressao_arterial }}"
+                                  disabled>{{ object.pressao_arterial }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Pulso</label>
+                        <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.pulso }}"
+                                  disabled>{{ object.pulso }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Respiração</label>
+                        <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.respiracao }}"
+                                  disabled>{{ object.respiracao }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Temperatura</label>
+                        <textarea cols="40" rows="3" class="textarea form-control"
+                                  value="{{ object.temperatura }}" disabled>{{ object.temperatura }}
+                        </textarea>
+                    </div>
+                </div>
+                 <div class="form-row">
+                   <div class="form-group col-md-12">
+                       <h3>Índice de Placa Visível</h3>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="16v"><b>16V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_16v}}" disabled>
+                            <span class="input-group-text" id="11v"><b>11V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_11v}}" disabled>
+                            <span class="input-group-text" id="26v"><b>26V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_26v}}" disabled>
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="36v"><b>36V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_36v}}" disabled>
+                            <span class="input-group-text" id="31v"><b>31V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_31v}}" disabled>
+                            <span class="input-group-text" id="46v"><b>46V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_46v}}" disabled>
+                        </div>
+                    </div>
+                     <div class="col-6">
+                         <div class="parent">
+                            <img src="{% static 'img/odon.png' %}" id="odon" alt="some text" width=400>
+                         </div>
+                     </div>
+                </div>
+                <div class="form-row">
+                </div>
+
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'exa_fis_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Anterior</span>
+                </a>
+                <a href="{% url 'sin_vit_cli_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Atualizar</span>
+                </a>
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                <a href="{% url 'psr_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Proximo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

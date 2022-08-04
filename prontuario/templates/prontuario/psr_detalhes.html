@@ -1,0 +1,108 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Data</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Antecedentes Familiares</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.antecedentes_familiares }}" disabled>{{ object.antecedentes_familiares }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Medicamentos em Uso</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.medicamentos_em_uso }}" disabled>{{ object.medicamentos_em_uso }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Cirurgias Anteriores</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.cirurgias_anteriores }}" disabled>{{ object.cirurgias_anteriores }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Cardiacos</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_cardiacos }}" disabled>{{ object.problemas_cardiacos }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Gastrointestinais</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_gastrointestinais }}" disabled>{{ object.problemas_gastrointestinais }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Alterações Sanguineas</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alteracoes_sanguineas }}" disabled>{{ object.alteracoes_sanguineas }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Enfermidades Osseas</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.enfermidades_osseas }}" disabled>{{ object.enfermidades_osseas }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Problemas Pulmonares</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_pulmonares }}" disabled>{{ object.problemas_pulmonares }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Alergias</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alergias }}" disabled>{{ object.alergias }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Hábitos</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.habitos }}" disabled>{{ object.habitos }}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                   <div class="form-group col-md-12">
+                        <label>Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?</label>
+                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.observacao }}" disabled>{{ object.observacao }}</textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+                <a href="{% url 'inf_sau-sis_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Atualizar</span>
+                </a>
+                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
+                    <span class="text">Excluir</span>
+                </a>
+                <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Proximo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

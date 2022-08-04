@@ -1,0 +1,66 @@
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>ANAMNESE</b>
+            </h1>
+            <form method="POST" action=".">
+                {% csrf_token %}
+                 <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Prontuario</label>
+                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Atualizado em:</label>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Criado em:</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label></label>
+                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" value="{{ object.anamnese }}" disabled>{{ object.anamnese }}</textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="mr-1 text-right">
+                <a href="{% url 'paciente_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
+                    <span class="text">Anterior</span>
+                </a>
+                <a href="{% url 'anamnese_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                    <span class="text">Atualizar</span>
+                </a>
+                <a href="{% url 'inf_sau_sis_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Próximo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
