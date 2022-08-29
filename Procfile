@@ -1,1 +1,1 @@
-web: gunicorn soft_clinica.wsgi
+web: gunicorn soft_clinica.wsgi  --log-file -
