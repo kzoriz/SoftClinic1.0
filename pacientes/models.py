@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.urls import reverse
+import datetime
 
 SEXO_BIOLOGICO = [
     ("MASCULINO", "masculino"),

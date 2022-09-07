@@ -56,7 +56,7 @@
 
                 <div class="form-group col-md-3">
                     <label>Data de nascimento</label>
-                    <input type="text" class="form-control" value="{{ object.data_nascimento }}" name="data_nascimento" >
+                    <input type="text" class="form-control" value="{{ object.data_nascimento|date:'d/m/Y' }}" name="data_nascimento" >
                 </div>
 
                 <div class="form-group col-md-3">

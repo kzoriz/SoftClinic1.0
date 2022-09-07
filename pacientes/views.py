@@ -165,12 +165,11 @@ def paciente_detalhes(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
     prontuario = Prontuario.objects.get(pk=pk)
 
-    #data = Paciente.data_nascimento
-    #data_nascimento = data.strftime("%d-%b-%y")
+
     context = {
             'object': instance,
             'prontuario': prontuario,
-            #'data_nascimento': data_nascimento,
+            #'data_nascimento': data,
 
     }
     return render(request, 'pacientes/paciente_detalhes2.html', context)
@@ -192,8 +191,8 @@ class PacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "pacientes/paciente_editar2.html"
     success_message = "Paciente atualizado com Sucesso!"
 
-
-
+    def data_nasci(self, obj):
+        return obj.data_nascimento.strftime("%d/%m/%Y")
 
 
 class PacienteInfantilUpdate(LoginRequiredMixin, UpdateView):

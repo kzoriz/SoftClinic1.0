@@ -153,5 +153,4 @@ LOGIN_URL = 'login'
 
 django_on_heroku.settings(locals())
 
-# formato da data
-DATE_INPUT_FORMATS = ['%d/%m/%Y']
+
