@@ -9,8 +9,8 @@ from django.views.generic.edit import UpdateView, DeleteView
 from pacientes.models import Paciente, PacienteInfantil
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from _datetime import datetime as dt
 import datetime
-
 
 def paciente_detalhes_geral(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
@@ -79,10 +79,18 @@ def registrar_paciente(request):
         uf = request.POST['uf']
         telefone_celular = request.POST['telefone']
         informacoes_complementares = request.POST['informacoes_complementares']
+
+        if data_nascimento == "":
+            data_nascimento = "2000-01-01"
+            data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
+        else:
+            data_nascimento = data_nascimento
+
         p = Paciente(nome=nome, nome_social=nome_social, data_nascimento=data_nascimento, sexo_biologico=sexo_biologico,
                      rg=rg, cpf=cpf, raca=raca, estado_civil=estado_civil, grau_instrucao=grau_instrucao,
                      endereco=endereco, cep=cep, bairro=bairro, cidade=cidade, uf=uf, telefone_celular=telefone_celular,
                      informacoes_complementares=informacoes_complementares)
+
         p.save()
         u = Prontuario(paciente=p, num_prontuario=b+c+d)
         u.save()
