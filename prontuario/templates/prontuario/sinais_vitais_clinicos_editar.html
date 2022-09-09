@@ -3,6 +3,13 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="card shadow mb-4">
         <div class="card-body"><br>
             <h1 class="mb-3 text-primary">
@@ -10,91 +17,82 @@
             </h1>
             <form method="POST" action=".">
                 {% csrf_token %}
-                 <div class="form-row">
+                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Prontuario</label>
                         <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Atualizado em:</label>
-                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at"
+                               disabled>
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Criado em:</label>
-                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                        <label>Data</label>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at"
+                               disabled>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>Antecedentes Familiares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.antecedentes_familiares }}" name="antecedentes_familiares">{{ object.antecedentes_familiares }}</textarea>
+                        <label>Pressão Arterial</label>
+                        <textarea name="pressao_arterial" cols="40" rows="10" class="textarea form-control" value="{{ object.pressao_arterial }}" id="id_pressao_arterial">{{ object.pressao_arterial }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>Medicamentos em Uso</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.medicamentos_em_uso }}" name="medicamentos_em_uso">{{ object.medicamentos_em_uso }}</textarea>
+                        <label>Pulso</label>
+                        <textarea name="pulso" cols="40" rows="10" class="textarea form-control" value="{{ object.pulso }}" id="id_pulso">{{ object.pulso }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>Cirurgias Anteriores</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.cirurgias_anteriores }}" name="cirurgias_anteriores">{{ object.cirurgias_anteriores }}</textarea>
+                        <label>Respiração</label>
+                        <textarea name="respiracao" cols="40" rows="10" class="textarea form-control" value="{{ object.respiracao }}" id="id_respiracao">{{ object.respiracao }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Temperatura</label>
+                        <textarea name="temperatura" cols="40" rows="10" class="textarea form-control" value="{{ object.temperatura }}" id="id_temperatura">{{ object.temperatura }}</textarea>
+                    </div>
+                </div>
+                 <div class="form-row">
                    <div class="form-group col-md-12">
-                        <label>Problemas Cardiacos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_cardiacos }}" name="problemas_cardiacos">{{ object.problemas_cardiacos }}</textarea>
+                       <h3>Índice de Placa Visível</h3>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Gastrointestinais</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_gastrointestinais }}" name="problemas_gastrointestinais">{{ object.problemas_gastrointestinais }}</textarea>
+                    <div class="col-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="16v"><b>16V</b></span>
+                            <input name="placa_visivel_16v" type="text" class="form-control" value="{{ object.placa_visivel_16v}}" id="id_placa_visivel_16v"  >
+                            <span class="input-group-text" id="11v"><b>11V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_11v}}" name="placa_visivel_11v" id="id_placa_visivel_11v">
+                            <span class="input-group-text" id="26v"><b>26V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_26v}}" name="placa_visivel_26v" id="id_placa_visivel_26v">
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="36v"><b>36V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_36v}}" name="placa_visivel_36v" id="id_placa_visivel_36v">
+                            <span class="input-group-text" id="31v"><b>31V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_31v}}" name="placa_visivel_31v" id="id_placa_visivel_31v">
+                            <span class="input-group-text" id="46v"><b>46V</b></span>
+                            <input type="text" class="form-control" value="{{ object.placa_visivel_46v}}" name="placa_visivel_46v" id="id_placa_visivel_46v">
+                        </div>
                     </div>
+                     <div class="col-6">
+                         <div class="parent">
+                            <img src="{% static 'img/odon.png' %}" id="odon" alt="some text" width=400>
+                         </div>
+                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alterações Sanguineas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alteracoes_sanguineas }}" name="alteracoes_sanguineas">{{ object.alteracoes_sanguineas }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Enfermidades Osseas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.enfermidades_osseas }}" name="enfermidades_osseas">{{ object.enfermidades_osseas }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Pulmonares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_pulmonares }}" name="problemas_pulmonares">{{ object.problemas_pulmonares }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alergias</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alergias }}" name="alergias">{{ object.alergias }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Hábitos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.habitos }}" name="habitos">{{ object.habitos }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.observacao }}" name="observacao">{{ object.observacao }}</textarea>
-                    </div>
                 </div>
                 <div class="mr-1 text-right">
                     <button type="submit" class="btn btn-primary text-white ">OK</button>
-                    <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
-                        <span class="text">Voltar</span>
-                    </a>
+                    <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="btn btn-secondary text-white"
+                       type="text">Voltar</a>
                 </div>
             </form>
 

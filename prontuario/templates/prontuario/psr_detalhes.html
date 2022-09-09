@@ -13,85 +13,41 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label>Atualizado em:</label>
-                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
+                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at"
+                               disabled>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Data</label>
-                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
+                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at"
+                               disabled>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Antecedentes Familiares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.antecedentes_familiares }}" disabled>{{ object.antecedentes_familiares }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Medicamentos em Uso</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.medicamentos_em_uso }}" disabled>{{ object.medicamentos_em_uso }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Cirurgias Anteriores</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.cirurgias_anteriores }}" disabled>{{ object.cirurgias_anteriores }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Cardiacos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_cardiacos }}" disabled>{{ object.problemas_cardiacos }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Gastrointestinais</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_gastrointestinais }}" disabled>{{ object.problemas_gastrointestinais }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alterações Sanguineas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alteracoes_sanguineas }}" disabled>{{ object.alteracoes_sanguineas }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Enfermidades Osseas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.enfermidades_osseas }}" disabled>{{ object.enfermidades_osseas }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Pulmonares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_pulmonares }}" disabled>{{ object.problemas_pulmonares }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alergias</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alergias }}" disabled>{{ object.alergias }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Hábitos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.habitos }}" disabled>{{ object.habitos }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.observacao }}" disabled>{{ object.observacao }}</textarea>
+                    <div class="col-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="16v"><b>Sextante 16V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_16v}}" disabled>
+                            <span class="input-group-text" id="11v"><b>Sextante 11V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_11v}}" disabled>
+                            <span class="input-group-text" id="26v"><b>Sextante 26V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_26v}}" disabled>
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="36v"><b>Sextante 36V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_36v}}" disabled>
+                            <span class="input-group-text" id="31v"><b>Sextante 31V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_31v}}" disabled>
+                            <span class="input-group-text" id="46v"><b>Sextante 46V</b></span>
+                            <input type="text" class="form-control" value="{{ object.sextante_46v}}" disabled>
+                        </div>
                     </div>
                 </div>
             </form>
             <div class="mr-1 text-right">
-                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
                     <span class="text">Voltar</span>
                 </a>
-                <a href="{% url 'inf_sau-sis_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                <a href="{% url 'psr_edit' object.pk %}" class="btn btn-warning text-white" type="button">
                     <span class="text">Atualizar</span>
                 </a>
                 <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">

@@ -94,8 +94,6 @@ def registrar_paciente(request):
         p.save()
         u = Prontuario(paciente=p, num_prontuario=b+c+d)
         u.save()
-        q = PSR(prontuario=u)
-        q.save()
         r = Anamnese(prontuario=u)
         r.save()
         s = InfSaudeSistemica(prontuario=u)

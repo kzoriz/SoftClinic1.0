@@ -15,6 +15,7 @@ class Prontuario(models.Model):
     def __str__(self):
         return self.num_prontuario
 
+
 '''
 class DadosMedicos(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
@@ -152,10 +153,11 @@ class InfSaudeSistemica(models.Model):
     problemas_pulmonares = models.TextField(verbose_name="Problemas Pulmonares", blank=True)
     alergias = models.TextField("alergias", blank=True)
     habitos = models.TextField(verbose_name="Hábitos", blank=True)
-    observacao = models.TextField(verbose_name="Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?", blank=True)
+    observacao = models.TextField(verbose_name="Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?",
+                                  blank=True)
 
     def get_absolute_url(self):
-        return reverse("inf_sau_sis_detalhes", kwargs={"pk": self.pk})
+        return reverse("inf_sau_sis_detalhes", kwargs={"pk": self.prontuario})
 
 
 class ExameFisico(models.Model):
@@ -196,21 +198,25 @@ class SinaisVitaisClinicos(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    pressao_arterial = models.TextField(verbose_name="Pressão Arterial")
-    pulso = models.TextField(verbose_name="Pulso")
-    respiracao = models.TextField(verbose_name="Respiração")
-    temperatura = models.TextField(verbose_name="Temperatura")
+    pressao_arterial = models.TextField(verbose_name="Pressão Arterial", blank=True)
+    pulso = models.TextField(verbose_name="Pulso", blank=True)
+    respiracao = models.TextField(verbose_name="Respiração", blank=True)
+    temperatura = models.TextField(verbose_name="Temperatura", blank=True)
     placa_visivel_16v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_11v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_26v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_36v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_31v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_46v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
-    indice = models.CharField(verbose_name="Indíce", max_length=5)
-    resultado = models.CharField(verbose_name="Resultado", choices=CHOICES_RESULTADO, max_length=15)
+
+    # indice = models.DecimalField(verbose_name="Indíce", max_length=5)
+    # resultado = models.CharField(verbose_name="Resultado", choices=CHOICES_RESULTADO, max_length=15)
 
     def get_absolute_url(self):
         return reverse("sin_vit_cli_detalhes", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return '{}'.format(self.prontuario.paciente.nome)
 
 
 class PSR(models.Model):
@@ -234,6 +240,10 @@ class PSR(models.Model):
 
     def get_absolute_url(self):
         return reverse("psr_detalhes", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return '{}'.format(self.prontuario.paciente.nome)
+
 
 
 class OdontogramaInicial(models.Model):
@@ -275,6 +285,9 @@ class OdontogramaInicial(models.Model):
 
     def get_absolute_url(self):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return '{}'.format(self.prontuario.paciente.nome)
 
 
 class SolicitacaoExamesComplementares(models.Model):

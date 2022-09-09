@@ -1,4 +1,3 @@
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
@@ -73,10 +72,11 @@ class SinaisVitaisClinicosUpdate(LoginRequiredMixin, SuccessMessageMixin, Update
     login_url = reverse_lazy("login")
     extra_context = {'nome_pagina': 'Sinais Vitais Clinicos'}
     model = SinaisVitaisClinicos
-    fields = ['prontuario', 'pressao_arterial', 'pulso', 'respiracao', 'temperatura', 'placa_visivel_16v',
-              'placa_visivel_11v', 'placa_visivel_26v', 'placa_visivel_36v', 'placa_visivel_31v', 'placa_visivel_46v',
-              'indice', 'resultado']
+    fields = ['pressao_arterial', 'pulso', 'respiracao', 'temperatura', 'placa_visivel_16v',
+              'placa_visivel_11v', 'placa_visivel_26v', 'placa_visivel_36v', 'placa_visivel_31v', 'placa_visivel_46v']
     template_name = "prontuario/sinais_vitais_clinicos_editar.html"
+    # template_name = "prontuario/padrao.html"
+    success_message = "Exame Sinais Vitais Clinicos atualizado com Sucesso!"
 
 
 def psr_detalhes(request, pk=None):
@@ -91,7 +91,7 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy("login")
     extra_context = {'nome_pagina': 'PSR'}
     model = PSR
-    fields = ['prontuario', 'sextante_16v', 'sextante_11v', 'sextante_26v', 'sextante_36v', 'sextante_31v',
+    fields = ['sextante_16v', 'sextante_11v', 'sextante_26v', 'sextante_36v', 'sextante_31v',
               'sextante_46v']
     template_name = "prontuario/psr_editar.html"
 
