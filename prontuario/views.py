@@ -94,7 +94,7 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['sextante_16v', 'sextante_11v', 'sextante_26v', 'sextante_36v', 'sextante_31v',
               'sextante_46v']
     template_name = "prontuario/psr_editar.html"
-
+    success_message = "Exame PSR atualizado com Sucesso!"
 
 def odo_ini_detalhes(request, pk=None):
     object = OdontogramaInicial.objects.get(pk=pk)
@@ -108,10 +108,11 @@ class OdontogramaInicialUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
     login_url = reverse_lazy("login")
     extra_context = {'nome_pagina': 'Odontograma Inicial'}
     model = OdontogramaInicial
-    fields = ['prontuario', 'd11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd21', 'd22', 'd23', 'd24', 'd25',
+    fields = ['d11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd21', 'd22', 'd23', 'd24', 'd25',
               'd26', 'd27', 'd28', 'd31', 'd32', 'd33', 'd34', 'd35', 'd36', 'd37', 'd38', 'd41', 'd42', 'd43', 'd44',
               'd45', 'd46', 'd47', 'd48']
     template_name = "prontuario/odontograma_inicial_editar.html"
+    success_message = "Odontograma Inicial Atualizado com Sucesso!"
 
 
 def sol_exa_com_detalhes(request, pk=None):
@@ -128,7 +129,7 @@ class SolicitacaoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMi
     model = SolicitacaoExamesComplementares
     fields = ['sol_exa_com', ]
     template_name = "prontuario/sol_exa_com_editar.html"
-
+    success_message = "Exames Complementares Atualizado com Sucesso!"
 
 def res_exa_com_detalhes(request, pk=None):
     object = ResultadoExamesComplementares.objects.get(pk=pk)

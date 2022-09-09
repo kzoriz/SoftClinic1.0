@@ -3,8 +3,18 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="card shadow mb-4">
         <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>PSR</b>
+            </h1>
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -41,6 +51,12 @@
                             <input type="text" class="form-control" value="{{ object.sextante_46v}}" disabled>
                         </div>
                     </div>
+                    <div class="col-6">
+                         <div class="parent">
+                            <img src="{% static 'img/sextante.gif' %}" id="odon" alt="some text" width=400>
+                         </div>
+                     </div>
+
                 </div>
             </form>
             <div class="mr-1 text-right">
@@ -53,7 +69,7 @@
                 <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
                     <span class="text">Excluir</span>
                 </a>
-                <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                <a href="{% url 'odo_ini_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
                     <span class="text">Proximo</span>
                 </a>
             </div>

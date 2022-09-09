@@ -3,8 +3,18 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="card shadow mb-4">
         <div class="card-body"><br>
+            <h1 class="mb-3 text-primary">
+                <b>ODONTOGRAMA INICIAL</b>
+            </h1>
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -21,83 +31,250 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Antecedentes Familiares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.antecedentes_familiares }}" disabled>{{ object.antecedentes_familiares }}</textarea>
+                    <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-group col-md-4">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Medicamentos em Uso</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.medicamentos_em_uso }}" disabled>{{ object.medicamentos_em_uso }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>18</b></label>
+                        <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d18 }}"
+                                  disabled>{{ object.d18 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>21</b></label>
+                           <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d21 }}"
+                                  disabled>{{ object.d21 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Cirurgias Anteriores</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.cirurgias_anteriores }}" disabled>{{ object.cirurgias_anteriores }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>17</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d17 }}"
+                                  disabled>{{ object.d17 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>22</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d22 }}"
+                                  disabled>{{ object.d22 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Cardiacos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_cardiacos }}" disabled>{{ object.problemas_cardiacos }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>16</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d16 }}"
+                                  disabled>{{ object.d16 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>23</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d23 }}"
+                                  disabled>{{ object.d23 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Gastrointestinais</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_gastrointestinais }}" disabled>{{ object.problemas_gastrointestinais }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>15</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d15 }}"
+                                  disabled>{{ object.d15 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>24</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d24 }}"
+                                  disabled>{{ object.d24 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alterações Sanguineas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alteracoes_sanguineas }}" disabled>{{ object.alteracoes_sanguineas }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>14</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d14 }}"
+                                  disabled>{{ object.d14 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>25</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d25 }}"
+                                  disabled>{{ object.d25 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Enfermidades Osseas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.enfermidades_osseas }}" disabled>{{ object.enfermidades_osseas }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>13</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d13 }}"
+                                  disabled>{{ object.d13 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>26</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d26 }}"
+                                  disabled>{{ object.d26 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Problemas Pulmonares</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.problemas_pulmonares }}" disabled>{{ object.problemas_pulmonares }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>12</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d12 }}"
+                                  disabled>{{ object.d12 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>27</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d27 }}"
+                                  disabled>{{ object.d27 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Alergias</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.alergias }}" disabled>{{ object.alergias }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>11</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d11 }}"
+                                  disabled>{{ object.d11 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>28</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d28 }}"
+                                  disabled>{{ object.d28 }}
+                        </textarea>
+                    </div>
+                </div>
+                                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>38</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d38 }}"
+                                  disabled>{{ object.d38 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>41</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d41 }}"
+                                  disabled>{{ object.d41 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Hábitos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.habitos }}" disabled>{{ object.habitos }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>37</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d37 }}"
+                                  disabled>{{ object.d37 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>42</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d42 }}"
+                                  disabled>{{ object.d42 }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Há Alguma Informação Sobre Sua Saúde Que Não Foi Perguntada?</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.observacao }}" disabled>{{ object.observacao }}</textarea>
+                    <div class="form-group col-md-6">
+                        <label><b>36</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d36 }}"
+                                  disabled>{{ object.d36 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>43</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d43 }}"
+                                  disabled>{{ object.d43 }}
+                        </textarea>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>35</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d35 }}"
+                                  disabled>{{ object.d35 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>44</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d44 }}"
+                                  disabled>{{ object.d44 }}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>34</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d34 }}"
+                                  disabled>{{ object.d34 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>45</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d45 }}"
+                                  disabled>{{ object.d45 }}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>33</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d33 }}"
+                                  disabled>{{ object.d33 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>46</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d46 }}"
+                                  disabled>{{ object.d46 }}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>32</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d32 }}"
+                                  disabled>{{ object.d32 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>47</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d32 }}"
+                                  disabled>{{ object.d32 }}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>31</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d31 }}"
+                                  disabled>{{ object.d31 }}
+                        </textarea>
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label><b>48</b></label>
+                            <textarea cols="40" rows="3" class="textarea form-control" value="{{ object.d48 }}"
+                                  disabled>{{ object.d48 }}
+                        </textarea>
+                    </div>
+                </div>
+
             </form>
             <div class="mr-1 text-right">
-                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+                <a href="{% url 'psr_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
                     <span class="text">Voltar</span>
                 </a>
-                <a href="{% url 'inf_sau-sis_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+                <a href="{% url 'odo_ini_edit' object.pk %}" class="btn btn-warning text-white" type="button">
                     <span class="text">Atualizar</span>
                 </a>
                 <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
                     <span class="text">Excluir</span>
                 </a>
-                <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+                <a href="{% url 'sol_exa_com_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
                     <span class="text">Proximo</span>
                 </a>
             </div>
