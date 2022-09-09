@@ -36,25 +36,25 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Pressão Arterial</label>
-                        <textarea name="pressao_arterial" cols="40" rows="10" class="textarea form-control" value="{{ object.pressao_arterial }}" id="id_pressao_arterial">{{ object.pressao_arterial }}</textarea>
+                        <textarea name="pressao_arterial" cols="40" rows="3" class="textarea form-control" value="{{ object.pressao_arterial }}" id="id_pressao_arterial">{{ object.pressao_arterial }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Pulso</label>
-                        <textarea name="pulso" cols="40" rows="10" class="textarea form-control" value="{{ object.pulso }}" id="id_pulso">{{ object.pulso }}</textarea>
+                        <textarea name="pulso" cols="40" rows="3" class="textarea form-control" value="{{ object.pulso }}" id="id_pulso">{{ object.pulso }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Respiração</label>
-                        <textarea name="respiracao" cols="40" rows="10" class="textarea form-control" value="{{ object.respiracao }}" id="id_respiracao">{{ object.respiracao }}</textarea>
+                        <textarea name="respiracao" cols="40" rows="3" class="textarea form-control" value="{{ object.respiracao }}" id="id_respiracao">{{ object.respiracao }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Temperatura</label>
-                        <textarea name="temperatura" cols="40" rows="10" class="textarea form-control" value="{{ object.temperatura }}" id="id_temperatura">{{ object.temperatura }}</textarea>
+                        <textarea name="temperatura" cols="40" rows="3" class="textarea form-control" value="{{ object.temperatura }}" id="id_temperatura">{{ object.temperatura }}</textarea>
                     </div>
                 </div>
                  <div class="form-row">
@@ -83,16 +83,16 @@
                     </div>
                      <div class="col-6">
                          <div class="parent">
-                            <img src="{% static 'img/odon.png' %}" id="odon" alt="some text" width=400>
+                            <img src="{% static 'img/odon.jpg' %}" id="odon" alt="some text" width=400>
                          </div>
                      </div>
                 </div>
                 <div class="form-row">
                 </div>
                 <div class="mr-1 text-right">
-                    <button type="submit" class="btn btn-primary text-white ">OK</button>
                     <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="btn btn-secondary text-white"
                        type="text">Voltar</a>
+                    <button type="submit" class="btn btn-primary text-white ">OK</button>
                 </div>
             </form>
 
