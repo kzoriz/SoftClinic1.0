@@ -157,7 +157,7 @@ class InfSaudeSistemica(models.Model):
                                   blank=True)
 
     def get_absolute_url(self):
-        return reverse("inf_sau_sis_detalhes", kwargs={"pk": self.prontuario})
+        return reverse("inf_sau_sis_detalhes", kwargs={"pk": self.pk})
 
 
 class ExameFisico(models.Model):
@@ -209,8 +209,8 @@ class SinaisVitaisClinicos(models.Model):
     placa_visivel_31v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
     placa_visivel_46v = models.CharField(verbose_name="16V", choices=PLACA_VISIVEL, max_length=1)
 
-    # indice = models.DecimalField(verbose_name="Indíce", max_length=5)
-    # resultado = models.CharField(verbose_name="Resultado", choices=CHOICES_RESULTADO, max_length=15)
+    indice = models.CharField(verbose_name="Indíce", max_length=5,blank=True)
+    resultado = models.CharField(verbose_name="Resultado", choices=CHOICES_RESULTADO, max_length=15, blank=True)
 
     def get_absolute_url(self):
         return reverse("sin_vit_cli_detalhes", kwargs={"pk": self.pk})
