@@ -1,16 +1,20 @@
+import datetime
+
+from _datetime import datetime as dt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, redirect, get_object_or_404
-
-from prontuario.models import *
-from pacientes.forms import PacienteForm, PacienteInfantilForm
-from django.views.generic.edit import UpdateView, DeleteView
-from pacientes.models import Paciente, PacienteInfantil
-from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from _datetime import datetime as dt
-import datetime
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import DeleteView, UpdateView
+from rest_framework import viewsets
+
+from pacientes.forms import PacienteForm, PacienteInfantilForm
+from pacientes.models import Paciente, PacienteInfantil, Teste2, Teste
+from pacientes.serializers import Teste2Serializer, TesteSerializer
+from prontuario.models import *
+
 
 def paciente_detalhes_geral(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
@@ -231,3 +235,14 @@ def inicio(request):
 @login_required
 def registrar_paciente_2(request):
     return render(request, "pacientes/pacientes_menu.html")
+
+
+class Teste2ViewSet(viewsets.ModelViewSet):
+    queryset = Teste2.objects.all()
+    serializer_class = Teste2Serializer
+
+
+class TesteViewSet(viewsets.ModelViewSet):
+    queryset = Teste.objects.all()
+    serializer_class = TesteSerializer
+

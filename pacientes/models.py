@@ -1,7 +1,8 @@
 
+import datetime
+
 from django.db import models
 from django.urls import reverse
-import datetime
 
 SEXO_BIOLOGICO = [
     ("MASCULINO", "masculino"),
@@ -140,4 +141,27 @@ class PacienteInfantil(models.Model):
     class Meta:
         verbose_name = "Paciente Infantil"
         verbose_name_plural = "Pacientes Infantis"
+
+
+class Teste(models.Model):    
+    testando = models.CharField(max_length=255, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.testando}"
+
+    class Meta:
+        verbose_name_plural = "Testes"
+
+class Teste2(models.Model):    
+    testando = models.CharField(max_length=255, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.testando}"
+
+    class Meta:
+        verbose_name_plural = "Teste2s"
 

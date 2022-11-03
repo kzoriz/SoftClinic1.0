@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'distribuicao.apps.DistribuicaoConfig',
     'prontuario.apps.ProntuarioConfig',
+    'dr_scaffold',
+    'rest_framework',
 
 ]
 
