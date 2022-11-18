@@ -180,17 +180,17 @@ class PlanoTratamentoIIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
     template_name = "prontuario/pla_tra_ii_editar.html"
 
 
-def evo_pac_detalhes(request, pk=None):
-    object = EvolucaoPaciente.objects.get(pk=pk)
-    context = {
-        'object': object,
-    }
-    return render(request, 'prontuario/evo_pac_detalhes.html', context)
+# def evo_pac_detalhes(request, pk=None):
+#     object = EvolucaoPaciente.objects.get(pk=pk)
+#     context = {
+#         'object': object,
+#     }
+#     return render(request, 'prontuario/evo_pac_detalhes.html', context)
 
 
-class EvolucaoPacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    login_url = reverse_lazy("login")
-    extra_context = {'nome_pagina': 'Evolução do Paciente'}
-    model = EvolucaoPaciente
-    fields = ['evolucao-paciente', ]
-    template_name = "prontuario/evo_pac_editar.html"
+# class EvolucaoPacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+#     login_url = reverse_lazy("login")
+#     extra_context = {'nome_pagina': 'Evolução do Paciente'}
+#     model = EvolucaoPaciente
+#     fields = ['evolucao-paciente', ]
+#     template_name = "prontuario/evo_pac_editar.html"

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'prontuario.apps.ProntuarioConfig',
     'dr_scaffold',
     'rest_framework',
+    'django_extensions',
 
 ]
 

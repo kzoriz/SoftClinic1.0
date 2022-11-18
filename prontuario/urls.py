@@ -22,7 +22,7 @@ urlpatterns = [
     path("pla-tra-i-edit/<int:pk>/", PlanoTratamentoIUpdate.as_view(), name="pla_tra_i_edit"),
     path("pla-tra-ii-detalhes/<int:pk>/", pla_tra_ii_detalhes, name="pla_tra_ii_detalhes"),
     path("pla-tra-ii-edit/<int:pk>/", PlanoTratamentoIIUpdate.as_view(), name="pla_tra_ii_edit"),
-    path("evo-pac-detalhes/<int:pk>/", evo_pac_detalhes, name="evo_pac_detalhes"),
-    path("evo-pac-edit/<int:pk>/", EvolucaoPacienteUpdate.as_view(), name="evo_pac_edit"),
+    # path("evo-pac-detalhes/<int:pk>/", evo_pac_detalhes, name="evo_pac_detalhes"),
+    # path("evo-pac-edit/<int:pk>/", EvolucaoPacienteUpdate.as_view(), name="evo_pac_edit"),
 
 ]

@@ -7,6 +7,42 @@ C_CHOICES = [
     ('NAO', 'NÃO'),
 ]
 
+DOENCA_CHOICES = [
+    ('carie', 'Carie'),
+    ('canal', 'Canal'),
+    ('cáries', 'cáries'),
+    ('gengivite', 'gengivite'),
+    ('tártaro', 'tártaro'),
+    ('infecções', 'infecções'),
+    ('sensibilidade', 'sensibilidade'),
+]
+
+PROCEDIMENTO_CHOICES = [
+    ('limpeza', 'limpeza'),
+    ('remoção de tartaro', 'remoção de tartaro'),
+    ('aplicacao de fluor', 'aplicacao de fluor'),
+]
+
+
+DENTE_CHOICES = [
+    ('D12', 'D12'),
+    ('D13', 'D13'),
+    ('D14', 'D14'),
+    ('D15', 'D15'),
+    ('D16', 'D16'),
+    ('D17', 'D17'),
+    ('D18', 'D18'),
+    ('D19', 'D19'),
+    ('D20', 'D20'),
+    ('D21', 'D21'),
+    ('D22', 'D23'),
+    ('D24', 'D24'),
+    ('D25', 'D25'),
+    ('D26', 'D26'),
+    ('D27', 'D27'),
+    ('D28', 'D28'),
+
+]
 
 class Prontuario(models.Model):
     paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
@@ -15,118 +51,40 @@ class Prontuario(models.Model):
     def __str__(self):
         return self.num_prontuario
 
-
-'''
-class DadosMedicos(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    temp_trat = models.CharField("Tempo de Tratamento", max_length=50, blank=True)
-    causa = models.CharField("Causa", max_length=50, blank=True)
-    crm_med = models.CharField("CRM Medico", max_length=50, blank=True)
-    tel_med = models.CharField("Telefone Medico", max_length=25, blank=True)
-    cont_urg = models.CharField("Contato de Urgencia", max_length=25, blank=True)
-
-    def __str__(self):
-        return self.prontuario.paciente.nome
+    class Meta:
+        verbose_name_plural = "Prontuarios"
 
 
-class Medicamentos(models.Model):
+class Doenca(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    #prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    doenca = models.TextField(verbose_name="Doença", choices=DOENCA_CHOICES)
 
-    PRONTUARIO_CHOICES = [
-        ('Med1', 'Medicamnto1'),
-        ('Med2', 'Medicamnto2'),
-        ('Med3', 'Medicamnto3'),
-        ('Med4', 'Medicamnto4'),
-        ('Med5', 'Medicamnto5'),
-    ]
-
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    medicamento = models.CharField("Medicamento", max_length=100, choices=PRONTUARIO_CHOICES, blank=True)
-    cirur_real = models.CharField("Cirurgia Realizada", max_length=50, blank=True)
-    dst = models.CharField("DST", max_length=50, blank=True)
-    anticoncepcional = models.CharField("Anticoncepcional", max_length=50, blank=True)
-    cardiopatia = models.CharField("Cardiopatias", max_length=50, blank=True)
-    prob_gastri = models.CharField("Problemas Gastricos", max_length=50, blank=True)
-    prob_pulmo = models.CharField("Problemas Pulmonares", max_length=50, blank=True)
-    alt_sang = models.CharField("Alterações Sanguineas", max_length=50, blank=True)
-    enf_ossea_infla = models.CharField("Infermidades Osséa Inflamatorias", max_length=50, blank=True)
-    habitos = models.CharField("Hábitos", max_length=50, blank=True)
-    alergias = models.CharField("Alergias", max_length=50, blank=True)
+    def get_absolute_url(self):
+        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return self.prontuario.paciente.nome
+        return self.doenca
+
+    class Meta:
+        verbose_name_plural = "Doenças"
 
 
-class Saude(models.Model):
+class Tratamento(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    #prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    tratamento = models.TextField(verbose_name="Tratamento", choices=PROCEDIMENTO_CHOICES)
 
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    diabetes = models.CharField("Diabetes", max_length=3, choices=C_CHOICES)
-    gravida = models.CharField("Grávida", max_length=3, choices=C_CHOICES)
-    plan_grav = models.CharField("Planeja Gravidez", max_length=3, choices=C_CHOICES)
-    hipertensao = models.CharField("Hipertensão", max_length=3, choices=C_CHOICES)
-    sangramento = models.CharField("Sangramento", max_length=3, choices=C_CHOICES)
-    epilepsia = models.CharField("Epilepsia", max_length=3, choices=C_CHOICES)
-    prob_ren = models.CharField("Problemas Renais", max_length=3, choices=C_CHOICES)
-    doenc_mental = models.CharField("Doença Mental", max_length=3, choices=C_CHOICES)
-    rad_terapia = models.CharField("Rádio Terapia", max_length=3, choices=C_CHOICES)
-    qui_terapia = models.CharField("Quimioterapia", max_length=3, choices=C_CHOICES)
-    hepatite = models.CharField("Hepatite", max_length=3, choices=C_CHOICES)
-    articulacao = models.CharField("Articulações", max_length=3, choices=C_CHOICES)
-    protese = models.CharField("Prótese", max_length=3, choices=C_CHOICES)
-    hiv = models.CharField("HIV", max_length=3, choices=C_CHOICES)
-    fumante = models.CharField("Fumante", max_length=3, choices=C_CHOICES)
-    herpes = models.CharField("Herpes", max_length=3, choices=C_CHOICES)
-    bebida = models.CharField("Bebida", max_length=3, choices=C_CHOICES)
-    inf_add = models.TextField("Informações Adicionais")
-
-
-class ExameFisicoIB(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    atm = models.CharField("ATM", max_length=50, blank=True)
-    lab_sup = models.CharField("Labio Superior", max_length=50, blank=True)
-    lab_inf = models.CharField("LabioInferior", max_length=50, blank=True)
-    com_labial = models.CharField("Comissura Labial", max_length=50, blank=True)
-    muc_jugal = models.CharField("Mucosa Jugal", max_length=50, blank=True)
-    palato_duro = models.CharField("Palato Duro", max_length=50, blank=True)
-    palato_mole = models.CharField("Palato Mole", max_length=50, blank=True)
-    tonsilas = models.CharField("Tonsilas", max_length=50, blank=True)
-    hig_oral = models.CharField("Higiene Oral", max_length=50, blank=True)
-    sang_gengival = models.CharField("Sangramento Gengival", max_length=50, blank=True)
-    calculo = models.CharField("Cálculo", max_length=50, blank=True)
-
-
-class PlanoTratamento(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    reg_dente = models.CharField("Região do Dente", max_length=50, blank=True)
-    procedimento = models.CharField("Procedimento", max_length=50, blank=True)
-
-
-class CondOclusal(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    tipo_co = models.CharField("Tipo CO", max_length=100, blank=True)
-
-
-class Odontograma(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    dente = models.CharField("Dente", max_length=100, blank=True)
-    condicao = models.CharField("Condição", max_length=100, blank=True)
-
-
-class PSR(models.Model):
-    prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    sextante = models.CharField("Sextante", max_length=100, blank=True)
-    classificacao = models.CharField("Classificação", max_length=100, blank=True)
-
-
-
-class Procedimento(models.Model):
-    prontuario = models.CharField("NumProntuario", max_length=200)
-    cpf = models.CharField("CPF", max_length=100, blank=True)
-    reg_dente = models.CharField("Região do Dente", max_length=50, blank=True)
-    procedimento = models.CharField("Procedimento", max_length=50, blank=True)
+    def get_absolute_url(self):
+        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return self.cpf
-'''
+        return self.tratamento
+
+    class Meta:
+        verbose_name_plural = "Tratamentos"
 
 
 class Anamnese(models.Model):
@@ -137,6 +95,9 @@ class Anamnese(models.Model):
 
     def get_absolute_url(self):
         return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+
+    class Meta:
+        verbose_name_plural = "Anamneses"
 
 
 class InfSaudeSistemica(models.Model):
@@ -159,6 +120,9 @@ class InfSaudeSistemica(models.Model):
     def get_absolute_url(self):
         return reverse("inf_sau_sis_detalhes", kwargs={"pk": self.pk})
 
+    class Meta:
+        verbose_name_plural = "Informações de Saúde Sistêmicas"
+
 
 class ExameFisico(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -180,6 +144,9 @@ class ExameFisico(models.Model):
 
     def __str__(self):
         return self.prontuario.paciente.nome
+
+    class Meta:
+        verbose_name_plural = "Exames Fisicos"
 
 
 class SinaisVitaisClinicos(models.Model):
@@ -218,6 +185,9 @@ class SinaisVitaisClinicos(models.Model):
     def __str__(self):
         return '{}'.format(self.prontuario.paciente.nome)
 
+    class Meta:
+        verbose_name_plural = "Sinais Vitais Clinicos"
+
 
 class PSR(models.Model):
     SEXTANTE = [
@@ -244,69 +214,33 @@ class PSR(models.Model):
     def __str__(self):
         return '{}'.format(self.prontuario.paciente.nome)
 
-
-class OdontogramaInicial(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    d11 = models.TextField(verbose_name="11", blank=True)
-    d12 = models.TextField(verbose_name="12", blank=True)
-    d13 = models.TextField(verbose_name="13", blank=True)
-    d14 = models.TextField(verbose_name="14", blank=True)
-    d15 = models.TextField(verbose_name="15", blank=True)
-    d16 = models.TextField(verbose_name="16", blank=True)
-    d17 = models.TextField(verbose_name="17", blank=True)
-    d18 = models.TextField(verbose_name="18", blank=True)
-    d21 = models.TextField(verbose_name="21", blank=True)
-    d22 = models.TextField(verbose_name="22", blank=True)
-    d23 = models.TextField(verbose_name="23", blank=True)
-    d24 = models.TextField(verbose_name="24", blank=True)
-    d25 = models.TextField(verbose_name="25", blank=True)
-    d26 = models.TextField(verbose_name="26", blank=True)
-    d27 = models.TextField(verbose_name="27", blank=True)
-    d28 = models.TextField(verbose_name="28", blank=True)
-    d31 = models.TextField(verbose_name="31", blank=True)
-    d32 = models.TextField(verbose_name="32", blank=True)
-    d33 = models.TextField(verbose_name="33", blank=True)
-    d34 = models.TextField(verbose_name="34", blank=True)
-    d35 = models.TextField(verbose_name="35", blank=True)
-    d36 = models.TextField(verbose_name="36", blank=True)
-    d37 = models.TextField(verbose_name="37", blank=True)
-    d38 = models.TextField(verbose_name="38", blank=True)
-    d41 = models.TextField(verbose_name="41", blank=True)
-    d42 = models.TextField(verbose_name="42", blank=True)
-    d43 = models.TextField(verbose_name="43", blank=True)
-    d44 = models.TextField(verbose_name="44", blank=True)
-    d45 = models.TextField(verbose_name="45", blank=True)
-    d46 = models.TextField(verbose_name="46", blank=True)
-    d47 = models.TextField(verbose_name="47", blank=True)
-    d48 = models.TextField(verbose_name="48", blank=True)
-
-    def get_absolute_url(self):
-        return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
-
-    def __str__(self):
-        return '{}'.format(self.prontuario.paciente.nome)
+    class Meta:
+        verbose_name_plural = "PSR's"
 
 
 class SolicitacaoExamesComplementares(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    sol_exa_com = models.TextField(verbose_name="Solicitação exames Complementares", blank=True)
+    sol_exa_com = models.TextField(verbose_name="Solicitação Exames Complementares", blank=True)
 
     def get_absolute_url(self):
         return reverse("sol_exa_com_detalhes", kwargs={"pk": self.pk})
+    class Meta:
+        verbose_name_plural = "Solicitações Exames Complementares"
 
 
 class ResultadoExamesComplementares(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    res_exa_com = models.TextField(verbose_name="Resulatdo Exames Complementares")
+    res_exa_com = models.TextField(verbose_name="Resultado Exames Complementares")
 
     def get_absolute_url(self):
         return reverse("res_exa_com_detalhes", kwargs={"pk": self.pk})
+
+    class Meta:
+        verbose_name_plural = "Resultados de Exames Complementares"
 
 
 class PlanoTratamentoI(models.Model):
@@ -317,6 +251,8 @@ class PlanoTratamentoI(models.Model):
 
     def get_absolute_url(self):
         return reverse("pla_tra_ii_detalhes", kwargs={"pk": self.pk})
+    class Meta:
+        verbose_name_plural = "Planos de Tratamentos I"
 
 
 class PlanoTratamentoII(models.Model):
@@ -327,13 +263,137 @@ class PlanoTratamentoII(models.Model):
 
     def get_absolute_url(self):
         return reverse("pla_tra_i_detalhes", kwargs={"pk": self.pk})
+    class Meta:
+        verbose_name_plural = "Planos de Tratamentos II"
 
 
-class EvolucaoPaciente(models.Model):
+# class EvolucaoPaciente(models.Model):
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+#     evolucao_paciente = models.TextField(verbose_name="Evolução do Paciente")
+#
+#     def get_absolute_url(self):
+#         return reverse("evo_pac_detalhes", kwargs={"pk": self.pk})
+
+
+# class Dente(models.Model):
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     #prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True)
+#     doencas = models.ForeignKey(Doenca, on_delete=models.CASCADE, blank=True)
+#     # dente = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
+#
+#     # def get_absolute_url(self):
+#     #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+#
+#     class Meta:
+#         verbose_name_plural = "Dentes"
+#
+#     def __str__(self):
+#         return self.dente
+
+
+class OdontogramaInicial(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True)
+
+    d11 = models.ManyToManyField(Doenca, blank=True, related_name="Dente11")
+    d12 = models.ManyToManyField(Doenca, blank=True, related_name="Dente12")
+    d13 = models.ManyToManyField(Doenca, blank=True, related_name="Dente13")
+    d14 = models.ManyToManyField(Doenca, blank=True, related_name="Dente14")
+    d15 = models.ManyToManyField(Doenca, blank=True, related_name="dente15")
+    d16 = models.ManyToManyField(Doenca, blank=True, related_name="Dente16")
+    d17 = models.ManyToManyField(Doenca, blank=True, related_name="Dente17")
+    d18 = models.ManyToManyField(Doenca, blank=True, related_name="Dente18")
+
+    d21 = models.ManyToManyField(Doenca, blank=True, related_name="Dente21")
+    d22 = models.ManyToManyField(Doenca, blank=True, related_name="Dente22")
+    d23 = models.ManyToManyField(Doenca, blank=True, related_name="Dente23")
+    d24 = models.ManyToManyField(Doenca, blank=True, related_name="Dente24")
+    d25 = models.ManyToManyField(Doenca, blank=True, related_name="dente25")
+    d26 = models.ManyToManyField(Doenca, blank=True, related_name="Dente26")
+    d27 = models.ManyToManyField(Doenca, blank=True, related_name="Dente27")
+    d28 = models.ManyToManyField(Doenca, blank=True, related_name="Dente28")
+
+    d31 = models.ManyToManyField(Doenca, blank=True, related_name="Dente31")
+    d32 = models.ManyToManyField(Doenca, blank=True, related_name="Dente32")
+    d33 = models.ManyToManyField(Doenca, blank=True, related_name="Dente33")
+    d34 = models.ManyToManyField(Doenca, blank=True, related_name="Dente34")
+    d35 = models.ManyToManyField(Doenca, blank=True, related_name="dente35")
+    d36 = models.ManyToManyField(Doenca, blank=True, related_name="Dente36")
+    d37 = models.ManyToManyField(Doenca, blank=True, related_name="Dente37")
+    d38 = models.ManyToManyField(Doenca, blank=True, related_name="Dente38")
+
+    d41 = models.ManyToManyField(Doenca, blank=True, related_name="Dente41")
+    d42 = models.ManyToManyField(Doenca, blank=True, related_name="Dente42")
+    d43 = models.ManyToManyField(Doenca, blank=True, related_name="Dente43")
+    d44 = models.ManyToManyField(Doenca, blank=True, related_name="Dente44")
+    d45 = models.ManyToManyField(Doenca, blank=True, related_name="Dente45")
+    d46 = models.ManyToManyField(Doenca, blank=True, related_name="Dente46")
+    d47 = models.ManyToManyField(Doenca, blank=True, related_name="Dente47")
+    d48 = models.ManyToManyField(Doenca, blank=True, related_name="Dente48")
+
+    def get_absolute_url(self):
+        return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return '{}'.format(self.prontuario.paciente.nome)
+
+    class Meta:
+        verbose_name_plural = "Odontogramas Iniciais"
+
+
+class Procedimento(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    evolucao_paciente = models.TextField(verbose_name="Evolução do Paciente")
+    dente_tratado= models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
+    # procedimento_realizado = models.CharField(verbose_name="Procedimento Realizado",
+    #                                           choices=PROCEDIMENTO_CHOICES, blank=True, max_length=100)
 
-    def get_absolute_url(self):
-        return reverse("evo_pac_detalhes", kwargs={"pk": self.pk})
+    d11 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente11")
+    d12 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente12")
+    d13 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente13")
+    d14 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente14")
+    d15 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente15")
+    d16 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente16")
+    d17 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente17")
+    d18 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente18")
+
+    d21 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente21")
+    d22 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente22")
+    d23 = models.ManyToManyField(Tratamento, blank=True, related_name="tratamentoDente23")
+    d24 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente24")
+    d25 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente25")
+    d26 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente26")
+    d27 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente27")
+    d28 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente28")
+
+    d31 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente31")
+    d32 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente32")
+    d33 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente33")
+    d34 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente34")
+    d35 = models.ManyToManyField(Tratamento, blank=True, related_name="Tratamentodente35")
+    d36 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente36")
+    d37 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente37")
+    d38 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente38")
+
+    d41 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente41")
+    d42 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente42")
+    d43 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente43")
+    d44 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente44")
+    d45 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente45")
+    d46 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente46")
+    d47 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente47")
+    d48 = models.ManyToManyField(Tratamento, blank=True, related_name="TratamentoDente48")
+
+    # def get_absolute_url(self):
+    #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return '{} - {}'.format(self.prontuario.paciente.nome, self.prontuario)
+
+    class Meta:
+        verbose_name_plural = "Procedimentos"
