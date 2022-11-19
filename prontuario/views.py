@@ -148,36 +148,36 @@ class ResultadoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMixi
     template_name = "prontuario/res_exa_com_editar.html"
 
 
-def pla_tra_i_detalhes(request, pk=None):
-    object = PlanoTratamentoI.objects.get(pk=pk)
-    context = {
-        'object': object,
-    }
-    return render(request, 'prontuario/pla_tra_i_detalhes.html', context)
+# def pla_tra_i_detalhes(request, pk=None):
+#     object = PlanoTratamentoI.objects.get(pk=pk)
+#     context = {
+#         'object': object,
+#     }
+#     return render(request, 'prontuario/pla_tra_i_detalhes.html', context)
 
 
-class PlanoTratamentoIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    login_url = reverse_lazy("login")
-    extra_context = {'nome_pagina': 'Plano de Tratamento 1º Opção'}
-    model = PlanoTratamentoI
-    fields = ['plano_tratamento_i', ]
-    template_name = "prontuario/pla_tra_i_editar.html"
+# class PlanoTratamentoIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+#     login_url = reverse_lazy("login")
+#     extra_context = {'nome_pagina': 'Plano de Tratamento 1º Opção'}
+#     model = PlanoTratamentoI
+#     fields = ['plano_tratamento_i', ]
+#     template_name = "prontuario/pla_tra_i_editar.html"
 
 
-def pla_tra_ii_detalhes(request, pk=None):
-    object = PlanoTratamentoII.objects.get(pk=pk)
-    context = {
-        'object': object,
-    }
-    return render(request, 'prontuario/pla_tra_ii_detalhes.html', context)
-
-
-class PlanoTratamentoIIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    login_url = reverse_lazy("login")
-    extra_context = {'nome_pagina': 'Plano de Tratamento 2º Opção'}
-    model = PlanoTratamentoI
-    fields = ['plano_tratamento_ii', ]
-    template_name = "prontuario/pla_tra_ii_editar.html"
+# def pla_tra_ii_detalhes(request, pk=None):
+#     object = PlanoTratamentoII.objects.get(pk=pk)
+#     context = {
+#         'object': object,
+#     }
+#     return render(request, 'prontuario/pla_tra_ii_detalhes.html', context)
+#
+#
+# class PlanoTratamentoIIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+#     login_url = reverse_lazy("login")
+#     extra_context = {'nome_pagina': 'Plano de Tratamento 2º Opção'}
+#     model = PlanoTratamentoI
+#     fields = ['plano_tratamento_ii', ]
+#     template_name = "prontuario/pla_tra_ii_editar.html"
 
 
 # def evo_pac_detalhes(request, pk=None):
