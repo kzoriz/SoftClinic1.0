@@ -305,6 +305,7 @@ class OdontogramaInicial(models.Model):
 
 
 class Odontograma(models.Model):
+    id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario")
@@ -317,7 +318,7 @@ class Odontograma(models.Model):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{}'.format(self.odontograma_inicial.prontuario.paciente)
+        return '{}'.format(self.prontuario.paciente.nome)
 
     class Meta:
         verbose_name_plural = "Odontogramas"
