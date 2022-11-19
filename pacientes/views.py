@@ -58,13 +58,13 @@ def paciente_detalhes_geral(request, pk=None):
 
 @login_required
 def registrar_paciente(request):
-    x = datetime.datetime.now()
-    # a = x.strftime("%H")
-    b = x.strftime("%M")
-    c = x.strftime("%S")
-    d = x.strftime("%Y")
-    # e = x.strftime("%m")
-    # f = x.strftime("%d")
+    # x = datetime.datetime.now()
+    # # a = x.strftime("%H")
+    # b = x.strftime("%M")
+    # c = x.strftime("%S")
+    # d = x.strftime("%Y")
+    # # e = x.strftime("%m")
+    # # f = x.strftime("%d")
     context = {}
     if request.method == 'POST':
         nome = request.POST['nome']
@@ -89,14 +89,28 @@ def registrar_paciente(request):
             data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
         else:
             data_nascimento = data_nascimento
+        # cpf = cpf.split(".")
+        # cpf = "".join(cpf)
+        # cpf = cpf.split("-")
+        # cpf = "".join(cpf)
+        # cpf = int(cpf)
 
-        p = Paciente(nome=nome, nome_social=nome_social, data_nascimento=data_nascimento, sexo_biologico=sexo_biologico,
+        if len(Prontuario.objects.all()) == 0:
+            numero_prontuario = "1000"
+        else:
+            numero_prontuario = str(int(Prontuario.objects.all().last().num_prontuario) + 1)
+        if len(Paciente.objects.all()) == 0:
+            id = 1
+        else:
+            id = Paciente.objects.all().last().id + 1
+
+        p = Paciente(id=id, nome=nome, nome_social=nome_social, data_nascimento=data_nascimento, sexo_biologico=sexo_biologico,
                      rg=rg, cpf=cpf, raca=raca, estado_civil=estado_civil, grau_instrucao=grau_instrucao,
                      endereco=endereco, cep=cep, bairro=bairro, cidade=cidade, uf=uf, telefone_celular=telefone_celular,
                      informacoes_complementares=informacoes_complementares)
 
         p.save()
-        u = Prontuario(paciente=p, num_prontuario=b+c+d)
+        u = Prontuario(id=id, paciente=p, num_prontuario=numero_prontuario)
         u.save()
         r = Anamnese(prontuario=u)
         r.save()
@@ -110,6 +124,8 @@ def registrar_paciente(request):
         x.save()
         y = OdontogramaInicial(prontuario=u)
         y.save()
+        # e = Odontograma(prontuario=u)
+        # e.save()
         w = SolicitacaoExamesComplementares(prontuario=u)
         w.save()
         z = ResultadoExamesComplementares(prontuario=u)
@@ -122,8 +138,8 @@ def registrar_paciente(request):
         # k.save()
         # m = Dente(prontuario=u)
         # m.save()
-        a = Procedimento(prontuario=u)
-        a.save()
+        # a = Procedimento(prontuario=u)
+        # a.save()
 
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
@@ -179,11 +195,10 @@ def paciente_detalhes(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
     prontuario = Prontuario.objects.get(pk=pk)
 
-
     context = {
-            'object': instance,
-            'prontuario': prontuario,
-            #'data_nascimento': data,
+        'object': instance,
+        'prontuario': prontuario,
+        # 'data_nascimento': data,
 
     }
     return render(request, 'pacientes/paciente_detalhes2.html', context)
@@ -249,4 +264,3 @@ class Teste2ViewSet(viewsets.ModelViewSet):
 class TesteViewSet(viewsets.ModelViewSet):
     queryset = Teste.objects.all()
     serializer_class = TesteSerializer
-

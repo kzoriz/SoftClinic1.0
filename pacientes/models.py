@@ -92,6 +92,7 @@ UF_CHOICES = (
 class Paciente(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    id = models.IntegerField(primary_key=True)
     nome = models.CharField(verbose_name="Nome", max_length=200)
     nome_social = models.CharField(verbose_name="Nome Social", max_length=200, blank=True)
     data_nascimento = models.DateField(verbose_name="Data de Nascimento", auto_now=False, auto_now_add=False, blank=True)
