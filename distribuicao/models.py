@@ -1,5 +1,7 @@
 from django.db import models
-from usuarios.models import Docente
+
+from prontuario.models import Prontuario, Atendimento
+from usuarios.models import Docente, Discente
 
 
 class Disciplina(models.Model):
@@ -23,3 +25,19 @@ class Disciplina(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Agendamento(models.Model):
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True, related_name="agendamento")
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE, blank=True, null=True, related_name="agendamento")
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, blank=True, related_name="agendamento")
+    docente = models.ForeignKey(Docente, on_delete=models.CASCADE, blank=True, related_name="agendamento")
+    discente = models.ForeignKey(Discente, on_delete=models.CASCADE, blank=True, related_name="agendamento")
+    data_hora = models.DateTimeField(verbose_name="Data", blank=True)
+    done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.prontuario.paciente.nome
+
+    class Meta:
+        verbose_name_plural = "Agendamentos"

@@ -21,3 +21,5 @@ admin.site.register(Dente)
 admin.site.register(Doenca)
 admin.site.register(Diagnostico)
 admin.site.register(Odontograma)
+admin.site.register(Procedimento)
+

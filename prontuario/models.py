@@ -2,6 +2,7 @@ from django.db import models
 from pacientes.models import Paciente
 from django.urls import reverse
 
+
 C_CHOICES = [
     ('SIM', 'SIM'),
     ('NAO', 'NÃO'),
@@ -239,21 +240,6 @@ class ResultadoExamesComplementares(models.Model):
         verbose_name_plural = "Resultados de Exames Complementares"
 
 
-class Dente(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    dente = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True, unique=True)
-
-    # def get_absolute_url(self):
-    #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
-
-    class Meta:
-        verbose_name_plural = "Dentes"
-
-    def __str__(self):
-        return self.dente
-
-
 class Doenca(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -269,12 +255,39 @@ class Doenca(models.Model):
         verbose_name_plural = "Doenças"
 
 
+class Procedimento(models.Model):
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    nome = models.CharField(verbose_name="procedimento",
+                            choices=PROCEDIMENTO_CHOICES,
+                            max_length=100,
+                            blank=True)
+
+
+class Dente(models.Model):
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente", blank=True, default='1001')
+    nome = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
+    procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="dente")
+    doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente")
+
+    # def get_absolute_url(self):
+    #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+
+    class Meta:
+        verbose_name_plural = "Dentes"
+
+    def __str__(self):
+        return self.nome
+
+
 class Diagnostico(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    doenca = models.ManyToManyField(Doenca, blank=True, related_name="diagnostico")
+    #doenca = models.ManyToManyField(Doenca, blank=True, related_name="diagnostico")
     dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True)
 
     def get_absolute_url(self):
@@ -325,10 +338,11 @@ class Odontograma(models.Model):
 
 
 class Atendimento(models.Model):
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True, related_name="atendimento")
+    #procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="atendimento")
+    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, related_name="atendimento")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True)
-    procedimento = models.CharField(verbose_name="atendimento", choices=PROCEDIMENTO_CHOICES, max_length=100, blank=True)
 
     def __str__(self):
         return '{} - {}'.format(self.prontuario.paciente.nome, self.prontuario)
