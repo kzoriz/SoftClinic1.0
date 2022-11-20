@@ -18,6 +18,8 @@ from django.urls import path, include
 from .api import api
 from pacientes.views import Teste2ViewSet, TesteViewSet
 from rest_framework import routers
+from django.conf.urls.static import static
+from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register(r'teste2', Teste2ViewSet)
@@ -30,4 +32,4 @@ urlpatterns = [
     path('', include("usuarios.urls")),
     path('', include("distribuicao.urls")),
     path('', include("prontuario.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

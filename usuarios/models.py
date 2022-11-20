@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Funcionario(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    matricula = models.CharField(verbose_name="MatFunc", max_length=200)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="funcionario")
+    imagem = models.ImageField(null=True, blank=True)
+    matricula = models.CharField(verbose_name="MatFunc", max_length=200, default="nenhuma")
     nome = models.CharField(verbose_name="Nome", max_length=200)
     telefone = models.CharField(verbose_name="Telefone", max_length=15)
     email = models.EmailField(verbose_name="Email", max_length=200)
@@ -14,7 +15,8 @@ class Funcionario(models.Model):
 
 
 class Docente(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="docente")
+    imagem = models.ImageField(null=True, blank=True)
     matricula = models.CharField(verbose_name="MatDocente", max_length=200)
     nome = models.CharField(verbose_name="Nome", max_length=200)
     telefone = models.CharField(verbose_name="Telefone", max_length=15)
@@ -39,7 +41,8 @@ class Discente(models.Model):
         ('10', '10º'),
 
     ]
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="discente")
+    imagem = models.ImageField(null=True, blank=True)
     matricula = models.CharField(verbose_name="MatDiscente", max_length=200)
     nome = models.CharField(verbose_name="Nome", max_length=200)
     periodo = models.CharField(verbose_name="Período", max_length=3)
@@ -48,3 +51,4 @@ class Discente(models.Model):
 
     def __str__(self):
         return self.nome
+

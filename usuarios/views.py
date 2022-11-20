@@ -111,3 +111,11 @@ def cadastro_discente(request):
         return redirect('inicio')
     return render(request, template_name, context)
 
+# def perfil_do_usuario(request):
+#
+#     discente = Discente.objects.all()
+#     docente = Docente.objects.all()
+#     funcionario = Funcionario.objects.all()
+
+
+

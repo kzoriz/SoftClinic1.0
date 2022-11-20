@@ -1,5 +1,5 @@
 from django.contrib.auth import forms
-from .models import User, Funcionario, Discente
+from usuarios.models import User, Funcionario, Discente
 from django import forms as mforms
 from django import forms as xforms
 
@@ -24,3 +24,4 @@ class DiscenteForm(xforms.ModelForm):
     class Meta:
         model = Discente
         fields = "__all__"
+

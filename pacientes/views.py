@@ -14,7 +14,8 @@ from pacientes.forms import PacienteForm, PacienteInfantilForm
 from pacientes.models import Paciente, PacienteInfantil, Teste2, Teste
 from pacientes.serializers import Teste2Serializer, TesteSerializer
 from prontuario.models import *
-
+from usuarios.models import Funcionario
+from django.contrib.auth.models import User
 
 def paciente_detalhes_geral(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
@@ -247,8 +248,11 @@ class PacienteInfantilDelete(LoginRequiredMixin, DeleteView):
 
 
 @login_required
-def inicio(request):
-    return render(request, "pacientes/inicio.html")
+def inicio(request, pk=None):
+    context = {
+
+    }
+    return render(request, "pacientes/inicio.html", context)
 
 
 @login_required
@@ -264,3 +268,4 @@ class Teste2ViewSet(viewsets.ModelViewSet):
 class TesteViewSet(viewsets.ModelViewSet):
     queryset = Teste.objects.all()
     serializer_class = TesteSerializer
+
