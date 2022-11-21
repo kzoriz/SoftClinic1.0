@@ -103,34 +103,29 @@ def registrar_paciente(request):
         p.save()
         u = Prontuario(id=id, paciente=p, num_prontuario=numero_prontuario)
         u.save()
-        r = Anamnese(prontuario=u)
+        r = Anamnese(id=id, prontuario=u)
         r.save()
-        s = InfSaudeSistemica(prontuario=u)
+        s = InfSaudeSistemica(id=id, prontuario=u)
         s.save()
-        t = ExameFisico(prontuario=u)
+        t = ExameFisico(id=id, prontuario=u)
         t.save()
-        v = SinaisVitaisClinicos(prontuario=u)
+        v = SinaisVitaisClinicos(id=id, prontuario=u)
         v.save()
-        x = PSR(prontuario=u)
+        x = PSR(id=id, prontuario=u)
         x.save()
-        y = OdontogramaInicial(prontuario=u)
+        b = Dente(prontuario=u)
+        b.save()
+        a = Diagnostico(id=id, prontuario=u)
+        a.save()
+        y = OdontogramaInicial(id=id, prontuario=u)
         y.save()
-        e = Odontograma(prontuario=u)
+        e = Odontograma(id=id, prontuario=u)
         e.save()
-        w = SolicitacaoExamesComplementares(prontuario=u)
+        w = SolicitacaoExamesComplementares(id=id, prontuario=u)
         w.save()
-        z = ResultadoExamesComplementares(prontuario=u)
+        z = ResultadoExamesComplementares(id=id, prontuario=u)
         z.save()
-        # i = PlanoTratamentoI(prontuario=u)
-        # i.save()
-        # j = PlanoTratamentoII(prontuario=u)
-        # j.save()
-        # k = EvolucaoPaciente(prontuario=u)
-        # k.save()
-        # m = Dente(prontuario=u)
-        # m.save()
-        # a = Procedimento(prontuario=u)
-        # a.save()
+
 
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
@@ -207,9 +202,13 @@ def paciente_detalhes_inf(request, pk=None):
 class PacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy("login")
     model = Paciente
-    fields = "__all__"
+    fields = ['nome', 'nome_social', 'data_nascimento', 'sexo_biologico', 'rg', 'cpf', 'raca',
+              'estado_civil', 'grau_instrucao', 'endereco', 'cep', 'bairro', 'cidade', 'uf',
+              'telefone_celular', 'informacoes_complementares']
+    # exclude = ('id')
     template_name = "pacientes/paciente_editar2.html"
     success_message = "Paciente atualizado com Sucesso!"
+
 
     def data_nasci(self, obj):
         return obj.data_nascimento.strftime("%d/%m/%Y")

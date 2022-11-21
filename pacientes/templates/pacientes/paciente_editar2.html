@@ -9,7 +9,25 @@
 {% endfor %}
 {% endif %}
 {% block content%}
+{% if item.total_error_count %}
+    <div class="alert alert-danger col-12 mx-1" role="alert">
+        <div id="form_errors">
+            {% if item.non_form_errors %}
+                {{ item.non_form_errors }}
+            {% endif %}
+            {% for error in item.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
 <div class="container">
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>{{ form.non_field_errors }}</strong>
+    </div>
+{% endif %}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"></h1>
     </div>

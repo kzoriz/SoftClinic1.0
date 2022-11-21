@@ -98,10 +98,14 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Exame PSR atualizado com Sucesso!"
 
 
-def odo_ini_detalhes(request, pk=None):
-    object = OdontogramaInicial.objects.get(pk=pk)
+def odo_ini_detalhes(request, prontuario=None):
+    odontograma_inicial = OdontogramaInicial.objects.filter(prontuario__num_prontuario=prontuario)
+    # dente = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente
+    # doencas = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente.doenca.all()
     context = {
-        'object': object,
+        'odontograma_inicial': odontograma_inicial,
+        # 'doencas': doencas,
+        # 'dente': dente,
     }
     return render(request, 'prontuario/odontograma_inicial_detalhes.html', context)
 

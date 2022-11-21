@@ -265,14 +265,20 @@ class Procedimento(models.Model):
                             max_length=100,
                             blank=True, default='nenhum')
 
+    class Meta:
+        verbose_name_plural = "Procedimentos"
+
+    def __str__(self):
+        return self.nome
+
 
 class Dente(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente", blank=True)
     nome = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
-    procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="dente")
-    doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente")
+    procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="procedimento")
+    doenca = models.ManyToManyField(Doenca, blank=True, related_name="doenca")
 
     # def get_absolute_url(self):
     #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
@@ -290,13 +296,13 @@ class Diagnostico(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
     #doenca = models.ManyToManyField(Doenca, blank=True, related_name="diagnostico")
-    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, default="D11")
+    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="dente")
 
     def get_absolute_url(self):
         return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{}'.format(self.dente.nome)
+        return '{}'.format(self.prontuario)
 
     class Meta:
         verbose_name_plural = "Diagnosticos"
@@ -306,8 +312,8 @@ class OdontogramaInicial(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    diagnostico = models.ForeignKey(Diagnostico, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_inicial")
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario_odonto")
+    diagnostico = models.ForeignKey(Diagnostico, on_delete=models.CASCADE, blank=True, null=True, related_name="diagnostico")
 
     def get_absolute_url(self):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
