@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
@@ -96,6 +97,7 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "prontuario/psr_editar.html"
     success_message = "Exame PSR atualizado com Sucesso!"
 
+
 def odo_ini_detalhes(request, pk=None):
     object = OdontogramaInicial.objects.get(pk=pk)
     context = {
@@ -130,6 +132,7 @@ class SolicitacaoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMi
     fields = ['sol_exa_com', ]
     template_name = "prontuario/sol_exa_com_editar.html"
     success_message = "Exames Complementares Atualizado com Sucesso!"
+
 
 def res_exa_com_detalhes(request, pk=None):
     object = ResultadoExamesComplementares.objects.get(pk=pk)
@@ -194,3 +197,13 @@ class ResultadoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMixi
 #     model = EvolucaoPaciente
 #     fields = ['evolucao-paciente', ]
 #     template_name = "prontuario/evo_pac_editar.html"
+
+@login_required
+def odontogramas(request):
+    todos_odontogramas = Odontograma.objects.order_by("-id")
+    context = {
+        "nome_pagina": "Pacientes",
+        "todos_odontogramas": todos_odontogramas,
+
+    }
+    return render(request, "prontuario/odontogramas.html", context)

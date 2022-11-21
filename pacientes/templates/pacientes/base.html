@@ -66,6 +66,7 @@
             </ul>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
+
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
@@ -74,13 +75,27 @@
 
                             <li class="nav-item dropdown no-arrow">
                                 {% if user.is_authenticated %}
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+<!--                                <i class="fa fa-user" aria-hidden="true"></i>-->
+                                    <div class="btn-group dropleft">
+
+                                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <b>{{user.username}}</b>
-                                        <i class=""></i>
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
-                                        <b>Sair</b>
-                                    </a>
+                                      </button>
+                                      <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="#" data-toggle="modal">
+                                              <i class=""></i>
+                                              <i class="fa fa-user fa-sm fa-fw mr-2 text-black-400" aria-hidden="true"></i>
+                                              <b>Atualizar Perfil</b>
+                                          </a>
+                                          <button class="dropdown-item" type="button">----------------</button>
+                                          <button class="dropdown-item" type="button">----------------</button>
+                                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                              <i class=""></i>
+                                              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
+                                              <b>Sair</b>
+                                          </a>
+                                      </div>
+                                    </div>
                                 {% endif %}
                             </li>
                         </ul>

@@ -17,6 +17,7 @@ from prontuario.models import *
 from usuarios.models import Funcionario
 from django.contrib.auth.models import User
 
+
 def paciente_detalhes_geral(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
     prontuario = Prontuario.objects.get(pk=pk)
@@ -59,13 +60,7 @@ def paciente_detalhes_geral(request, pk=None):
 
 @login_required
 def registrar_paciente(request):
-    # x = datetime.datetime.now()
-    # # a = x.strftime("%H")
-    # b = x.strftime("%M")
-    # c = x.strftime("%S")
-    # d = x.strftime("%Y")
-    # # e = x.strftime("%m")
-    # # f = x.strftime("%d")
+
     context = {}
     if request.method == 'POST':
         nome = request.POST['nome']
@@ -90,11 +85,6 @@ def registrar_paciente(request):
             data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
         else:
             data_nascimento = data_nascimento
-        # cpf = cpf.split(".")
-        # cpf = "".join(cpf)
-        # cpf = cpf.split("-")
-        # cpf = "".join(cpf)
-        # cpf = int(cpf)
 
         if len(Prontuario.objects.all()) == 0:
             numero_prontuario = "1000"
