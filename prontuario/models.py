@@ -2,6 +2,25 @@ from django.db import models
 from pacientes.models import Paciente
 from django.urls import reverse
 
+SEXTANTE = [
+    ('0', '0'),
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+]
+
+PLACA_VISIVEL = [
+    ('0', '0'),
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+]
+CHOICES_RESULTADO = [
+    ('Higiene Boa', 'Higiene Boa'),
+    ('Higiene Regular', 'Higiene regular'),
+    ('Higiene Ruim', 'Higiene Ruim'),
+]
 
 C_CHOICES = [
     ('SIM', 'SIM'),
@@ -10,7 +29,6 @@ C_CHOICES = [
 
 DOENCA_CHOICES = [
     ('carie', 'Carie'),
-    ('canal', 'Canal'),
     ('cáries', 'cáries'),
     ('gengivite', 'gengivite'),
     ('tártaro', 'tártaro'),
@@ -19,7 +37,8 @@ DOENCA_CHOICES = [
     ('nenhuma', 'nenhuma'),
 ]
 
-PROCEDIMENTO_CHOICES = [
+TRATAMENTO_CHOICES = [
+    ('canal', 'Canal'),
     ('limpeza', 'limpeza'),
     ('remoção de tartaro', 'remoção de tartaro'),
     ('aplicacao de fluor', 'aplicacao de fluor'),
@@ -145,17 +164,6 @@ class ExameFisico(models.Model):
 
 
 class SinaisVitaisClinicos(models.Model):
-    PLACA_VISIVEL = [
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-    ]
-    CHOICES_RESULTADO = [
-        ('Higiene Boa', 'Higiene Boa'),
-        ('Higiene Regular', 'Higiene regular'),
-        ('Higiene Ruim', 'Higiene Ruim'),
-    ]
 
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -186,13 +194,6 @@ class SinaisVitaisClinicos(models.Model):
 
 
 class PSR(models.Model):
-    SEXTANTE = [
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-    ]
 
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -247,8 +248,8 @@ class Doenca(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     nome = models.TextField(verbose_name="Doença", choices=DOENCA_CHOICES, blank=True, default="nenhuma")
 
-    def get_absolute_url(self):
-        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+    # def get_absolute_url(self):
+    #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.nome
@@ -257,16 +258,16 @@ class Doenca(models.Model):
         verbose_name_plural = "Doenças"
 
 
-class Procedimento(models.Model):
+class Tratamento(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     nome = models.CharField(verbose_name="procedimento",
-                            choices=PROCEDIMENTO_CHOICES,
+                            choices=TRATAMENTO_CHOICES,
                             max_length=100,
                             blank=True, default='nenhum')
 
     class Meta:
-        verbose_name_plural = "Procedimentos"
+        verbose_name_plural = "Tratamentos"
 
     def __str__(self):
         return self.nome
@@ -277,8 +278,8 @@ class Dente(models.Model):
     # updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente", blank=True)
     nome = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
-    procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="procedimento")
-    doenca = models.ManyToManyField(Doenca, blank=True, related_name="doenca")
+    tratamento = models.ManyToManyField(Tratamento, blank=True, related_name="dente_tratamentos")
+    doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente_doencas")
 
     # def get_absolute_url(self):
     #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
@@ -290,50 +291,53 @@ class Dente(models.Model):
         return self.nome
 
 
-class Diagnostico(models.Model):
-    id = models.IntegerField(primary_key=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    #doenca = models.ManyToManyField(Doenca, blank=True, related_name="diagnostico")
-    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="dente")
+# class Diagnostico(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+#     #doenca = models.ManyToManyField(Doenca, blank=True, related_name="diagnostico")
+#     dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="dente")
+#
+#     def get_absolute_url(self):
+#         return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+#
+#     def __str__(self):
+#         return '{}'.format(self.prontuario)
+#
+#     class Meta:
+#         verbose_name_plural = "Diagnosticos"
 
-    def get_absolute_url(self):
-        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
-    def __str__(self):
-        return '{}'.format(self.prontuario)
-
-    class Meta:
-        verbose_name_plural = "Diagnosticos"
-
-
-class OdontogramaInicial(models.Model):
-    id = models.IntegerField(primary_key=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario_odonto")
-    diagnostico = models.ForeignKey(Diagnostico, on_delete=models.CASCADE, blank=True, null=True, related_name="diagnostico")
-
-    def get_absolute_url(self):
-        return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
-
-    def __str__(self):
-        return '{} - {}'.format(self.prontuario.paciente.nome, self.diagnostico)
-
-    class Meta:
-        verbose_name_plural = "Odontogramas Iniciais"
+# class OdontogramaInicial(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario_odonto")
+#     diagnostico = models.ForeignKey(Diagnostico, on_delete=models.CASCADE,
+#                                       blank=True, null=True,
+#                                       related_name="diagnostico")
+#
+#     def get_absolute_url(self):
+#         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
+#
+#     def __str__(self):
+#         return '{} - {}'.format(self.prontuario.paciente.nome, self.diagnostico)
+#
+#     class Meta:
+#         verbose_name_plural = "Odontogramas Iniciais"
 
 
 class Odontograma(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario")
-    odontograma_inicial = models.OneToOneField(OdontogramaInicial,
-                                               on_delete=models.CASCADE,
-                                               related_name="odontograma_inicial",
-                                               blank=True, null=True)
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="odontograma_prontuario")
+    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente")
+    # odontograma_inicial = models.OneToOneField(OdontogramaInicial,
+    #                                            on_delete=models.CASCADE,
+    #                                            related_name="odontograma_inicial",
+    #                                            blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
@@ -346,9 +350,10 @@ class Odontograma(models.Model):
 
 
 class Atendimento(models.Model):
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, blank=True, related_name="atendimento")
-    #procedimento = models.ManyToManyField(Procedimento, blank=True, related_name="atendimento")
-    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, related_name="atendimento")
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE,
+                                   blank=True,
+                                   related_name="atendimento_prontuario")
+    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, related_name="atendimento_dente")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

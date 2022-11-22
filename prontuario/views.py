@@ -98,26 +98,26 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Exame PSR atualizado com Sucesso!"
 
 
-def odo_ini_detalhes(request, prontuario=None):
-    odontograma_inicial = OdontogramaInicial.objects.filter(prontuario__num_prontuario=prontuario)
+def odon_detalhes(request, prontuario=None):
+    odontograma = Odontograma.objects.filter(prontuario__num_prontuario=prontuario)
     # dente = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente
     # doencas = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente.doenca.all()
     context = {
-        'odontograma_inicial': odontograma_inicial,
+        'odontograma_inicial': odontograma,
         # 'doencas': doencas,
         # 'dente': dente,
     }
-    return render(request, 'prontuario/odontograma_inicial_detalhes.html', context)
+    return render(request, 'prontuario/odontograma_detalhes.html', context)
 
 
-class OdontogramaInicialUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class OdontogramaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy("login")
     extra_context = {'nome_pagina': 'Odontograma Inicial'}
-    model = OdontogramaInicial
+    model = Odontograma
     fields = ['d11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd21', 'd22', 'd23', 'd24', 'd25',
               'd26', 'd27', 'd28', 'd31', 'd32', 'd33', 'd34', 'd35', 'd36', 'd37', 'd38', 'd41', 'd42', 'd43', 'd44',
               'd45', 'd46', 'd47', 'd48']
-    template_name = "prontuario/odontograma_inicial_editar.html"
+    template_name = "prontuario/odontograma_editar.html"
     success_message = "Odontograma Inicial Atualizado com Sucesso!"
 
 
