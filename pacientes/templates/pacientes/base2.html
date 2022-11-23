@@ -90,6 +90,11 @@
                                 </div>
                             {% endfor %}
                         {% endif %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.non_field_errors }}</strong>
+                            </div>
+                        {% endif %}
                         <div class="card shadow mb-4">
                             <section style="background-color: #ffffff;">
                                 {% block content %}

@@ -16,6 +16,7 @@ from pacientes.serializers import Teste2Serializer, TesteSerializer
 from prontuario.models import *
 from usuarios.models import Funcionario
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 
 def paciente_detalhes_geral(request, pk=None):
@@ -77,7 +78,7 @@ def registrar_paciente(request):
         bairro = request.POST['bairro']
         cidade = request.POST['cidade']
         uf = request.POST['uf']
-        telefone_celular = request.POST['telefone']
+        telefone_celular = request.POST['telefone_celular']
         informacoes_complementares = request.POST['informacoes_complementares']
 
         if data_nascimento == "":
@@ -125,7 +126,7 @@ def registrar_paciente(request):
 
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
-    return render(request, "pacientes/paciente_registrar2.html", context)
+    return render(request, "pacientes/paciente_registrar_front.html", context)
 
 
 @login_required
@@ -149,11 +150,22 @@ def registrar_paciente_inf(request):
 def pacientes(request):
     todos_pacientes = Paciente.objects.order_by("nome")
     todos_pacientes_inf = PacienteInfantil.objects.order_by("-id")
+    paginator = Paginator(todos_pacientes, 10)  # Mostra 25 contatos por página
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
 
+    # Se o page request (9999) está fora da lista, mostre a última página.
+    try:
+        pacientes = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        pacientes = paginator.page(paginator.num_pages)
     context = {
         "nome_pagina": "PACIENTES REGISTRADOS",
         "todos_pacientes": todos_pacientes,
         "todos_pacientes_inf": todos_pacientes_inf,
+        "pacientes": pacientes,
 
     }
     return render(request, "pacientes/pacientes2.html", context)
@@ -178,12 +190,13 @@ def paciente_detalhes(request, pk=None):
     prontuario = Prontuario.objects.get(pk=pk)
 
     context = {
+        "nome_pagina": "INFORMAÇÕES DO PACIENTE",
         'object': instance,
         'prontuario': prontuario,
         # 'data_nascimento': data,
 
     }
-    return render(request, 'pacientes/paciente_detalhes2.html', context)
+    return render(request, 'pacientes/paciente_detalhes_front.html', context)
 
 
 @login_required
@@ -202,7 +215,9 @@ class PacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
               'estado_civil', 'grau_instrucao', 'endereco', 'cep', 'bairro', 'cidade', 'uf',
               'telefone_celular', 'informacoes_complementares']
     # exclude = ('id')
-    template_name = "pacientes/paciente_editar2.html"
+    # template_name = "pacientes/paciente_editar2.html"
+    template_name_field = "ATUALIZANDO PACIENTE"
+    template_name = "pacientes/paciente_editar_front.html"
     success_message = "Paciente atualizado com Sucesso!"
 
 

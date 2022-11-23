@@ -1,0 +1,141 @@
+{% extends "pacientes/base2.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+ <body class="body">
+    <div class="container" >
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+        </div>
+        <div class="col-md-12 mx-auto">
+             <section style="background-color: #ffffff;">
+                 <div class="row">
+                     <div class="col-lg-12">
+                        <div class="card-body text-center">
+                            <section class="u-align-left u-clearfix u-grey-10 u-section-1" id="">
+                              <div class="u-clearfix u-sheet u-sheet-1">
+                                <div class="u-align-center">
+                                  <form action="." method="post" class="u-clearfix u-form-spacing-35 u-form-vertical u-inner-form" style="padding: 20px;" name="form">
+                                      {% csrf_token %}
+                                    <div class="u-form-group u-form-name u-form-partition-factor-3">
+                                      <label for="nome" class="u-label">Nome</label>
+                                      <input type="text" placeholder="Seu Nome Completo" id="nome" name="nome" class="u-input u-input-rectangle u-white u-input-3" value="{{ object.nome }}">
+                                    </div>
+                                    <div class="u-form-group u-form-name u-form-partition-factor-3">
+                                      <label for="nome_social" class="u-label">Nome Social</label>
+                                      <input type="text" value="{{ object.nome_social}}" placeholder="Seu Nome Social" id="nome_social" name="nome_social" class="u-input u-input-rectangle u-white u-input-3">
+                                    </div>
+                                    <div class="u-form-group u-form-select u-label-top u-form-group-9 u-form-partition-factor-3">
+                                      <label for="raca" class="u-label">Raça</label>
+                                      <div class="u-form-select-wrapper">
+                                        <select id="raca" name="raca" class="u-input u-input-rectangle u-white u-input-9">
+                                            <option value="{{ object.raca }}">{{ object.raca}}</option>
+                                            <option value="BRANCO">Branco</option>
+                                            <option value="PARDO">Pardo</option>
+                                            <option value="INDIGENA">Indígena</option>
+                                            <option value="AMARELO">Amarelo</option>
+                                        </select>
+                                        <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                                      </div>
+                                    </div>
+                                    <div class="u-form-group u-form-select u-label-top u-form-group-9 u-form-partition-factor-3">
+                                      <label for="sexo_biologico" class="u-label">Sexo Biologico</label>
+                                      <div class="u-form-select-wrapper">
+                                        <select id="sexo_biologico" name="sexo_biologico" class="u-input u-input-rectangle u-white u-input-9">
+                                            <option value="{{ object.sexo_biologico}}">{{object.sexo_biologico}}</option>
+                                            <option value="MASCULINO">Masculino</option>
+                                            <option value="FEMININO">Feminino</option>
+                                        </select>
+                                        <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                                      </div>
+                                    </div>
+                                    <div class="u-form-group u-form-select u-label-top u-form-group-9 u-form-partition-factor-3">
+                                      <label for="estado_civil" class="u-label">Estado Civil</label>
+                                      <div class="u-form-select-wrapper">
+                                        <select id="estado_civil" name="estado_civil" class="u-input u-input-rectangle u-white u-input-9">
+                                            <option value="{{object.estado_civil}}">{{object.estado_civil}}</option>
+                                            <option value="SOLTEIRO">SOLTEIRO</option>
+                                            <option value="CASADO">CASADO</option>
+                                            <option value="SEPARADO">SEPARADO</option>
+                                            <option value="DIVORCIADO">DIVORCIADO</option>
+                                            <option value="VIUVO">VIUVO</option>
+                                        </select>
+                                        <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                                      </div>
+                                    </div>
+                                    <div class="u-form-group u-form-select u-label-top u-form-group-9 u-form-partition-factor-3">
+                                      <label for="grau_instrucao" class="u-label">Grau de Instrunção</label>
+                                      <div class="u-form-select-wrapper">
+                                        <select id="grau_instrucao" name="grau_instrucao" class="u-input u-input-rectangle u-white u-input-9">
+                                            <option value="{{object.grau_instrucao}}">{{object.grau_instrucao}}</option>
+                                            <option value="Analfabeto">Analfabeto</option>
+                                            <option value="5º Ano Incompleto">5º Ano Incompleto</option>
+                                            <option value="5º Ano Completo">5º Ano Completo</option>
+                                            <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+                                            <option value="Fundamental Completo">Fundamental Completo</option>
+                                            <option value="Medio Incompleto">Médio Incompleto</option>
+                                            <option value="Médio Completo">Médio Completo</option>
+                                            <option value="Superior Incompleto">Superior Incompleto</option>
+                                            <option value="Superior Completo">Superior Completo</option>
+                                            <option value="Mestrado">Mestrado</option>
+                                            <option value="Doutorado">Doutorado</option>
+                                        </select>
+                                        <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                                      </div>
+                                    </div>
+                                    <div class="u-form-group u-form-partition-factor-3 u-form-phone u-form-group-2">
+                                      <label for="telefone_celular" class="u-label">Telefone</label>
+                                      <input type="tel" value="{{object.telefone_celular}}" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Seu Telefone" id="telefone_celular" name="telefone_celular" class="u-input u-input-rectangle u-white u-input-2">
+                                    </div>
+                                      <div class="u-form-group u-form-name u-form-partition-factor-3">
+                                      <label for="cpf" class="u-label">CPF</label>
+                                      <input type="text" value="{{object.cpf}}" placeholder="**.***-**" id="cpf" name="cpf" class="u-input u-input-rectangle u-white u-input-3">
+                                    </div>
+                                    <div class="u-form-group u-form-name u-form-partition-factor-3">
+                                      <label for="cep" class="u-label">CEP</label>
+                                      <input type="text" value="{{object.cep}}" placeholder="**.***-**" id="cep" name="cep" class="u-input u-input-rectangle u-white u-input-3">
+                                    </div>
+                                    <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-3">
+                                      <label for="cidade" class="u-label">Cidade</label>
+                                      <input type="text" value="{{object.cidade}}" placeholder="Insira Seu Endereço" id="cidade" name="cidade" class="u-input u-input-rectangle u-white u-input-4"  maxlength="30">
+                                    </div>
+                                    <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-3">
+                                      <label for="bairro" class="u-label">Bairro</label>
+                                      <input type="text" value="{{object.bairro}}" placeholder="Insira Seu Endereço" id="bairro" name="bairro" class="u-input u-input-rectangle u-white u-input-4"  maxlength="30">
+                                    </div>
+                                      <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-3">
+                                      <label for="uf" class="u-label">UF</label>
+                                      <input type="text" value="{{object.uf}}" placeholder="Insira Seu Endereço" id="uf" name="uf" class="u-input u-input-rectangle u-white u-input-4"  maxlength="30">
+                                    </div>
+                                    <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-2">
+                                      <label for="endereco" class="u-label">Endereço</label>
+                                      <input type="text" value="{{object.endereco}}" placeholder="Insira Seu Endereço" id="endereco" name="endereco" class="u-input u-input-rectangle u-white u-input-4"  maxlength="30">
+                                    </div>
+                                    <div class="u-form-date u-form-group u-label-top u-form-group-5 u-form-partition-factor-3">
+                                      <label for="data_nascimento" class="u-label">Data Nascimento</label>
+                                      <input type="text" value="{{object.data_nascimento|date:'d/m/Y'}}" placeholder="MM/DD/YYYY" id="data_nascimento" name="data_nascimento" class="u-input u-input-rectangle u-white u-input-5" >
+                                    </div>
+                                    <div class="u-form-group  u-label-top u-form-group-7">
+                                      <label for="informacoes_complementares" class="u-label">Informações Complementares</label>
+                                      <textarea value="{{ object.informacoes_complementares }}" placeholder="Enter your message"  rows="4" cols="50" id="informacoes_complementares" name="informacoes_complementares" class="u-input u-input-rectangle u-white u-input-7" >
+                                          {{ object.informacoes_complementares }}
+                                      </textarea>
+                                    </div>
+                                      <div class="" type="submit">
+                                        <div>
+                                            <a href="#" type="submit" class="u-black u-btn u-btn-submit u-button-style u-btn-1">Atualizar</a>
+                                        </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </section>
+                        </div>
+                     </div>
+                 </div>
+             </section>
+        </div>
+    </div>
+ </body>
+{% endblock content%}
