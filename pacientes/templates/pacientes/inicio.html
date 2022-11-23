@@ -1,4 +1,4 @@
-{% extends "pacientes/base.html" %}
+{% extends "pacientes/base2.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -193,7 +193,7 @@
                             <div class="col-lg-4">
                               <div class="card mb-4">
                                 <div class="card-body text-center">
-                                      <img src="media/{{user.discente.imagem}}"  alt="avatar"
+                                      <img src="/media/{{user.discente.imagem}}"  alt="avatar"
                                       class="rounded mx-auto d-block" style="width: 150px;">
                                       <h5 class="my-3">{{user.discente.nome}}</h5>
                                       <p class="text-muted mb-1">Discente</p>

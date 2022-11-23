@@ -330,10 +330,7 @@ class Odontograma(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="prontuario")
-    odontograma_inicial = models.OneToOneField(OdontogramaInicial,
-                                               on_delete=models.CASCADE,
-                                               related_name="odontograma_inicial",
-                                               blank=True, null=True)
+
 
     def get_absolute_url(self):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})

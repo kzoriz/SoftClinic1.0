@@ -115,10 +115,10 @@ def registrar_paciente(request):
         x.save()
         b = Dente(prontuario=u)
         b.save()
-        a = Diagnostico(id=id, prontuario=u)
-        a.save()
-        y = OdontogramaInicial(id=id, prontuario=u)
-        y.save()
+        # a = Diagnostico(id=id, prontuario=u)
+        # a.save()
+        # y = OdontogramaInicial(id=id, prontuario=u)
+        # y.save()
         e = Odontograma(id=id, prontuario=u)
         e.save()
         w = SolicitacaoExamesComplementares(id=id, prontuario=u)
@@ -153,11 +153,12 @@ def registrar_paciente_inf(request):
 def pacientes(request):
     todos_pacientes = Paciente.objects.order_by("nome")
     todos_pacientes_inf = PacienteInfantil.objects.order_by("-id")
-
+    nome_pagina = 'PACIENTES REGISTRADOS'
     context = {
-        "nome_pagina": "Pacientes",
+        "nome_pagina": nome_pagina,
         "todos_pacientes": todos_pacientes,
         "todos_pacientes_inf": todos_pacientes_inf,
+
 
     }
     return render(request, "pacientes/pacientes.html", context)

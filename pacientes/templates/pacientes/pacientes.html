@@ -1,4 +1,4 @@
-{% extends "pacientes/base.html" %}
+{% extends "pacientes/base2.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content%}
@@ -10,30 +10,49 @@
             </div>
         {% endfor %}
      {% endif %}
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"></h1>
+<!--        <div class="d-sm-flex align-items-center justify-content-between mb-4">-->
+<!--            <h1 class="h3 mb-0 text-gray-800"></h1>-->
+<!--        </div>-->
+
+    <section style="background-color: #ffffff;">
+                <div class="card-body">
+     <section class="u-align-center u-clearfix u-section-2" id="sec-0390">
+<!--      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">-->
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+          <table class="u-table-entity u-table-entity-1">
+            <colgroup>
+              <col width="50%">
+              <col width="50%">
+            </colgroup>
+
+            <tbody class="u-table-alt-palette-1-light-3 u-table-body">
+                {% for paciente in todos_pacientes %}
+              <tr style="height: 65px;">
+                <td class="u-table-cell">{{paciente.nome | upper}}</td>
+                <td class="u-table-cell">{{ paciente.created_at }}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </section>
+      </div>
+
+
+<!--                <table class="table">-->
+<!--                    <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">Nome</th>-->
+<!--                            <th scope="col">Data Cadastro</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    {% for paciente in todos_pacientes %}-->
+<!--                     <tbody class="link">-->
+<!--                        <td><a id="link" href="{% url 'paciente_detalhes' paciente.pk %}">{{paciente.nome | upper}}</a></td>-->
+<!--                        <td>{{ paciente.created_at }}</td>-->
+<!--                     </tbody>-->
+<!--                    {% endfor %}-->
+<!--                </table>-->
         </div>
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                 <h1 class="mb-3 text-primary">
-                    <b>PACIENTES REGISTRADOS</b>
-                 </h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Data Cadastro</th>
-                            <th scope="col">Nome</th>
-                        </tr>
-                    </thead>
-                    {% for paciente in todos_pacientes %}
-                     <tbody class="link">
-                        <td>{{ paciente.created_at }}</td>
-                        <td><a id="link" href="{% url 'paciente_detalhes' paciente.pk %}">{{paciente.nome | upper}}</a></td>
-                     </tbody>
-                    {% endfor %}
-                </table>
-            </div>
-            </div>
-        </div>
+
  </div>
 {% endblock content%}
