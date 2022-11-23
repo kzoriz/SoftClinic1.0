@@ -2,7 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-
  <body class="body">
     <div class="container" >
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -13,24 +12,25 @@
                  <div class="row">
                      <div class="col-lg-12">
                         <div class="card-body text-center">
-                            <section class="u-align-left u-clearfix u-grey-10 u-section-1" id="">
+                            {{template_name_field}}
+                            <section class="u-align-left u-clearfix u-grey-10 u-section-1" id="carousel_33d5">
                               <div class="u-clearfix u-sheet u-sheet-1">
                                 <div class="u-align-center">
-                                  <form action="." method="post" class="u-clearfix u-form-spacing-35 u-form-vertical u-inner-form" style="padding: 20px;" name="form">
+                                  <form action="." method="POST" class="u-clearfix u-form-spacing-35 u-form-vertical u-inner-form" style="padding: 20px;" source="email" name="form">
                                       {% csrf_token %}
                                     <div class="u-form-group u-form-name u-form-partition-factor-3">
                                       <label for="nome" class="u-label">Nome</label>
-                                      <input type="text" placeholder="Seu Nome Completo" id="nome" name="nome" class="u-input u-input-rectangle u-white u-input-3" value="{{ object.nome }}">
+                                      <input type="text" placeholder="Seu Nome Completo" id="nome" name="nome" class="u-input u-input-rectangle u-white u-input-3" value="{{ object.nome }}" >
                                     </div>
                                     <div class="u-form-group u-form-name u-form-partition-factor-3">
                                       <label for="nome_social" class="u-label">Nome Social</label>
-                                      <input type="text" value="{{ object.nome_social}}" placeholder="Seu Nome Social" id="nome_social" name="nome_social" class="u-input u-input-rectangle u-white u-input-3">
+                                      <input type="text" value="{{ object.nome_social}}" placeholder="Seu Nome Social" id="nome_social" name="nome_social" class="u-input u-input-rectangle u-white u-input-3" >
                                     </div>
                                     <div class="u-form-group u-form-select u-label-top u-form-group-9 u-form-partition-factor-3">
                                       <label for="raca" class="u-label">Raça</label>
                                       <div class="u-form-select-wrapper">
                                         <select id="raca" name="raca" class="u-input u-input-rectangle u-white u-input-9">
-                                            <option value="{{ object.raca }}">{{ object.raca}}</option>
+                                            <option value="{{ object.raca }}">{{ object.raca }}</option>
                                             <option value="BRANCO">Branco</option>
                                             <option value="PARDO">Pardo</option>
                                             <option value="INDIGENA">Indígena</option>
@@ -86,15 +86,19 @@
                                     </div>
                                     <div class="u-form-group u-form-partition-factor-3 u-form-phone u-form-group-2">
                                       <label for="telefone_celular" class="u-label">Telefone</label>
-                                      <input type="tel" value="{{object.telefone_celular}}" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Seu Telefone" id="telefone_celular" name="telefone_celular" class="u-input u-input-rectangle u-white u-input-2">
+                                      <input type="text" value="{{object.telefone_celular}}" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Seu Telefone" id="telefone_celular" name="telefone_celular" class="u-input u-input-rectangle u-white u-input-2" >
                                     </div>
                                       <div class="u-form-group u-form-name u-form-partition-factor-3">
                                       <label for="cpf" class="u-label">CPF</label>
-                                      <input type="text" value="{{object.cpf}}" placeholder="**.***-**" id="cpf" name="cpf" class="u-input u-input-rectangle u-white u-input-3">
+                                      <input type="text" value="{{object.cpf}}" placeholder="**.***-**" id="cpf" name="cpf" class="u-input u-input-rectangle u-white u-input-3" >
+                                    </div>
+                                      <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-3">
+                                      <label for="rg" class="u-label">RG</label>
+                                      <input type="text" value="{{object.bairro}}" placeholder="Insira Seu Endereço" id="rg" name="rg" class="u-input u-input-rectangle u-white u-input-4"  maxlength="30">
                                     </div>
                                     <div class="u-form-group u-form-name u-form-partition-factor-3">
                                       <label for="cep" class="u-label">CEP</label>
-                                      <input type="text" value="{{object.cep}}" placeholder="**.***-**" id="cep" name="cep" class="u-input u-input-rectangle u-white u-input-3">
+                                      <input type="text" value="{{object.cep}}" placeholder="**.***-**" id="cep" name="cep" class="u-input u-input-rectangle u-white u-input-3" >
                                     </div>
                                     <div class="u-form-group u-label-top u-form-group-4 u-form-partition-factor-3">
                                       <label for="cidade" class="u-label">Cidade</label>
@@ -114,21 +118,28 @@
                                     </div>
                                     <div class="u-form-date u-form-group u-label-top u-form-group-5 u-form-partition-factor-3">
                                       <label for="data_nascimento" class="u-label">Data Nascimento</label>
-                                      <input type="text" value="{{object.data_nascimento|date:'d/m/Y'}}" placeholder="MM/DD/YYYY" id="data_nascimento" name="data_nascimento" class="u-input u-input-rectangle u-white u-input-5" >
+                                      <input type="text" value="{{object.data_nascimento|date:'d/m/Y'}}" placeholder="MM/DD/YYYY" id="data_nascimento" name="data_nascimento" class="u-input u-input-rectangle u-white u-input-5">
                                     </div>
+                        <!--            <div class="u-form-group u-label-top u-form-group-6">-->
+                        <!--              <label for="text-91de" class="u-label">Campo de Entrada</label>-->
+                        <!--              <input type="text" placeholder="" id="text-91de" name="text" class="u-input u-input-rectangle u-white u-input-6">-->
+                        <!--            </div>-->
                                     <div class="u-form-group  u-label-top u-form-group-7">
                                       <label for="informacoes_complementares" class="u-label">Informações Complementares</label>
-                                      <textarea value="{{ object.informacoes_complementares }}" placeholder="Enter your message"  rows="4" cols="50" id="informacoes_complementares" name="informacoes_complementares" class="u-input u-input-rectangle u-white u-input-7" >
+                                      <textarea value="{{ object.informacoes_complementares }}" placeholder="Enter your message"  rows="4" cols="50" id="informacoes_complementares" name="informacoes_complementares" class="u-input u-input-rectangle u-white u-input-7">
                                           {{ object.informacoes_complementares }}
                                       </textarea>
                                     </div>
-                                      <div class="" type="submit">
-
-                                            <a href="{{ object.get_absolute_url }}" type="submit" class="u-black u-btn u-btn-submit u-button-style u-btn-1">Atualizar</a>
+                        <!--            <div class="u-form-group u-label-top u-form-group-8">-->
+                        <!--              <label for="text-14ab" class="u-label">Campo de Entrada</label>-->
+                        <!--              <input type="text" placeholder="" id="text-14ab" name="text-1" class="u-input u-input-rectangle u-white u-input-8">-->
+                        <!--            </div>-->
+                                              <div class="u-align-center u-form-group u-form-submit u-label-top">
+                                      <input type="submit" value="submit" class="u-form-control-hidden">
+                                        <a href="#" class="u-black u-btn u-btn-submit u-button-style u-btn-1">Submit</a>
 
 
                                     </div>
-                                      <button  type="submit" class="btn btn-primary">Submit</button>
                                   </form>
                                 </div>
                               </div>
