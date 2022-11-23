@@ -19,14 +19,14 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Data Cadastro</th>
                             <th scope="col">Nome</th>
+                            <th scope="col">Dente</th>
                         </tr>
                     </thead>
-                    {% for odontograma in odontograma_inicial %}
+                    {% for odontograma in odontogramas %}
                      <tbody class="link">
                         <td>{{ odontograma }}</td>
-                        <td><a id="link" href="#">{{odontograma.diagnostico.dente.nome | upper}}</a></td>
+                        <td><a id="link" href="#">{{ odontograma.nome | upper}}</a></td>
                      </tbody>
                     {% endfor %}
                 </table>

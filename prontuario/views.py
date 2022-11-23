@@ -99,11 +99,11 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 def odon_detalhes(request, prontuario=None):
-    odontograma = Odontograma.objects.filter(prontuario__num_prontuario=prontuario)
+    odontogramas = Dente.objects.filter(prontuario__num_prontuario=prontuario)
     # dente = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente
     # doencas = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente.doenca.all()
     context = {
-        'odontograma_inicial': odontograma,
+        'odontogramas': odontogramas,
         # 'doencas': doencas,
         # 'dente': dente,
     }

@@ -1,0 +1,60 @@
+{% extends "pacientes/base2.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+
+ <body class="body">
+
+    <div class="container" >
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+        </div>
+        <div class="col-md-12 mx-auto">
+                 <section style="background-color: #ffffff;">
+
+                     <div class="row">
+                         <div class="col-lg-12">
+                                <div class="card-body text-center">
+                                        <section class="u-align-center u-clearfix u-section-2" id="sec-0390">
+<!--                                              <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">-->
+                                                <div class="u-expanded-width u-table u-table-responsive u-table-1">
+                                                  <table class="u-table-entity u-table-entity-1">
+                                                    <colgroup>
+                                                      <col width="100%">
+<!--                                                      <col width="25%">-->
+<!--                                                      <col width="25%">-->
+<!--                                                      <col width="25%">-->
+                                                    </colgroup>
+                                                      {% for paciente in todos_pacientes %}
+                                                    <tbody class="u-table-alt-palette-1-light-3 u-table-body">
+                                                      <tr style="height: 10px;">
+                                                      </tr>
+                                                      <tr style="height: 10px;">
+                                                        <td class="u-table-cell">{{paciente.nome}}</td>
+                                                        <td class="u-table-cell">
+                                                              <a href="{% url 'paciente_detalhes' paciente.pk %}" class="u-blue u-btn  u-button-style u-btn-1">Prontuarios</a>
+                                                        </td>
+<!--                                                        <td class="u-table-cell">Description</td>-->
+<!--                                                        <td class="u-table-cell">Description</td>-->
+                                                      </tr>
+                                                    </tbody>
+                                                      {% endfor %}
+                                                      <div class="u-align-right u-form-group  u-label-top">
+                                                          <input type="button" value="#" class="u-form-control-hidden">
+                                                          <a href="{% url 'paciente_registrar' %}" class="u-black u-btn  u-button-style u-btn-1">Adicionar</a>
+                                                        </div>
+                                                  </table>
+                                                </div>
+                                            </section>
+                                </div>
+
+                         </div>
+                     </div>
+                 </section>
+
+        </div>
+    </div>
+ </body>
+
+{% endblock content%}
