@@ -77,28 +77,23 @@
         </h4>
 
         <div class="u-align-center u-form u-form-1">
-
             <body class="body">
                 <div class="container" >
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"></h1>
                     </div>
                     <div class="col-md-12 mx-auto">
-                                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="alert alert-success" role="alert">
-                                        {{ message }}
-                                    </div>
-                                {% endfor %}
-                             {% endif %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="card shadow mb-4">
-
                             <section style="background-color: #ffffff;">
-
-            {% block content %}
-
-            {% endblock content %}
-
+                                {% block content %}
+                                {% endblock content %}
                             </section>
                         </div>
                     </div>
