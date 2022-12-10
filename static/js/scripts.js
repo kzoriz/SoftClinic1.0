@@ -1,9 +1,6 @@
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 })
-
-
-
     function limpa_formulario_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('rua').value=("");
