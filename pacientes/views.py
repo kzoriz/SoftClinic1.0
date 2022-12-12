@@ -126,7 +126,7 @@ def registrar_paciente(request):
 
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
-    return render(request, "pacientes/paciente_registrar_front.html", context)
+    return render(request, "pacientes/paciente_registrar2.html", context)
 
 
 @login_required
@@ -168,7 +168,7 @@ def pacientes(request):
         "pacientes": pacientes,
 
     }
-    return render(request, "pacientes/pacientes2.html", context)
+    return render(request, "pacientes/pacientes.html", context)
 
 
 def agenda(request):
@@ -196,7 +196,7 @@ def paciente_detalhes(request, pk=None):
         # 'data_nascimento': data,
 
     }
-    return render(request, 'pacientes/paciente_detalhes_front.html', context)
+    return render(request, 'pacientes/paciente_detalhes2.html', context)
 
 
 @login_required
