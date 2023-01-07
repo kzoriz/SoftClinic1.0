@@ -150,7 +150,7 @@ def registrar_paciente_inf(request):
 def pacientes(request):
     todos_pacientes = Paciente.objects.order_by("nome")
     todos_pacientes_inf = PacienteInfantil.objects.order_by("-id")
-    paginator = Paginator(todos_pacientes, 10)  # Mostra 25 contatos por página
+    paginator = Paginator(todos_pacientes, 5)  # Mostra 25 contatos por página
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -217,7 +217,7 @@ class PacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     # exclude = ('id')
     # template_name = "pacientes/paciente_editar2.html"
     template_name_field = "ATUALIZANDO PACIENTE"
-    template_name = "pacientes/paciente_editar_front.html"
+    template_name = "pacientes/paciente_editar2.html"
     success_message = "Paciente atualizado com Sucesso!"
 
 

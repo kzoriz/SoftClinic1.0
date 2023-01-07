@@ -2,17 +2,36 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<body class="body">
+
+<style>
+    .leaderboard__name {
+  color: #1E90FF;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.64px;
+  margin-left: 12px;
+}
+</style>
+
+
     <div class="container" >
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"></h1>
         </div>
         <div class="col-md-12 mx-auto">
-<!--            <div class="card shadow mb-4">-->
+            <div class="card shadow mb-4">
 <!--              <section style="background-color: #eee;">-->
 <!--                <div class="card-body">-->
                   {% if user.funcionario %}
                  <section style="background-color: #ffffff;">
+                   <div class="leaderboard__name">
                         <div class="container py-5">
                           <div class="row">
                             <div class="col-lg-4">
@@ -20,8 +39,8 @@
                                 <div class="card-body text-center">
                                       <img src="media/{{user.funcionario.imagem}}" alt="avatar"
                                       class="rounded mx-auto d-block" style="width: 150px;">
-                                      <h5 class="my-3">{{user.funcionario.nome}}</h5>
-                                      <p class="text-muted mb-1">Funcionario</p>
+                                      <h5 class="my-3">{{user.funcionario.nome | upper}}</h5>
+                                      <p class="text-muted mb-1">FUNCIONÁRIO</p>
                                 </div>
                               </div>
                             </div>
@@ -76,6 +95,7 @@
                               </div>
                             </div>
                           </div>
+                        </div>
                         </div>
                       </section>
                     {% elif user.discente %}
@@ -224,7 +244,7 @@
                   {% endif %}
                  </div>
             </div>
-            </div>
-        </div>
-</body>
+    </div>
+
+
 {% endblock content %}
