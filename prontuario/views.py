@@ -107,7 +107,7 @@ def odon_detalhes(request, prontuario=None):
         # 'doencas': doencas,
         # 'dente': dente,
     }
-    return render(request, 'prontuario/odontograma_detalhes.html', context)
+    return render(request, 'prontuario/index.html', context)
 
 
 class OdontogramaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
