@@ -1,0 +1,108 @@
+
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+
+
+nav {
+    background: grey;
+
+}
+
+nav .menuItems {
+  padding: 1px 20px 1px 10px;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: end;
+}
+nav .menuItems li {
+  margin: 10px;
+}
+
+nav .menuItems li a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 300;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  text-transform: uppercase;
+
+}
+nav .menuItems li a::before {
+  content: attr(data-item);
+  transition: 0.5s;
+  color: #8254ff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 0;
+  overflow: hidden;
+  font-weight: 300;
+}
+nav .menuItems li a:hover{
+  width: 100%;
+  /* transition: all 0.5s ease-in-out; */
+  color: #6763ef;
+  padding: 2px 2px 2px 2px;
+
+}
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 30px 300px 30px 300px;
+
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    margin-bottom: auto;
+}
+
+footer {
+    background: black;
+    padding: 40px 20px 40px 20px;
+    margin-top: auto;
+    text-align: center;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+
+
+}
+
+.card {
+    display: inline-block;
+    background-color: #fff;
+    width: 200px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0;
+    border-radius: 5px;
+}
+
+.card2 {
+    display: inline-block;
+    background-color: #fff;
+    width: 200px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0;
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+img {
+    padding: 0% 0% 0% 0%;
+    border-radius: 5px;
+
+}
+
+

@@ -1,8 +1,17 @@
-{% extends "pacientes/base.html" %}
+<!doctype html>
+{% extends "pacientes/base_new.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block content %}
 
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 <style>
     .leaderboard__name {
   color: #1E90FF;
@@ -12,9 +21,8 @@
   margin-left: 12px;
 }
 </style>
-
-
-    <div class="container" >
+<body>
+        <div class="container" >
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-success" role="alert">
@@ -245,6 +253,12 @@
                  </div>
             </div>
     </div>
+</body>
+</html>
+
+
+
+
 
 
 {% endblock content %}

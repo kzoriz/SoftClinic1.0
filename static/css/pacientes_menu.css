@@ -1,0 +1,15 @@
+
+.link{
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+
+}
+.link a img{
+    background-color: #fff;
+    width: 200px;
+    margin: 30px 30px 30px 30px;
+}

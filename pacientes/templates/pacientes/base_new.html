@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<nav>
+    <ul class="menuItems">
+        <li><a href='#' data-item='Home'>Home</a></li>
+        <li><a href="{% url 'pacientes_menu' %}" data-item='Pacientes'>PACIENTES</a></li>
+        <li><a href='#' data-item='Agendamento'>Agendamento</a></li>
+        <li><a href='#' data-item='Opções'>Opções</a></li>
+        <li><a href='#' data-item='Informações'>Informações</a></li>
+    </ul>
+</nav>
+<body>
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+<footer>
+    <small>SoftClinica 2023</small>
+</footer>
+</html>
