@@ -8,10 +8,11 @@
     <title>Index</title>
     <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pacientes.css' %}">
 </head>
 <nav>
     <ul class="menuItems">
-        <li><a href='#' data-item='Home'>Home</a></li>
+        <li><a href="{% url 'inicio' %}" data-item='Home'>Home</a></li>
         <li><a href="{% url 'pacientes_menu' %}" data-item='Pacientes'>PACIENTES</a></li>
         <li><a href='#' data-item='Agendamento'>Agendamento</a></li>
         <li><a href='#' data-item='Opções'>Opções</a></li>

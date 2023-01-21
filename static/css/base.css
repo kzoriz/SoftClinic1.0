@@ -4,8 +4,6 @@ html {
     min-height: 100%;
 }
 
-
-
 nav {
     background: grey;
 
@@ -52,16 +50,9 @@ nav .menuItems li a:hover{
   padding: 2px 2px 2px 2px;
 
 }
-.container {
-    display: flex;
-    flex-flow: row wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    padding: 30px 300px 30px 300px;
 
-}
+
+
 body {
     display: flex;
     flex-direction: column;
@@ -76,8 +67,6 @@ footer {
     text-align: center;
     color: #fff;
     font-family: 'Courier New', Courier, monospace;
-
-
 }
 
 .card {

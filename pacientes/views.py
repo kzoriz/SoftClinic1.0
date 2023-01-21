@@ -150,7 +150,7 @@ def registrar_paciente_inf(request):
 def pacientes(request):
     todos_pacientes = Paciente.objects.order_by("nome")
     todos_pacientes_inf = PacienteInfantil.objects.order_by("-id")
-    paginator = Paginator(todos_pacientes, 5)  # Mostra 25 contatos por página
+    paginator = Paginator(todos_pacientes, 10)  # Mostra 25 contatos por página
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
