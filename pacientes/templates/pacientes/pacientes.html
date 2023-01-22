@@ -1,27 +1,26 @@
 
 {% extends "pacientes/base_new.html" %}
 {% load static %}
-<!--{% load crispy_forms_tags %}-->
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container_pacientes">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+
+
+    <div id="pacientes">
         <div class="lista_pacientes" >
+<!--            <div class="cabecalho">-->
+<!--                <span>nome</span>-->
+<!--                <span>Data criação</span>-->
+<!--            </div>-->
             {% for paciente in pacientes.object_list %}
                 <div  class="lista_pacientes_conteudo" >
                     <span class="paciente_nome" ><a id="name" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{paciente.nome | upper}}</a></span>
-                    <span class="paciente_valor"><span>.</span></span>
+                    <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>
                 </div>
             {% endfor %}
             <div class="navegacao">
-                <nav class="naveg">
-                    <ul class="pagination justify-content-center">
+                <nav class="naveg" style="background: #FFFFFF;">
+                    <ul class="pagination justify-content-center" >
                         <li class="page-item " id="previus">
                             <span class="step-links">
                                 {% if pacientes.has_previous %}
@@ -43,6 +42,6 @@
                     </ul>
                 </nav>
             </div>
-        </di>
+        </div>
     </div>
 {% endblock content %}

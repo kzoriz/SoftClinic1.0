@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/pacientes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pacientes_menu.css' %}">
 </head>
-<nav>
+
+<nav id="nav">
     <ul class="menuItems">
         <li><a href="{% url 'inicio' %}" data-item='Home'>Home</a></li>
         <li><a href="{% url 'pacientes_menu' %}" data-item='Pacientes'>PACIENTES</a></li>
@@ -20,11 +22,16 @@
     </ul>
 </nav>
 <body>
-    <div class="container">
-        {% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="msg_success">
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% block content %}
 
-        {% endblock content %}
-    </div>
+    {% endblock content %}
 </body>
 <footer>
     <small>SoftClinica 2023</small>

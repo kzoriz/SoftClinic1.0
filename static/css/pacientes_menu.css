@@ -1,15 +1,38 @@
-
-.link{
+#pacientes_menu {
     display: flex;
-    flex-flow: row wrap;
     flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    /*background-image: url("https://aprendalogos.com/2015/wp-content/uploads/2014/11/background-triangulos.jpg");*/
+    /*background-size: contain ;*/
+    padding: 30px 300px 30px 300px;
 
 }
+.link {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 49%;
+    background: #FFFFFF;
+    border: 2px solid #FFFFFF;
+
+}
+.link a{
+    position: center;
+
+}
+
 .link a img{
     background-color: #fff;
     width: 200px;
-    margin: 30px 30px 30px 30px;
+    margin: 30px 100px 30px 10px;
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+
 }

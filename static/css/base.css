@@ -1,11 +1,28 @@
+/** {*/
+/*    max-height: 600px;*/
+/*}*/
 
+.msg_success span{
+    display: block;
+    background-color: #71e371;
+    border-radius: 5px 5px 5px 5px;
+    padding: 15px 15px 15px 15px;
+    margin: 5px 300px 5px 300px;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "NotoColorEmoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols", serif;
+    text-transform: uppercase;
+}
 html {
     height: 100%;
     min-height: 100%;
 }
 
-nav {
-    background: grey;
+#nav {
+    /*background: grey;*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    box-shadow: 0 0 7px 0 rgba(51, 51, 51, 1);
 
 }
 
@@ -46,7 +63,7 @@ nav .menuItems li a::before {
 nav .menuItems li a:hover{
   width: 100%;
   /* transition: all 0.5s ease-in-out; */
-  color: #6763ef;
+  color: #ffc402;
   padding: 2px 2px 2px 2px;
 
 }
@@ -58,9 +75,11 @@ body {
     flex-direction: column;
     min-height: 100%;
     margin-bottom: auto;
+
 }
 
 footer {
+    display: block;
     background: black;
     padding: 40px 20px 40px 20px;
     margin-top: auto;
