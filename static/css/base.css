@@ -24,6 +24,8 @@ html {
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
     box-shadow: 0 0 7px 0 rgba(51, 51, 51, 1);
 
+
+
 }
 
 nav .menuItems {
@@ -50,7 +52,7 @@ nav .menuItems li a {
 nav .menuItems li a::before {
   content: attr(data-item);
   transition: 0.5s;
-  color: #8254ff;
+  /*color: #8254ff;*/
   position: absolute;
   top: 0;
   bottom: 0;
@@ -108,7 +110,7 @@ footer {
 }
 
 img {
-    padding: 0% 0% 0% 0%;
+    padding: 0 0 0 0;
     border-radius: 5px;
 
 }
