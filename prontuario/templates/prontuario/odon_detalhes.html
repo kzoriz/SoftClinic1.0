@@ -1,0 +1,129 @@
+{% extends "pacientes/base_new.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+<div id="body_odontograma">
+    <div id="row1" style="flex-grow: 3">
+        <div class="dentes" >
+            <a href="">
+                <img class="img-fluid" id="d18" src="{% static 'img/img_new/dentadura-sup-18.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-17.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-16.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-15.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-14.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-13.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-12.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-11.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-21.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-22.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-23.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-24.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-25.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-26.png' %}">
+            </a>
+            <a href="#">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-27.png' %}">
+            </a>
+            <a href="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-28.png' %}">
+            </a>
+        </div>
+        <div class="dentes">
+            <a href="" title="">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-48.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-47.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-46.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-45.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-44.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-43.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-42.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-41.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-31.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-32.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-33.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-34.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-35.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-36.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-37.png' %}" alt="Imagem Responsiva">
+                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-38.png' %}" alt="Imagem Responsiva">
+            </a>
+        </div>
+    </div>
+    <div id="row2">
+        <div class="facetas" >
+                <a href="#" class="button" id="distal" onclick="clicar1()">Distal</a>
+                <a href="#" class="button" id="oclusal" onclick="clicar2()">Oclusal</a>
+                <a href="#" class="button" id="lingual" onclick="clicar3()">Lingual</a>
+                <a href="#" class="button" id="mesial">Mesial</a>
+                <a href="#" class="button" id="vestibular">Vestibular</a>
+        </div>
+    </div>
+</div>
+<script>
+
+
+        function clicar1(){
+            const a = window.document.getElementById('distal');
+            const b = window.document.getElementById('oclusal');
+            const c = window.document.getElementById('lingual');
+
+            a.style.background = 'rgb(35,167,240)';
+            a.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
+            b.style.background = '#ffffff';
+            b.style.boxShadow = 'none';
+            c.style.background = '#ffffff';
+            c.style.boxShadow = 'none';
+
+        }
+        function clicar2(){
+            const a = window.document.getElementById('distal');
+            const b = window.document.getElementById('oclusal');
+            const c = window.document.getElementById('lingual');
+            a.style.background = 'rgb(255, 255, 255)';
+            a.style.boxShadow = 'none';
+            b.style.background = 'rgb(221, 138, 0)';
+            b.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
+            c.style.background = 'rgb(255, 255, 255)';
+            c.style.boxShadow = 'none';
+
+       }
+       function clicar3(){
+           const a = window.document.getElementById('distal');
+           const b = window.document.getElementById('oclusal');
+           const c = window.document.getElementById('lingual');
+           a.style.background = 'rgb(255, 255, 255)';
+           a.style.boxShadow = 'none';
+           b.style.background = 'rgb(255, 255, 255)';
+           a.style.boxShadow = 'none';
+           c.style.background = 'rgb(221, 138, 0)';
+           c.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
+
+       }
+</script>
+{% endblock content%}

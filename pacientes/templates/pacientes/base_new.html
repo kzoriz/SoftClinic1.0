@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/pacientes.css' %}">
     <link rel="stylesheet" href="{% static 'css/pacientes_menu.css' %}">
     <link rel="stylesheet" href="{% static 'css/odon_detalhes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 </head>
 
 <nav id="nav">
@@ -23,16 +24,8 @@
     </ul>
 </nav>
 <body>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="msg_success">
-                    <span>{{ message }}</span>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% block content %}
-
-    {% endblock content %}
+{% block content %}
+{% endblock content %}
 </body>
 <footer>
     <small>SoftClinica 2023</small>

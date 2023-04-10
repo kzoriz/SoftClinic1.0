@@ -123,7 +123,6 @@ def registrar_paciente(request):
         z = ResultadoExamesComplementares(id=id, prontuario=u)
         z.save()
 
-
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
     return render(request, "pacientes/paciente_registrar2.html", context)

@@ -27,7 +27,7 @@ C_CHOICES = [
     ('NAO', 'NÃO'),
 ]
 
-DOENCA_CHOICES = [
+ESTENOGRAFIA_CHOICES = [
     ('carie', 'Carie'),
     ('cáries', 'cáries'),
     ('gengivite', 'gengivite'),
@@ -243,10 +243,10 @@ class ResultadoExamesComplementares(models.Model):
         verbose_name_plural = "Resultados de Exames Complementares"
 
 
-class Doenca(models.Model):
+class Estenografia(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    nome = models.TextField(verbose_name="Doença", choices=DOENCA_CHOICES, blank=True, default="nenhuma")
+    nome = models.CharField(verbose_name="nome", choices=ESTENOGRAFIA_CHOICES, max_length=25, blank=True, default="nenhuma")
 
     # def get_absolute_url(self):
     #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
@@ -255,7 +255,7 @@ class Doenca(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name_plural = "Doenças"
+        verbose_name_plural = "Estenografia"
 
 
 class Tratamento(models.Model):
@@ -276,10 +276,16 @@ class Tratamento(models.Model):
 class Dente(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente", blank=True)
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente_prontuario", blank=True)
     nome = models.CharField(verbose_name="Dente", choices=DENTE_CHOICES, max_length=3, blank=True)
-    tratamento = models.ManyToManyField(Tratamento, blank=True, related_name="dente_tratamentos")
-    doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente_doencas")
+    # tratamento = models.ManyToManyField(Tratamento, blank=True, related_name="dente_tratamentos")
+    # doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente_doencas")
+    distal = models.ManyToManyField(Estenografia, blank=True, related_name="dente_distal")
+    oclusal = models.ManyToManyField(Estenografia, blank=True, related_name="dente_oclusal")
+    mesial = models.ManyToManyField(Estenografia, blank=True, related_name="dente_mesial")
+    lingual = models.ManyToManyField(Estenografia, blank=True, related_name="dente_lingual")
+    vestibular = models.ManyToManyField(Estenografia, blank=True, related_name="dente_vestibular")
+
 
     # def get_absolute_url(self):
     #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
@@ -343,7 +349,7 @@ class Odontograma(models.Model):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{}'.format(self.prontuario.paciente.nome)
+        return '{} - {}'.format(self.prontuario.paciente.nome, self.dente)
 
     class Meta:
         verbose_name_plural = "Odontogramas"
