@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
-ALLOWED_HOSTS = ['localhost']
+#ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
 
@@ -157,3 +158,5 @@ django_on_heroku.settings(locals())
 
 #AUTH_USER_MODEL = 'usuarios.CustomUser'
 
+# vercel_app/settings.py
+WSGI_APPLICATION = 'vercel_app.wsgi.app'
