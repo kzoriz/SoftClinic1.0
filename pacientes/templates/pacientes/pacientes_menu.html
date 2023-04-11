@@ -1,18 +1,28 @@
-
-{% extends "pacientes/base_new.html" %}
+{% extends "pacientes/base.html" %}
 {% load static %}
 <!--{% load crispy_forms_tags %}-->
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/pacientes_menu.css' %}">
+        <title>pacientes</title>
+    </head>
 {% block content %}
-<div id="pacientes_menu">
-    <div class="link">
-        <a href="{% url 'paciente_registrar' %}">
-            <img class="img-fluid" src="{% static 'img/RP.png' %}" alt="Imagem Responsiva" width="100%">
-        </a>
+    <div class="container">
+<!--        <div class="card shadow mb-4">-->
+            <div class="card-body">
+                <div id="pacientes_menu">
+                    <div class="link">
+                        <a href="{% url 'paciente_registrar' %}">
+                            <img class="img-fluid" src="{% static 'img/RP.png' %}" alt="Imagem Responsiva" width="100%">
+                        </a>
+                    </div>
+                    <div class="link">
+                        <a href="{% url 'pacientes' %}" >
+                            <img class="img-fluid" src="{% static 'img/LP.png' %}" alt="Imagem Reponsiva" width="100%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+<!--        </div>-->
     </div>
-    <div class="link">
-        <a href="{% url 'pacientes' %}" >
-            <img class="img-fluid" src="{% static 'img/LP.png' %}" alt="Imagem Reponsiiva" width="100%">
-        </a>
-    </div>
-</div>
 {% endblock content %}
