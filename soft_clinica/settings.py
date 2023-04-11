@@ -158,5 +158,3 @@ django_on_heroku.settings(locals())
 
 #AUTH_USER_MODEL = 'usuarios.CustomUser'
 
-# vercel_app/settings.py
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
