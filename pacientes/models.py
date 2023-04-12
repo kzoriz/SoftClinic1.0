@@ -1,4 +1,3 @@
-
 import datetime
 
 from django.db import models
@@ -95,7 +94,8 @@ class Paciente(models.Model):
     id = models.IntegerField(primary_key=True)
     nome = models.CharField(verbose_name="Nome", max_length=200)
     nome_social = models.CharField(verbose_name="Nome Social", max_length=200, blank=True)
-    data_nascimento = models.DateField(verbose_name="Data de Nascimento", auto_now=False, auto_now_add=False, blank=True)
+    data_nascimento = models.DateField(verbose_name="Data de Nascimento", auto_now=False, auto_now_add=False,
+                                       blank=True)
     sexo_biologico = models.CharField(verbose_name="Sexo Biologico", max_length=200, blank=True)
     rg = models.CharField(verbose_name="RG", max_length=200, blank=True)
     cpf = models.CharField(verbose_name="CPF", max_length=200, blank=True)
@@ -103,7 +103,7 @@ class Paciente(models.Model):
     estado_civil = models.CharField(verbose_name="Estado Civil", max_length=200, blank=True)
     grau_instrucao = models.CharField(verbose_name="Grau de Instrução", max_length=200, blank=True)
     endereco = models.CharField(verbose_name="Endereço", max_length=200, blank=True)
-    cep = models.CharField(verbose_name="CEP", max_length=200,blank=True)
+    cep = models.CharField(verbose_name="CEP", max_length=200, blank=True)
     bairro = models.CharField(verbose_name="Bairro", max_length=200, blank=True)
     cidade = models.CharField(verbose_name="Cidade", max_length=200, blank=True)
     uf = models.CharField(verbose_name="UF", max_length=2, blank=True)
@@ -144,7 +144,7 @@ class PacienteInfantil(models.Model):
         verbose_name_plural = "Pacientes Infantis"
 
 
-class Teste(models.Model):    
+class Teste(models.Model):
     testando = models.CharField(max_length=255, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -155,7 +155,8 @@ class Teste(models.Model):
     class Meta:
         verbose_name_plural = "Testes"
 
-class Teste2(models.Model):    
+
+class Teste2(models.Model):
     testando = models.CharField(max_length=255, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -165,4 +166,3 @@ class Teste2(models.Model):
 
     class Meta:
         verbose_name_plural = "Teste2s"
-

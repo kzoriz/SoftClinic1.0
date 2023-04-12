@@ -11,23 +11,22 @@
     /*padding: 30px 300px 30px 300px;*/
     padding: 10% 30%;
 }
-#pacientes_menu .link a{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: #FFFFFF;
+/*#pacientes_menu .link a{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    height: 100%;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    width: 100%;*/
 
-}
-.link a{
-    position: center;
-}
+/*}*/
 
 .link a img{
     background-color: #fff;
     width: 200px;
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 30px 20px;
 
 
