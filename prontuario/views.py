@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from prontuario.models import *
-
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 def anamnese_detalhes(request, pk=None):
     object = Anamnese.objects.get(pk=pk)
@@ -211,3 +211,12 @@ def odontogramas(request):
 
     }
     return render(request, "prontuario/odontogramas.html", context)
+
+
+@xframe_options_sameorigin
+def sup18(request):
+    return render(request, "prontuario/Dentes/dentadura-sup-18.html")
+
+@xframe_options_sameorigin
+def sup17(request):
+    return render(request, "prontuario/Dentes/dentadura-sup-17.html")

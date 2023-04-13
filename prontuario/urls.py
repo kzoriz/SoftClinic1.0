@@ -25,5 +25,7 @@ urlpatterns = [
     # path("pla-tra-ii-edit/<int:pk>/", PlanoTratamentoIIUpdate.as_view(), name="pla_tra_ii_edit"),
     # path("evo-pac-detalhes/<int:pk>/", evo_pac_detalhes, name="evo_pac_detalhes"),
     # path("evo-pac-edit/<int:pk>/", EvolucaoPacienteUpdate.as_view(), name="evo_pac_edit"),
+    path("sup-18", sup18, name="sup18"),
+    path("sup-17", sup17, name="sup17"),
 
 ]
