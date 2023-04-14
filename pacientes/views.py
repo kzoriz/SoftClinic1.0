@@ -1,28 +1,30 @@
-import datetime
-
 from _datetime import datetime as dt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView, UpdateView
 from rest_framework import viewsets
-
-from pacientes.forms import PacienteForm, PacienteInfantilForm
-from pacientes.models import Paciente, PacienteInfantil, Teste2, Teste
+from pacientes.forms import PacienteInfantilForm
+from pacientes.models import PacienteInfantil, Teste2, Teste
 from pacientes.serializers import Teste2Serializer, TesteSerializer
 from prontuario.models import *
-from usuarios.models import Funcionario
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+
+lista_dentes = ['18', '17', '16', '15', '14', '13', '12', '11',
+                '21', '22', '23', '24', '25', '26', '27', '28',
+                '48', '47', '46', '45', '44', '43', '42', '41',
+                '31', '32', '33', '34', '35', '36', '37', '38',
+                ]
 
 
 def paciente_detalhes_geral(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
     prontuario = Prontuario.objects.get(pk=pk)
     anam = Anamnese.objects.get(pk=pk)
+
     context = {
         'object': instance,
         'prontuario': prontuario,
@@ -61,7 +63,6 @@ def paciente_detalhes_geral(request, pk=None):
 
 @login_required
 def registrar_paciente(request):
-
     context = {}
     if request.method == 'POST':
         nome = request.POST['nome']
@@ -96,7 +97,8 @@ def registrar_paciente(request):
         else:
             id = Paciente.objects.all().last().id + 1
 
-        p = Paciente(id=id, nome=nome, nome_social=nome_social, data_nascimento=data_nascimento, sexo_biologico=sexo_biologico,
+        p = Paciente(id=id, nome=nome, nome_social=nome_social, data_nascimento=data_nascimento,
+                     sexo_biologico=sexo_biologico,
                      rg=rg, cpf=cpf, raca=raca, estado_civil=estado_civil, grau_instrucao=grau_instrucao,
                      endereco=endereco, cep=cep, bairro=bairro, cidade=cidade, uf=uf, telefone_celular=telefone_celular,
                      informacoes_complementares=informacoes_complementares)
@@ -114,8 +116,9 @@ def registrar_paciente(request):
         v.save()
         x = PSR(id=id, prontuario=u)
         x.save()
-        # b = Dente(prontuario=u)
-        # b.save()
+        for i in lista_dentes:
+            b = Dente(prontuario=u, nome=i)
+            b.save()
         y = Odontograma(id=id, prontuario=u)
         y.save()
         w = SolicitacaoExamesComplementares(id=id, prontuario=u)
@@ -219,7 +222,6 @@ class PacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "pacientes/paciente_editar2.html"
     success_message = "Paciente atualizado com Sucesso!"
 
-
     def data_nasci(self, obj):
         return obj.data_nascimento.strftime("%d/%m/%Y")
 
@@ -267,4 +269,3 @@ class Teste2ViewSet(viewsets.ModelViewSet):
 class TesteViewSet(viewsets.ModelViewSet):
     queryset = Teste.objects.all()
     serializer_class = TesteSerializer
-
