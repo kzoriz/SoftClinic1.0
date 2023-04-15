@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
-#ALLOWED_HOSTS = ['localhost']
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -57,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'soft_clinica.urls'
@@ -158,3 +158,5 @@ django_on_heroku.settings(locals())
 
 #AUTH_USER_MODEL = 'usuarios.CustomUser'
 
+#X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'DENY'

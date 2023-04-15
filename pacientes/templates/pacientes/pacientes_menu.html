@@ -1,18 +1,47 @@
-
-{% extends "pacientes/base_new.html" %}
+{% extends "pacientes/base.html" %}
 {% load static %}
 <!--{% load crispy_forms_tags %}-->
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/pacientes_menu.css' %}">
+        <title>pacientes</title>
+    </head>
 {% block content %}
-<div id="pacientes_menu">
-    <div class="link">
-        <a href="{% url 'paciente_registrar' %}">
-            <img class="img-fluid" src="{% static 'img/RP.png' %}" alt="Imagem Responsiva" width="100%">
-        </a>
+    <style>
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        padding: 5px 5px 5px 5px;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+    }
+    </style>
+    <div class="container">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="card">
+                    <div class="link">
+                        <a href="{% url 'paciente_registrar' %}">
+                            <img class="img-fluid" src="{% static 'img/RP.png' %}" alt="Imagem Responsiva" width="100%">
+                        </a>
+                    </div>
+                </div>
+            <div class="card">
+                <div class="link">
+                    <a href="{% url 'pacientes' %}" >
+                        <img class="img-fluid" style="position: center" src="{% static 'img/LP.png' %}" alt="Imagem Reponsiva" width="100%">
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
-    <div class="link">
-        <a href="{% url 'pacientes' %}" >
-            <img class="img-fluid" src="{% static 'img/LP.png' %}" alt="Imagem Reponsiiva" width="100%">
-        </a>
-    </div>
-</div>
+    </html>
 {% endblock content %}

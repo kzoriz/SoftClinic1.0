@@ -1,129 +1,157 @@
-{% extends "pacientes/base_new.html" %}
+{% extends "pacientes/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content%}
-<div id="body_odontograma">
-    <div id="row1" style="flex-grow: 3">
-        <div class="dentes" >
-            <a href="">
-                <img class="img-fluid" id="d18" src="{% static 'img/img_new/dentadura-sup-18.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-17.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-16.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-15.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-14.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-13.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-12.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-11.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-21.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-22.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-23.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-24.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-25.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-26.png' %}">
-            </a>
-            <a href="#">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-27.png' %}">
-            </a>
-            <a href="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-sup-28.png' %}">
-            </a>
-        </div>
-        <div class="dentes">
-            <a href="" title="">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-48.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-47.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-46.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-45.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-44.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-43.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-42.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-41.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-31.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-32.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-33.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-34.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-35.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-36.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-37.png' %}" alt="Imagem Responsiva">
-                <img class="img-fluid" src="{% static 'img/img_new/dentadura-inf-38.png' %}" alt="Imagem Responsiva">
-            </a>
-        </div>
-    </div>
-    <div id="row2">
-        <div class="facetas" >
-                <a href="#" class="button" id="distal" onclick="clicar1()">Distal</a>
-                <a href="#" class="button" id="oclusal" onclick="clicar2()">Oclusal</a>
-                <a href="#" class="button" id="lingual" onclick="clicar3()">Lingual</a>
-                <a href="#" class="button" id="mesial">Mesial</a>
-                <a href="#" class="button" id="vestibular">Vestibular</a>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Index</title>-->
+<!--    <link rel="stylesheet" href="https://cdn.es.gov.br/fonts/font-awesome/css/font-awesome.min.css">-->
+<!--    -->
+<!--</head>-->
+<style>
+/*    body{*/
+/*    background: #f7f7ff;*/
+/*    !*margin-top:20px;*!*/
+/*}*/
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+</style>
+<link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
+<link rel="stylesheet" href="{% static 'odontograma/css/odon_detalhes.css' %}">
+<div id="sup-18">
+    <div class="container">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="card">
+                    <div id="dentadura-sup-18" class="img-responsive">
+                        <div style="display: flex; justify-content: center;">
+                            <div class="bloco1" style="display: flex;flex-direction: column;">
+                                <div class="dentadura-sup row" style="display: flex; justify-content: center; flex-direction: row; margin-top: 70px;">
+                                    <div class="dente"  id="btn_18" type="button" onclick="btn_18()">
+                                        <img src="{% static 'odontograma/img/dentadura/dentadura-sup-18.png' %}"   alt="sup-18">
+                                    </div>
+                                    <div class="dente" id="btn_17" type="button" onclick="btn_17()">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-17.png' %}" alt="sup-17">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-16.png' %}" alt="sup-16">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-15.png' %}" alt="sup-15">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-14.png' %}" alt="sup-14">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-13.png' %}" alt="sup-13">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-12.png' %}" alt="sup-12">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-11.png' %}" alt="sup-11">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-21.png' %}" alt="sup-21">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-22.png' %}" alt="sup-22">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-23.png' %}" alt="sup-23">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-24.png' %}" alt="sup-24">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-25.png' %}" alt="sup-25">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-26.png' %}" alt="sup-26">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-27.png' %}" alt="sup-27">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-28.png' %}" alt="sup-28">
+                                    </div>
+                                </div>
+                                <div class="dentadura-inf" style="display: flex; justify-content: center; flex-direction: row;">
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-48.png' %}" alt="inf-48">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-47.png' %}" alt="inf-47">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-46.png' %}" alt="inf-46">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-45.png' %}" alt="inf-45">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-44.png' %}" alt="inf-44">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-43.png' %}" alt="inf-43">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-42.png' %}" alt="inf-42">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-41.png' %}" alt="inf-41">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-31.png' %}" alt="inf-31">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-32.png' %}" alt="inf-32">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-33.png' %}" alt="inf-33">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-34.png' %}" alt="inf-34">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-35.png' %}" alt="inf-35">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-36.png' %}" alt="inf-36">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-37.png' %}" alt="inf-37">
+                                    </div>
+                                    <div class="dente">
+                                        <img class="" src="{% static 'odontograma/img/dentadura/dentadura-inf-38.png' %}" alt="inf-38">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <iframe id="d18" src="{% url  'sup18' %}" width="100%" height="1000px" style="border: none" sandbox="allow-scripts">
+                </iframe>
+                <iframe id="d17" src="{% url  'sup17' %}" width="100%" height="1000px" style="border: none" sandbox="allow-scripts">
+                </iframe>
+            </div>
         </div>
     </div>
 </div>
-<script>
+<script src="{% static 'odontograma/js/odon_detalhes.js' %}"></script>
 
 
-        function clicar1(){
-            const a = window.document.getElementById('distal');
-            const b = window.document.getElementById('oclusal');
-            const c = window.document.getElementById('lingual');
-
-            a.style.background = 'rgb(35,167,240)';
-            a.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
-            b.style.background = '#ffffff';
-            b.style.boxShadow = 'none';
-            c.style.background = '#ffffff';
-            c.style.boxShadow = 'none';
-
-        }
-        function clicar2(){
-            const a = window.document.getElementById('distal');
-            const b = window.document.getElementById('oclusal');
-            const c = window.document.getElementById('lingual');
-            a.style.background = 'rgb(255, 255, 255)';
-            a.style.boxShadow = 'none';
-            b.style.background = 'rgb(221, 138, 0)';
-            b.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
-            c.style.background = 'rgb(255, 255, 255)';
-            c.style.boxShadow = 'none';
-
-       }
-       function clicar3(){
-           const a = window.document.getElementById('distal');
-           const b = window.document.getElementById('oclusal');
-           const c = window.document.getElementById('lingual');
-           a.style.background = 'rgb(255, 255, 255)';
-           a.style.boxShadow = 'none';
-           b.style.background = 'rgb(255, 255, 255)';
-           a.style.boxShadow = 'none';
-           c.style.background = 'rgb(221, 138, 0)';
-           c.style.boxShadow = '0 0 7px 0 rgba(51, 51, 51, 1)';
-
-       }
-</script>
 {% endblock content%}
