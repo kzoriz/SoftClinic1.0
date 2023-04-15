@@ -1,0 +1,61 @@
+
+#inicio {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 20px 40px 20px 40px;
+	border-radius: 5px;
+	margin: 20px 300px 20px 300px;
+	box-shadow: 0 0 7px 0 rgba(51, 51, 51, 1);
+
+
+}
+#profile{
+	display: flex;
+	justify-content: start;
+	flex-direction: column;
+}
+
+#image-profile{
+				width: 150px;
+				height: 150px;
+				background-size:	contain;
+				margin: 10px	auto;
+				background-color: #ccc;
+				border-radius: 5%;
+}
+#badge-role{
+				width: 100%;
+				padding: 10px 0;
+				font-size: 1em;
+				float:	left;
+				border-radius: 0;
+}
+#icon-edit{
+				width: 35.56px;
+				height: 35.56px;
+				border-radius: 0;
+				float:	left;
+				text-align:	center;
+				line-height: 35.56px;
+				color: #fff;
+				font-weight:	bold;
+				background-color: #157af6;
+				position:	absolute;
+				right: 20px;
+}
+ul.list-group{
+				float:	left;
+				width: 100%;
+}
+ul#days{
+				list-style:	none;
+				padding: 0;
+				width: 100%;
+}
+
+.text {
+	color: black;
+	font-family: "Apple Color Emoji", "Segoe UI Emoji", "NotoColorEmoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols", serif;
+	font-weight: bold;
+}

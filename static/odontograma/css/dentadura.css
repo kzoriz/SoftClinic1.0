@@ -1,0 +1,151 @@
+#dentadura-sup-18{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    /*margin: 0 0 10px 0;*/
+    justify-content: center;
+    /*border: 2px solid blue;*/
+}
+#display_distal{
+    /*margin-bottom: 200px;*/
+    margin-top: 100px;
+    display: flex;
+}
+#display_oclusal{
+    /*margin-bottom: 200px;*/
+    margin-top: 100px;
+    display: none;
+}
+#display_mesial{
+    /*margin-bottom: 200px;*/
+    margin-top: 100px;
+    display: none;
+}
+.facetas {
+    /* background: rgb(196, 194, 194); */
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    /* border: 2px solid black; */
+    margin-top: 50px;
+    /* margin-bottom: 200px; */
+    margin-bottom: -60px;
+}
+
+.facetas div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.detalhes {
+    /* background: rgb(196, 194, 194); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px ;
+    padding-left: 20px;
+    /* border: 2px solid red; */
+    /* margin-bottom: 100px;
+    margin-top: 100px; */
+}
+.detalhes div{
+    margin: 5px 5px 5px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.detalhes img{
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+}
+.button_facetas {
+    background-color: #ffffff;
+    color: black;
+    padding: 32px 32px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#lingual {
+    position: relative;
+    right: 2px;
+    padding: 22px 15px 22px 15px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    margin-bottom: 0;
+    }
+
+#mesial {
+    padding: 22px 13px 22px 13px;
+    /* position: relative;
+    right: 0; */
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+    }
+#vestibular {
+    
+    position: relative;
+    right: 2px;
+    padding: 22px 7px 22px 7px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    margin-top: 0;
+    }
+#distal {
+    padding: 22px 13px 22px 13px;
+    /* margin-left: 45%;
+    position: relative; */
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    background: rgb(35,167,240);
+    box-shadow: 0 0 7px 0 rgba(51, 51, 51, 1);
+    text-decoration: none;
+    }
+
+#distal:hover {
+    color: black;
+
+}
+#oclusal {
+    padding: 22px 15px 22px 15px;
+    /* position: relative;
+    right: 0; */
+    
+    }
+.img-fluid{
+    opacity: 0.5;
+}
+
+.check {
+    visibility: hidden;
+}
+
+/*.bloco1 {*/
+/*    padding: 0 100px 0 100px;*/
+/*}*/
+
+
+.bloco2{
+    padding: 0 25px 25px 0px;
+    margin-bottom: 0;
+    /* border: 2px solid green; */
+}
+
+#d17 {
+    display: none;
+}
+
+#d18{
+    display: none;
+}

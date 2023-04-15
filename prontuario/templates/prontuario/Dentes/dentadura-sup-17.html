@@ -1,0 +1,372 @@
+
+{% load static %}
+
+
+<style>
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+    }
+</style>
+<link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
+<div id="sup-18">
+    <div class="container">
+
+
+                <div class="card-body">
+                    <div class="card">
+                        <div class="bloco2" style="margin-left: 60px;">
+                            <div class="facetas">
+                                <h1 style="margin: auto; padding-bottom: 10px;">17</h1>
+                                <div>
+                                    <a href="#" class="button_facetas" id="lingual" onclick="clicar3()">Lingual</a>
+                                </div>
+                                <div>
+                                    <a href="#" class="button_facetas" id="distal" onclick="btn_distal()">Distal</a>
+                                    <a href="#" class="button_facetas" id="oclusal" onclick="btn_oclusal()">Oclusal</a>
+                                    <a href="#" class="button_facetas" id="mesial" onclick="btn_mesial()">Mesial</a>
+                                </div>
+                                <div>
+                                    <a href="#" class="button_facetas" id="vestibular" onclick="clicar5()">Vestibular</a>
+                                </div>
+                            </div>
+                            <div class="detalhes" id="display_distal" style="flex: 70%;" >
+                                <h1 style="margin: auto; padding-bottom: 10px;">Distal</h1>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/higido.jpeg' %}" id="img_distal_higido" onclick="chk_distal_higido()">
+                                        <input type="checkbox" class="check" name="higido" id="chk_distal_higido" value="higido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa" onclick="chk_distal_mancha_branca_ativa()">
+                                        <input type="checkbox" class="check" name="mancha_branca_ativa" id="chk_distal_mancha_branca_ativa" value="mancha branca ativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_distal_mancha_inativa" onclick="chk_distal_mancha_inativa()">
+                                        <input type="checkbox" class="check" name="mancha_inativa" id="chk_distal_mancha_inativa" value="mancha inativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_distal_lesao_carie_primaria" onclick="chk_distal_lesao_carie_primaria()">
+                                        <input type="checkbox" class="check" name="lesao_carie_primaria" id="chk_distal_lesao_carie_primaria" value="lesao carie primaria">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_distal_lesao_carie_cronica" onclick="chk_distal_lesao_carie_cronica()">
+                                        <input type="checkbox" class="check" name="lesao_carie_cronica" id="chk_distal_lesao_carie_cronica" value="lesao carie cronica">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_distal_restauracao_defeituosa" onclick="chk_distal_restauracao_defeituosa()">
+                                        <input type="checkbox" class="check" name="restauracao_defeituosa" id="chk_distal_restauracao_defeituosa" value="restauracao defeituosa">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_distal_restauracao_bom_estado" onclick="chk_distal_restauracao_bom_estado()">
+                                        <input type="checkbox" class="check" name="restauracao_bom_estado" id="chk_distal_restauracao_bom_estado" value="restauracao bom estado">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_distal_necessidade_tratamento_endondontico" onclick="chk_distal_necessidade_tratamento_endondontico()">
+                                        <input type="checkbox" class="check" name="necessidade_tratamento_endondontico" id="chk_distal_necessidade_tratamento_endondontico" value="necessidade tratamento endondontico">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_distal_tratamento_endondontico_concluido_" onclick="chk_distal_tratamento_endondontico_concluido_()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_distal_tratamento_endondontico_concluido_" value="tratamento endondontico concluido_">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_distal_extracao_indicada" onclick="chk_distal_extracao_indicada()">
+                                        <input type="checkbox" class="check" name="extracao_indicada" id="chk_distal_extracao_indicada" value="extracao indicada">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_distal_necessidade_protese" onclick="chk_distal_necessidade_protese()">
+                                        <input type="checkbox" class="check" name="necessidade_protese" id="chk_distal_necessidade_protese" value="necessidade protese">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_distal_protese_fixa_concluida_satisfatoria" onclick="chk_distal_protese_fixa_concluida_satisfatoria()">
+                                        <input type="checkbox" class="check" name="protese_fixa_concluida_satisfatoria" id="chk_distal_protese_fixa_concluida_satisfatoria" value="protese fixa concluida satisfatoria">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_distal_ausente" onclick="chk_distal_ausente()">
+                                        <input type="checkbox" class="check" name="dente_ausente" id="chk_distal_ausente" value="dente ausente">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_distal_doenca_periodontal" onclick="chk_distal_doenca_periodontal()">
+                                        <input type="checkbox" class="check" name="doenca_periodontal" id="chk_distal_doenca_periodontal" value="doenca periodontal">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_distal_faceta_degaste" onclick="chk_distal_faceta_desgaste()">
+                                        <input type="checkbox" class="check" name="faceta_degaste" id="chk_distal_faceta_degaste" value="faceta degaste">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_distal_fratura" onclick="chk_distal_fratura()">
+                                        <input type="checkbox" class="check" name="fratura" id="chk_distal_fratura" value="fratura">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_distal_selante_fazer" onclick="chk_distal_selante_fazer()">
+                                        <input type="checkbox" class="check" name="selante_fazer" id="chk_distal_selante_fazer" value="selante fazer">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_distal_selante_satisfatorio" onclick="chk_distal_selante_satisfatorio()">
+                                        <input type="checkbox" class="check" name="selante_satisfatorio" id="chk_distal_selante_satisfatorio" value="selante satisfatorio">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;">
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_distal_anomalia_de_forma" onclick="chk_distal_anomalia_de_forma()">
+                                        <input type="checkbox" class="check" name="anomalia_de_forma" id="chk_distal_anomalia_de_forma" value="anomalia de forma">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_distal_defeito_de_esmalte" onclick="chk_distal_defeito_de_esmalte()">
+                                        <input type="checkbox" class="check" name="defeito_de_esmalte" id="chk_distal_defeito_de_esmalte" value="defeito de esmalte">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_distal_supranumerario" onclick="chk_distal_supranumerario()">
+                                        <input type="checkbox" class="check" name="supranumerario" id="chk_distal_supranumerario" value="supranumerario">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_distal_restauracao_protese_concluida" onclick="chk_distal_restauracao_protese_concluida()">
+                                        <input type="checkbox" class="check" name="restauracao_protese_concluida" id="chk_distal_restauracao_protese_concluida" value="restauracao protese concluida">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_distal_tratamento_endondontico_concluido" onclick="chk_distal_tratamento_endondontico_concluido()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_distal_tratamento_endondontico_concluido" value="tratamento endondontico concluido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/calculo_recessao_gengival.jpeg' %}" id="img_distal_calculo_recessao_gengival" onclick="chk_distal_calculo_recessao_gengival()">
+                                        <input type="checkbox" class="check" name="calculo_recessao_gengival" id="chk_distal_calculo_recessao_gengival" value="calculo recessao gengival">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detalhes" id="display_oclusal" style="flex: 70%;" >
+                                <h1 style="margin: auto; padding-bottom: 10px;">Oclusal</h1>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/higido.jpeg' %}" id="img_oclusal_higido" onclick="chk_oclusal_higido()">
+                                        <input type="checkbox" class="check" name="higido" id="chk_oclusal_higido" value="higido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_oclusal_mancha_branca_ativa" onclick="chk_oclusal_mancha_branca_ativa()">
+                                        <input type="checkbox" class="check" name="mancha_branca_ativa" id="chk_oclusal_mancha_branca_ativa" value="mancha branca ativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_oclusal_mancha_inativa" onclick="chk_oclusal_mancha_inativa()">
+                                        <input type="checkbox" class="check" name="mancha_inativa" id="chk_oclusal_mancha_inativa" value="mancha inativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_oclusal_lesao_carie_primaria" onclick="chk_oclusal_lesao_carie_primaria()">
+                                        <input type="checkbox" class="check" name="lesao_carie_primaria" id="chk_oclusal_lesao_carie_primaria" value="lesao carie primaria">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_oclusal_lesao_carie_cronica" onclick="chk_oclusal_lesao_carie_cronica()">
+                                        <input type="checkbox" class="check" name="lesao_carie_cronica" id="chk_oclusal_lesao_carie_cronica" value="lesao carie cronica">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_oclusal_restauracao_defeituosa" onclick="chk_oclusal_restauracao_defeituosa()">
+                                        <input type="checkbox" class="check" name="restauracao_defeituosa" id="chk_oclusal_restauracao_defeituosa" value="restauracao defeituosa">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_oclusal_restauracao_bom_estado" onclick="chk_oclusal_restauracao_bom_estado()">
+                                        <input type="checkbox" class="check" name="restauracao_bom_estado" id="chk_oclusal_restauracao_bom_estado" value="restauracao bom estado">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_oclusal_necessidade_tratamento_endondontico" onclick="chk_oclusal_necessidade_tratamento_endondontico()">
+                                        <input type="checkbox" class="check" name="necessidade_tratamento_endondontico" id="chk_oclusal_necessidade_tratamento_endondontico" value="necessidade tratamento endondontico">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_oclusal_tratamento_endondontico_concluido_" onclick="chk_oclusal_tratamento_endondontico_concluido_()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_oclusal_tratamento_endondontico_concluido_" value="tratamento endondontico concluido_">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_oclusal_extracao_indicada" onclick="chk_oclusal_extracao_indicada()">
+                                        <input type="checkbox" class="check" name="extracao_indicada" id="chk_oclusal_extracao_indicada" value="extracao indicada">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_oclusal_necessidade_protese" onclick="chk_oclusal_necessidade_protese()">
+                                        <input type="checkbox" class="check" name="necessidade_protese" id="chk_oclusal_necessidade_protese" value="necessidade protese">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_oclusal_protese_fixa_concluida_satisfatoria" onclick="chk_oclusal_protese_fixa_concluida_satisfatoria()">
+                                        <input type="checkbox" class="check" name="protese_fixa_concluida_satisfatoria" id="chk_oclusal_protese_fixa_concluida_satisfatoria" value="protese fixa concluida satisfatoria">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_oclusal_ausente" onclick="chk_oclusal_ausente()">
+                                        <input type="checkbox" class="check" name="dente_ausente" id="chk_oclusal_ausente" value="dente ausente">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_oclusal_doenca_periodontal" onclick="chk_oclusal_doenca_periodontal()">
+                                        <input type="checkbox" class="check" name="doenca_periodontal" id="chk_oclusal_doenca_periodontal" value="doenca periodontal">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_oclusal_faceta_degaste" onclick="chk_oclusal_faceta_desgaste()">
+                                        <input type="checkbox" class="check" name="faceta_degaste" id="chk_oclusal_faceta_degaste" value="faceta degaste">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_oclusal_fratura" onclick="chk_oclusal_fratura()">
+                                        <input type="checkbox" class="check" name="fratura" id="chk_oclusal_fratura" value="fratura">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_oclusal_selante_fazer" onclick="chk_oclusal_selante_fazer()">
+                                        <input type="checkbox" class="check" name="selante_fazer" id="chk_oclusal_selante_fazer" value="selante fazer">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_oclusal_selante_satisfatorio" onclick="chk_oclusal_selante_satisfatorio()">
+                                        <input type="checkbox" class="check" name="selante_satisfatorio" id="chk_oclusal_selante_satisfatorio" value="selante satisfatorio">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;">
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_oclusal_anomalia_de_forma" onclick="chk_oclusal_anomalia_de_forma()">
+                                        <input type="checkbox" class="check" name="anomalia_de_forma" id="chk_oclusal_anomalia_de_forma" value="anomalia de forma">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_oclusal_defeito_de_esmalte" onclick="chk_oclusal_defeito_de_esmalte()">
+                                        <input type="checkbox" class="check" name="defeito_de_esmalte" id="chk_oclusal_defeito_de_esmalte" value="defeito de esmalte">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_oclusal_supranumerario" onclick="chk_oclusal_supranumerario()">
+                                        <input type="checkbox" class="check" name="supranumerario" id="chk_oclusal_supranumerario" value="supranumerario">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_oclusal_restauracao_protese_concluida" onclick="chk_oclusal_restauracao_protese_concluida()">
+                                        <input type="checkbox" class="check" name="restauracao_protese_concluida" id="chk_oclusal_restauracao_protese_concluida" value="restauracao protese concluida">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_oclusal_tratamento_endondontico_concluido" onclick="chk_oclusal_tratamento_endondontico_concluido()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_oclusal_tratamento_endondontico_concluido" value="tratamento endondontico concluido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/calculo_recessao_gengival.jpeg' %}" id="img_oclusal_calculo_recessao_gengival" onclick="chk_oclusal_calculo_recessao_gengival()">
+                                        <input type="checkbox" class="check" name="calculo_recessao_gengival" id="chk_oclusal_calculo_recessao_gengival" value="calculo recessao gengival">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detalhes" id="display_mesial" style="flex: 70%;" >
+                                <h1 style="margin: auto; padding-bottom: 10px;">Mesial</h1>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/higido.jpeg' %}" id="img_mesial_higido" onclick="chk_mesial_higido()">
+                                        <input type="checkbox" class="check" name="higido" id="chk_mesial_higido" value="higido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_mesial_mancha_branca_ativa" onclick="chk_mesial_mancha_branca_ativa()">
+                                        <input type="checkbox" class="check" name="mancha_branca_ativa" id="chk_mesial_mancha_branca_ativa" value="mancha branca ativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_mesial_mancha_inativa" onclick="chk_mesial_mancha_inativa()">
+                                        <input type="checkbox" class="check" name="mancha_inativa" id="chk_mesial_mancha_inativa" value="mancha inativa">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_mesial_lesao_carie_primaria" onclick="chk_mesial_lesao_carie_primaria()">
+                                        <input type="checkbox" class="check" name="lesao_carie_primaria" id="chk_mesial_lesao_carie_primaria" value="lesao carie primaria">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_mesial_lesao_carie_cronica" onclick="chk_mesial_lesao_carie_cronica()">
+                                        <input type="checkbox" class="check" name="lesao_carie_cronica" id="chk_mesial_lesao_carie_cronica" value="lesao carie cronica">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_mesial_restauracao_defeituosa" onclick="chk_mesial_restauracao_defeituosa()">
+                                        <input type="checkbox" class="check" name="restauracao_defeituosa" id="chk_mesial_restauracao_defeituosa" value="restauracao defeituosa">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_mesial_restauracao_bom_estado" onclick="chk_mesial_restauracao_bom_estado()">
+                                        <input type="checkbox" class="check" name="restauracao_bom_estado" id="chk_mesial_restauracao_bom_estado" value="restauracao bom estado">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_mesial_necessidade_tratamento_endondontico" onclick="chk_mesial_necessidade_tratamento_endondontico()">
+                                        <input type="checkbox" class="check" name="necessidade_tratamento_endondontico" id="chk_mesial_necessidade_tratamento_endondontico" value="necessidade tratamento endondontico">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_mesial_tratamento_endondontico_concluido_" onclick="chk_mesial_tratamento_endondontico_concluido_()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_mesial_tratamento_endondontico_concluido_" value="tratamento endondontico concluido_">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_mesial_extracao_indicada" onclick="chk_mesial_extracao_indicada()">
+                                        <input type="checkbox" class="check" name="extracao_indicada" id="chk_mesial_extracao_indicada" value="extracao indicada">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_mesial_necessidade_protese" onclick="chk_mesial_necessidade_protese()">
+                                        <input type="checkbox" class="check" name="necessidade_protese" id="chk_mesial_necessidade_protese" value="necessidade protese">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_mesial_protese_fixa_concluida_satisfatoria" onclick="chk_mesial_protese_fixa_concluida_satisfatoria()">
+                                        <input type="checkbox" class="check" name="protese_fixa_concluida_satisfatoria" id="chk_mesial_protese_fixa_concluida_satisfatoria" value="protese fixa concluida satisfatoria">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;" >
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_mesial_ausente" onclick="chk_mesial_ausente()">
+                                        <input type="checkbox" class="check" name="dente_ausente" id="chk_mesial_ausente" value="dente ausente">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_mesial_doenca_periodontal" onclick="chk_mesial_doenca_periodontal()">
+                                        <input type="checkbox" class="check" name="doenca_periodontal" id="chk_mesial_doenca_periodontal" value="doenca periodontal">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_mesial_faceta_degaste" onclick="chk_mesial_faceta_desgaste()">
+                                        <input type="checkbox" class="check" name="faceta_degaste" id="chk_mesial_faceta_degaste" value="faceta degaste">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_mesial_fratura" onclick="chk_mesial_fratura()">
+                                        <input type="checkbox" class="check" name="fratura" id="chk_mesial_fratura" value="fratura">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_mesial_selante_fazer" onclick="chk_mesial_selante_fazer()">
+                                        <input type="checkbox" class="check" name="selante_fazer" id="chk_mesial_selante_fazer" value="selante fazer">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_mesial_selante_satisfatorio" onclick="chk_mesial_selante_satisfatorio()">
+                                        <input type="checkbox" class="check" name="selante_satisfatorio" id="chk_mesial_selante_satisfatorio" value="selante satisfatorio">
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: row;">
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_mesial_anomalia_de_forma" onclick="chk_mesial_anomalia_de_forma()">
+                                        <input type="checkbox" class="check" name="anomalia_de_forma" id="chk_mesial_anomalia_de_forma" value="anomalia de forma">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_mesial_defeito_de_esmalte" onclick="chk_mesial_defeito_de_esmalte()">
+                                        <input type="checkbox" class="check" name="defeito_de_esmalte" id="chk_mesial_defeito_de_esmalte" value="defeito de esmalte">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_mesial_supranumerario" onclick="chk_mesial_supranumerario()">
+                                        <input type="checkbox" class="check" name="supranumerario" id="chk_mesial_supranumerario" value="supranumerario">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_mesial_restauracao_protese_concluida" onclick="chk_mesial_restauracao_protese_concluida()">
+                                        <input type="checkbox" class="check" name="restauracao_protese_concluida" id="chk_mesial_restauracao_protese_concluida" value="restauracao protese concluida">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_mesial_tratamento_endondontico_concluido" onclick="chk_mesial_tratamento_endondontico_concluido()">
+                                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_mesial_tratamento_endondontico_concluido" value="tratamento endondontico concluido">
+                                    </div>
+                                    <div>
+                                        <img class="img-fluid" src="{% static 'odontograma/img/calculo_recessao_gengival.jpeg' %}" id="img_mesial_calculo_recessao_gengival" onclick="chk_mesial_calculo_recessao_gengival()">
+                                        <input type="checkbox" class="check" name="calculo_recessao_gengival" id="chk_mesial_calculo_recessao_gengival" value="calculo recessao gengival">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    </div>
+</div>
+<!--<script src="{% static 'odontograma/js/dentadura-sup-18.js' %}"></script>-->
+<script src="{% static 'odontograma/js/display_distal.js' %}"></script>
+<script src="{% static 'odontograma/js/display_oclusal.js' %}"></script>
