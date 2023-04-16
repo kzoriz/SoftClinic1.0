@@ -2,7 +2,59 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="container">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+SC:wght@700&family=Tourney:wght@700&display=swap');
+
+        .custom-btn {
+          width: 130px;
+          height: 40px;
+          padding: 10px 25px;
+          border: 2px solid #000;
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          display: inline-block;
+        }
+
+.btn-margin {
+    margin: 0 0 0 10px;
+}
+.bold700{
+    /*font-family: 'Bungee Shade', cursive;*/
+    font-family: 'Fira Code Medium', serif;
+    /*font-family: 'Tourney', cursive;*/
+    color: #66a1e8;
+}
+.btn-1 {
+  transition: all 0.3s ease;
+}
+.btn-1:hover {
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  background: #66a1e8;
+    color: #FFFFFF;
+}
+.btn-2 {
+  transition: all 0.3s ease;
+}
+.btn-2:hover {
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  background: #3CB371;
+    color: #FFFFFF;
+}
+    </style>
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-success" role="alert">
@@ -11,119 +63,146 @@
         {% endfor %}
     {% endif %}
     <div class="card shadow mb-4">
-        <div class="card-body"><br>
-            <h1 class="mb-3 text-primary">
+        <div class="card-body" style="padding: 20px 40px 20px 40px"><br>
+            <h1 class="bold700 text-center">
                 <b>INFORMAÇÕES DO PACIENTE</b>
             </h1>
+<!--            <div class="card">-->
+            <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
+                <a href="{% url 'paciente_editar' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
+                    <span class="text">Atualizar</span>
+                </a>
+            </div>
             <form>
                 <div class="form-row">
                    <div class="form-group col-md-4">
-                        <label>Prontuario</label>
-                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
+                        <label><b>Prontuario</b></label>
+                       <div>{{ object.prontuario }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>-->
                     </div>
                    <div class="form-group col-md-4">
-                        <label>Atualizado em:</label>
-                        <input type="text" class="form-control" value="{{ object.updated_at}}"  disabled>
+                        <label><b>Atualizado em</b></label>
+                       <div>{{ object.updated_at}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.updated_at}}"  disabled>-->
                    </div>
                    <div class="form-group col-md-4">
-                        <label>Criado em:</label>
-                        <input type="text" class="form-control" value="{{ object.created_at}}"  disabled>
+                        <label><b>Criado em</b></label>
+                       <div>{{ object.created_at}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.created_at}}"  disabled>-->
                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" value="{{ object.nome}}" name="nome" disabled>
+                        <label><b>Nome</b></label>
+                        <div>{{ object.nome|upper}}</div>
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Nome Social</label>
-                        <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social" disabled>
+                        <label><b>Nome Social</b></label>
+                        <di>{{ object.nome_social|upper}}</di>
+<!--                        <input type="text" class="form-control" value="{{ object.nome_social}}" name="nome_social" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Data de nascimento</label>
-                        <input type="text" class="form-control" value="{{ object.data_nascimento|date:'d/m/Y' }}" disabled>
+                        <label><b>Data de nascimento</b></label>
+                        <div>{{ object.data_nascimento|date:'d/m/Y' }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.data_nascimento|date:'d/m/Y' }}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Sexo Biologico</label>
-                        <input type="text" class="form-control" value="{{ object.sexo_biologico }}" disabled>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label>RG</label>
-                        <input type="text" class="form-control" value="{{ object.rg}}" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>CPF</label>
-                        <input type="text" class="form-control" value="{{ object.cpf }}" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Raça</label>
-                        <input type="text" class="form-control" value="{{ object.raca}}" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Estado Civil</label>
-                        <input type="text" class="form-control" value="{{ object.estado_civil }}" disabled>
+                        <label><b>Sexo Biologico</b></label>
+                        <div>{{ object.sexo_biologico|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.sexo_biologico }}" disabled>-->
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label>Grau de instrução</label>
-                        <input type="text" class="form-control" value="{{ object.grau_instrucao }}" disabled>
+                        <label><b>RG</b></label>
+                        <div>{{ object.rg}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.rg}}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Endereço</label>
-                        <input type="text" class="form-control" value="{{ object.endereco }}" disabled>
+                        <label><b>CPF</b></label>
+                        <div>{{ object.cpf }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.cpf }}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Cep</label>
-                        <input type="text" class="form-control" value="{{ object.cep}}" disabled>
+                        <label><b>Raça</b></label>
+                        <div>{{ object.raca|upper}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.raca}}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Bairro</label>
-                        <input type="text" class="form-control" value="{{ object.bairro }}" disabled>
+                        <label><b>Estado Civil</b></label>
+                        <div>{{ object.estado_civil|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.estado_civil }}" disabled>-->
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label>Cidade</label>
-                        <input type="text" class="form-control" value="{{ object.cidade }}" disabled>
+                        <label><b>Grau de instrução</b></label>
+                        <div>{{ object.grau_instrucao|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.grau_instrucao }}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>UF</label>
-                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>
+                        <label><b>Endereço</b></label>
+                        <div>{{ object.endereco|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.endereco }}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Telefone</label>
-                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>
+                        <label><b>Cep</b></label>
+                        <div>{{ object.cep|upper}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.cep}}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Prontuario</label>
-                        <input type="text" class="form-control" value="{{ prontuario }}" disabled>
+                        <label><b>Bairro</b></label>
+                        <div>{{ object.bairro | upper}}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.bairro | upper}}" disabled>-->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><b>Cidade</b></label>
+                        <div>{{ object.cidade|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.cidade }}" disabled>-->
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><b>UF</b></label>
+                        <div>{{ object.uf|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>-->
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><b>Telefone</b></label>
+                        <div>{{ object.telefone_celular }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>-->
+                    </div>
+                    <div class="form-group col-md-3">
+<!--                        <label>Prontuario</label>-->
+<!--                        <input type="text" class="form-control" value="{{ prontuario }}" disabled>-->
                     </div>
                     <div class="form-group col-md-12">
-                        <label>Informações Complementares</label>
-                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" value="{{ object.informacoes_complementares }}" disabled>{{ object.informacoes_complementares }}</textarea>
+                        <label><b>Informações Complementares</b></label>
+                        <div>{{ object.informacoes_complementares }}</div>
+<!--                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" -->
+<!--                                  value="{{ object.informacoes_complementares }}" disabled>-->
+<!--                            {{ object.informacoes_complementares }}-->
+<!--                        </textarea>-->
                     </div>
                 </div>
             </form>
-            <div class="mr-1 text-right">
-                <a href="{% url 'pacientes' %}" class="btn btn-secondary text-white" type="button">
+<!--            </div>-->
+            <div class="mr-1 text-right" style="padding-top: 20px">
+                <a href="{% url 'pacientes' %}" class="custom-btn btn-1 btn" type="button">
                     <span class="text">Voltar</span>
                 </a>
-                <a href="{% url 'paciente_editar' object.pk %}" class="btn btn-warning text-white" type="button">
-                    <span class="text">Atualizar</span>
-                </a>
-                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
-                    <span class="text">Excluir</span>
-                </a>
-                <a href="{% url 'anamnese_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
-                    <span class="text">Proximo</span>
+<!--                <a href="{% url 'paciente_editar' object.pk %}" class="btn btn-warning text-white" type="button">-->
+<!--                    <span class="text">Atualizar</span>-->
+<!--                </a>-->
+<!--                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">-->
+<!--                    <span class="text">Excluir</span>-->
+<!--                </a>-->
+                <a href="{% url 'anamnese_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
+                    <span class="text">Próximo</span>
                 </a>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock content %}
 ###############

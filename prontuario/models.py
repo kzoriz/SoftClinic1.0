@@ -300,42 +300,73 @@ class Odontograma(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="odontograma_prontuario")
-    dente_18 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_18")
-    dente_17 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_17")
-    dente_16 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_16")
-    dente_15 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_15")
-    dente_14 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_14")
-    dente_13 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_13")
-    dente_12 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_12")
-    dente_11 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_11")
+    dente_18 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_18")
+    dente_17 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_17")
+    dente_16 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_16")
+    dente_15 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_15")
+    dente_14 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_14")
+    dente_13 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_13")
+    dente_12 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_12")
+    dente_11 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_11")
 
-    dente_21 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_21")
-    dente_22 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_22")
-    dente_23 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_23")
-    dente_24 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_24")
-    dente_25 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_25")
-    dente_26 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_26")
-    dente_27 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_27")
-    dente_28 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_28")
+    dente_21 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_21")
+    dente_22 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_22")
+    dente_23 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_23")
+    dente_24 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_24")
+    dente_25 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_25")
+    dente_26 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_26")
+    dente_27 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_27")
+    dente_28 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_28")
 
-    dente_48 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_48")
-    dente_47 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_47")
-    dente_46 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_46")
-    dente_45 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_45")
-    dente_44 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_44")
-    dente_43 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_43")
-    dente_42 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_42")
-    dente_41 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_41")
+    dente_48 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_48")
+    dente_47 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_47")
+    dente_46 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_46")
+    dente_45 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_45")
+    dente_44 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_44")
+    dente_43 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_43")
+    dente_42 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_42")
+    dente_41 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_41")
 
-    dente_31 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_31")
-    dente_32 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_32")
-    dente_33 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_33")
-    dente_34 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_34")
-    dente_35 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_35")
-    dente_36 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_36")
-    dente_37 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_37")
-    dente_38 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True, related_name="odontograma_dente_38")
-
+    dente_31 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_31")
+    dente_32 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_32")
+    dente_33 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_33")
+    dente_34 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_34")
+    dente_35 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_35")
+    dente_36 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_36")
+    dente_37 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_37")
+    dente_38 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
+                                 related_name="odontograma_dente_38")
 
     def get_absolute_url(self):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})

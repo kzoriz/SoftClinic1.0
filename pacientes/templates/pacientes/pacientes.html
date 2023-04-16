@@ -5,7 +5,9 @@
 
 {% block content %}
     <style>
-    .card {
+        @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+SC:wght@700&family=Tourney:wght@700&display=swap');
+
+        .card {
         position: relative;
         display: flex;
         flex-direction: row;
@@ -25,15 +27,65 @@
       margin-left: 12px;
 
     }
+
+        .custom-btn {
+          width: 130px;
+          height: 40px;
+          padding: 10px 25px;
+          border: 2px solid #000;
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          display: inline-block;
+        }
+
+        .btn-margin {
+            margin: 0 10px 0 10px;
+        }
+        .bold700{
+            /*font-family: 'Bungee Shade', cursive;*/
+            font-family: 'Fira Code Medium', serif;
+            /*font-family: 'Tourney', cursive;*/
+            color: #66a1e8;
+        }
+        .btn-1 {
+          transition: all 0.3s ease;
+        }
+        .btn-1:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #66a1e8;
+            color: #FFFFFF;
+        }
+        .btn-2 {
+          transition: all 0.3s ease;
+        }
+        .btn-2:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #3CB371;
+            color: #FFFFFF;
+        }
     </style>
-    <div class="container">
-           <div class="card shadow mb-4">
-        <div class="card-body">
-<!--    <div id="pacientes">-->
-<!--        <div class="lista_pacientes" >-->
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body" style="padding: 20px 40px 20px 40px"><br>
+            <h1 class="bold700 text-center">
+                <b>PACIENTES</b>
+            </h1>
+            <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
+            </div>
             {% for paciente in pacientes.object_list %}
                 <div class="card">
-<!--                <div  class="lista_pacientes_conteudo" >-->
                     <span class="paciente_nome" ><a id="name" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{paciente.nome | upper}}</a></span>
                     <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>
                 </div>
@@ -62,9 +114,7 @@
                     </ul>
                 </nav>
             </div>
-<!--        </div>-->
-<!--    </div>-->
+        </div>
     </div>
-    </div>
-    </div>
+</div>
 {% endblock content %}
