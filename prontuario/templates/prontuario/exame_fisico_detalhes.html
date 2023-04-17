@@ -3,6 +3,57 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+SC:wght@700&family=Tourney:wght@700&display=swap');
+
+        .custom-btn {
+          width: 130px;
+          height: 40px;
+          padding: 10px 25px;
+          border: 2px solid #000;
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          display: inline-block;
+        }
+
+        .btn-margin {
+            margin: 0 10px 0 10px;
+        }
+        .bold700{
+            /*font-family: 'Bungee Shade', cursive;*/
+            font-family: 'Fira Code Medium', serif;
+            /*font-family: 'Tourney', cursive;*/
+            color: #66a1e8;
+        }
+        .btn-1 {
+          transition: all 0.3s ease;
+        }
+        .btn-1:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #66a1e8;
+            color: #FFFFFF;
+        }
+        .btn-2 {
+          transition: all 0.3s ease;
+        }
+        .btn-2:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #3CB371;
+            color: #FFFFFF;
+        }
+    </style>
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-success" role="alert">
@@ -11,102 +62,153 @@
         {% endfor %}
     {% endif %}
     <div class="card shadow mb-4">
-        <div class="card-body"><br>
-            <h1 class="mb-3 text-primary">
+        <div class="card-body" style="padding: 20px 40px 20px 40px"><br>
+              <h1 class="bold700 text-center">
                 <b>EXAME FÍSICO</b>
             </h1>
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>Prontuario</label>
-                        <input type="text" class="form-control" value="{{ object.prontuario }}" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Atualizado em:</label>
-                        <input type="text" class="form-control" value="{{ object.updated_at}}" name="updated_at" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Criado em:</label>
-                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Nódulos Linfáticos</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.nodulos_linfaticos }}" disabled>{{ object.nodulos_linfaticos }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Amigdalas</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.amigdalas }}" disabled>{{ object.amigdalas }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>Trigono Retromolar</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.trigono_retromolar }}" disabled>{{ object.trigono_retromolar }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Palato Duro</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.palato_duro }}" disabled>{{ object.palato_duro }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Palato Mole</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.palato_mole }}" disabled>{{ object.palato_mole }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Lábios</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.labios }}" disabled>{{ object.labios }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Pele</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.pele }}" disabled>{{ object.pele }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>ATM</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.atm }}" disabled>{{ object.atm }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Vestíbulo</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.vestibulo }}" disabled>{{ object.vestibulo }}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                   <div class="form-group col-md-12">
-                        <label>Higiene Bucal</label>
-                        <textarea type="textarea" cols="40" rows="3" class="textarea form-control" value="{{ object.higiene_bucal }}" disabled>{{ object.higiene_bucal }}</textarea>
-                    </div>
-                </div>
-            </form>
-            <div class="mr-1 text-right">
-                <a href="{% url 'inf_sau_sis_detalhes' object.pk %}" class="btn btn-secondary text-white" type="button">
-                    <span class="text">Voltar</span>
-                </a>
-                <a href="{% url 'exa_fis_edit' object.pk %}" class="btn btn-warning text-white" type="button">
+            <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
+                <a href="{% url 'exa_fis_edit' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
                     <span class="text">Atualizar</span>
                 </a>
-                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">
-                    <span class="text">Excluir</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label><b>Prontuario</b></label>
+                    <div>{{ object.prontuario }}</div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label><b>Atualizado Em</b></label>
+                    <div>{{ object.updated_at}}</div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label><b>Criado Em</b></label>
+                    <div>{{ object.created_at}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label><b>Paciente</b></label>
+                    <div>{{ paciente.nome}}</div>
+                </div>
+            </div>
+
+            <br>
+            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="aba1-tab" data-toggle="tab" href="#aba1" role="tab" aria-controls="aba1" aria-selected="true"><b>Nódulos Linfáticos</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba2-tab" data-toggle="tab" href="#aba2" role="tab" aria-controls="aba2" aria-selected="false"><b>Amigdalas</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba3-tab" data-toggle="tab" href="#aba3" role="tab" aria-controls="aba3" aria-selected="false"><b>Trigono Retromolar</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba4-tab" data-toggle="tab" href="#aba4" role="tab" aria-controls="aba3" aria-selected="false"><b>Palato Duro</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba5-tab" data-toggle="tab" href="#aba5" role="tab" aria-controls="aba3" aria-selected="false"><b>Palato Mole</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba6-tab" data-toggle="tab" href="#aba6" role="tab" aria-controls="aba6" aria-selected="false"><b>Lábios</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba7-tab" data-toggle="tab" href="#aba7" role="tab" aria-controls="aba7" aria-selected="false"><b>Pele</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba8-tab" data-toggle="tab" href="#aba8" role="tab" aria-controls="aba8" aria-selected="false"><b>ATM</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba9-tab" data-toggle="tab" href="#aba9" role="tab" aria-controls="aba9" aria-selected="false"><b>Vestíbulo</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="aba10-tab" data-toggle="tab" href="#aba10" role="tab" aria-controls="aba10" aria-selected="false"><b>Higiene Bucal</b></a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+               <div class="tab-pane fade show active" id="aba1" role="tabpanel" aria-labelledby="aba1-tab">
+                  <br>
+                  <br>
+                  <div class="form-group col-md-12">
+                      <div>{{ object.nodulos_linfaticos }}</div>
+                  </div>
+               </div>
+               <div class="tab-pane fade" id="aba2" role="tabpanel" aria-labelledby="aba2-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                       <div>{{ object.amigdalas }}</div>
+                   </div>
+               </div>
+               <div class="tab-pane fade" id="aba3" role="tabpanel" aria-labelledby="aba3-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                        <div>{{ object.trigono_retromolar }}</div>
+                   </div>
+               </div>
+               <div class="tab-pane fade" id="aba4" role="tabpanel" aria-labelledby="aba4-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                        <div>{{ object.palato_duro }}</div>
+                   </div>
+               </div>
+                <div class="tab-pane fade" id="aba5" role="tabpanel" aria-labelledby="aba5-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                        <div>{{ object.palato_mole }}</div>
+                   </div>
+                </div>
+                <div class="tab-pane fade" id="aba6" role="tabpanel" aria-labelledby="aba6-tab">
+                    <br>
+                    <br>
+                    <div class="form-group col-md-12">
+                      <div>{{ object.labios }}</div>
+                    </div>
+               </div>
+               <div class="tab-pane fade" id="aba7" role="tabpanel" aria-labelledby="aba7-tab">
+                  <br>
+                  <br>
+                  <div class="form-group col-md-12">
+                      <div>{{ object.pele }}</div>
+                  </div>
+               </div>
+               <div class="tab-pane fade" id="aba8" role="tabpanel" aria-labelledby="aba8-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                       <div>{{ object.atm }}</div>
+                   </div>
+               </div>
+               <div class="tab-pane fade" id="aba9" role="tabpanel" aria-labelledby="aba9-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                        <div>{{ object.vestibulo }}</div>
+                   </div>
+               </div>
+               <div class="tab-pane fade" id="aba10" role="tabpanel" aria-labelledby="aba10-tab">
+                  <br>
+                  <br>
+                   <div class="form-group col-md-12">
+                        <div>{{ object.higiene_bucal }}</div>
+                   </div>
+               </div>
+            </div>
+            <div class="mr-1 text-right">
+                <a href="{% url 'inf_sau_sis_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
+                    <span class="text">Voltar</span>
                 </a>
-                <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="btn btn-primary text-white" type="button">
+<!--                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">-->
+<!--                    <span class="text">Excluir</span>-->
+<!--                </a>-->
+                <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
                     <span class="text">Proximo</span>
                 </a>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock content %}

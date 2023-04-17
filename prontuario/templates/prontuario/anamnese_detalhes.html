@@ -71,8 +71,6 @@
                     <span class="text">Atualizar</span>
                 </a>
             </div>
-            <form method="POST" action=".">
-                {% csrf_token %}
                  <div class="form-row">
                     <div class="form-group col-md-4">
                         <label><b>Prontuario</b></label>
@@ -90,6 +88,13 @@
 <!--                        <input type="text" class="form-control" value="{{ object.created_at}}" name="created_at" disabled>-->
                     </div>
                 </div>
+                            <div class="row">
+                <div class="form-group col-md-4">
+                    <label><b>Paciente</b></label>
+                    <div>{{ paciente.nome}}</div>
+                </div>
+            </div>
+
                 <div class="form-row">
 
                 </div>
@@ -107,7 +112,6 @@
 <!--                                  value="{{ object.anamnese }}" disabled>{{ object.anamnese }}</textarea>-->
                     </div>
                 </div>
-            </form>
             <div class="mr-1 text-right">
                 <a href="{% url 'paciente_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
                     <span class="text">Anterior</span>

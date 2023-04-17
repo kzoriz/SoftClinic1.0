@@ -9,8 +9,10 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 def anamnese_detalhes(request, pk=None):
     object = Anamnese.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
         'object': object,
+        'paciente': paciente,
     }
     return render(request, 'prontuario/anamnese_detalhes.html', context)
 
@@ -26,8 +28,10 @@ class AnamneseUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 def inf_saude_sistemica_detalhes(request, pk=None):
     object = InfSaudeSistemica.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
         'object': object,
+        'paciente': paciente,
     }
     return render(request, 'prontuario/inf_saude_sistemica.html', context)
 
@@ -45,8 +49,10 @@ class InfSaudeSistemicaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
 
 def exame_fisico_detalhes(request, pk=None):
     object = ExameFisico.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
         'object': object,
+        'paciente': paciente,
     }
     return render(request, 'prontuario/exame_fisico_detalhes.html', context)
 
@@ -63,8 +69,10 @@ class ExameFisicoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 def sinais_vitais_clinicos_detalhes(request, pk=None):
     object = SinaisVitaisClinicos.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
         'object': object,
+        'paciente': paciente,
     }
     return render(request, 'prontuario/sinais_vitais_clinicos_detalhes.html', context)
 
@@ -82,8 +90,10 @@ class SinaisVitaisClinicosUpdate(LoginRequiredMixin, SuccessMessageMixin, Update
 
 def psr_detalhes(request, pk=None):
     object = PSR.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
         'object': object,
+        'paciente': paciente,
     }
     return render(request, 'prontuario/psr_detalhes.html', context)
 
@@ -98,14 +108,14 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Exame PSR atualizado com Sucesso!"
 
 
-def odon_detalhes(request, prontuario=None):
-    dentes = Dente.objects.filter(prontuario__num_prontuario=prontuario)
-    # dente = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente
-    # doencas = OdontogramaInicial.objects.get(pk=pk).diagnostico.dente.doenca.all()
+def odon_detalhes(request, pk=None):
+    object = Odontograma.objects.get(pk=pk)
+    paciente = Paciente.objects.get(pk=pk)
     context = {
-        'dente': dentes,
-        # 'doencas': doencas,
-        # 'dente': dente,
+        'object': object,
+        'paciente': paciente,
+
+
     }
     return render(request, 'prontuario/odon_detalhes.html', context)
 
