@@ -269,7 +269,7 @@ def estenografia_create():
         e4.save()
         e5 = Estenografia(nome='lesao de carie cronica')
         e5.save()
-        e6 = Estenografia(nome='restauração defeituosa')
+        e6 = Estenografia(nome='restauracao defeituosa')
         e6.save()
         e7 = Estenografia(nome='restauracao em bom estado')
         e7.save()

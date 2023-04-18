@@ -274,22 +274,38 @@ def sup18(request, pk=None):
 @xframe_options_sameorigin
 def sup17(request, pk=None):
     object = Odontograma.objects.get(pk=pk)
-    dente = list(object.dente_17.distal.all())
-    dente2 = []
-    print(
-        '##########################################################################################################################')
-    print(type(dente))
-    for i in dente:
-        print(i)
+    dd = list(object.dente_17.distal.all())
+    do = list(object.dente_17.oclusal.all())
+    dm = list(object.dente_17.mesial.all())
+    dl = list(object.dente_17.lingual.all())
+    dv = list(object.dente_17.vestibular.all())
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
         i = str(i)
-        dente2.append(i)
-        print(type(i))
-    for i in dente2:
-        print(i, type(i))
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
     context = {
-
-        'dente': dente2,
-
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
     }
-    return render(request, "prontuario/Dentes/dentadura-sup-17.html", context)
+    return render(request, "prontuario/Dentes/dentadura-sup-17-detail.html", context)
 
