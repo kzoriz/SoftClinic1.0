@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
 <div id="sup-18">
     <div class="container">
+         {% for distal in dente %}
+                    <p>{{ distal }}</p>
+                {% endfor %}
                 <div class="card-body">
 <!--                    <div class="card">-->
                         <div class="bloco2" style="margin-left: 60px;">
@@ -40,10 +43,13 @@
                             <div class="detalhes" id="display_distal" style="flex: 70%;" >
                                 <h1 style="margin: auto; padding-bottom: 10px;">Distal</h1>
                                 <div style="display: flex; flex-direction: row;" >
+
+                                    {% if 'higido' in dente %}
                                     <div>
                                         <img class="img-fluid" src="{% static 'odontograma/img/higido.jpeg' %}" id="img_distal_higido" onclick="chk_distal_higido()">
                                         <input type="checkbox" class="check" name="higido" id="chk_distal_higido" value="higido">
                                     </div>
+                                    {% endif %}
                                     <div>
                                         <img class="img-fluid" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa" onclick="chk_distal_mancha_branca_ativa()">
                                         <input type="checkbox" class="check" name="mancha_branca_ativa" id="chk_distal_mancha_branca_ativa" value="mancha branca ativa">

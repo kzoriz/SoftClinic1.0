@@ -1,11 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from prontuario.models import *
 from django.views.decorators.clickjacking import xframe_options_sameorigin
+
 
 def anamnese_detalhes(request, pk=None):
     object = Anamnese.objects.get(pk=pk)
@@ -111,13 +113,49 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 def odon_detalhes(request, pk=None):
     object = Odontograma.objects.get(pk=pk)
     paciente = Paciente.objects.get(pk=pk)
+    dente = list(object.dente_17.distal.all())
+    dente2 = []
+    print('##########################################################################################################################')
+    print(type(dente))
+    for i in dente:
+        print(i)
+        i = str(i)
+        dente2.append(i)
+        print(type(i))
+    for i in dente2:
+        print(i, type(i))
     context = {
         'object': object,
         'paciente': paciente,
-
+        'dente': dente2,
 
     }
     return render(request, 'prontuario/odon_detalhes.html', context)
+
+
+# def odon_update(request, pk=None):
+#
+#
+#     if request.method == 'POST':
+#         odontograma = Odontograma.objects.get(pk=pk)
+#         d_18 = Dente.objects.filter(Dente.prontuario == odontograma.prontuario and Dente.nome == '18')
+#         distal = request.POST['distal_18']
+#
+#         d = d_18(distal=distal)
+#         d.save()
+#
+#         messages.success(request, "#")
+#         return redirect("pacientes")
+#     return render(request, "prontuario/Dentes/dentadura-sup-18.html")
+
+
+# class OdonUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+#     login_url = reverse_lazy("login")
+#     extra_context = {'nome_pagina': 'Odontograma Inicial'}
+#     model = Dente
+#     fields = ['distal']
+#     template_name = "prontuario/Dentes/dentadura-sup-18.html"
+#     success_message = "Odontograma Inicial Atualizado com Sucesso!"
 
 
 class OdontogramaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -224,9 +262,34 @@ def odontogramas(request):
 
 
 @xframe_options_sameorigin
-def sup18(request):
+def sup18(request, pk=None):
+    # object = Odontograma.objects.get(pk=pk)
+    # dente = list(object.dente_17.distal.all())
+    # context = {
+    #     'dente18': dente,
+    # }
     return render(request, "prontuario/Dentes/dentadura-sup-18.html")
 
+
 @xframe_options_sameorigin
-def sup17(request):
-    return render(request, "prontuario/Dentes/dentadura-sup-17.html")
+def sup17(request, pk=None):
+    object = Odontograma.objects.get(pk=pk)
+    dente = list(object.dente_17.distal.all())
+    dente2 = []
+    print(
+        '##########################################################################################################################')
+    print(type(dente))
+    for i in dente:
+        print(i)
+        i = str(i)
+        dente2.append(i)
+        print(type(i))
+    for i in dente2:
+        print(i, type(i))
+    context = {
+
+        'dente': dente2,
+
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-17.html", context)
+

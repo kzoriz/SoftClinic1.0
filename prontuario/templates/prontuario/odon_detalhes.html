@@ -105,6 +105,9 @@
                         <span class="text">Atualizar</span>
                     </a>
                 </div>
+                {% for distal in dente %}
+                    {{ distal }}
+                {% endfor %}
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label><b>Prontuario</b></label>
@@ -227,7 +230,7 @@
                 </div>
                 <iframe id="d18" src="{% url  'sup18' %}" width="100%" height="1000px" style="border: none" sandbox="allow-scripts">
                 </iframe>
-                <iframe id="d17" src="{% url  'sup17' %}" width="100%" height="1000px" style="border: none" sandbox="allow-scripts">
+                <iframe id="d17" src="{% url  'sup17' object.pk %}" width="100%" height="1000px" style="border: none" sandbox="allow-scripts">
                 </iframe>
                 <div class="mr-1 text-right">
                     <a href="{% url 'psr_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">

@@ -195,7 +195,6 @@ def registrar_paciente(request):
                         dente_41=d41, dente_31=d31, dente_32=d32, dente_33=d33, dente_34=d34, dente_35=d35,
                         dente_36=d36, dente_37=d37, dente_38=d38)
         y.save()
-
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
     return render(request, "pacientes/paciente_registrar2.html", context)

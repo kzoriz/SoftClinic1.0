@@ -119,7 +119,7 @@ function reset_check_distal(){
 
 
 function btn_distal(){
-    reset_check_distal();
+    // reset_check_distal();
     const btn_distal = window.document.getElementById('distal');
     const btn_oclusal = window.document.getElementById('oclusal');
     const btn_lingual = window.document.getElementById('lingual');

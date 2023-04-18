@@ -158,5 +158,5 @@ django_on_heroku.settings(locals())
 
 #AUTH_USER_MODEL = 'usuarios.CustomUser'
 
-#X_FRAME_OPTIONS = 'SAMEORIGIN'
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+# X_FRAME_OPTIONS = 'DENY'

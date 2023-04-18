@@ -257,6 +257,62 @@ class Estenografia(models.Model):
         verbose_name_plural = "Estenografia"
 
 
+def estenografia_create():
+    if len(Estenografia.objects.all()) == 0:
+        e1 = Estenografia(nome='higido')
+        e1.save()
+        e2 = Estenografia(nome='mancha branca ativa')
+        e2.save()
+        e3 = Estenografia(nome='mancha inativa')
+        e3.save()
+        e4 = Estenografia(nome='lesao de carie primaria')
+        e4.save()
+        e5 = Estenografia(nome='lesao de carie cronica')
+        e5.save()
+        e6 = Estenografia(nome='restauração defeituosa')
+        e6.save()
+        e7 = Estenografia(nome='restauracao em bom estado')
+        e7.save()
+        e8 = Estenografia(nome='necessidade de tratamento endodontico')
+        e8.save()
+        e9 = Estenografia(nome='tratamento endodontico concluido')
+        e9.save()
+        e10 = Estenografia(nome='extracao indicada')
+        e10.save()
+        e11 = Estenografia(nome='necessidade de protese')
+        e11.save()
+        e12 = Estenografia(nome='protese fixa concluida ou satisfatoria')
+        e12.save()
+        e13 = Estenografia(nome='dente ausente ou extraido')
+        e13.save()
+        e14 = Estenografia(nome='selante a fazer')
+        e14.save()
+        e15 = Estenografia(nome='selante satisfatorio')
+        e15.save()
+        e16 = Estenografia(nome='faceta de desgaste')
+        e16.save()
+        e17 = Estenografia(nome='fratura')
+        e17.save()
+        e18 = Estenografia(nome='doenca periodontal')
+        e18.save()
+        e19 = Estenografia(nome='anomalia de forma')
+        e19.save()
+        e20 = Estenografia(nome='defeito de esmalte ou dentina')
+        e20.save()
+        e21 = Estenografia(nome='supranumerario')
+        e21.save()
+        e22 = Estenografia(nome='restauracao ou protese concluida')
+        e22.save()
+        e23 = Estenografia(nome='tratamento endodontico concluido')
+        e23.save()
+
+    else:
+        print("Estenografia OK!")
+
+
+
+
+
 class Tratamento(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
@@ -391,3 +447,6 @@ class Atendimento(models.Model):
 
     class Meta:
         verbose_name_plural = "Atendimentos"
+
+
+estenografia_create()
