@@ -88,18 +88,6 @@
             margin: 1px 1px 1px 1px;
         }
     </style>
-        <script>
-            let =  document.write(document.URL);
-            // document.write(window.location.protocol)
-            // document.write(window.location.host)
-            // document.write(window.location.pathname)
-            function redireciona(){
-                window.location.href = let + '18';
-            }
-            function alterar_url(nova){
-                  history.pushState({}, null, nova);
-            }
-        </script>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-success" role="alert">

@@ -120,16 +120,16 @@ def odon_detalhes(request, pk=None):
     object = Odontograma.objects.get(pk=pk)
     # paciente = Paciente.objects.get(pk=pk)
     dente18 = object.dente_18.pk
-    print('dente18 ', dente18)
-    dente = list(object.dente_17.distal.all())
-    dente2 = []
-    for i in dente:
-        i = str(i)
-        dente2.append(i)
+    # print('dente18 ', dente18)
+    # dente = list(object.dente_17.distal.all())
+    # dente2 = []
+    # for i in dente:
+    #     i = str(i)
+    #     dente2.append(i)
     context = {
         'object': object,
         # 'paciente': paciente,
-        'dente': dente2,
+        # 'dente': dente2,
         'dente18': dente18,
 
     }
@@ -266,13 +266,17 @@ def sup18_edit(request, pk=None):
     e23 = Estenografia.objects.get(pk=23)
     for i in range(23):
         estenografia.append(Estenografia.objects.get(pk=i+1))
-        # print(estenografia[i])
-        # print(len(estenografia))
     if request.method == 'GET':
         dente_18 = Dente.objects.get(pk=pk)
         d18 = dente_18.pk
+        dd = list(dente_18.distal.all())
+        distal = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
         context = {
             'object': d18,
+            'distal': distal,
         }
         return render(request, "prontuario/Dentes/dentadura-sup-18-edit.html", context)
     if request.method == 'POST':
@@ -280,53 +284,12 @@ def sup18_edit(request, pk=None):
         print('metodo post')
         print(' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', dente_18.pk)
         distal = request.POST.getlist('distal')
-        for i in distal:
-            if i == '1':
-                dente_18.distal.add(e1)
-            elif i == '2':
-                dente_18.distal.add(e2)
-            elif i == '3':
-                dente_18.distal.add(e3)
-            elif i == '4':
-                dente_18.distal.add(e4)
-            elif i == '5':
-                dente_18.distal.add(e5)
-            elif i == '6':
-                dente_18.distal.add(e6)
-            elif i == '7':
-                dente_18.distal.add(e7)
-            elif i == '8':
-                dente_18.distal.add(e8)
-            elif i == '9':
-                dente_18.distal.add(e9)
-            elif i == '10':
-                dente_18.distal.add(e10)
-            elif i == '11':
-                dente_18.distal.add(e11)
-            elif i == '12':
-                dente_18.distal.add(e12)
-            elif i == '13':
-                dente_18.distal.add(e13)
-            elif i == '14':
-                dente_18.distal.add(e14)
-            elif i == '15':
-                dente_18.distal.add(e15)
-            elif i == '16':
-                dente_18.distal.add(e16)
-            elif i == '17':
-                dente_18.distal.add(e17)
-            elif i == '18':
-                dente_18.distal.add(e18)
-            elif i == '19':
-                dente_18.distal.add(e19)
-            elif i == '20':
-                dente_18.distal.add(e20)
-            elif i == '21':
-                dente_18.distal.add(e21)
-            elif i == '22':
-                dente_18.distal.add(e22)
-            elif i == '23':
-                dente_18.distal.add(e23)
+        print(distal)
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_18.distal.add(estenografia[i])
+            else:
+                dente_18.distal.remove(estenografia[i])
 
         messages.success(request, "Dente alterado com sucesso")
         return HttpResponsePermanentRedirect(reverse('sup18', args=[d18]))
