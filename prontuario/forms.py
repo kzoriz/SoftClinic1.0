@@ -1,14 +1,15 @@
 from django import forms
 from django.forms import fields
-from prontuario.models import Prontuario
+from prontuario.models import *
 
 
-class ProntuarioForm(forms.ModelForm):
-    class Meta:
-        model = Prontuario
-        fields = "__all__"
-
-# class DadosMedicosForm(forms.ModelForm):
+# class ProntuarioForm(forms.ModelForm):
 #     class Meta:
-#         model = DadosMedicos
+#         model = Prontuario
 #         fields = "__all__"
+#
+
+class DenteForm(forms.ModelForm):
+    class Meta:
+        model = Dente
+        fields = ['distal', ]

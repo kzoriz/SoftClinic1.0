@@ -20,50 +20,8 @@ lista_dentes = ['dente_18', 'dente_17', 'dente_16', 'dente_15', 'dente_14', 'den
                 ]
 
 
-# def paciente_detalhes_geral(request, pk=None):
-#     instance = Paciente.objects.get(pk=pk)
-#     prontuario = Prontuario.objects.get(pk=pk)
-#     anam = Anamnese.objects.get(pk=pk)
-#
-#     context = {
-#         'object': instance,
-#         'prontuario': prontuario,
-#         'anam': anam,
-#     }
-#     if request.method == 'POST':
-#         nome = request.POST['nome']
-#         nome_social = request.POST['nome_social']
-#         data_nascimento = request.POST['data_nascimento']
-#         sexo_biologico = request.POST['sexo_biologico']
-#         rg = request.POST['rg']
-#         cpf = request.POST['cpf']
-#         raca = request.POST['raca']
-#         estado_civil = request.POST['estado_civil']
-#         grau_instrucao = request.POST['grau_instrucao']
-#         endereco = request.POST['endereco']
-#         cep = request.POST['cep']
-#         bairro = request.POST['bairro']
-#         cidade = request.POST['cidade']
-#         uf = request.POST['uf']
-#         telefone_celular = request.POST['telefone_celular']
-#         informacoes_complementares = request.POST['informacoes_complementares']
-#         p = Paciente(nome=nome, nome_social=nome_social, data_nascimento=data_nascimento, sexo_biologico=sexo_biologico,
-#                      rg=rg, cpf=cpf, raca=raca, estado_civil=estado_civil, grau_instrucao=grau_instrucao,
-#                      endereco=endereco, cep=cep, bairro=bairro, cidade=cidade, uf=uf, telefone_celular=telefone_celular,
-#                      informacoes_complementares=informacoes_complementares)
-#         p.save()
-#
-#         anamnese = request.POST['anamnese']
-#         a = Anamnese(anamnese=anamnese)
-#         a.save()
-#         messages.success(request, "Paciente atualizado com sucesso")
-#         return redirect("pacientes")
-#     return render(request, 'pacientes/paciente_editar3.html', context)
-
-
 @login_required
 def registrar_paciente(request):
-    context = {}
     if request.method == 'POST':
         nome = request.POST['nome']
         nome_social = request.POST['nome_social']
@@ -88,10 +46,10 @@ def registrar_paciente(request):
         else:
             data_nascimento = data_nascimento
 
-        if len(Prontuario.objects.all()) == 0:
+        if len(Paciente.objects.all()) == 0:
             numero_prontuario = "1000"
         else:
-            numero_prontuario = str(int(Prontuario.objects.all().last().num_prontuario) + 1)
+            numero_prontuario = str(int(Paciente.objects.all().last().prontuario) + 1)
         if len(Paciente.objects.all()) == 0:
             id = 1
         else:
@@ -101,94 +59,94 @@ def registrar_paciente(request):
                      sexo_biologico=sexo_biologico,
                      rg=rg, cpf=cpf, raca=raca, estado_civil=estado_civil, grau_instrucao=grau_instrucao,
                      endereco=endereco, cep=cep, bairro=bairro, cidade=cidade, uf=uf, telefone_celular=telefone_celular,
-                     informacoes_complementares=informacoes_complementares)
+                     informacoes_complementares=informacoes_complementares, prontuario=numero_prontuario)
 
         p.save()
-        u = Prontuario(id=id, paciente=p, num_prontuario=numero_prontuario)
-        u.save()
-        r = Anamnese(id=id, prontuario=u)
+        # u = Prontuario(id=id, paciente=p, num_prontuario=numero_prontuario)
+        # u.save()
+        r = Anamnese(id=id, paciente=p, prontuario=numero_prontuario)
         r.save()
-        s = InfSaudeSistemica(id=id, prontuario=u)
+        s = InfSaudeSistemica(id=id, paciente=p, prontuario=numero_prontuario)
         s.save()
-        t = ExameFisico(id=id, prontuario=u)
+        t = ExameFisico(id=id, paciente=p, prontuario=numero_prontuario)
         t.save()
-        v = SinaisVitaisClinicos(id=id, prontuario=u)
+        v = SinaisVitaisClinicos(id=id, paciente=p, prontuario=numero_prontuario)
         v.save()
-        x = PSR(id=id, prontuario=u)
+        x = PSR(id=id, paciente=p, prontuario=numero_prontuario)
         x.save()
-        w = SolicitacaoExamesComplementares(id=id, prontuario=u)
+        w = SolicitacaoExamesComplementares(id=id, paciente=p, prontuario=numero_prontuario)
         w.save()
-        z = ResultadoExamesComplementares(id=id, prontuario=u)
-        z.save()
-        d18 = Dente(prontuario=u, nome='18')
+        # z = ResultadoExamesComplementares(id=id, prontuario=u)
+        # z.save()
+        d18 = Dente(paciente=p, prontuario=numero_prontuario + '18',  nome='18')
         d18.save()
-        d17 = Dente(prontuario=u, nome='17')
+        d17 = Dente(paciente=p, prontuario=numero_prontuario + '17', nome='17')
         d17.save()
-        d16 = Dente(prontuario=u, nome='16')
+        d16 = Dente(paciente=p, prontuario=numero_prontuario + '16', nome='16')
         d16.save()
-        d15 = Dente(prontuario=u, nome='15')
+        d15 = Dente(paciente=p, prontuario=numero_prontuario + '15', nome='15')
         d15.save()
-        d14 = Dente(prontuario=u, nome='14')
+        d14 = Dente(paciente=p, prontuario=numero_prontuario + '14', nome='14')
         d14.save()
-        d13 = Dente(prontuario=u, nome='13')
+        d13 = Dente(paciente=p, prontuario=numero_prontuario + '13', nome='13')
         d13.save()
-        d12 = Dente(prontuario=u, nome='12')
+        d12 = Dente(paciente=p, prontuario=numero_prontuario + '12', nome='12')
         d12.save()
-        d11 = Dente(prontuario=u, nome='11')
+        d11 = Dente(paciente=p, prontuario=numero_prontuario + '11', nome='11')
         d11.save()
 
-        d21 = Dente(prontuario=u, nome='21')
+        d21 = Dente(paciente=p, prontuario=numero_prontuario + '21', nome='21')
         d21.save()
-        d22 = Dente(prontuario=u, nome='22')
+        d22 = Dente(paciente=p, prontuario=numero_prontuario + '22', nome='22')
         d22.save()
-        d23 = Dente(prontuario=u, nome='23')
+        d23 = Dente(paciente=p, prontuario=numero_prontuario + '23', nome='23')
         d23.save()
-        d24 = Dente(prontuario=u, nome='24')
+        d24 = Dente(paciente=p, prontuario=numero_prontuario + '24', nome='24')
         d24.save()
-        d25 = Dente(prontuario=u, nome='25')
+        d25 = Dente(paciente=p, prontuario=numero_prontuario + '25', nome='25')
         d25.save()
-        d26 = Dente(prontuario=u, nome='26')
+        d26 = Dente(paciente=p, prontuario=numero_prontuario + '26', nome='26')
         d26.save()
-        d27 = Dente(prontuario=u, nome='27')
+        d27 = Dente(paciente=p, prontuario=numero_prontuario + '27', nome='27')
         d27.save()
-        d28 = Dente(prontuario=u, nome='28')
+        d28 = Dente(paciente=p, prontuario=numero_prontuario + '28', nome='28')
         d28.save()
 
-        d48 = Dente(prontuario=u, nome='48')
+        d48 = Dente(paciente=p, prontuario=numero_prontuario + '48', nome='48')
         d48.save()
-        d47 = Dente(prontuario=u, nome='47')
+        d47 = Dente(paciente=p, prontuario=numero_prontuario + '47', nome='47')
         d47.save()
-        d46 = Dente(prontuario=u, nome='46')
+        d46 = Dente(paciente=p, prontuario=numero_prontuario + '46', nome='46')
         d46.save()
-        d45 = Dente(prontuario=u, nome='45')
+        d45 = Dente(paciente=p, prontuario=numero_prontuario + '45', nome='45')
         d45.save()
-        d44 = Dente(prontuario=u, nome='44')
+        d44 = Dente(paciente=p, prontuario=numero_prontuario + '44', nome='44')
         d44.save()
-        d43 = Dente(prontuario=u, nome='43')
+        d43 = Dente(paciente=p, prontuario=numero_prontuario + '43', nome='43')
         d43.save()
-        d42 = Dente(prontuario=u, nome='42')
+        d42 = Dente(paciente=p, prontuario=numero_prontuario + '42', nome='42')
         d42.save()
-        d41 = Dente(prontuario=u, nome='41')
+        d41 = Dente(paciente=p, prontuario=numero_prontuario + '41', nome='41')
         d41.save()
 
-        d31 = Dente(prontuario=u, nome='31')
+        d31 = Dente(paciente=p, prontuario=numero_prontuario + '31', nome='31')
         d31.save()
-        d32 = Dente(prontuario=u, nome='32')
+        d32 = Dente(paciente=p, prontuario=numero_prontuario + '32', nome='32')
         d32.save()
-        d33 = Dente(prontuario=u, nome='33')
+        d33 = Dente(paciente=p, prontuario=numero_prontuario + '33', nome='33')
         d33.save()
-        d34 = Dente(prontuario=u, nome='34')
+        d34 = Dente(paciente=p, prontuario=numero_prontuario + '34', nome='34')
         d34.save()
-        d35 = Dente(prontuario=u, nome='35')
+        d35 = Dente(paciente=p, prontuario=numero_prontuario + '35', nome='35')
         d35.save()
-        d36 = Dente(prontuario=u, nome='36')
+        d36 = Dente(paciente=p, prontuario=numero_prontuario + '36', nome='36')
         d36.save()
-        d37 = Dente(prontuario=u, nome='37')
+        d37 = Dente(paciente=p, prontuario=numero_prontuario + '37', nome='37')
         d37.save()
-        d38 = Dente(prontuario=u, nome='38')
+        d38 = Dente(paciente=p, prontuario=numero_prontuario + '38', nome='38')
         d38.save()
 
-        y = Odontograma(id=id, prontuario=u, dente_18=d18, dente_17=d17, dente_16=d16, dente_15=d15, dente_14=d14,
+        y = Odontograma(id=id, paciente=p, prontuario=numero_prontuario, dente_18=d18, dente_17=d17, dente_16=d16, dente_15=d15, dente_14=d14,
                         dente_13=d13, dente_12=d12, dente_11=d11, dente_21=d21, dente_22=d22, dente_23=d23,
                         dente_24=d24, dente_25=d25, dente_26=d26, dente_27=d27, dente_28=d28, dente_48=d48,
                         dente_47=d47, dente_46=d46, dente_45=d45, dente_44=d44, dente_43=d43, dente_42=d42,
@@ -197,7 +155,7 @@ def registrar_paciente(request):
         y.save()
         messages.success(request, "Paciente registrado com sucesso")
         return redirect("pacientes")
-    return render(request, "pacientes/paciente_registrar2.html", context)
+    return render(request, "pacientes/paciente_registrar2.html")
 
 
 @login_required
@@ -258,12 +216,12 @@ def opcoes(request):
 @login_required
 def paciente_detalhes(request, pk=None):
     instance = Paciente.objects.get(pk=pk)
-    prontuario = Prontuario.objects.get(pk=pk)
+    # prontuario = Prontuario.objects.get(pk=pk)
 
     context = {
         "nome_pagina": "INFORMAÇÕES DO PACIENTE",
         'object': instance,
-        'prontuario': prontuario,
+        # 'prontuario': prontuario,
         # 'data_nascimento': data,
 
     }

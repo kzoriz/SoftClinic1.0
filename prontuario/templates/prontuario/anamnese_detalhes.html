@@ -67,7 +67,7 @@
                 <b>ANAMNESE</b>
             </h1>
             <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
-                <a href="{% url 'anamnese_edit' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
+                <a href="{% url 'anamnese_edit' anamnese.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
                     <span class="text">Atualizar</span>
                 </a>
             </div>
@@ -108,18 +108,13 @@
                     <div class="form-group col-md-12">
                         <label><b>Anamnese</b></label>
                         <div>{{ object.anamnese }}</div>
-<!--                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" -->
-<!--                                  value="{{ object.anamnese }}" disabled>{{ object.anamnese }}</textarea>-->
                     </div>
                 </div>
             <div class="mr-1 text-right">
-                <a href="{% url 'paciente_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
+                <a href="{% url 'paciente_detalhes' paciente.pk %}" class="custom-btn btn-1 btn" type="button">
                     <span class="text">Anterior</span>
                 </a>
-<!--                <a href="{% url 'anamnese_edit' object.pk %}" class="btn btn-warning text-white" type="button">-->
-<!--                    <span class="text">Atualizar</span>-->
-<!--                </a>-->
-                <a href="{% url 'inf_sau_sis_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
+                <a href="{% url 'inf_sau_sis_detalhes' inf_sau.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
                     <span class="text">Próximo</span>
                 </a>
             </div>

@@ -2,19 +2,24 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse, QueryDict, HttpResponsePermanentRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
+from django.shortcuts import resolve_url
+from prontuario.forms import DenteForm
 from prontuario.models import *
-from django.views.decorators.clickjacking import xframe_options_sameorigin
+from django.views.decorators.clickjacking import xframe_options_sameorigin, xframe_options_deny
 
 
 def anamnese_detalhes(request, pk=None):
     object = Anamnese.objects.get(pk=pk)
     paciente = Paciente.objects.get(pk=pk)
+    inf_sau = InfSaudeSistemica.objects.get(pk=pk)
     context = {
-        'object': object,
+        'anamnese': object,
         'paciente': paciente,
+        'inf_sau': inf_sau,
     }
     return render(request, 'prontuario/anamnese_detalhes.html', context)
 
@@ -111,51 +116,24 @@ class PSRUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 def odon_detalhes(request, pk=None):
+    estenografia_create()
     object = Odontograma.objects.get(pk=pk)
-    paciente = Paciente.objects.get(pk=pk)
+    # paciente = Paciente.objects.get(pk=pk)
+    dente18 = object.dente_18.pk
+    print('dente18 ', dente18)
     dente = list(object.dente_17.distal.all())
     dente2 = []
-    print('##########################################################################################################################')
-    print(type(dente))
     for i in dente:
-        print(i)
         i = str(i)
         dente2.append(i)
-        print(type(i))
-    for i in dente2:
-        print(i, type(i))
     context = {
         'object': object,
-        'paciente': paciente,
+        # 'paciente': paciente,
         'dente': dente2,
+        'dente18': dente18,
 
     }
     return render(request, 'prontuario/odon_detalhes.html', context)
-
-
-# def odon_update(request, pk=None):
-#
-#
-#     if request.method == 'POST':
-#         odontograma = Odontograma.objects.get(pk=pk)
-#         d_18 = Dente.objects.filter(Dente.prontuario == odontograma.prontuario and Dente.nome == '18')
-#         distal = request.POST['distal_18']
-#
-#         d = d_18(distal=distal)
-#         d.save()
-#
-#         messages.success(request, "#")
-#         return redirect("pacientes")
-#     return render(request, "prontuario/Dentes/dentadura-sup-18.html")
-
-
-# class OdonUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-#     login_url = reverse_lazy("login")
-#     extra_context = {'nome_pagina': 'Odontograma Inicial'}
-#     model = Dente
-#     fields = ['distal']
-#     template_name = "prontuario/Dentes/dentadura-sup-18.html"
-#     success_message = "Odontograma Inicial Atualizado com Sucesso!"
 
 
 class OdontogramaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -186,89 +164,173 @@ class SolicitacaoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMi
     success_message = "Exames Complementares Atualizado com Sucesso!"
 
 
-def res_exa_com_detalhes(request, pk=None):
-    object = ResultadoExamesComplementares.objects.get(pk=pk)
-    context = {
-        'object': object,
-
-    }
-    return render(request, 'prontuario/res_exa_com_detalhes.html', context)
-
-
-class ResultadoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    login_url = reverse_lazy("login")
-    extra_context = {'nome_pagina': 'Resultado de Exames Complementares'}
-    model = ResultadoExamesComplementares
-    fields = ['res_exa_com', ]
-    template_name = "prontuario/res_exa_com_editar.html"
-
-
-# def pla_tra_i_detalhes(request, pk=None):
-#     object = PlanoTratamentoI.objects.get(pk=pk)
+# def res_exa_com_detalhes(request, pk=None):
+#     object = ResultadoExamesComplementares.objects.get(pk=pk)
 #     context = {
 #         'object': object,
-#     }
-#     return render(request, 'prontuario/pla_tra_i_detalhes.html', context)
-
-
-# class PlanoTratamentoIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-#     login_url = reverse_lazy("login")
-#     extra_context = {'nome_pagina': 'Plano de Tratamento 1º Opção'}
-#     model = PlanoTratamentoI
-#     fields = ['plano_tratamento_i', ]
-#     template_name = "prontuario/pla_tra_i_editar.html"
-
-
-# def pla_tra_ii_detalhes(request, pk=None):
-#     object = PlanoTratamentoII.objects.get(pk=pk)
-#     context = {
-#         'object': object,
-#     }
-#     return render(request, 'prontuario/pla_tra_ii_detalhes.html', context)
 #
-#
-# class PlanoTratamentoIIUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-#     login_url = reverse_lazy("login")
-#     extra_context = {'nome_pagina': 'Plano de Tratamento 2º Opção'}
-#     model = PlanoTratamentoI
-#     fields = ['plano_tratamento_ii', ]
-#     template_name = "prontuario/pla_tra_ii_editar.html"
-
-
-# def evo_pac_detalhes(request, pk=None):
-#     object = EvolucaoPaciente.objects.get(pk=pk)
-#     context = {
-#         'object': object,
 #     }
-#     return render(request, 'prontuario/evo_pac_detalhes.html', context)
+#     return render(request, 'prontuario/res_exa_com_detalhes.html', context)
 
 
-# class EvolucaoPacienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+# class ResultadoExamesComplementaresUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 #     login_url = reverse_lazy("login")
-#     extra_context = {'nome_pagina': 'Evolução do Paciente'}
-#     model = EvolucaoPaciente
-#     fields = ['evolucao-paciente', ]
-#     template_name = "prontuario/evo_pac_editar.html"
-
-@login_required
-def odontogramas(request):
-    todos_odontogramas = Odontograma.objects.order_by("-id")
-    context = {
-        "nome_pagina": "Pacientes",
-        "todos_odontogramas": todos_odontogramas,
-
-    }
-    return render(request, "prontuario/odontogramas.html", context)
+#     extra_context = {'nome_pagina': 'Resultado de Exames Complementares'}
+#     model = ResultadoExamesComplementares
+#     fields = ['res_exa_com', ]
+#     template_name = "prontuario/res_exa_com_editar.html"
 
 
 @xframe_options_sameorigin
 def sup18(request, pk=None):
-    # object = Odontograma.objects.get(pk=pk)
-    # dente = list(object.dente_17.distal.all())
-    # context = {
-    #     'dente18': dente,
-    # }
-    return render(request, "prontuario/Dentes/dentadura-sup-18.html")
+    d18 = Dente.objects.get(pk=pk)
+    dente18 = d18.pk
+    print(d18)
+    dd = list(d18.distal.all())
+    do = list(d18.oclusal.all())
+    dm = list(d18.mesial.all())
+    dl = list(d18.lingual.all())
+    dv = list(d18.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente18': dente18,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-18-detail.html", context)
+
+
+# class DenteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+#     login_url = reverse_lazy("login")
+#     extra_context = {'nome_pagina': 'Solicitação de Exames Complementares'}
+#     model = Dente
+#     fields = ['distal', ]
+#     template_name = "prontuario/Dentes/dentadura-sup-18-edit.html"
+#     success_message = "Dente Atualizado com Sucesso!"
+
+
+#
+@xframe_options_sameorigin
+def sup18_edit(request, pk=None):
+    dente_18 = Dente.objects.get(pk=pk)
+    d18 = dente_18.pk
+    print('metodo post')
+    print(' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', d18)
+    estenografia = []
+    e1 = Estenografia.objects.get(pk=1)
+    e2 = Estenografia.objects.get(pk=2)
+    e3 = Estenografia.objects.get(pk=3)
+    e4 = Estenografia.objects.get(pk=4)
+    e5 = Estenografia.objects.get(pk=5)
+    e6 = Estenografia.objects.get(pk=6)
+    e7 = Estenografia.objects.get(pk=7)
+    e8 = Estenografia.objects.get(pk=8)
+    e9 = Estenografia.objects.get(pk=9)
+    e10 = Estenografia.objects.get(pk=10)
+    e11 = Estenografia.objects.get(pk=11)
+    e12 = Estenografia.objects.get(pk=12)
+    e13 = Estenografia.objects.get(pk=13)
+    e14 = Estenografia.objects.get(pk=14)
+    e15 = Estenografia.objects.get(pk=15)
+    e16 = Estenografia.objects.get(pk=16)
+    e17 = Estenografia.objects.get(pk=17)
+    e18 = Estenografia.objects.get(pk=18)
+    e19 = Estenografia.objects.get(pk=19)
+    e20 = Estenografia.objects.get(pk=20)
+    e21 = Estenografia.objects.get(pk=21)
+    e22 = Estenografia.objects.get(pk=22)
+    e23 = Estenografia.objects.get(pk=23)
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i+1))
+        # print(estenografia[i])
+        # print(len(estenografia))
+    if request.method == 'GET':
+        dente_18 = Dente.objects.get(pk=pk)
+        d18 = dente_18.pk
+        context = {
+            'object': d18,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-18-edit.html", context)
+    if request.method == 'POST':
+        dente_18 = Dente.objects.get(pk=pk)
+        print('metodo post')
+        print(' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', dente_18.pk)
+        distal = request.POST.getlist('distal')
+        for i in distal:
+            if i == '1':
+                dente_18.distal.add(e1)
+            elif i == '2':
+                dente_18.distal.add(e2)
+            elif i == '3':
+                dente_18.distal.add(e3)
+            elif i == '4':
+                dente_18.distal.add(e4)
+            elif i == '5':
+                dente_18.distal.add(e5)
+            elif i == '6':
+                dente_18.distal.add(e6)
+            elif i == '7':
+                dente_18.distal.add(e7)
+            elif i == '8':
+                dente_18.distal.add(e8)
+            elif i == '9':
+                dente_18.distal.add(e9)
+            elif i == '10':
+                dente_18.distal.add(e10)
+            elif i == '11':
+                dente_18.distal.add(e11)
+            elif i == '12':
+                dente_18.distal.add(e12)
+            elif i == '13':
+                dente_18.distal.add(e13)
+            elif i == '14':
+                dente_18.distal.add(e14)
+            elif i == '15':
+                dente_18.distal.add(e15)
+            elif i == '16':
+                dente_18.distal.add(e16)
+            elif i == '17':
+                dente_18.distal.add(e17)
+            elif i == '18':
+                dente_18.distal.add(e18)
+            elif i == '19':
+                dente_18.distal.add(e19)
+            elif i == '20':
+                dente_18.distal.add(e20)
+            elif i == '21':
+                dente_18.distal.add(e21)
+            elif i == '22':
+                dente_18.distal.add(e22)
+            elif i == '23':
+                dente_18.distal.add(e23)
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup18', args=[d18]))
+    return render(request, "pacientes/paciente_registrar2.html")
 
 
 @xframe_options_sameorigin
@@ -279,6 +341,7 @@ def sup17(request, pk=None):
     dm = list(object.dente_17.mesial.all())
     dl = list(object.dente_17.lingual.all())
     dv = list(object.dente_17.vestibular.all())
+
     distal = []
     oclusal = []
     mesial = []
@@ -309,3 +372,12 @@ def sup17(request, pk=None):
     }
     return render(request, "prontuario/Dentes/dentadura-sup-17-detail.html", context)
 
+
+@xframe_options_deny
+def view_one(request):
+    return HttpResponse("I won't display in any frame!")
+
+
+@xframe_options_sameorigin
+def view_two(request):
+    return HttpResponse("Display in a frame if it's from the same origin as me.")

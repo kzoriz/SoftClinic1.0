@@ -85,27 +85,28 @@ DENTE_CHOICES = [
 ]
 
 
-class Prontuario(models.Model):
-    id = models.IntegerField(primary_key=True)
-    paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
-    num_prontuario = models.CharField("NumProntuario", max_length=200)
-
-    def __str__(self):
-        return self.num_prontuario
-
-    class Meta:
-        verbose_name_plural = "Prontuarios"
+# class Prontuario(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
+#     num_prontuario = models.CharField("NumProntuario", max_length=200)
+#
+#     def __str__(self):
+#         return self.num_prontuario
+#
+#     class Meta:
+#         verbose_name_plural = "Prontuarios"
 
 
 class Anamnese(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE, blank=True, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     anamnese = models.TextField(verbose_name="Anamnese")
 
     def get_absolute_url(self):
-        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+        return reverse("anamnese_detalhes", kwargs={"prontuario": self.prontuario})
 
     class Meta:
         verbose_name_plural = "Anamneses"
@@ -115,7 +116,8 @@ class InfSaudeSistemica(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=True, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     antecedentes_familiares = models.TextField(verbose_name="Antecedentes Familiares", blank=True)
     medicamentos_em_uso = models.TextField(verbose_name="Medicamentos Em uso", blank=True)
     cirurgias_anteriores = models.TextField(verbose_name="Cirurgias Anteriores", blank=True)
@@ -140,7 +142,8 @@ class ExameFisico(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=True, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     nodulos_linfaticos = models.TextField(verbose_name="Nódulos Linfáticos", blank=True)
     amigdalas = models.TextField(verbose_name="Amígdalas", blank=True)
     trigono_retromolar = models.TextField(verbose_name="Trígono Retromolar", blank=True)
@@ -156,7 +159,7 @@ class ExameFisico(models.Model):
         return reverse("exa_fis_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return self.prontuario.paciente.nome
+        return self.paciente.nome
 
     class Meta:
         verbose_name_plural = "Exames Fisicos"
@@ -166,7 +169,8 @@ class SinaisVitaisClinicos(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=True, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     pressao_arterial = models.TextField(verbose_name="Pressão Arterial", blank=True)
     pulso = models.TextField(verbose_name="Pulso", blank=True)
     respiracao = models.TextField(verbose_name="Respiração", blank=True)
@@ -185,7 +189,7 @@ class SinaisVitaisClinicos(models.Model):
         return reverse("sin_vit_cli_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{} - {}'.format(self.prontuario.num_prontuario, self.prontuario.paciente.nome)
+        return '{} - {}'.format(self.prontuario, self.paciente.nome)
 
     class Meta:
         verbose_name_plural = "Sinais Vitais Clinicos"
@@ -195,7 +199,8 @@ class PSR(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     sextante_16v = models.CharField(verbose_name="Sextante 16V", choices=SEXTANTE, max_length=1)
     sextante_11v = models.CharField(verbose_name="Sextante 11V", choices=SEXTANTE, max_length=1)
     sextante_26v = models.CharField(verbose_name="Sextante 26V", choices=SEXTANTE, max_length=1)
@@ -207,7 +212,7 @@ class PSR(models.Model):
         return reverse("psr_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{}'.format(self.prontuario.paciente.nome)
+        return '{}'.format(self.paciente.nome)
 
     class Meta:
         verbose_name_plural = "PSR's"
@@ -217,7 +222,8 @@ class SolicitacaoExamesComplementares(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     sol_exa_com = models.TextField(verbose_name="Solicitação Exames Complementares", blank=True)
 
     def get_absolute_url(self):
@@ -227,18 +233,18 @@ class SolicitacaoExamesComplementares(models.Model):
         verbose_name_plural = "Solicitações Exames Complementares"
 
 
-class ResultadoExamesComplementares(models.Model):
-    id = models.IntegerField(primary_key=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
-    res_exa_com = models.TextField(verbose_name="Resultado Exames Complementares")
-
-    def get_absolute_url(self):
-        return reverse("res_exa_com_detalhes", kwargs={"pk": self.pk})
-
-    class Meta:
-        verbose_name_plural = "Resultados de Exames Complementares"
+# class ResultadoExamesComplementares(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+#     res_exa_com = models.TextField(verbose_name="Resultado Exames Complementares")
+#
+#     def get_absolute_url(self):
+#         return reverse("res_exa_com_detalhes", kwargs={"pk": self.pk})
+#
+#     class Meta:
+#         verbose_name_plural = "Resultados de Exames Complementares"
 
 
 class Estenografia(models.Model):
@@ -313,49 +319,47 @@ def estenografia_create():
 
 
 
-class Tratamento(models.Model):
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
-    nome = models.CharField(verbose_name="procedimento",
-                            choices=TRATAMENTO_CHOICES,
-                            max_length=100,
-                            blank=True, default='nenhum')
-
-    class Meta:
-        verbose_name_plural = "Tratamentos"
-
-    def __str__(self):
-        return self.nome
+# class Tratamento(models.Model):
+#     # created_at = models.DateTimeField(auto_now_add=True)
+#     # updated_at = models.DateTimeField(auto_now=True)
+#     nome = models.CharField(verbose_name="procedimento",
+#                             choices=TRATAMENTO_CHOICES,
+#                             max_length=100,
+#                             blank=True, default='nenhum')
+#
+#     class Meta:
+#         verbose_name_plural = "Tratamentos"
+#
+#     def __str__(self):
+#         return self.nome
 
 
 class Dente(models.Model):
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="dente_prontuario", blank=True)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     nome = models.CharField(verbose_name="Dente", max_length=3, blank=True)
-    # tratamento = models.ManyToManyField(Tratamento, blank=True, related_name="dente_tratamentos")
-    # doenca = models.ManyToManyField(Doenca, blank=True, related_name="dente_doencas")
     distal = models.ManyToManyField(Estenografia, blank=True, related_name="dente_distal")
     oclusal = models.ManyToManyField(Estenografia, blank=True, related_name="dente_oclusal")
     mesial = models.ManyToManyField(Estenografia, blank=True, related_name="dente_mesial")
     lingual = models.ManyToManyField(Estenografia, blank=True, related_name="dente_lingual")
     vestibular = models.ManyToManyField(Estenografia, blank=True, related_name="dente_vestibular")
 
-    # def get_absolute_url(self):
-    #     return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("sup18", kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name_plural = "Dentes"
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.prontuario.num_prontuario, self.prontuario.paciente.nome, self.nome)
+        return '{} - {} - {}'.format(self.prontuario, self.paciente.nome, self.nome)
 
 
 class Odontograma(models.Model):
     id = models.IntegerField(primary_key=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, related_name="odontograma_prontuario")
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
+    prontuario = models.CharField("prontuario", max_length=200, blank=True)
     dente_18 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
                                  related_name="odontograma_dente_18")
     dente_17 = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, null=True,
@@ -428,25 +432,22 @@ class Odontograma(models.Model):
         return reverse("odo_ini_detalhes", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return '{}'.format(self.prontuario.paciente.nome)
+        return '{}'.format(self.paciente.nome)
 
     class Meta:
         verbose_name_plural = "Odontogramas"
 
 
-class Atendimento(models.Model):
-    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE,
-                                   blank=True,
-                                   related_name="atendimento_prontuario")
-    dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, related_name="atendimento_dente")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return '{} - {}'.format(self.prontuario.paciente.nome, self.prontuario)
-
-    class Meta:
-        verbose_name_plural = "Atendimentos"
-
-
-estenografia_create()
+# class Atendimento(models.Model):
+#     prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE,
+#                                    blank=True,
+#                                    related_name="atendimento_prontuario")
+#     dente = models.ForeignKey(Dente, on_delete=models.CASCADE, blank=True, related_name="atendimento_dente")
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return '{} - {}'.format(self.prontuario.paciente.nome, self.prontuario)
+#
+#     class Meta:
+#         verbose_name_plural = "Atendimentos"
