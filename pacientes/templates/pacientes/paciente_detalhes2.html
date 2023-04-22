@@ -70,7 +70,7 @@
 <!--            <div class="card">-->
             <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
                 <a href="{% url 'paciente_editar' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
-                    <span class="text">Atualizar</span>
+                    <span class="text"><i class="fa-solid fa-user-pen"></i></span>
                 </a>
             </div>
             <form>
@@ -189,7 +189,7 @@
 <!--            </div>-->
             <div class="mr-1 text-right" style="padding-top: 20px">
                 <a href="{% url 'pacientes' %}" class="custom-btn btn-1 btn" type="button">
-                    <span class="text">Voltar</span>
+                    <span class="text"><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
 <!--                <a href="{% url 'paciente_editar' object.pk %}" class="btn btn-warning text-white" type="button">-->
 <!--                    <span class="text">Atualizar</span>-->
@@ -198,7 +198,7 @@
 <!--                    <span class="text">Excluir</span>-->
 <!--                </a>-->
                 <a href="{% url 'anamnese_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
-                    <span class="text">Próximo</span>
+                    <span class="text"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>

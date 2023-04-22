@@ -125,7 +125,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label><b>Paciente</b></label>
-                        <div>{{ paciente.nome}}</div>
+                        <div>{{ object.paciente.nome}}</div>
                     </div>
                 </div>
                 <div class="row justify-content-md-center" style="margin-top: 20px;margin-bottom: 20px">
@@ -242,9 +242,9 @@
                 </div>
             </div>
         </div>
-
+<script src="{% static 'odontograma/js/odon_detalhes.js' %}"></script>
     </div>
 <!--</div>-->
-<script src="{% static 'odontograma/js/odon_detalhes.js' %}"></script>
+
 
 {% endblock content%}

@@ -106,7 +106,7 @@ class Anamnese(models.Model):
     anamnese = models.TextField(verbose_name="Anamnese")
 
     def get_absolute_url(self):
-        return reverse("anamnese_detalhes", kwargs={"prontuario": self.prontuario})
+        return reverse("anamnese_detalhes", kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name_plural = "Anamneses"
