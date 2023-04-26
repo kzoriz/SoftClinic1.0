@@ -68,7 +68,7 @@
             </h1>
             <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
                 <a href="{% url 'inf_sau_sis_edit' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
-                    <span class="text">Atualizar</span>
+                    <span class="text"><i class="fa-solid fa-user-pen"></i></span>
                 </a>
             </div>
             <div class="form-row">
@@ -94,37 +94,37 @@
             <br>
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="aba1-tab" data-toggle="tab" href="#aba1" role="tab" aria-controls="aba1" aria-selected="true"><b>Antecedentes Familiares</b></a>
+                    <a class="nav-link active" style="color: black" id="aba1-tab" data-toggle="tab" href="#aba1" role="tab" aria-controls="aba1" aria-selected="true"><b>Antecedentes Familiares</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba2-tab" data-toggle="tab" href="#aba2" role="tab" aria-controls="aba2" aria-selected="false"><b>Medicamentos em Uso</b></a>
+                    <a class="nav-link" style="color: black" id="aba2-tab" data-toggle="tab" href="#aba2" role="tab" aria-controls="aba2" aria-selected="false"><b>Medicamentos em Uso</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba3-tab" data-toggle="tab" href="#aba3" role="tab" aria-controls="aba3" aria-selected="false"><b>Cirurgias Anteriores</b></a>
+                    <a class="nav-link" style="color: black" id="aba3-tab" data-toggle="tab" href="#aba3" role="tab" aria-controls="aba3" aria-selected="false"><b>Cirurgias Anteriores</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba4-tab" data-toggle="tab" href="#aba4" role="tab" aria-controls="aba3" aria-selected="false"><b>Problemas Cardiacos</b></a>
+                    <a class="nav-link" style="color: black" id="aba4-tab" data-toggle="tab" href="#aba4" role="tab" aria-controls="aba3" aria-selected="false"><b>Problemas Cardiacos</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba5-tab" data-toggle="tab" href="#aba5" role="tab" aria-controls="aba3" aria-selected="false"><b>Problemas Gastrointestinais</b></a>
+                    <a class="nav-link" style="color: black" id="aba5-tab" data-toggle="tab" href="#aba5" role="tab" aria-controls="aba3" aria-selected="false"><b>Problemas Gastrointestinais</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba6-tab" data-toggle="tab" href="#aba6" role="tab" aria-controls="aba6" aria-selected="false"><b>Alterações Sanguineas</b></a>
+                    <a class="nav-link" style="color: black" id="aba6-tab" data-toggle="tab" href="#aba6" role="tab" aria-controls="aba6" aria-selected="false"><b>Alterações Sanguineas</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba7-tab" data-toggle="tab" href="#aba7" role="tab" aria-controls="aba7" aria-selected="false"><b>Enfermidades Ósseas</b></a>
+                    <a class="nav-link" style="color: black" id="aba7-tab" data-toggle="tab" href="#aba7" role="tab" aria-controls="aba7" aria-selected="false"><b>Enfermidades Ósseas</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba8-tab" data-toggle="tab" href="#aba8" role="tab" aria-controls="aba8" aria-selected="false"><b>Problemas Pulmonares</b></a>
+                    <a class="nav-link" style="color: black" id="aba8-tab" data-toggle="tab" href="#aba8" role="tab" aria-controls="aba8" aria-selected="false"><b>Problemas Pulmonares</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba9-tab" data-toggle="tab" href="#aba9" role="tab" aria-controls="aba9" aria-selected="false"><b>Alergias</b></a>
+                    <a class="nav-link" style="color: black" id="aba9-tab" data-toggle="tab" href="#aba9" role="tab" aria-controls="aba9" aria-selected="false"><b>Alergias</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba10-tab" data-toggle="tab" href="#aba10" role="tab" aria-controls="aba10" aria-selected="false"><b>Hábitos</b></a>
+                    <a class="nav-link" style="color: black" id="aba10-tab" data-toggle="tab" href="#aba10" role="tab" aria-controls="aba10" aria-selected="false"><b>Hábitos</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="aba11-tab" data-toggle="tab" href="#aba11" role="tab" aria-controls="aba11" aria-selected="false"><b>Observação</b></a>
+                    <a class="nav-link" style="color: black" id="aba11-tab" data-toggle="tab" href="#aba11" role="tab" aria-controls="aba11" aria-selected="false"><b>Observação</b></a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -208,10 +208,10 @@
             </div>
             <div class="mr-1 text-right">
                 <a href="{% url 'anamnese_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
-                    <span class="text">Anterior</span>
+                    <span class="text"><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
                 <a href="{% url 'exa_fis_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
-                    <span class="text">Próximo</span>
+                    <span class="text"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>

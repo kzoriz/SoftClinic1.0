@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container">
+
 <div class="container">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+SC:wght@700&family=Tourney:wght@700&display=swap');
@@ -73,7 +73,7 @@
             </h1>
             <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
                 <a href="{% url 'psr_edit' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
-                    <span class="text">Atualizar</span>
+                    <span class="text"><i class="fa-solid fa-user-pen"></i></span>
                 </a>
             </div>
             <div class="form-row">
@@ -145,14 +145,14 @@
 
             <div class="mr-1 text-right">
                 <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
-                    <span class="text">Voltar</span>
+                    <span class="text"><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
                 <a href="{% url 'odon_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
-                    <span class="text">Proximo</span>
+                    <span class="text"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 {% endblock content %}

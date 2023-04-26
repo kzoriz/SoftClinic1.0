@@ -3,17 +3,17 @@
 
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
+
 
 <div class="container">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
     <style xmlns="http://www.w3.org/1999/html">
 
     .custom-btn {
           width: 130px;
           height: 40px;
           padding: 10px 25px;
-          border: 2px solid yellow;
           font-family: 'Lato', sans-serif;
           font-weight: 500;
           background: transparent;
@@ -78,24 +78,29 @@
     }
 </style>
     {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% else %}
+    <div style="margin-bottom: 58px">
+    </div>
     {% endif %}
-    <div class="facetas">
-        <h1 style="margin: auto; padding-bottom: 10px;">18</h1>
-        <div>
-            <a href="#" class="button_facetas" id="lingual" onclick="clicar3()">Lingual</a>
+    <div class="col">
+        <div class="row justify-content-md-center">
+            <h1 style="margin: auto; padding-bottom: 10px;">18</h1>
         </div>
-        <div>
+        <div class="row justify-content-md-center">
+            <a href="#" class="button_facetas" id="lingual" onclick="btn_lingual()">Lingual</a>
+        </div>
+        <div class="row justify-content-md-center">
             <a href="#" class="button_facetas" id="distal" onclick="btn_distal()">Distal</a>
             <a href="#" class="button_facetas" id="oclusal" onclick="btn_oclusal()">Oclusal</a>
             <a href="#" class="button_facetas" id="mesial" onclick="btn_mesial()">Mesial</a>
         </div>
-        <div>
-            <a href="#" class="button_facetas" id="vestibular" onclick="clicar5()">Vestibular</a>
+        <div class="row justify-content-md-center">
+            <a href="#" class="button_facetas" id="vestibular" onclick="btn_vestibular()">Vestibular</a>
         </div>
     </div>
     <div class="detalhes" id="display_distal"  >
@@ -119,9 +124,9 @@
                         <td>
                             <div>
                                 {% if 'mancha branca ativa' in distal %}
-                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa-t" onclick="" alt="">
+                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -132,9 +137,9 @@
                         <td>
                             <div>
                                 {% if 'mancha inativa' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_distal_mancha_inativa-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_distal_mancha_inativa-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -143,9 +148,9 @@
                         <td>
                             <div>
                                 {% if 'lesao de carie primaria' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_distal_lesao_carie_primaria-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_distal_lesao_carie_primaria-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -156,9 +161,9 @@
                         <td>
                             <div>
                                 {% if 'lesao de carie cronica' in distal%}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_distal_lesao_carie_cronica-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_distal_lesao_carie_cronica-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -167,9 +172,9 @@
                             <td>
                                 <div>
                                     {% if 'restauracao defeituosa' in distal %}
-                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_distal_restauracao_defeituosa-t" onclick="" alt="">
+                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
                                     {% else %}
-                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_distal_restauracao_defeituosa-f" onclick="" alt="">
+                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
                                     {% endif %}
 
                                 </div>
@@ -181,9 +186,9 @@
                     <td>
                         <div>
                             {% if 'restauracao em bom estado' in distal %}
-                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}"  id="img_distal_restauracao_bom_estado-t" onclick="" alt="">
+                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
                             {% else %}
-                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_distal_restauracao_bom_estado-f" onclick="" alt="">
+                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
                             {% endif %}
                         </div>
                     </td>
@@ -192,9 +197,9 @@
                         <td>
                             <div>
                                 {% if 'necessidade de tratamento endodontico' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_distal_necessidade_tratamento_endondontico-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_distal_necessidade_tratamento_endondontico-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -205,9 +210,9 @@
                         <td>
                             <div>
                                 {% if 'tratamento endodontico concluido' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_distal_tratamento_endondontico_concluido_-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_distal_tratamento_endondontico_concluido_-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -216,9 +221,9 @@
                         <td>
                             <div>
                                 {% if 'extracao indicada' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_distal_extracao_indicada-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_distal_extracao_indicada-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -229,9 +234,9 @@
                         <td>
                             <div>
                                 {% if 'necessidade de protese' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_distal_necessidade_protese-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_distal_necessidade_protese-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -239,10 +244,10 @@
                     <th scope="row">12</th>
                         <td>
                             <div>
-                                {% if 'necessidade de protese' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_distal_protese_fixa_concluida_satisfatoria-t" onclick="">
+                                {% if 'protese fixa concluida ou satisfatoria' in distal %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_distal_protese_fixa_concluida_satisfatoria-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
 
@@ -254,9 +259,9 @@
                         <td>
                             <div>
                                 {% if 'dente ausente ou extraido' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_distal_ausente-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_distal_ausente-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -265,9 +270,9 @@
                         <td>
                             <div>
                                 {% if 'selante a fazer' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_distal_selante_fazer-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_distal_selante_fazer-f" onclick="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
 
@@ -280,9 +285,9 @@
                         <td>
                             <div>
                                 {% if 'selante satisfatorio' in distal %}
-                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_distal_selante_satisfatorio-t" onclick="" alt="">
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_distal_selante_satisfatorio-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -290,10 +295,10 @@
                     <th scope="row">16</th>
                         <td>
                             <div>
-                                {% if 'faceta de degaste' in distal %}
-                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_distal_faceta_degaste-t" onclick="" alt="">
+                                {% if 'faceta de desgaste' in distal %}
+                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_distal_faceta_degaste-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -304,9 +309,9 @@
                         <td>
                             <div>
                                 {% if 'fratura' in distal %}
-                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_distal_fratura-t" onclick="" alt="">
+                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_distal_fratura-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -315,9 +320,9 @@
                         <td>
                             <div>
                                 {% if 'doenca periodontal' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_distal_doenca_periodontal-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_distal_doenca_periodontal-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -328,9 +333,9 @@
                         <td>
                             <div>
                                 {% if 'anomalia de forma' in distal %}
-                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_distal_anomalia_de_forma-t" onclick="" alt="">
+                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
                                 {% else %}
-                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_distal_anomalia_de_forma-f" onclick="" alt="">
+                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -339,9 +344,9 @@
                         <td>
                             <div>
                                 {% if 'defeito de esmalte ou dentina' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_distal_defeito_de_esmalte-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_distal_defeito_de_esmalte-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -352,9 +357,9 @@
                         <td>
                             <div>
                                 {% if 'supranumerario' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_distal_supranumerario-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_distal_supranumerario-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -363,9 +368,9 @@
                         <td>
                             <div>
                                 {% if 'restauracao ou protese concluida' in distal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_distal_restauracao_protese_concluida-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_distal_restauracao_protese_concluida-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -376,9 +381,9 @@
                         <td>
                             <div>
                                 {% if 'tratamento endodontico concluido' in distal %}
-                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_distal_tratamento_endondontico_concluido-t" onclick="" alt="">
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_distal_tratamento_endondontico_concluido-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -399,7 +404,7 @@
             </table>
         </div>
     </div>
-    <div class="detalhes" id="display_oclusal" style="flex: 70%;" >
+    <div class="detalhes" id="display_oclusal">
         <h1 style="margin: auto; padding-bottom: 10px;">Oclusal</h1>
         <div class="row">
             <table class="table table-sm table-bordered">
@@ -409,7 +414,7 @@
                         <td>
                             <div class="">
                                 {% if 'higido' in oclusal %}
-                                <img class=" img-fluid checked-true inf" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                <img class=" img-fluid checked-true" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
                                 {% else %}
                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
                                 {% endif %}
@@ -420,9 +425,9 @@
                         <td>
                             <div>
                                 {% if 'mancha branca ativa' in oclusal %}
-                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa-t" onclick="" alt="">
+                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_distal_mancha_branca_ativa-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -433,9 +438,9 @@
                         <td>
                             <div>
                                 {% if 'mancha inativa' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_distal_mancha_inativa-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_distal_mancha_inativa-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -444,9 +449,9 @@
                         <td>
                             <div>
                                 {% if 'lesao de carie primaria' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_distal_lesao_carie_primaria-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_distal_lesao_carie_primaria-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -457,9 +462,9 @@
                         <td>
                             <div>
                                 {% if 'lesao de carie cronica' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_distal_lesao_carie_cronica-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_distal_lesao_carie_cronica-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -468,9 +473,9 @@
                             <td>
                                 <div>
                                     {% if 'restauracao defeituosa' in oclusal %}
-                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_distal_restauracao_defeituosa-t" onclick="" alt="">
+                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
                                     {% else %}
-                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_distal_restauracao_defeituosa-f" onclick="" alt="">
+                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
                                     {% endif %}
 
                                 </div>
@@ -482,9 +487,9 @@
                     <td>
                         <div>
                             {% if 'restauracao em bom estado' in oclusal %}
-                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}"  id="img_distal_restauracao_bom_estado-t" onclick="" alt="">
+                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
                             {% else %}
-                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_distal_restauracao_bom_estado-f" onclick="" alt="">
+                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
                             {% endif %}
                         </div>
                     </td>
@@ -493,9 +498,9 @@
                         <td>
                             <div>
                                 {% if 'necessidade de tratamento endodontico' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_distal_necessidade_tratamento_endondontico-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_distal_necessidade_tratamento_endondontico-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -506,9 +511,9 @@
                         <td>
                             <div>
                                 {% if 'tratamento endodontico concluido' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_distal_tratamento_endondontico_concluido_-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_distal_tratamento_endondontico_concluido_-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -517,9 +522,9 @@
                         <td>
                             <div>
                                 {% if 'extracao indicada' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_distal_extracao_indicada-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_distal_extracao_indicada-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -530,9 +535,9 @@
                         <td>
                             <div>
                                 {% if 'necessidade de protese' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_distal_necessidade_protese-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_distal_necessidade_protese-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -540,10 +545,10 @@
                     <th scope="row">12</th>
                         <td>
                             <div>
-                                {% if 'necessidade de protese' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_distal_protese_fixa_concluida_satisfatoria-t" onclick="">
+                                {% if 'protese fixa concluida ou satisfatoria' in oclusal %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_distal_protese_fixa_concluida_satisfatoria-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
 
@@ -555,9 +560,9 @@
                         <td>
                             <div>
                                 {% if 'dente ausente ou extraido' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_distal_ausente-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_distal_ausente-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -566,9 +571,9 @@
                         <td>
                             <div>
                                 {% if 'selante a fazer' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_distal_selante_fazer-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_distal_selante_fazer-f" onclick="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
 
@@ -581,9 +586,9 @@
                         <td>
                             <div>
                                 {% if 'selante satisfatorio' in oclusal %}
-                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_distal_selante_satisfatorio-t" onclick="" alt="">
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_distal_selante_satisfatorio-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -591,10 +596,10 @@
                     <th scope="row">16</th>
                         <td>
                             <div>
-                                {% if 'faceta de degaste' in oclusal %}
-                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_distal_faceta_degaste-t" onclick="" alt="">
+                                {% if 'faceta de desgaste' in oclusal %}
+                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_distal_faceta_degaste-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -605,9 +610,9 @@
                         <td>
                             <div>
                                 {% if 'fratura' in oclusal %}
-                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_distal_fratura-t" onclick="" alt="">
+                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_distal_fratura-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -616,9 +621,9 @@
                         <td>
                             <div>
                                 {% if 'doenca periodontal' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_distal_doenca_periodontal-t" onclick="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_distal_doenca_periodontal-f" onclick="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -629,9 +634,9 @@
                         <td>
                             <div>
                                 {% if 'anomalia de forma' in oclusal %}
-                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_distal_anomalia_de_forma-t" onclick="" alt="">
+                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
                                 {% else %}
-                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_distal_anomalia_de_forma-f" onclick="" alt="">
+                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -640,9 +645,9 @@
                         <td>
                             <div>
                                 {% if 'defeito de esmalte ou dentina' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_distal_defeito_de_esmalte-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_distal_defeito_de_esmalte-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -653,9 +658,9 @@
                         <td>
                             <div>
                                 {% if 'supranumerario' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_distal_supranumerario-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_distal_supranumerario-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -664,9 +669,9 @@
                         <td>
                             <div>
                                 {% if 'restauracao ou protese concluida' in oclusal %}
-                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_distal_restauracao_protese_concluida-t" onclick="" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
                                 {% else %}
-                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_distal_restauracao_protese_concluida-f" onclick="" alt="">
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -677,9 +682,9 @@
                         <td>
                             <div>
                                 {% if 'tratamento endodontico concluido' in oclusal %}
-                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_distal_tratamento_endondontico_concluido-t" onclick="" alt="">
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
                                 {% else %}
-                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_distal_tratamento_endondontico_concluido-f" onclick="" alt="">
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -700,118 +705,915 @@
             </table>
         </div>
     </div>
-    <div class="detalhes" id="display_mesial" style="flex: 70%;" >
-                <h1 style="margin: auto; padding-bottom: 10px;">Mesial</h1>
-                <div style="display: flex; flex-direction: row;" >
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/higido.jpeg' %}" id="img_mesial_higido" onclick="chk_mesial_higido()">
-                        <input type="checkbox" class="check" name="higido" id="chk_mesial_higido" value="higido">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" id="img_mesial_mancha_branca_ativa" onclick="chk_mesial_mancha_branca_ativa()">
-                        <input type="checkbox" class="check" name="mancha_branca_ativa" id="chk_mesial_mancha_branca_ativa" value="mancha branca ativa">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" id="img_mesial_mancha_inativa" onclick="chk_mesial_mancha_inativa()">
-                        <input type="checkbox" class="check" name="mancha_inativa" id="chk_mesial_mancha_inativa" value="mancha inativa">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}" id="img_mesial_lesao_carie_primaria" onclick="chk_mesial_lesao_carie_primaria()">
-                        <input type="checkbox" class="check" name="lesao_carie_primaria" id="chk_mesial_lesao_carie_primaria" value="lesao carie primaria">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" id="img_mesial_lesao_carie_cronica" onclick="chk_mesial_lesao_carie_cronica()">
-                        <input type="checkbox" class="check" name="lesao_carie_cronica" id="chk_mesial_lesao_carie_cronica" value="lesao carie cronica">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" id="img_mesial_restauracao_defeituosa" onclick="chk_mesial_restauracao_defeituosa()">
-                        <input type="checkbox" class="check" name="restauracao_defeituosa" id="chk_mesial_restauracao_defeituosa" value="restauracao defeituosa">
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: row;" >
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" id="img_mesial_restauracao_bom_estado" onclick="chk_mesial_restauracao_bom_estado()">
-                        <input type="checkbox" class="check" name="restauracao_bom_estado" id="chk_mesial_restauracao_bom_estado" value="restauracao bom estado">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" id="img_mesial_necessidade_tratamento_endondontico" onclick="chk_mesial_necessidade_tratamento_endondontico()">
-                        <input type="checkbox" class="check" name="necessidade_tratamento_endondontico" id="chk_mesial_necessidade_tratamento_endondontico" value="necessidade tratamento endondontico">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" id="img_mesial_tratamento_endondontico_concluido_" onclick="chk_mesial_tratamento_endondontico_concluido_()">
-                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_mesial_tratamento_endondontico_concluido_" value="tratamento endondontico concluido_">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" id="img_mesial_extracao_indicada" onclick="chk_mesial_extracao_indicada()">
-                        <input type="checkbox" class="check" name="extracao_indicada" id="chk_mesial_extracao_indicada" value="extracao indicada">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" id="img_mesial_necessidade_protese" onclick="chk_mesial_necessidade_protese()">
-                        <input type="checkbox" class="check" name="necessidade_protese" id="chk_mesial_necessidade_protese" value="necessidade protese">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" id="img_mesial_protese_fixa_concluida_satisfatoria" onclick="chk_mesial_protese_fixa_concluida_satisfatoria()">
-                        <input type="checkbox" class="check" name="protese_fixa_concluida_satisfatoria" id="chk_mesial_protese_fixa_concluida_satisfatoria" value="protese fixa concluida satisfatoria">
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: row;" >
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/dente_ausente.png' %}" id="img_mesial_ausente" onclick="chk_mesial_ausente()">
-                        <input type="checkbox" class="check" name="dente_ausente" id="chk_mesial_ausente" value="dente ausente">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}" id="img_mesial_doenca_periodontal" onclick="chk_mesial_doenca_periodontal()">
-                        <input type="checkbox" class="check" name="doenca_periodontal" id="chk_mesial_doenca_periodontal" value="doenca periodontal">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" id="img_mesial_faceta_degaste" onclick="chk_mesial_faceta_desgaste()">
-                        <input type="checkbox" class="check" name="faceta_degaste" id="chk_mesial_faceta_degaste" value="faceta degaste">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/fratura.jpeg' %}" id="img_mesial_fratura" onclick="chk_mesial_fratura()">
-                        <input type="checkbox" class="check" name="fratura" id="chk_mesial_fratura" value="fratura">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/selante_fazer.jpeg' %}" id="img_mesial_selante_fazer" onclick="chk_mesial_selante_fazer()">
-                        <input type="checkbox" class="check" name="selante_fazer" id="chk_mesial_selante_fazer" value="selante fazer">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" id="img_mesial_selante_satisfatorio" onclick="chk_mesial_selante_satisfatorio()">
-                        <input type="checkbox" class="check" name="selante_satisfatorio" id="chk_mesial_selante_satisfatorio" value="selante satisfatorio">
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: row;">
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" id="img_mesial_anomalia_de_forma" onclick="chk_mesial_anomalia_de_forma()">
-                        <input type="checkbox" class="check" name="anomalia_de_forma" id="chk_mesial_anomalia_de_forma" value="anomalia de forma">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" id="img_mesial_defeito_de_esmalte" onclick="chk_mesial_defeito_de_esmalte()">
-                        <input type="checkbox" class="check" name="defeito_de_esmalte" id="chk_mesial_defeito_de_esmalte" value="defeito de esmalte">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/supranumerario.jpeg' %}" id="img_mesial_supranumerario" onclick="chk_mesial_supranumerario()">
-                        <input type="checkbox" class="check" name="supranumerario" id="chk_mesial_supranumerario" value="supranumerario">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" id="img_mesial_restauracao_protese_concluida" onclick="chk_mesial_restauracao_protese_concluida()">
-                        <input type="checkbox" class="check" name="restauracao_protese_concluida" id="chk_mesial_restauracao_protese_concluida" value="restauracao protese concluida">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" id="img_mesial_tratamento_endondontico_concluido" onclick="chk_mesial_tratamento_endondontico_concluido()">
-                        <input type="checkbox" class="check" name="tratamento_endondontico_concluido" id="chk_mesial_tratamento_endondontico_concluido" value="tratamento endondontico concluido">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'odontograma/img/calculo_recessao_gengival.jpeg' %}" id="img_mesial_calculo_recessao_gengival" onclick="chk_mesial_calculo_recessao_gengival()">
-                        <input type="checkbox" class="check" name="calculo_recessao_gengival" id="chk_mesial_calculo_recessao_gengival" value="calculo recessao gengival">
-                    </div>
-                </div>
-            </div>
+    <div class="detalhes" id="display_mesial">
+        <h1 style="margin: auto; padding-bottom: 10px;">Mesial</h1>
+        <div class="row">
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <div class="">
+                                {% if 'higido' in mesial %}
+                                <img class=" img-fluid checked-true" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Hígido</td>
+                        <th scope="row">2</th>
+                        <td>
+                            <div>
+                                {% if 'mancha branca ativa' in mesial %}
+                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Branca Ativa</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>
+                            <div>
+                                {% if 'mancha inativa' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Inativa</td>
+                        <th scope="row">4</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie primaria' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Primária</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie cronica' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Crônica</td>
+                        <th scope="row">6</th>
+                            <td>
+                                <div>
+                                    {% if 'restauracao defeituosa' in mesial %}
+                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% else %}
+                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                        <td>Restauração Defeituosa</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">7</th>
+                    <td>
+                        <div>
+                            {% if 'restauracao em bom estado' in mesial %}
+                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% else %}
+                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>Restauração em Bom Estado</td>
+                    <th scope="row">8</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de tratamento endodontico' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Tratamento Endodôntico</td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">10</th>
+                        <td>
+                            <div>
+                                {% if 'extracao indicada' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Extração Indicada</td>
+                </tr>
+                <tr>
+                    <th scope="row">11</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de protese' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Prótese</td>
+                    <th scope="row">12</th>
+                        <td>
+                            <div>
+                                {% if 'protese fixa concluida ou satisfatoria' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Prótese Fixa Concluída ou Satisfatória</td>
+                </tr>
+                    <tr>
+                    <th scope="row">13</th>
+                        <td>
+                            <div>
+                                {% if 'dente ausente ou extraido' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Dente Ausente ou Extraído</td>
+                    <th scope="row">14</th>
+                        <td>
+                            <div>
+                                {% if 'selante a fazer' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Selante a Fazer</td>
+                </tr>
+                </tr>
+                <tr>
+                    <th scope="row">15</th>
+                        <td>
+                            <div>
+                                {% if 'selante satisfatorio' in mesial %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Selante Satisfatório</td>
+                    <th scope="row">16</th>
+                        <td>
+                            <div>
+                                {% if 'faceta de desgaste' in mesial %}
+                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Faceta de Degaste</td>
+                </tr>
+                <tr>
+                    <th scope="row">17</th>
+                        <td>
+                            <div>
+                                {% if 'fratura' in mesial %}
+                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Fratura</td>
+                    <th scope="row">18</th>
+                        <td>
+                            <div>
+                                {% if 'doenca periodontal' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Doença Periodontal</td>
+                </tr>
+                <tr>
+                    <th scope="row">19</th>
+                        <td>
+                            <div>
+                                {% if 'anomalia de forma' in mesial %}
+                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% else %}
+                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Anomalia de Forma</td>
+                    <th scope="row">20</th>
+                        <td>
+                            <div>
+                                {% if 'defeito de esmalte ou dentina' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Defeito de Esmalte ou Dentina</td>
+                </tr>
+                <tr>
+                    <th scope="row">21</th>
+                        <td>
+                            <div>
+                                {% if 'supranumerario' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Supranumerário</td>
+                    <th scope="row">22</th>
+                        <td>
+                            <div>
+                                {% if 'restauracao ou protese concluida' in mesial %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Restauração ou prótese Concluída</td>
+                </tr>
+                                              <tr>
+                    <th scope="row">23</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in mesial %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">24</th>
+                        <td>
+                            <div>
+                                {% if 'outro' in mesial %}
+
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Outro</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detalhes" id="display_lingual">
+        <h1 style="margin: auto; padding-bottom: 10px;">Lingual</h1>
+        <div class="row">
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <div class="">
+                                {% if 'higido' in lingual %}
+                                <img class=" img-fluid checked-true" src="{% static 'odontograma/img/higido.jpeg' %}" width="50%" onclick="" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Hígido</td>
+                        <th scope="row">2</th>
+                        <td>
+                            <div>
+                                {% if 'mancha branca ativa' in lingual %}
+                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Branca Ativa</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>
+                            <div>
+                                {% if 'mancha inativa' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Inativa</td>
+                        <th scope="row">4</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie primaria' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Primária</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie cronica' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Crônica</td>
+                        <th scope="row">6</th>
+                            <td>
+                                <div>
+                                    {% if 'restauracao defeituosa' in lingual %}
+                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% else %}
+                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                        <td>Restauração Defeituosa</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">7</th>
+                    <td>
+                        <div>
+                            {% if 'restauracao em bom estado' in lingual %}
+                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% else %}
+                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>Restauração em Bom Estado</td>
+                    <th scope="row">8</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de tratamento endodontico' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Tratamento Endodôntico</td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">10</th>
+                        <td>
+                            <div>
+                                {% if 'extracao indicada' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Extração Indicada</td>
+                </tr>
+                <tr>
+                    <th scope="row">11</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de protese' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Prótese</td>
+                    <th scope="row">12</th>
+                        <td>
+                            <div>
+                                {% if 'protese fixa concluida ou satisfatoria' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Prótese Fixa Concluída ou Satisfatória</td>
+                </tr>
+                    <tr>
+                    <th scope="row">13</th>
+                        <td>
+                            <div>
+                                {% if 'dente ausente ou extraido' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Dente Ausente ou Extraído</td>
+                    <th scope="row">14</th>
+                        <td>
+                            <div>
+                                {% if 'selante a fazer' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Selante a Fazer</td>
+                </tr>
+                </tr>
+                <tr>
+                    <th scope="row">15</th>
+                        <td>
+                            <div>
+                                {% if 'selante satisfatorio' in lingual %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Selante Satisfatório</td>
+                    <th scope="row">16</th>
+                        <td>
+                            <div>
+                                {% if 'faceta de desgaste' in lingual %}
+                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Faceta de Degaste</td>
+                </tr>
+                <tr>
+                    <th scope="row">17</th>
+                        <td>
+                            <div>
+                                {% if 'fratura' in lingual %}
+                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Fratura</td>
+                    <th scope="row">18</th>
+                        <td>
+                            <div>
+                                {% if 'doenca periodontal' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Doença Periodontal</td>
+                </tr>
+                <tr>
+                    <th scope="row">19</th>
+                        <td>
+                            <div>
+                                {% if 'anomalia de forma' in lingual %}
+                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% else %}
+                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Anomalia de Forma</td>
+                    <th scope="row">20</th>
+                        <td>
+                            <div>
+                                {% if 'defeito de esmalte ou dentina' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Defeito de Esmalte ou Dentina</td>
+                </tr>
+                <tr>
+                    <th scope="row">21</th>
+                        <td>
+                            <div>
+                                {% if 'supranumerario' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Supranumerário</td>
+                    <th scope="row">22</th>
+                        <td>
+                            <div>
+                                {% if 'restauracao ou protese concluida' in lingual %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Restauração ou prótese Concluída</td>
+                </tr>
+                                              <tr>
+                    <th scope="row">23</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in lingual %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">24</th>
+                        <td>
+                            <div>
+                                {% if 'outro' in lingual %}
+
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Outro</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detalhes" id="display_vestibular">
+        <h1 style="margin: auto; padding-bottom: 10px;">Vestibular</h1>
+        <div class="row">
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <div class="">
+                                {% if 'higido' in vestibular %}
+                                <img class=" img-fluid checked-true" src="{% static 'odontograma/img/higido.jpeg' %}" width="50%" onclick="" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Hígido</td>
+                        <th scope="row">2</th>
+                        <td>
+                            <div>
+                                {% if 'mancha branca ativa' in vestibular %}
+                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Branca Ativa</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>
+                            <div>
+                                {% if 'mancha inativa' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_inativa.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Mancha Inativa</td>
+                        <th scope="row">4</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie primaria' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_primaria.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Primária</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>
+                            <div>
+                                {% if 'lesao de carie cronica' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/lesao_carie_cronica.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>Lesão de Cárie Crônica</td>
+                        <th scope="row">6</th>
+                            <td>
+                                <div>
+                                    {% if 'restauracao defeituosa' in vestibular %}
+                                    <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% else %}
+                                    <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_defeituosa.jpeg' %}" alt="">
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                        <td>Restauração Defeituosa</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">7</th>
+                    <td>
+                        <div>
+                            {% if 'restauracao em bom estado' in vestibular %}
+                            <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% else %}
+                            <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_bom_estado.jpeg' %}" alt="">
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>Restauração em Bom Estado</td>
+                    <th scope="row">8</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de tratamento endodontico' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_tratamento_endondontico.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Tratamento Endodôntico</td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido_.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">10</th>
+                        <td>
+                            <div>
+                                {% if 'extracao indicada' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/extracao_indicada.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Extração Indicada</td>
+                </tr>
+                <tr>
+                    <th scope="row">11</th>
+                        <td>
+                            <div>
+                                {% if 'necessidade de protese' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/necessidade_protese.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Necessidade de Prótese</td>
+                    <th scope="row">12</th>
+                        <td>
+                            <div>
+                                {% if 'protese fixa concluida ou satisfatoria' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/protese_fixa_concluida_satisfatoria.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Prótese Fixa Concluída ou Satisfatória</td>
+                </tr>
+                    <tr>
+                    <th scope="row">13</th>
+                        <td>
+                            <div>
+                                {% if 'dente ausente ou extraido' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/dente_ausente.png' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Dente Ausente ou Extraído</td>
+                    <th scope="row">14</th>
+                        <td>
+                            <div>
+                                {% if 'selante a fazer' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_fazer.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+
+                        </td>
+                    <td>Selante a Fazer</td>
+                </tr>
+                </tr>
+                <tr>
+                    <th scope="row">15</th>
+                        <td>
+                            <div>
+                                {% if 'selante satisfatorio' in vestibular %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/selante_satisfatorio.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Selante Satisfatório</td>
+                    <th scope="row">16</th>
+                        <td>
+                            <div>
+                                {% if 'faceta de desgaste' in vestibular %}
+                               <img class="img-fluid checked-true" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/faceta_degaste.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Faceta de Degaste</td>
+                </tr>
+                <tr>
+                    <th scope="row">17</th>
+                        <td>
+                            <div>
+                                {% if 'fratura' in vestibular %}
+                                  <img class="img-fluid checked-true" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/fratura.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Fratura</td>
+                    <th scope="row">18</th>
+                        <td>
+                            <div>
+                                {% if 'doenca periodontal' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/doenca_periodontal.jpeg' %}"  alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Doença Periodontal</td>
+                </tr>
+                <tr>
+                    <th scope="row">19</th>
+                        <td>
+                            <div>
+                                {% if 'anomalia de forma' in vestibular %}
+                                   <img class="img-fluid checked-true" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% else %}
+                                   <img class="img-fluid checked-false" src="{% static 'odontograma/img/anomalia_de_forma.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Anomalia de Forma</td>
+                    <th scope="row">20</th>
+                        <td>
+                            <div>
+                                {% if 'defeito de esmalte ou dentina' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/defeito_de_esmalte.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Defeito de Esmalte ou Dentina</td>
+                </tr>
+                <tr>
+                    <th scope="row">21</th>
+                        <td>
+                            <div>
+                                {% if 'supranumerario' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/supranumerario.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Supranumerário</td>
+                    <th scope="row">22</th>
+                        <td>
+                            <div>
+                                {% if 'restauracao ou protese concluida' in vestibular %}
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% else %}
+                                <img class="img-fluid checked-false" src="{% static 'odontograma/img/restauracao_protese_concluida.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Restauração ou prótese Concluída</td>
+                </tr>
+                                              <tr>
+                    <th scope="row">23</th>
+                        <td>
+                            <div>
+                                {% if 'tratamento endodontico concluido' in vestibular %}
+                                 <img class="img-fluid checked-true" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% else %}
+                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/tratamento_endondontico_concluido.jpeg' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Tratamento Endodôntico Concluído</td>
+                    <th scope="row">24</th>
+                        <td>
+                            <div>
+                                {% if 'outro' in vestibular %}
+
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                        </td>
+                    <td>Outro</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
         <a href="{% url 'sup18_edit' dente18 %}" class="btn btn-2 custom-btn  btn-margin"  type="button">
             <span class="text">Atualizar</span>
         </a>
     </div>
 </div>
-<script src="{% static 'odontograma/js/display_distal_detail.js' %}"></script>
-<script src="{% static 'odontograma/js/display_oclusal.js' %}"></script>
+<!--<script src="{% static 'odontograma/js/display_distal_detail.js' %}"></script>-->
+<!--<script src="{% static 'odontograma/js/display_oclusal.js' %}"></script>-->
+<script src="{% static 'odontograma/js/btn_facetas.js' %}"></script>

@@ -68,7 +68,7 @@
             </h1>
             <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
                 <a href="{% url 'exa_fis_edit' object.pk %}" class="btn custom-btn btn-2 btn-margin" type="button">
-                    <span class="text">Atualizar</span>
+                    <span class="text"><i class="fa-solid fa-user-pen"></i></span>
                 </a>
             </div>
             <div class="form-row">
@@ -199,13 +199,13 @@
             </div>
             <div class="mr-1 text-right">
                 <a href="{% url 'inf_sau_sis_detalhes' object.pk %}" class="custom-btn btn-1 btn" type="button">
-                    <span class="text">Voltar</span>
+                    <span class="text"><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
 <!--                <a href="{% url 'paciente_delete' object.pk %}" class="btn btn-danger text-white" type="button">-->
 <!--                    <span class="text">Excluir</span>-->
 <!--                </a>-->
                 <a href="{% url 'sin_vit_cli_detalhes' object.pk %}" class="custom-btn btn-1 btn btn-margin" type="button">
-                    <span class="text">Proximo</span>
+                    <span class="text"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>
