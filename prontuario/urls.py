@@ -20,4 +20,5 @@ urlpatterns = [
     path("sup-18/<int:pk>", sup18, name="sup18"),
     path("sup-18-edit/<int:pk>", sup18_edit, name="sup18_edit"),
     path("sup-17/<int:pk>/", sup17, name="sup17"),
+    path("create-data/", create_data, name="create_data"),
 ]

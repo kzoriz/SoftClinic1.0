@@ -331,3 +331,11 @@ def view_one(request):
 @xframe_options_sameorigin
 def view_two(request):
     return HttpResponse("Display in a frame if it's from the same origin as me.")
+
+
+def create_data(request):
+    if request.method == 'POST':
+        valor = request.POST['valor']
+        for i in range(valor):
+            pass
+
