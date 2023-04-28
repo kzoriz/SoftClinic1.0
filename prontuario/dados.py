@@ -1,6 +1,60 @@
 import random
 
 
+def raca_random():
+    raca_list = [
+        'PARDO',
+        'BRANCO',
+        'INDIGENA',
+        'AMARELO'
+    ]
+    var = random.randint(0, 100)
+
+    if var <= 10:
+        return 'N.D.N'
+    else:
+        var2 = random.randint(0, len(raca_list) - 1)
+        return raca_list[var2]
+
+
+def estado_civil_random():
+    estado_civil_list = [
+        'SOLTEIRO(A)',
+        'CASADO(A)',
+        'VIÚVO(A)',
+        'SEPARADO(A)',
+        'DIVORCIADO(A)'
+    ]
+    var = random.randint(0, 100)
+
+    if var <= 10:
+        return 'N.D.N'
+    else:
+        var2 = random.randint(0, len(estado_civil_list) - 1)
+        return estado_civil_list[var2]
+
+
+def grau_instruncao_random():
+    grau_instruncao_list = [
+        'ANALFABETO',
+        'FUNDAMENTAL INCOMPLETO',
+        'FUNDAMENTAL COMPLETO',
+        'MÉDIO INCOMPLETO',
+        'MEDIO COMPLETO',
+        'SUPERIOR INCOMPLETO',
+        'SUPERIOR COMPLETO',
+        'MESTRADO',
+        'DOUTORADO'
+    ]
+    var = random.randint(0, 100)
+
+    if var <= 10:
+        return 'N.D.N'
+    else:
+        var2 = random.randint(0, len(grau_instruncao_list) - 1)
+        return grau_instruncao_list[var2]
+
+
 def anamnese_random():
     anamnese_list = [
         'Paciente procurou as clínicas da UERN alegando sentir dores nos dentes ao ter '
@@ -227,7 +281,8 @@ def gastrointestinais_random():
     else:
         var2 = random.randint(1, 3)
         for i in range(var2):
-            lista.append(problemas_gastroinstestinais_list[random.randint(0, len(problemas_gastroinstestinais_list) - 1)])
+            lista.append(
+                problemas_gastroinstestinais_list[random.randint(0, len(problemas_gastroinstestinais_list) - 1)])
         lista_set = list(set(lista))
         for i in range(len(lista_set)):
             if i == len(lista_set) - 1:
@@ -270,6 +325,39 @@ def alteracoes_sangineas():
 
 
 print('ALTERAÇÕES SANGUINEAS: ', alteracoes_sangineas())
+
+
+def enfermidades_osseas_random():
+    lista = []
+    dados = ''
+    enfermidades_osseas_list = [
+        'Doença de Paget',
+        'Reumatismo',
+        'Febre reumática',
+        'Osteoporose',
+    ]
+    var = random.randint(0, 100)
+    if var <= 70:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'N.D.N'
+        else:
+            return 'Não'
+    else:
+        var2 = random.randint(1, 2)
+        for i in range(var2):
+            lista.append(enfermidades_osseas_list[random.randint(0, len(enfermidades_osseas_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('ENFERMIDADES ÓSSEAS: ', enfermidades_osseas_random())
 
 
 def problemas_pulmonares_random():
@@ -409,7 +497,6 @@ print('DIABETES: ', diabetes_random())
 
 
 def hipertencao_random():
-
     hipertensao_list = [
         'Normal',
         'Normal limítrofe',
@@ -434,7 +521,6 @@ print('HIPERTENSÃO: ', hipertencao_random())
 
 
 def epilepsia_random():
-
     epilepsia_list = [
         'Crise focal Simples',
         'Crise focal Complexa',
@@ -496,7 +582,6 @@ print('DOENÇA MENTAL: ', doenca_mental_random())
 
 
 def hepatite_random():
-
     hepatite_list = [
         'A',
         'B',
@@ -519,8 +604,8 @@ def hepatite_random():
 
 print('HEPATITE: ', hepatite_random())
 
-def hiv_random():
 
+def hiv_random():
     hiv_list = [
         'Sim'
     ]
@@ -541,7 +626,6 @@ print('HIV: ', hiv_random())
 
 
 def herpes_random():
-
     herpes_list = [
         'Tipo 1',
         'Tipo 2',
@@ -564,7 +648,6 @@ print('HERPES: ', herpes_random())
 
 
 def sangra_excesso_random():
-
     sangra_list = [
         'Sim'
     ]
@@ -585,7 +668,6 @@ print('SANGRA EM EXCESSO: ', sangra_excesso_random())
 
 
 def gravida_random():
-
     gravida_list = [
         'Sim',
     ]
@@ -603,6 +685,7 @@ def gravida_random():
 
 
 print('GRAVIDA: ', gravida_random())
+
 
 def problemas_renais_random():
     lista = []
@@ -640,7 +723,6 @@ print('PROBLEMAS RENAIS: ', problemas_renais_random())
 
 
 def radioterapia_random():
-
     radioterapia_list = [
         'Sim'
     ]
@@ -659,8 +741,8 @@ def radioterapia_random():
 
 print('RADIOTERAPIA: ', radioterapia_random())
 
-def quimioterapia_random():
 
+def quimioterapia_random():
     quimioterapia_list = [
         'Sim'
     ]
@@ -712,7 +794,6 @@ print('ARTICULAÇÕES OU PROTÉSE: ', protese_random())
 
 
 def fuma_random():
-
     fuma_list = [
         'Diariamente',
         'Socialmente',
@@ -735,7 +816,6 @@ print('FUMA / MASTIGA TABACO OU RAPÉ: ', fuma_random())
 
 
 def bebida_random():
-
     bebida_list = [
         'Diariamente',
         'Socialmente',
@@ -757,10 +837,325 @@ def bebida_random():
 print('BEBIDA: ', bebida_random())
 
 
-nodulos_linfaticos_list = [
+def nodulos_linfaticos_random():
+    nodulos_linfaticos_list = [
+        'Não Palpavéis',
+        'Inchados',
 
-]
-#
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'N.D.N'
+        else:
+            return 'Normal'
+    else:
+        var2 = random.randint(0, len(nodulos_linfaticos_list) - 1)
+        dados = nodulos_linfaticos_list[var2]
+        return dados
+
+
+print('NODULOS LINFATICOS: ', nodulos_linfaticos_random())
+
+
+def amigdalas_random():
+    lista = []
+    dados = ''
+    amigdalas_list = [
+        'Hipertrofica',
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 2)
+        if var2 == 0:
+            return 'N.D.N'
+        elif var2 == 1:
+            return 'Normal'
+        else:
+            return 'Ausente'
+    else:
+        var2 = random.randint(1, 2)
+        for i in range(var2):
+            lista.append(amigdalas_list[random.randint(0, len(amigdalas_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('AMIGDALAS: ', amigdalas_random())
+
+
+def trigono_retromolar_random():
+    lista = []
+    dados = ''
+
+    trigono_retromolar_list = [
+        'Ulcerações',
+        'Presença de eritroplasias',
+        'Presença de úlceras',
+
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'N.D.N'
+        else:
+            return 'Normal'
+    else:
+        var2 = random.randint(1, 2)
+        for i in range(var2):
+            lista.append(trigono_retromolar_list[random.randint(0, len(trigono_retromolar_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('TRIGONO RETROMOLAR: ', trigono_retromolar_random())
+
+
+def palato_duro_random():
+    lista = []
+    dados = ''
+
+    palato_duro_list = [
+        'Tórus',
+        'Tórus na rafe',
+        'Candidíase',
+        'Presença de áreas nodulares',
+        'Presença de pústulas',
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 3)
+        for i in range(var2):
+            lista.append(palato_duro_list[random.randint(0, len(palato_duro_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('PALATO DURO: ', palato_duro_random())
+
+
+def palato_mole_random():
+    lista = []
+    dados = ''
+    palato_mole_list = [
+        'Úvula bífida',
+        'Presença de pigmentos amarelados',
+        'candidíase',
+        'herpangina',
+        'Presença de petéquias',
+        'Presença de abcesso',
+        'abscesso peritonsilar',
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 3)
+        for i in range(var2):
+            lista.append(palato_mole_list[random.randint(0, len(palato_mole_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('PALATO MOLE: ', palato_mole_random())
+
+
+def labios_random():
+    lista = []
+    dados = ''
+    labios_list = [
+        'Ressecados',
+        'Lesão arredondada',
+        'Mucocele',
+        'Mucosite',
+        'Bolhas no lábio superior',
+        'Bolhas no lábio inferior',
+        'Mácula no lábio inferior',
+        'Mácula no lábio superior',
+        'Queilite actínica no lábio inferior',
+        'Queilite actínica no lábio superior',
+
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 3)
+        for i in range(var2):
+            lista.append(labios_list[random.randint(0, len(labios_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print("LABIOS: ", labios_random())
+
+
+def pele_random():
+    lista = []
+    dados = ''
+    pele_list = [
+        'Brozeada',
+        'Presença de pápula vermelha',
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 2)
+        for i in range(var2):
+            lista.append(pele_list[random.randint(0, len(pele_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('PELE: ', pele_random())
+
+
+def atm_random():
+    lista = []
+    dados = ''
+    atm_list = [
+        'Estalido (direito)',
+        'Estalidos',
+        'Dor',
+        'Apertamento',
+        'Dor ao acordar'
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 2)
+        for i in range(var2):
+            lista.append(atm_list[random.randint(0, len(atm_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('ATM: ', atm_random())
+
+
+def vestibulo_random():
+    lista = []
+    dados = ''
+    vestibulo_list = [
+        'Morsicatio',
+        'Hiperplasia fibrosa inflamatoria',
+        'Presença de placas esbranquiçadas difusas',
+        'Presença de petéquias e úlceras',
+        'Nevo',
+        'aftas'
+    ]
+    var = random.randint(0, 100)
+    if var <= 50:
+        var2 = random.randint(0, 1)
+        if var2 == 0:
+            return 'Normal'
+        else:
+            return 'N.D.N'
+    else:
+        var2 = random.randint(1, 4)
+        for i in range(var2):
+            lista.append(vestibulo_list[random.randint(0, len(vestibulo_list) - 1)])
+        lista_set = list(set(lista))
+        for i in range(len(lista_set)):
+            if i == len(lista_set) - 1:
+                dados += f'{lista_set[i]}.'
+            else:
+                dados += f'{lista_set[i]}, '
+
+        return dados
+
+
+print('VESTIBULO: ', vestibulo_random())
+
+
+def higiene_bucal_random():
+    higiene_bucal_list = [
+        'Razoável',
+        'Ruim',
+        'Boa',
+        'Excelente',
+
+    ]
+    var = random.randint(0, 100)
+    if var <= 40:
+        return 'N.D.N'
+
+    else:
+        var2 = random.randint(0, len(higiene_bucal_list) - 1)
+        dados = higiene_bucal_list[var2]
+        return dados
+
+
+print('HIGIENE BUCAL: ', higiene_bucal_random())
+
 # for i in range(1, 10001):
 #     print('PACIENTE: ', i)
 #     print('-----------------------------------------------------------------------------------------------------------')

@@ -1,3 +1,5 @@
+import random
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +12,11 @@ from django.shortcuts import resolve_url
 from prontuario.forms import DenteForm
 from prontuario.models import *
 from django.views.decorators.clickjacking import xframe_options_sameorigin, xframe_options_deny
+from _datetime import datetime as dt
+from .dados import *
+from faker import Faker
+locales = 'pt-BR'
+fake = Faker(locales)
 
 
 def anamnese_detalhes(request, pk=None):
@@ -333,9 +340,141 @@ def view_two(request):
     return HttpResponse("Display in a frame if it's from the same origin as me.")
 
 
+@login_required
 def create_data(request):
+
     if request.method == 'POST':
-        valor = request.POST['valor']
-        for i in range(valor):
-            pass
+        var = random.randint(0, 1)
+        if var == 1:
+            nome_fake = fake.name_male()
+            sexo_fake = 'MASCULINO'
+        else:
+            nome_fake = fake.name_female()
+            sexo_fake = 'FEMININO'
+
+        data_nascimento = fake.date()
+        data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
+        data_nascimento = data_nascimento
+
+        if len(Paciente.objects.all()) == 0:
+            numero_prontuario = "1000"
+        else:
+            numero_prontuario = str(int(Paciente.objects.all().last().prontuario) + 1)
+        if len(Paciente.objects.all()) == 0:
+            id = 1
+        else:
+            id = Paciente.objects.all().last().id + 1
+
+        p = Paciente(id=id, nome=nome_fake, data_nascimento=data_nascimento,
+                     sexo_biologico=sexo_fake,
+                     rg=fake.rg(), cpf=fake.cpf(), raca=raca_random(), estado_civil=estado_civil_random(),
+                     grau_instrucao=grau_instruncao_random(),
+                     endereco=fake.street_address(), cep=fake.postcode(), bairro=fake.bairro(),
+                     cidade=fake.city(), uf=fake.estado(), telefone_celular=fake.cellphone_number(),
+                     prontuario=numero_prontuario)
+
+        p.save()
+        r = Anamnese(id=id, paciente=p, prontuario=numero_prontuario, anamnese=anamnese_random())
+        r.save()
+        s = InfSaudeSistemica(id=id, paciente=p, prontuario=numero_prontuario,
+                              antecedentes_familiares=antecedentes_familiares_random(),
+                              medicamentos_em_uso=medicamentos_random(), cirurgias_anteriores=cirurgia_random(),
+                              problemas_cardiacos=cardiaco_random(),
+                              problemas_gastrointestinais=gastrointestinais_random(),
+                              alteracoes_sanguineas=alteracoes_sangineas(),
+                              enfermidades_osseas=enfermidades_osseas_random(),
+                              problemas_pulmonares=problemas_pulmonares_random(),
+                              alergias=alegias_random(), habitos=habitos_random()
+                              )
+        s.save()
+        t = ExameFisico(id=id, paciente=p, prontuario=numero_prontuario, nodulos_linfaticos=nodulos_linfaticos_random(),
+                        amigdalas=amigdalas_random(), trigono_retromolar=trigono_retromolar_random(),
+                        palato_duro=palato_duro_random(), palato_mole=palato_mole_random(), labios=labios_random(),
+                        pele=pele_random(), atm=atm_random(), vestibulo=vestibulo_random(),
+                        higiene_bucal=higiene_bucal_random()
+                        )
+        t.save()
+        v = SinaisVitaisClinicos(id=id, paciente=p, prontuario=numero_prontuario)
+        v.save()
+        x = PSR(id=id, paciente=p, prontuario=numero_prontuario)
+        x.save()
+
+        d18 = Dente(paciente=p, prontuario=numero_prontuario + '18',  nome='18')
+        d18.save()
+        d17 = Dente(paciente=p, prontuario=numero_prontuario + '17', nome='17')
+        d17.save()
+        d16 = Dente(paciente=p, prontuario=numero_prontuario + '16', nome='16')
+        d16.save()
+        d15 = Dente(paciente=p, prontuario=numero_prontuario + '15', nome='15')
+        d15.save()
+        d14 = Dente(paciente=p, prontuario=numero_prontuario + '14', nome='14')
+        d14.save()
+        d13 = Dente(paciente=p, prontuario=numero_prontuario + '13', nome='13')
+        d13.save()
+        d12 = Dente(paciente=p, prontuario=numero_prontuario + '12', nome='12')
+        d12.save()
+        d11 = Dente(paciente=p, prontuario=numero_prontuario + '11', nome='11')
+        d11.save()
+
+        d21 = Dente(paciente=p, prontuario=numero_prontuario + '21', nome='21')
+        d21.save()
+        d22 = Dente(paciente=p, prontuario=numero_prontuario + '22', nome='22')
+        d22.save()
+        d23 = Dente(paciente=p, prontuario=numero_prontuario + '23', nome='23')
+        d23.save()
+        d24 = Dente(paciente=p, prontuario=numero_prontuario + '24', nome='24')
+        d24.save()
+        d25 = Dente(paciente=p, prontuario=numero_prontuario + '25', nome='25')
+        d25.save()
+        d26 = Dente(paciente=p, prontuario=numero_prontuario + '26', nome='26')
+        d26.save()
+        d27 = Dente(paciente=p, prontuario=numero_prontuario + '27', nome='27')
+        d27.save()
+        d28 = Dente(paciente=p, prontuario=numero_prontuario + '28', nome='28')
+        d28.save()
+
+        d48 = Dente(paciente=p, prontuario=numero_prontuario + '48', nome='48')
+        d48.save()
+        d47 = Dente(paciente=p, prontuario=numero_prontuario + '47', nome='47')
+        d47.save()
+        d46 = Dente(paciente=p, prontuario=numero_prontuario + '46', nome='46')
+        d46.save()
+        d45 = Dente(paciente=p, prontuario=numero_prontuario + '45', nome='45')
+        d45.save()
+        d44 = Dente(paciente=p, prontuario=numero_prontuario + '44', nome='44')
+        d44.save()
+        d43 = Dente(paciente=p, prontuario=numero_prontuario + '43', nome='43')
+        d43.save()
+        d42 = Dente(paciente=p, prontuario=numero_prontuario + '42', nome='42')
+        d42.save()
+        d41 = Dente(paciente=p, prontuario=numero_prontuario + '41', nome='41')
+        d41.save()
+
+        d31 = Dente(paciente=p, prontuario=numero_prontuario + '31', nome='31')
+        d31.save()
+        d32 = Dente(paciente=p, prontuario=numero_prontuario + '32', nome='32')
+        d32.save()
+        d33 = Dente(paciente=p, prontuario=numero_prontuario + '33', nome='33')
+        d33.save()
+        d34 = Dente(paciente=p, prontuario=numero_prontuario + '34', nome='34')
+        d34.save()
+        d35 = Dente(paciente=p, prontuario=numero_prontuario + '35', nome='35')
+        d35.save()
+        d36 = Dente(paciente=p, prontuario=numero_prontuario + '36', nome='36')
+        d36.save()
+        d37 = Dente(paciente=p, prontuario=numero_prontuario + '37', nome='37')
+        d37.save()
+        d38 = Dente(paciente=p, prontuario=numero_prontuario + '38', nome='38')
+        d38.save()
+
+        y = Odontograma(id=id, paciente=p, prontuario=numero_prontuario, dente_18=d18, dente_17=d17, dente_16=d16, dente_15=d15, dente_14=d14,
+                        dente_13=d13, dente_12=d12, dente_11=d11, dente_21=d21, dente_22=d22, dente_23=d23,
+                        dente_24=d24, dente_25=d25, dente_26=d26, dente_27=d27, dente_28=d28, dente_48=d48,
+                        dente_47=d47, dente_46=d46, dente_45=d45, dente_44=d44, dente_43=d43, dente_42=d42,
+                        dente_41=d41, dente_31=d31, dente_32=d32, dente_33=d33, dente_34=d34, dente_35=d35,
+                        dente_36=d36, dente_37=d37, dente_38=d38)
+        y.save()
+        messages.success(request, "Pacientes Criados com Sucesso!")
+        return redirect("create_data")
+    return render(request, "prontuario/create_data.html")
 

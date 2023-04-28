@@ -22,6 +22,7 @@ lista_dentes = ['dente_18', 'dente_17', 'dente_16', 'dente_15', 'dente_14', 'den
 
 @login_required
 def registrar_paciente(request):
+
     if request.method == 'POST':
         nome = request.POST['nome']
         nome_social = request.POST['nome_social']
