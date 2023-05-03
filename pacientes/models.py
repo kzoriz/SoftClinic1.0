@@ -88,8 +88,8 @@ UF_CHOICES = (
 
 
 class Paciente(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     id = models.IntegerField(primary_key=True)
     prontuario = models.CharField("prontuario", max_length=200, blank=True)
     nome = models.CharField(verbose_name="Nome", max_length=200)

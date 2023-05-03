@@ -73,6 +73,7 @@
                     <span class="text"><i class="fa-solid fa-user-pen"></i></span>
                 </a>
             </div>
+            <hr>
             <form>
                 <div class="form-row">
                    <div class="form-group col-md-4">
@@ -91,6 +92,7 @@
 <!--                        <input type="text" class="form-control" value="{{ object.created_at}}"  disabled>-->
                    </div>
                 </div>
+                <hr>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label><b>Nome</b></label>
@@ -112,8 +114,9 @@
 <!--                        <input type="text" class="form-control" value="{{ object.sexo_biologico }}" disabled>-->
                     </div>
                 </div>
+                <hr>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label><b>RG</b></label>
                         <div>{{ object.rg}}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.rg}}" disabled>-->
@@ -123,29 +126,39 @@
                         <div>{{ object.cpf }}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.cpf }}" disabled>-->
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label><b>Raça</b></label>
                         <div>{{ object.raca|upper}}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.raca}}" disabled>-->
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label><b>Estado Civil</b></label>
                         <div>{{ object.estado_civil|upper }}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.estado_civil }}" disabled>-->
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-3">
                         <label><b>Grau de instrução</b></label>
                         <div>{{ object.grau_instrucao|upper }}</div>
-<!--                        <input type="text" class="form-control" value="{{ object.grau_instrucao }}" disabled>-->
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><b>Cidade</b></label>
+                        <div>{{ object.cidade|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.cidade }}" disabled>-->
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label><b>UF</b></label>
+                        <div>{{ object.uf|upper }}</div>
+<!--                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>-->
                     </div>
                     <div class="form-group col-md-3">
                         <label><b>Endereço</b></label>
                         <div>{{ object.endereco|upper }}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.endereco }}" disabled>-->
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label><b>Cep</b></label>
                         <div>{{ object.cep|upper}}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.cep}}" disabled>-->
@@ -156,35 +169,19 @@
 <!--                        <input type="text" class="form-control" value="{{ object.bairro | upper}}" disabled>-->
                     </div>
                 </div>
+                <hr>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label><b>Cidade</b></label>
-                        <div>{{ object.cidade|upper }}</div>
-<!--                        <input type="text" class="form-control" value="{{ object.cidade }}" disabled>-->
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label><b>UF</b></label>
-                        <div>{{ object.uf|upper }}</div>
-<!--                        <input type="text" class="form-control" value="{{ object.uf }}" disabled>-->
-                    </div>
                     <div class="form-group col-md-3">
                         <label><b>Telefone</b></label>
                         <div>{{ object.telefone_celular }}</div>
 <!--                        <input type="text" class="form-control" value="{{ object.telefone_celular }}" disabled>-->
                     </div>
-                    <div class="form-group col-md-3">
-<!--                        <label>Prontuario</label>-->
-<!--                        <input type="text" class="form-control" value="{{ prontuario }}" disabled>-->
-                    </div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-9">
                         <label><b>Informações Complementares</b></label>
                         <div>{{ object.informacoes_complementares }}</div>
-<!--                        <textarea type="textarea" cols="40" rows="10" class="textarea form-control" -->
-<!--                                  value="{{ object.informacoes_complementares }}" disabled>-->
-<!--                            {{ object.informacoes_complementares }}-->
-<!--                        </textarea>-->
                     </div>
                 </div>
+                <hr>
             </form>
 <!--            </div>-->
             <div class="mr-1 text-right">

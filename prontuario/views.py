@@ -15,8 +15,10 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin, xfra
 from _datetime import datetime as dt
 from .dados import *
 from faker import Faker
+
 locales = 'pt-BR'
 fake = Faker(locales)
+from tqdm import tqdm
 
 
 def anamnese_detalhes(request, pk=None):
@@ -208,7 +210,7 @@ def sup18_edit(request, pk=None):
     d18 = dente_18.pk
     estenografia = []
     for i in range(23):
-        estenografia.append(Estenografia.objects.get(pk=i+1))
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
     if request.method == 'GET':
         dente_18 = Dente.objects.get(pk=pk)
         d18 = dente_18.pk
@@ -340,141 +342,523 @@ def view_two(request):
     return HttpResponse("Display in a frame if it's from the same origin as me.")
 
 
+def request_date(request, dado):
+    context = {
+        'dado': dado,
+    }
+    return render(request, "prontuario/create_data.html", context)
+
+
+def esteografia_random():
+    estenografia = []
+    for i in range(6):
+        esteno = Estenografia.objects.get(pk=random.randint(0, 23))
+        estenografia.append(esteno)
+
+    return estenografia
+
+
 @login_required
 def create_data(request):
+    if request.method == 'GET':
+        atual = len(Paciente.objects.all())
+        print(atual)
+        context = {
+            'atual': atual,
+        }
+        return render(request, "prontuario/create_data.html", context)
 
     if request.method == 'POST':
-        var = random.randint(0, 1)
-        if var == 1:
-            nome_fake = fake.name_male()
-            sexo_fake = 'MASCULINO'
-        else:
-            nome_fake = fake.name_female()
-            sexo_fake = 'FEMININO'
+        num = request.POST['qtd']
+        qtd = int(num)
+        for i in range(1, qtd + 1):
+            var = random.randint(0, 1)
+            if var == 1:
+                nome_fake = fake.name_male() + ' ' + fake.last_name_nonbinary()
+                sexo_fake = 'MASCULINO'
+            else:
+                nome_fake = fake.name_female() + ' ' + fake.last_name_nonbinary()
+                sexo_fake = 'FEMININO'
 
-        data_nascimento = fake.date()
-        data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
-        data_nascimento = data_nascimento
+            data_nascimento = fake.date()
+            data_nascimento = dt.strptime(data_nascimento, '%Y-%m-%d').date()
+            data_nascimento = data_nascimento
 
-        if len(Paciente.objects.all()) == 0:
-            numero_prontuario = "1000"
-        else:
-            numero_prontuario = str(int(Paciente.objects.all().last().prontuario) + 1)
-        if len(Paciente.objects.all()) == 0:
-            id = 1
-        else:
-            id = Paciente.objects.all().last().id + 1
+            if len(Paciente.objects.all()) == 0:
+                numero_prontuario = "1000"
+            else:
+                numero_prontuario = str(int(Paciente.objects.all().last().prontuario) + 1)
+            if len(Paciente.objects.all()) == 0:
+                id = 1
+            else:
+                id = Paciente.objects.all().last().id + 1
 
-        p = Paciente(id=id, nome=nome_fake, data_nascimento=data_nascimento,
-                     sexo_biologico=sexo_fake,
-                     rg=fake.rg(), cpf=fake.cpf(), raca=raca_random(), estado_civil=estado_civil_random(),
-                     grau_instrucao=grau_instruncao_random(),
-                     endereco=fake.street_address(), cep=fake.postcode(), bairro=fake.bairro(),
-                     cidade=fake.city(), uf=fake.estado(), telefone_celular=fake.cellphone_number(),
-                     prontuario=numero_prontuario)
+            p = Paciente(id=id, nome=nome_fake, data_nascimento=data_nascimento,
+                         sexo_biologico=sexo_fake,
+                         rg=fake.rg(), cpf=fake.cpf(), raca=raca_random(), estado_civil=estado_civil_random(),
+                         grau_instrucao=grau_instruncao_random(),
+                         endereco=fake.street_address(), cep=fake.postcode(), bairro=fake.bairro(),
+                         cidade=fake.city(), uf=fake.estado()[0], telefone_celular=fake.cellphone_number(),
+                         prontuario=numero_prontuario)
 
-        p.save()
-        r = Anamnese(id=id, paciente=p, prontuario=numero_prontuario, anamnese=anamnese_random())
-        r.save()
-        s = InfSaudeSistemica(id=id, paciente=p, prontuario=numero_prontuario,
-                              antecedentes_familiares=antecedentes_familiares_random(),
-                              medicamentos_em_uso=medicamentos_random(), cirurgias_anteriores=cirurgia_random(),
-                              problemas_cardiacos=cardiaco_random(),
-                              problemas_gastrointestinais=gastrointestinais_random(),
-                              alteracoes_sanguineas=alteracoes_sangineas(),
-                              enfermidades_osseas=enfermidades_osseas_random(),
-                              problemas_pulmonares=problemas_pulmonares_random(),
-                              alergias=alegias_random(), habitos=habitos_random()
-                              )
-        s.save()
-        t = ExameFisico(id=id, paciente=p, prontuario=numero_prontuario, nodulos_linfaticos=nodulos_linfaticos_random(),
-                        amigdalas=amigdalas_random(), trigono_retromolar=trigono_retromolar_random(),
-                        palato_duro=palato_duro_random(), palato_mole=palato_mole_random(), labios=labios_random(),
-                        pele=pele_random(), atm=atm_random(), vestibulo=vestibulo_random(),
-                        higiene_bucal=higiene_bucal_random()
-                        )
-        t.save()
-        v = SinaisVitaisClinicos(id=id, paciente=p, prontuario=numero_prontuario)
-        v.save()
-        x = PSR(id=id, paciente=p, prontuario=numero_prontuario)
-        x.save()
+            p.save()
+            r = Anamnese(id=id, paciente=p, prontuario=numero_prontuario, anamnese=anamnese_random())
+            r.save()
+            s = InfSaudeSistemica(id=id, paciente=p, prontuario=numero_prontuario,
+                                  antecedentes_familiares=antecedentes_familiares_random(),
+                                  medicamentos_em_uso=medicamentos_random(), cirurgias_anteriores=cirurgia_random(),
+                                  problemas_cardiacos=cardiaco_random(),
+                                  problemas_gastrointestinais=gastrointestinais_random(),
+                                  alteracoes_sanguineas=alteracoes_sangineas(),
+                                  enfermidades_osseas=enfermidades_osseas_random(),
+                                  problemas_pulmonares=problemas_pulmonares_random(),
+                                  alergias=alegias_random(), habitos=habitos_random()
+                                  )
+            s.save()
+            t = ExameFisico(id=id, paciente=p, prontuario=numero_prontuario,
+                            nodulos_linfaticos=nodulos_linfaticos_random(),
+                            amigdalas=amigdalas_random(), trigono_retromolar=trigono_retromolar_random(),
+                            palato_duro=palato_duro_random(), palato_mole=palato_mole_random(), labios=labios_random(),
+                            pele=pele_random(), atm=atm_random(), vestibulo=vestibulo_random(),
+                            higiene_bucal=higiene_bucal_random()
+                            )
+            t.save()
+            v = SinaisVitaisClinicos(id=id, paciente=p, prontuario=numero_prontuario,
+                                     pressao_arterial=pressao_arterial_random(),
+                                     respiracao=respiracao_random(), temperatura=temperatura_random(),
+                                     placa_visivel_16v=ipv_random(), placa_visivel_11v=ipv_random(),
+                                     placa_visivel_26v=ipv_random(), placa_visivel_36v=ipv_random(),
+                                     placa_visivel_31v=ipv_random(), placa_visivel_46v=ipv_random())
+            v.save()
+            x = PSR(id=id, paciente=p, prontuario=numero_prontuario, sextante_16v=psr_random(),
+                    sextante_11v=psr_random(), sextante_26v=psr_random(), sextante_36v=psr_random(),
+                    sextante_31v=psr_random(), sextante_46v=psr_random())
+            x.save()
 
-        d18 = Dente(paciente=p, prontuario=numero_prontuario + '18',  nome='18')
-        d18.save()
-        d17 = Dente(paciente=p, prontuario=numero_prontuario + '17', nome='17')
-        d17.save()
-        d16 = Dente(paciente=p, prontuario=numero_prontuario + '16', nome='16')
-        d16.save()
-        d15 = Dente(paciente=p, prontuario=numero_prontuario + '15', nome='15')
-        d15.save()
-        d14 = Dente(paciente=p, prontuario=numero_prontuario + '14', nome='14')
-        d14.save()
-        d13 = Dente(paciente=p, prontuario=numero_prontuario + '13', nome='13')
-        d13.save()
-        d12 = Dente(paciente=p, prontuario=numero_prontuario + '12', nome='12')
-        d12.save()
-        d11 = Dente(paciente=p, prontuario=numero_prontuario + '11', nome='11')
-        d11.save()
+            d18 = Dente(paciente=p, prontuario=numero_prontuario, nome='18')
+            d18.save()
+            for est in range(0, random.randint(1, 7)):
+                d18.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d18.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d18.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d18.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d18.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
 
-        d21 = Dente(paciente=p, prontuario=numero_prontuario + '21', nome='21')
-        d21.save()
-        d22 = Dente(paciente=p, prontuario=numero_prontuario + '22', nome='22')
-        d22.save()
-        d23 = Dente(paciente=p, prontuario=numero_prontuario + '23', nome='23')
-        d23.save()
-        d24 = Dente(paciente=p, prontuario=numero_prontuario + '24', nome='24')
-        d24.save()
-        d25 = Dente(paciente=p, prontuario=numero_prontuario + '25', nome='25')
-        d25.save()
-        d26 = Dente(paciente=p, prontuario=numero_prontuario + '26', nome='26')
-        d26.save()
-        d27 = Dente(paciente=p, prontuario=numero_prontuario + '27', nome='27')
-        d27.save()
-        d28 = Dente(paciente=p, prontuario=numero_prontuario + '28', nome='28')
-        d28.save()
+            d17 = Dente(paciente=p, prontuario=numero_prontuario, nome='17')
+            d17.save()
+            for est in range(0, random.randint(1, 7)):
+                d17.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d17.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d17.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d17.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d17.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
 
-        d48 = Dente(paciente=p, prontuario=numero_prontuario + '48', nome='48')
-        d48.save()
-        d47 = Dente(paciente=p, prontuario=numero_prontuario + '47', nome='47')
-        d47.save()
-        d46 = Dente(paciente=p, prontuario=numero_prontuario + '46', nome='46')
-        d46.save()
-        d45 = Dente(paciente=p, prontuario=numero_prontuario + '45', nome='45')
-        d45.save()
-        d44 = Dente(paciente=p, prontuario=numero_prontuario + '44', nome='44')
-        d44.save()
-        d43 = Dente(paciente=p, prontuario=numero_prontuario + '43', nome='43')
-        d43.save()
-        d42 = Dente(paciente=p, prontuario=numero_prontuario + '42', nome='42')
-        d42.save()
-        d41 = Dente(paciente=p, prontuario=numero_prontuario + '41', nome='41')
-        d41.save()
+            d16 = Dente(paciente=p, prontuario=numero_prontuario, nome='16')
+            d16.save()
+            for est in range(0, random.randint(1, 7)):
+                d16.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d16.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d16.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d16.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d16.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
 
-        d31 = Dente(paciente=p, prontuario=numero_prontuario + '31', nome='31')
-        d31.save()
-        d32 = Dente(paciente=p, prontuario=numero_prontuario + '32', nome='32')
-        d32.save()
-        d33 = Dente(paciente=p, prontuario=numero_prontuario + '33', nome='33')
-        d33.save()
-        d34 = Dente(paciente=p, prontuario=numero_prontuario + '34', nome='34')
-        d34.save()
-        d35 = Dente(paciente=p, prontuario=numero_prontuario + '35', nome='35')
-        d35.save()
-        d36 = Dente(paciente=p, prontuario=numero_prontuario + '36', nome='36')
-        d36.save()
-        d37 = Dente(paciente=p, prontuario=numero_prontuario + '37', nome='37')
-        d37.save()
-        d38 = Dente(paciente=p, prontuario=numero_prontuario + '38', nome='38')
-        d38.save()
+            d15 = Dente(paciente=p, prontuario=numero_prontuario, nome='15')
+            d15.save()
+            for est in range(0, random.randint(1, 7)):
+                d15.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d15.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d15.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d15.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d15.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
 
-        y = Odontograma(id=id, paciente=p, prontuario=numero_prontuario, dente_18=d18, dente_17=d17, dente_16=d16, dente_15=d15, dente_14=d14,
-                        dente_13=d13, dente_12=d12, dente_11=d11, dente_21=d21, dente_22=d22, dente_23=d23,
-                        dente_24=d24, dente_25=d25, dente_26=d26, dente_27=d27, dente_28=d28, dente_48=d48,
-                        dente_47=d47, dente_46=d46, dente_45=d45, dente_44=d44, dente_43=d43, dente_42=d42,
-                        dente_41=d41, dente_31=d31, dente_32=d32, dente_33=d33, dente_34=d34, dente_35=d35,
-                        dente_36=d36, dente_37=d37, dente_38=d38)
-        y.save()
+            d14 = Dente(paciente=p, prontuario=numero_prontuario, nome='14')
+            d14.save()
+            for est in range(0, random.randint(1, 7)):
+                d14.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d14.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d14.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d14.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d14.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d13 = Dente(paciente=p, prontuario=numero_prontuario, nome='13')
+            d13.save()
+            for est in range(0, random.randint(1, 7)):
+                d13.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d13.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d13.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d13.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d13.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d12 = Dente(paciente=p, prontuario=numero_prontuario, nome='12')
+            d12.save()
+            for est in range(0, random.randint(1, 7)):
+                d12.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d12.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d12.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d12.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d12.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d11 = Dente(paciente=p, prontuario=numero_prontuario, nome='11')
+            d11.save()
+            for est in range(0, random.randint(1, 7)):
+                d11.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d11.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d11.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d11.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d11.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d21 = Dente(paciente=p, prontuario=numero_prontuario, nome='21')
+            d21.save()
+            for est in range(0, random.randint(1, 7)):
+                d21.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d21.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d21.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d21.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d21.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d22 = Dente(paciente=p, prontuario=numero_prontuario, nome='22')
+            d22.save()
+            for est in range(0, random.randint(1, 7)):
+                d22.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d22.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d22.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d22.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d22.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d23 = Dente(paciente=p, prontuario=numero_prontuario, nome='23')
+            d23.save()
+            for est in range(0, random.randint(1, 7)):
+                d23.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d23.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d23.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d23.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d23.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d24 = Dente(paciente=p, prontuario=numero_prontuario, nome='24')
+            d24.save()
+            for est in range(0, random.randint(1, 7)):
+                d24.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d24.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d24.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d24.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d24.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d25 = Dente(paciente=p, prontuario=numero_prontuario, nome='25')
+            d25.save()
+            for est in range(0, random.randint(1, 7)):
+                d25.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d25.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d25.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d25.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d25.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d26 = Dente(paciente=p, prontuario=numero_prontuario, nome='26')
+            d26.save()
+            for est in range(0, random.randint(1, 7)):
+                d26.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d26.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d26.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d26.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d26.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d27 = Dente(paciente=p, prontuario=numero_prontuario, nome='27')
+            d27.save()
+            for est in range(0, random.randint(1, 7)):
+                d27.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d27.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d27.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d27.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d27.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d28 = Dente(paciente=p, prontuario=numero_prontuario, nome='28')
+            d28.save()
+            for est in range(0, random.randint(1, 7)):
+                d28.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d28.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d28.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d28.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d28.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d48 = Dente(paciente=p, prontuario=numero_prontuario, nome='48')
+            d48.save()
+            for est in range(0, random.randint(1, 7)):
+                d48.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d48.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d48.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d48.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d48.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            d47 = Dente(paciente=p, prontuario=numero_prontuario, nome='47')
+            d47.save()
+            for est in range(0, random.randint(1, 7)):
+                d47.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d47.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d47.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d47.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d47.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d46 = Dente(paciente=p, prontuario=numero_prontuario, nome='46')
+            d46.save()
+            for est in range(0, random.randint(1, 7)):
+                d46.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d46.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d46.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d46.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d46.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            d45 = Dente(paciente=p, prontuario=numero_prontuario, nome='45')
+            d45.save()
+            for est in range(0, random.randint(1, 7)):
+                d45.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d45.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d45.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d45.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d45.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d44 = Dente(paciente=p, prontuario=numero_prontuario, nome='44')
+            d44.save()
+            for est in range(0, random.randint(1, 7)):
+                d44.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d44.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d44.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d44.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d44.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d43 = Dente(paciente=p, prontuario=numero_prontuario, nome='43')
+            d43.save()
+            for est in range(0, random.randint(1, 7)):
+                d43.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d43.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d43.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d43.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d43.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d42 = Dente(paciente=p, prontuario=numero_prontuario, nome='42')
+            d42.save()
+            for est in range(0, random.randint(1, 7)):
+                d42.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d42.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d42.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d42.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d42.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d41 = Dente(paciente=p, prontuario=numero_prontuario, nome='41')
+            d41.save()
+            for est in range(0, random.randint(1, 7)):
+                d41.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d41.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d41.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d41.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d41.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d31 = Dente(paciente=p, prontuario=numero_prontuario, nome='31')
+            d31.save()
+            for est in range(0, random.randint(1, 7)):
+                d31.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d31.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d31.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d31.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d31.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d32 = Dente(paciente=p, prontuario=numero_prontuario, nome='32')
+            d32.save()
+            for est in range(0, random.randint(1, 7)):
+                d32.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d32.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d32.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d32.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d32.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d33 = Dente(paciente=p, prontuario=numero_prontuario, nome='33')
+            d33.save()
+            for est in range(0, random.randint(1, 7)):
+                d33.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d33.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d33.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d33.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d33.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d34 = Dente(paciente=p, prontuario=numero_prontuario, nome='34')
+            d34.save()
+            for est in range(0, random.randint(1, 7)):
+                d34.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d34.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d34.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d34.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d34.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d35 = Dente(paciente=p, prontuario=numero_prontuario, nome='35')
+            d35.save()
+            for est in range(0, random.randint(1, 7)):
+                d35.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d35.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d35.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d35.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d35.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d36 = Dente(paciente=p, prontuario=numero_prontuario, nome='36')
+            d36.save()
+            for est in range(0, random.randint(1, 7)):
+                d36.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d36.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d36.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d36.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d36.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d37 = Dente(paciente=p, prontuario=numero_prontuario, nome='37')
+            d37.save()
+            for est in range(0, random.randint(1, 7)):
+                d37.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d37.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d37.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d37.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d37.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            d38 = Dente(paciente=p, prontuario=numero_prontuario, nome='38')
+            d38.save()
+            for est in range(0, random.randint(1, 7)):
+                d38.distal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d38.oclusal.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d38.mesial.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d38.lingual.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+            for est in range(0, random.randint(1, 7)):
+                d38.vestibular.add(Estenografia.objects.get(pk=random.randint(1, 23)))
+
+            y = Odontograma(id=id, paciente=p, prontuario=numero_prontuario, dente_18=d18, dente_17=d17, dente_16=d16,
+                            dente_15=d15, dente_14=d14,
+                            dente_13=d13, dente_12=d12, dente_11=d11, dente_21=d21, dente_22=d22, dente_23=d23,
+                            dente_24=d24, dente_25=d25, dente_26=d26, dente_27=d27, dente_28=d28, dente_48=d48,
+                            dente_47=d47, dente_46=d46, dente_45=d45, dente_44=d44, dente_43=d43, dente_42=d42,
+                            dente_41=d41, dente_31=d31, dente_32=d32, dente_33=d33, dente_34=d34, dente_35=d35,
+                            dente_36=d36, dente_37=d37, dente_38=d38)
+            y.save()
+            with tqdm(total=qtd) as barra_progresso:
+                barra_progresso.update(i)
         messages.success(request, "Pacientes Criados com Sucesso!")
         return redirect("create_data")
     return render(request, "prontuario/create_data.html")
-

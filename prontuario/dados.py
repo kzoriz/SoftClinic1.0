@@ -101,7 +101,7 @@ def anamnese_random():
         return anamnese_list[var2]
 
 
-print('ANAMNESE: ', anamnese_random())
+#print('ANAMNESE: ', anamnese_random())
 
 
 def antecedentes_familiares_random():
@@ -136,7 +136,7 @@ def antecedentes_familiares_random():
         return dados
 
 
-print('ANTECEDENTES FAMILIARES: ', antecedentes_familiares_random())
+# print('ANTECEDENTES FAMILIARES: ', antecedentes_familiares_random())
 
 
 def medicamentos_random():
@@ -183,7 +183,7 @@ def medicamentos_random():
         return dados
 
 
-print('MEDICAMENTOS EM USO: ', medicamentos_random())
+# print('MEDICAMENTOS EM USO: ', medicamentos_random())
 
 
 def cirurgia_random():
@@ -223,7 +223,7 @@ def cirurgia_random():
         return dados
 
 
-print('CIRURGIAS ANTERIORES: ', cirurgia_random())
+# print('CIRURGIAS ANTERIORES: ', cirurgia_random())
 
 
 def cardiaco_random():
@@ -259,7 +259,7 @@ def cardiaco_random():
         return dados
 
 
-print('PROBLEMAS CARDIACOS: ', cardiaco_random())
+# print('PROBLEMAS CARDIACOS: ', cardiaco_random())
 
 
 def gastrointestinais_random():
@@ -292,8 +292,8 @@ def gastrointestinais_random():
 
         return dados
 
-
-print('PROBLEMAS GASTROINTESTINAIS: ', gastrointestinais_random())
+#
+# print('PROBLEMAS GASTROINTESTINAIS: ', gastrointestinais_random())
 
 
 def alteracoes_sangineas():
@@ -324,7 +324,7 @@ def alteracoes_sangineas():
         return dados
 
 
-print('ALTERAÇÕES SANGUINEAS: ', alteracoes_sangineas())
+# print('ALTERAÇÕES SANGUINEAS: ', alteracoes_sangineas())
 
 
 def enfermidades_osseas_random():
@@ -357,7 +357,7 @@ def enfermidades_osseas_random():
         return dados
 
 
-print('ENFERMIDADES ÓSSEAS: ', enfermidades_osseas_random())
+# print('ENFERMIDADES ÓSSEAS: ', enfermidades_osseas_random())
 
 
 def problemas_pulmonares_random():
@@ -392,7 +392,7 @@ def problemas_pulmonares_random():
         return dados
 
 
-print('PROBLEMAS PULMONARES: ', problemas_pulmonares_random())
+# print('PROBLEMAS PULMONARES: ', problemas_pulmonares_random())
 
 
 def alegias_random():
@@ -435,7 +435,7 @@ def alegias_random():
         return dados
 
 
-print('ALERGIAS: ', alegias_random())
+# print('ALERGIAS: ', alegias_random())
 
 
 def habitos_random():
@@ -468,8 +468,8 @@ def habitos_random():
 
         return dados
 
-
-print('HÁBITOS: ', habitos_random())
+#
+# print('HÁBITOS: ', habitos_random())
 
 
 def diabetes_random():
@@ -493,7 +493,7 @@ def diabetes_random():
         return dados
 
 
-print('DIABETES: ', diabetes_random())
+# print('DIABETES: ', diabetes_random())
 
 
 def hipertencao_random():
@@ -517,7 +517,7 @@ def hipertencao_random():
         return dados
 
 
-print('HIPERTENSÃO: ', hipertencao_random())
+# print('HIPERTENSÃO: ', hipertencao_random())
 
 
 def epilepsia_random():
@@ -544,7 +544,7 @@ def epilepsia_random():
         return dados
 
 
-print('EPILEPSIA: ', epilepsia_random())
+# print('EPILEPSIA: ', epilepsia_random())
 
 
 def doenca_mental_random():
@@ -578,7 +578,7 @@ def doenca_mental_random():
         return dados
 
 
-print('DOENÇA MENTAL: ', doenca_mental_random())
+# print('DOENÇA MENTAL: ', doenca_mental_random())
 
 
 def hepatite_random():
@@ -602,7 +602,7 @@ def hepatite_random():
         return dados
 
 
-print('HEPATITE: ', hepatite_random())
+# print('HEPATITE: ', hepatite_random())
 
 
 def hiv_random():
@@ -622,7 +622,7 @@ def hiv_random():
         return dados
 
 
-print('HIV: ', hiv_random())
+# print('HIV: ', hiv_random())
 
 
 def herpes_random():
@@ -644,7 +644,7 @@ def herpes_random():
         return dados
 
 
-print('HERPES: ', herpes_random())
+# print('HERPES: ', herpes_random())
 
 
 def sangra_excesso_random():
@@ -664,7 +664,7 @@ def sangra_excesso_random():
         return dados
 
 
-print('SANGRA EM EXCESSO: ', sangra_excesso_random())
+# print('SANGRA EM EXCESSO: ', sangra_excesso_random())
 
 
 def gravida_random():
@@ -684,7 +684,7 @@ def gravida_random():
         return dados
 
 
-print('GRAVIDA: ', gravida_random())
+# print('GRAVIDA: ', gravida_random())
 
 
 def problemas_renais_random():
@@ -719,7 +719,7 @@ def problemas_renais_random():
         return dados
 
 
-print('PROBLEMAS RENAIS: ', problemas_renais_random())
+# print('PROBLEMAS RENAIS: ', problemas_renais_random())
 
 
 def radioterapia_random():
@@ -739,7 +739,7 @@ def radioterapia_random():
         return dados
 
 
-print('RADIOTERAPIA: ', radioterapia_random())
+# print('RADIOTERAPIA: ', radioterapia_random())
 
 
 def quimioterapia_random():
@@ -759,7 +759,7 @@ def quimioterapia_random():
         return dados
 
 
-print('QUIMIOTERAPIA: ', quimioterapia_random())
+# print('QUIMIOTERAPIA: ', quimioterapia_random())
 
 
 def protese_random():
@@ -790,7 +790,7 @@ def protese_random():
         return dados
 
 
-print('ARTICULAÇÕES OU PROTÉSE: ', protese_random())
+# print('ARTICULAÇÕES OU PROTÉSE: ', protese_random())
 
 
 def fuma_random():
@@ -812,7 +812,7 @@ def fuma_random():
         return dados
 
 
-print('FUMA / MASTIGA TABACO OU RAPÉ: ', fuma_random())
+# print('FUMA / MASTIGA TABACO OU RAPÉ: ', fuma_random())
 
 
 def bebida_random():
@@ -834,7 +834,7 @@ def bebida_random():
         return dados
 
 
-print('BEBIDA: ', bebida_random())
+# print('BEBIDA: ', bebida_random())
 
 
 def nodulos_linfaticos_random():
@@ -856,7 +856,7 @@ def nodulos_linfaticos_random():
         return dados
 
 
-print('NODULOS LINFATICOS: ', nodulos_linfaticos_random())
+# print('NODULOS LINFATICOS: ', nodulos_linfaticos_random())
 
 
 def amigdalas_random():
@@ -888,7 +888,7 @@ def amigdalas_random():
         return dados
 
 
-print('AMIGDALAS: ', amigdalas_random())
+# print('AMIGDALAS: ', amigdalas_random())
 
 
 def trigono_retromolar_random():
@@ -922,7 +922,7 @@ def trigono_retromolar_random():
         return dados
 
 
-print('TRIGONO RETROMOLAR: ', trigono_retromolar_random())
+# print('TRIGONO RETROMOLAR: ', trigono_retromolar_random())
 
 
 def palato_duro_random():
@@ -957,7 +957,7 @@ def palato_duro_random():
         return dados
 
 
-print('PALATO DURO: ', palato_duro_random())
+# print('PALATO DURO: ', palato_duro_random())
 
 
 def palato_mole_random():
@@ -993,7 +993,7 @@ def palato_mole_random():
         return dados
 
 
-print('PALATO MOLE: ', palato_mole_random())
+# print('PALATO MOLE: ', palato_mole_random())
 
 
 def labios_random():
@@ -1033,7 +1033,7 @@ def labios_random():
         return dados
 
 
-print("LABIOS: ", labios_random())
+# print("LABIOS: ", labios_random())
 
 
 def pele_random():
@@ -1064,7 +1064,7 @@ def pele_random():
         return dados
 
 
-print('PELE: ', pele_random())
+# print('PELE: ', pele_random())
 
 
 def atm_random():
@@ -1098,7 +1098,7 @@ def atm_random():
         return dados
 
 
-print('ATM: ', atm_random())
+# print('ATM: ', atm_random())
 
 
 def vestibulo_random():
@@ -1133,7 +1133,7 @@ def vestibulo_random():
         return dados
 
 
-print('VESTIBULO: ', vestibulo_random())
+# print('VESTIBULO: ', vestibulo_random())
 
 
 def higiene_bucal_random():
@@ -1154,7 +1154,79 @@ def higiene_bucal_random():
         return dados
 
 
-print('HIGIENE BUCAL: ', higiene_bucal_random())
+# print('HIGIENE BUCAL: ', higiene_bucal_random())
+
+
+def pressao_arterial_random():
+    var = random.randint(0, 100)
+    if var <= 40:
+        return 'N.D.N'
+
+    else:
+        var2 = str(random.randint(110, 190))
+        dados = 'Sistólica ' + var2 + ' mmHg'
+        return dados
+
+
+# print('PRESSÃO ARTERIAL: ', pressao_arterial_random())
+
+
+def respiracao_random():
+    var = random.randint(0, 100)
+    if var <= 40:
+        return 'N.D.N'
+
+    else:
+        var2 = str(random.randint(12, 20))
+        dados = var2 + ' mrm'
+        return dados
+
+
+# print('RESPIRAÇÃO: ', respiracao_random())
+
+
+def temperatura_random():
+    var = random.randint(0, 100)
+    if var <= 40:
+        return 'N.D.N'
+
+    else:
+        var2 = random.uniform(36, 38)
+        var2 = '{:.1f}'.format(var2)
+        dados = var2 + ' ºC'
+        return dados
+
+
+# print('TEMPERATURA: ', temperatura_random())
+
+
+def ipv_random():
+    var = random.randint(0, 100)
+    if var <= 60:
+        return '0'
+
+    else:
+        var2 = str(random.randint(1, 3))
+        dados = var2
+        return dados
+
+
+# print('INDICE DE PLACA VISIVEL: ', ipv_random())
+
+
+def psr_random():
+    var = random.randint(0, 100)
+    if var <= 60:
+        return '0'
+
+    else:
+        var2 = str(random.randint(1, 4))
+        dados = var2
+        return dados
+
+
+# print('PSR: ', psr_random())
+
 
 # for i in range(1, 10001):
 #     print('PACIENTE: ', i)
