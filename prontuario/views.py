@@ -1,5 +1,5 @@
 import random
-
+import time
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -206,14 +206,13 @@ def sup18(request, pk=None):
 
 @xframe_options_sameorigin
 def sup18_edit(request, pk=None):
-    dente_18 = Dente.objects.get(pk=pk)
-    d18 = dente_18.pk
+    d18 = Dente.objects.get(pk=pk)
+    dente18 = d18.pk
     estenografia = []
     for i in range(23):
         estenografia.append(Estenografia.objects.get(pk=i + 1))
     if request.method == 'GET':
         dente_18 = Dente.objects.get(pk=pk)
-        d18 = dente_18.pk
         dd = list(dente_18.distal.all())
         do = list(dente_18.oclusal.all())
         dm = list(dente_18.mesial.all())
@@ -243,7 +242,7 @@ def sup18_edit(request, pk=None):
         for i in distal:
             print(i)
         context = {
-            'object': d18,
+            'dente18': dente18,
             'distal': distal,
             'oclusal': oclusal,
             'mesial': mesial,
@@ -285,7 +284,7 @@ def sup18_edit(request, pk=None):
                 dente_18.vestibular.remove(estenografia[i])
 
         messages.success(request, "Dente alterado com sucesso")
-        return HttpResponsePermanentRedirect(reverse('sup18', args=[d18]))
+        return HttpResponsePermanentRedirect(reverse('sup18', args=[dente18]))
     return render(request, "pacientes/paciente_registrar2.html")
 
 
@@ -332,6 +331,90 @@ def sup17(request, pk=None):
     return render(request, "prontuario/Dentes/dentadura-sup-17-detail.html", context)
 
 
+@xframe_options_sameorigin
+def sup17_edit(request, pk=None):
+    d17 = Dente.objects.get(pk=pk)
+    dente17 = d17.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_17 = Dente.objects.get(pk=pk)
+        dd = list(dente_17.distal.all())
+        do = list(dente_17.oclusal.all())
+        dm = list(dente_17.mesial.all())
+        dl = list(dente_17.lingual.all())
+        dv = list(dente_17.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente18': dente17,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-18-edit.html", context)
+    if request.method == 'POST':
+        dente_18 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_18.distal.add(estenografia[i])
+            else:
+                dente_18.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_18.oclusal.add(estenografia[i])
+            else:
+                dente_18.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_18.mesial.add(estenografia[i])
+            else:
+                dente_18.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_18.lingual.add(estenografia[i])
+            else:
+                dente_18.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_18.vestibular.add(estenografia[i])
+            else:
+                dente_18.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup17', args=[dente17]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
 @xframe_options_deny
 def view_one(request):
     return HttpResponse("I won't display in any frame!")
@@ -369,6 +452,7 @@ def create_data(request):
         return render(request, "prontuario/create_data.html", context)
 
     if request.method == 'POST':
+        ini = time.time()
         num = request.POST['qtd']
         qtd = int(num)
         for i in range(1, qtd + 1):
@@ -859,6 +943,9 @@ def create_data(request):
             y.save()
             with tqdm(total=qtd) as barra_progresso:
                 barra_progresso.update(i)
+        fim = time.time()
+        tempo = (fim - ini)
+        print(f'TEMPO: {tempo:.2f} SEGUNDOS ')
         messages.success(request, "Pacientes Criados com Sucesso!")
         return redirect("create_data")
     return render(request, "prontuario/create_data.html")

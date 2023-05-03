@@ -278,6 +278,7 @@ class PacienteInfantilDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def inicio(request, pk=None):
+    estenografia_create()
     context = {
 
     }

@@ -66,7 +66,7 @@
 
     <div class="col">
         <div class="row justify-content-md-center">
-            <h1 style="margin: auto; padding-bottom: 10px;">18</h1>
+            <h1 style="margin: auto; padding-bottom: 10px;">17</h1>
         </div>
         <div class="row justify-content-md-center">
             <a href="#" class="button_facetas" id="lingual" onclick="btn_lingual()">Lingual</a>
@@ -80,7 +80,7 @@
             <a href="#" class="button_facetas" id="vestibular" onclick="btn_vestibular()">Vestibular</a>
         </div>
     </div>
-    <form method="post" action={{ dente18 }}><input type="hidden">
+    <form method="post" action={{ dente17 }}><input type="hidden">
         {% csrf_token %}
         <div class="detalhes" id="display_distal"  >
             <h1 style="margin: auto; padding-bottom: 10px;">Distal</h1>
@@ -2051,9 +2051,6 @@
             <button type="submit" class="btn btn-1 custom-btn  btn-margin" style="border: 2px solid black"><i class="fa-solid fa-floppy-disk"></i></button>
         </div>
     </form>
-<!--    <script src="{% static 'odontograma/js/display_distal_detail.js' %}"></script>-->
-<!--    <script src="{% static 'odontograma/js/display_distal.js' %}"></script>-->
-<!--    <script src="{% static 'odontograma/js/display_oclusal.js' %}"></script>-->
     <script src="{% static 'odontograma/js/btn_facetas.js' %}"></script>
 </div>
 
