@@ -138,7 +138,7 @@
                         <div style="padding-top: 10px">
                             <b>17</b>
                         </div>
-                        <div class="dente"  style="margin: 0 -10px 0 -10px"  id="btn_17" type="button" onclick="btn_17()">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_17" type="button" onclick="btn_17()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-17.png' %}" alt="sup-17">
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                         <div style="padding-top: 10px">
                             <b>16</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px"  id="btn_16" type="button" onclick="btn_16()">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_16" type="button" onclick="btn_16()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-16.png' %}" alt="sup-16">
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                         <div style="padding-top: 10px">
                             <b>15</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px"  id="btn_15" type="button" onclick="btn_15()">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_15" type="button" onclick="btn_15()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-15.png' %}" alt="sup-15">
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         <div style="padding-top: 10px">
                             <b>14</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_14" type="button" onclick="btn_14()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-14.png' %}" alt="sup-14">
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                         <div style="padding-top: 10px">
                             <b>13</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_13" type="button" onclick="btn_13()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-13.png' %}" alt="sup-13">
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                         <div style="padding-top: 10px">
                             <b>12</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_12" type="button" onclick="btn_12()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-12.png' %}" alt="sup-12">
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                         <div style="padding-top: 10px">
                             <b>11</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_11" type="button" onclick="btn_11()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-11.png' %}" alt="sup-11">
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                         <div style="padding-top: 10px">
                             <b>21</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_21" type="button" onclick="btn_21()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-21.png' %}" alt="sup-21">
                         </div>
                     </div>
@@ -399,6 +399,16 @@
             <iframe class="display_none" id="d16" src="{% url  'sup16' odontograma.dente_16.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
             </iframe>
             <iframe class="display_none" id="d15" src="{% url  'sup15' odontograma.dente_15.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d14" src="{% url  'sup14' odontograma.dente_14.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d13" src="{% url  'sup13' odontograma.dente_13.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d12" src="{% url  'sup12' odontograma.dente_12.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d11" src="{% url  'sup11' odontograma.dente_11.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d21" src="{% url  'sup21' odontograma.dente_21.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
             </iframe>
             <div class="mr-1 text-right">
                 <a href="{% url 'psr_detalhes' odontograma.pk %}" class="custom-btn btn-1 btn" type="button">
