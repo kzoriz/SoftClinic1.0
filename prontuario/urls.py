@@ -36,6 +36,20 @@ urlpatterns = [
 
     path("sup-21/<int:pk>/", sup21, name="sup21"),
     path("sup-21-edit/<int:pk>", sup21_edit, name="sup21_edit"),
+    path("sup-22/<int:pk>/", sup22, name="sup22"),
+    path("sup-22-edit/<int:pk>", sup22_edit, name="sup22_edit"),
+    path("sup-23/<int:pk>/", sup23, name="sup23"),
+    path("sup-23-edit/<int:pk>", sup23_edit, name="sup23_edit"),
+    path("sup-24/<int:pk>/", sup24, name="sup24"),
+    path("sup-24-edit/<int:pk>", sup24_edit, name="sup24_edit"),
+    path("sup-25/<int:pk>/", sup25, name="sup25"),
+    path("sup-25-edit/<int:pk>", sup25_edit, name="sup25_edit"),
+    path("sup-26/<int:pk>/", sup26, name="sup26"),
+    path("sup-26-edit/<int:pk>", sup26_edit, name="sup26_edit"),
+    path("sup-27/<int:pk>/", sup27, name="sup27"),
+    path("sup-27-edit/<int:pk>", sup27_edit, name="sup27_edit"),
+    path("sup-28/<int:pk>/", sup28, name="sup28"),
+    path("sup-28-edit/<int:pk>", sup28_edit, name="sup28_edit"),
 
     path("create-data/", create_data, name="create_data"),
 ]

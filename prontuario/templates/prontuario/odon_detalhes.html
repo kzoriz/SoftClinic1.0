@@ -204,7 +204,7 @@
                         <div style="padding-top: 10px">
                             <b>22</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_22" type="button" onclick="btn_22()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-22.png' %}" alt="sup-22">
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                         <div style="padding-top: 10px">
                             <b>23</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_23" type="button" onclick="btn_23()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-23.png' %}" alt="sup-23">
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                         <div style="padding-top: 10px">
                             <b>24</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_24" type="button" onclick="btn_24()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-24.png' %}" alt="sup-24">
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                         <div style="padding-top: 10px">
                             <b>25</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_25" type="button" onclick="btn_25()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-25.png' %}" alt="sup-25">
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                         <div style="padding-top: 10px">
                             <b>26</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_26" type="button" onclick="btn_26()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-26.png' %}" alt="sup-26">
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                         <div style="padding-top: 10px">
                             <b>27</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_27" type="button" onclick="btn_27()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-27.png' %}" alt="sup-27">
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                         <div style="padding-top: 10px">
                             <b>28</b>
                         </div>
-                        <div class="dente" style="margin: 0 -10px 0 -10px">
+                        <div class="dente" style="margin: 0 -10px 0 -10px" id="btn_28" type="button" onclick="btn_28()">
                             <img class="" src="{% static 'odontograma/img/dentadura/dentadura-sup-28.png' %}" alt="sup-28">
                         </div>
                     </div>
@@ -409,6 +409,20 @@
             <iframe class="display_none" id="d11" src="{% url  'sup11' odontograma.dente_11.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
             </iframe>
             <iframe class="display_none" id="d21" src="{% url  'sup21' odontograma.dente_21.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d22" src="{% url  'sup22' odontograma.dente_22.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d23" src="{% url  'sup23' odontograma.dente_23.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d24" src="{% url  'sup24' odontograma.dente_24.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d25" src="{% url  'sup25' odontograma.dente_25.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d26" src="{% url  'sup26' odontograma.dente_26.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d27" src="{% url  'sup27' odontograma.dente_27.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
+            </iframe>
+            <iframe class="display_none" id="d28" src="{% url  'sup28' odontograma.dente_28.pk %}" width="100%" height="1700px" style="border: none" sandbox="allow-same-origin allow-forms allow-scripts">
             </iframe>
             <div class="mr-1 text-right">
                 <a href="{% url 'psr_detalhes' odontograma.pk %}" class="custom-btn btn-1 btn" type="button">
