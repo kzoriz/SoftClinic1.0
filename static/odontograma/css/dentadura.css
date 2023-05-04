@@ -151,10 +151,16 @@
 /*    !* border: 2px solid green; *!*/
 /*}*/
 
-#d17 {
-    display: none;
-}
+/*#d17 {*/
+/*    display: none;*/
+/*}*/
+/*#d18{*/
+/*    display: none;*/
+/*}*/
+/*#d16{*/
+/*    display: none;*/
+/*}*/
 
-#d18{
+.display_none {
     display: none;
 }

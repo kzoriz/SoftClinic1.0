@@ -5,33 +5,20 @@
     <link rel="stylesheet" href="{% static 'odontograma/css/dentadura.css' %}">
     <style xmlns="http://www.w3.org/1999/html">
         .custom-btn {
-              width: 130px;
-              height: 40px;
-              padding: 10px 25px;
-              font-family: 'Lato', sans-serif;
-              font-weight: 500;
-              background: transparent;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              position: relative;
-              display: inline-block;
+            width: 130px;
+            height: 40px;
+            padding: 10px 25px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
             color: black;
         }
         .btn-margin {
             margin: 0 10px 0 10px;
-        }
-
-        .btn-1 {
-          transition: all 0.3s ease;
-        }
-        .btn-1:hover {
-           box-shadow:
-           -7px -7px 20px 0px #fff9,
-           -4px -4px 5px 0px #fff9,
-           7px 7px 20px 0px #0002,
-           4px 4px 5px 0px #0001;
-          background: #66a1e8;
-            color: #FFFFFF;
         }
         .btn-2 {
             transition: all 0.3s ease;
@@ -46,11 +33,6 @@
             background: #3CB371;
             color: #FFFFFF;
         }
-        .col-sextante{
-            padding: 1px 1px 1px 1px;
-            margin: 1px 1px 1px 1px;
-        }
-
         .checked-true{
             position: center;
             /*bottom : 10px;*/
@@ -80,7 +62,7 @@
     {% endif %}
     <div class="col">
         <div class="row justify-content-md-center">
-            <h1 style="margin: auto; padding-bottom: 10px;">18</h1>
+            <h1 style="margin: auto; padding-bottom: 10px;">16</h1>
         </div>
         <div class="row justify-content-md-center">
             <a href="#" class="button_facetas" id="lingual" onclick="btn_lingual()">Lingual</a>
@@ -104,9 +86,9 @@
                         <td>
                             <div class="">
                                 {% if 'higido' in distal %}
-                                <img class=" img-fluid checked-true inf" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                <img class=" img-fluid checked-true" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
                                 {% else %}
-                                <img class=" img-fluid checked-false inf" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
+                                <img class=" img-fluid checked-false" src="{% static 'odontograma/img/higido.jpeg' %}"  onclick="" alt="">
                                 {% endif %}
                             </div>
                         </td>
@@ -115,7 +97,7 @@
                         <td>
                             <div>
                                 {% if 'mancha branca ativa' in distal %}
-                                <img class="img-fluid checked-true inf" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
+                                <img class="img-fluid checked-true" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}" alt="">
                                 {% else %}
                                 <img class="img-fluid checked-false" src="{% static 'odontograma/img/mancha_branca_ativa.jpeg' %}"  alt="">
                                 {% endif %}
@@ -1599,7 +1581,7 @@
         </div>
     </div>
     <div class="mr-1 text-right" style="padding: 20px 0 40px 40px">
-        <a href="{% url 'sup18_edit' dente18 %}" class="btn btn-2 custom-btn  btn-margin"  type="button">
+        <a href="{% url 'sup16_edit' dente16 %}" class="btn btn-2 custom-btn  btn-margin"  type="button">
             <span class="text">Atualizar</span>
         </a>
     </div>
