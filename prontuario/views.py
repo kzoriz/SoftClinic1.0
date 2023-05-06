@@ -426,11 +426,7 @@ def sup17_edit(request, pk=None):
 #     return HttpResponse("Display in a frame if it's from the same origin as me.")
 #
 #
-# def request_date(request, dado):
-#     context = {
-#         'dado': dado,
-#     }
-#     return render(request, "prontuario/create_data.html", context)
+
 
 def sup16(request, pk=None):
     d16 = Dente.objects.get(pk=pk)
@@ -2206,6 +2202,2038 @@ def sup28_edit(request, pk=None):
 
         messages.success(request, "Dente alterado com sucesso")
         return HttpResponsePermanentRedirect(reverse('sup28', args=[dente28]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup48(request, pk=None):
+    d48 = Dente.objects.get(pk=pk)
+    dente48 = d48.pk
+    print(d48)
+    dd = list(d48.distal.all())
+    do = list(d48.oclusal.all())
+    dm = list(d48.mesial.all())
+    dl = list(d48.lingual.all())
+    dv = list(d48.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente48': dente48,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-48-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup48_edit(request, pk=None):
+    d48 = Dente.objects.get(pk=pk)
+    dente48 = d48.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_48 = Dente.objects.get(pk=pk)
+        dd = list(dente_48.distal.all())
+        do = list(dente_48.oclusal.all())
+        dm = list(dente_48.mesial.all())
+        dl = list(dente_48.lingual.all())
+        dv = list(dente_48.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente48': dente48,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-48-edit.html", context)
+    if request.method == 'POST':
+        dente_48 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_48.distal.add(estenografia[i])
+            else:
+                dente_48.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_48.oclusal.add(estenografia[i])
+            else:
+                dente_48.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_48.mesial.add(estenografia[i])
+            else:
+                dente_48.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_48.lingual.add(estenografia[i])
+            else:
+                dente_48.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_48.vestibular.add(estenografia[i])
+            else:
+                dente_48.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup48', args=[dente48]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup47(request, pk=None):
+    d47 = Dente.objects.get(pk=pk)
+    dente47 = d47.pk
+    print(d47)
+    dd = list(d47.distal.all())
+    do = list(d47.oclusal.all())
+    dm = list(d47.mesial.all())
+    dl = list(d47.lingual.all())
+    dv = list(d47.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente47': dente47,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-47-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup47_edit(request, pk=None):
+    d47 = Dente.objects.get(pk=pk)
+    dente47 = d47.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_47 = Dente.objects.get(pk=pk)
+        dd = list(dente_47.distal.all())
+        do = list(dente_47.oclusal.all())
+        dm = list(dente_47.mesial.all())
+        dl = list(dente_47.lingual.all())
+        dv = list(dente_47.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente47': dente47,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-47-edit.html", context)
+    if request.method == 'POST':
+        dente_47 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_47.distal.add(estenografia[i])
+            else:
+                dente_47.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_47.oclusal.add(estenografia[i])
+            else:
+                dente_47.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_47.mesial.add(estenografia[i])
+            else:
+                dente_47.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_47.lingual.add(estenografia[i])
+            else:
+                dente_47.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_47.vestibular.add(estenografia[i])
+            else:
+                dente_47.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup47', args=[dente47]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup46(request, pk=None):
+    d46 = Dente.objects.get(pk=pk)
+    dente46 = d46.pk
+    print(d46)
+    dd = list(d46.distal.all())
+    do = list(d46.oclusal.all())
+    dm = list(d46.mesial.all())
+    dl = list(d46.lingual.all())
+    dv = list(d46.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente46': dente46,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-46-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup46_edit(request, pk=None):
+    d46 = Dente.objects.get(pk=pk)
+    dente46 = d46.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_46 = Dente.objects.get(pk=pk)
+        dd = list(dente_46.distal.all())
+        do = list(dente_46.oclusal.all())
+        dm = list(dente_46.mesial.all())
+        dl = list(dente_46.lingual.all())
+        dv = list(dente_46.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente46': dente46,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-46-edit.html", context)
+    if request.method == 'POST':
+        dente_46 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_46.distal.add(estenografia[i])
+            else:
+                dente_46.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_46.oclusal.add(estenografia[i])
+            else:
+                dente_46.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_46.mesial.add(estenografia[i])
+            else:
+                dente_46.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_46.lingual.add(estenografia[i])
+            else:
+                dente_46.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_46.vestibular.add(estenografia[i])
+            else:
+                dente_46.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup46', args=[dente46]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup45(request, pk=None):
+    d45 = Dente.objects.get(pk=pk)
+    dente45 = d45.pk
+    print(d45)
+    dd = list(d45.distal.all())
+    do = list(d45.oclusal.all())
+    dm = list(d45.mesial.all())
+    dl = list(d45.lingual.all())
+    dv = list(d45.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente45': dente45,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-45-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup45_edit(request, pk=None):
+    d45 = Dente.objects.get(pk=pk)
+    dente45 = d45.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_45 = Dente.objects.get(pk=pk)
+        dd = list(dente_45.distal.all())
+        do = list(dente_45.oclusal.all())
+        dm = list(dente_45.mesial.all())
+        dl = list(dente_45.lingual.all())
+        dv = list(dente_45.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente45': dente45,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-45-edit.html", context)
+    if request.method == 'POST':
+        dente_45 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_45.distal.add(estenografia[i])
+            else:
+                dente_45.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_45.oclusal.add(estenografia[i])
+            else:
+                dente_45.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_45.mesial.add(estenografia[i])
+            else:
+                dente_45.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_45.lingual.add(estenografia[i])
+            else:
+                dente_45.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_45.vestibular.add(estenografia[i])
+            else:
+                dente_45.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup45', args=[dente45]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup44(request, pk=None):
+    d44 = Dente.objects.get(pk=pk)
+    dente44 = d44.pk
+    print(d44)
+    dd = list(d44.distal.all())
+    do = list(d44.oclusal.all())
+    dm = list(d44.mesial.all())
+    dl = list(d44.lingual.all())
+    dv = list(d44.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente44': dente44,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-44-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup44_edit(request, pk=None):
+    d44 = Dente.objects.get(pk=pk)
+    dente44 = d44.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_44 = Dente.objects.get(pk=pk)
+        dd = list(dente_44.distal.all())
+        do = list(dente_44.oclusal.all())
+        dm = list(dente_44.mesial.all())
+        dl = list(dente_44.lingual.all())
+        dv = list(dente_44.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente44': dente44,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-44-edit.html", context)
+    if request.method == 'POST':
+        dente_44 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_44.distal.add(estenografia[i])
+            else:
+                dente_44.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_44.oclusal.add(estenografia[i])
+            else:
+                dente_44.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_44.mesial.add(estenografia[i])
+            else:
+                dente_44.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_44.lingual.add(estenografia[i])
+            else:
+                dente_44.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_44.vestibular.add(estenografia[i])
+            else:
+                dente_44.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup44', args=[dente44]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup43(request, pk=None):
+    d43 = Dente.objects.get(pk=pk)
+    dente43 = d43.pk
+    print(d43)
+    dd = list(d43.distal.all())
+    do = list(d43.oclusal.all())
+    dm = list(d43.mesial.all())
+    dl = list(d43.lingual.all())
+    dv = list(d43.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente43': dente43,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-43-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup43_edit(request, pk=None):
+    d43 = Dente.objects.get(pk=pk)
+    dente43 = d43.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_43 = Dente.objects.get(pk=pk)
+        dd = list(dente_43.distal.all())
+        do = list(dente_43.oclusal.all())
+        dm = list(dente_43.mesial.all())
+        dl = list(dente_43.lingual.all())
+        dv = list(dente_43.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente43': dente43,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-43-edit.html", context)
+    if request.method == 'POST':
+        dente_43 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_43.distal.add(estenografia[i])
+            else:
+                dente_43.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_43.oclusal.add(estenografia[i])
+            else:
+                dente_43.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_43.mesial.add(estenografia[i])
+            else:
+                dente_43.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_43.lingual.add(estenografia[i])
+            else:
+                dente_43.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_43.vestibular.add(estenografia[i])
+            else:
+                dente_43.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup43', args=[dente43]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup42(request, pk=None):
+    d42 = Dente.objects.get(pk=pk)
+    dente42 = d42.pk
+    print(d42)
+    dd = list(d42.distal.all())
+    do = list(d42.oclusal.all())
+    dm = list(d42.mesial.all())
+    dl = list(d42.lingual.all())
+    dv = list(d42.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente42': dente42,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-42-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup42_edit(request, pk=None):
+    d42 = Dente.objects.get(pk=pk)
+    dente42 = d42.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_42 = Dente.objects.get(pk=pk)
+        dd = list(dente_42.distal.all())
+        do = list(dente_42.oclusal.all())
+        dm = list(dente_42.mesial.all())
+        dl = list(dente_42.lingual.all())
+        dv = list(dente_42.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente42': dente42,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-42-edit.html", context)
+    if request.method == 'POST':
+        dente_42 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_42.distal.add(estenografia[i])
+            else:
+                dente_42.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_42.oclusal.add(estenografia[i])
+            else:
+                dente_42.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_42.mesial.add(estenografia[i])
+            else:
+                dente_42.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_42.lingual.add(estenografia[i])
+            else:
+                dente_42.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_42.vestibular.add(estenografia[i])
+            else:
+                dente_42.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup42', args=[dente42]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup41(request, pk=None):
+    d41 = Dente.objects.get(pk=pk)
+    dente41 = d41.pk
+    print(d41)
+    dd = list(d41.distal.all())
+    do = list(d41.oclusal.all())
+    dm = list(d41.mesial.all())
+    dl = list(d41.lingual.all())
+    dv = list(d41.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente41': dente41,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-41-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup41_edit(request, pk=None):
+    d41 = Dente.objects.get(pk=pk)
+    dente41 = d41.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_41 = Dente.objects.get(pk=pk)
+        dd = list(dente_41.distal.all())
+        do = list(dente_41.oclusal.all())
+        dm = list(dente_41.mesial.all())
+        dl = list(dente_41.lingual.all())
+        dv = list(dente_41.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente41': dente41,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-41-edit.html", context)
+    if request.method == 'POST':
+        dente_41 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_41.distal.add(estenografia[i])
+            else:
+                dente_41.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_41.oclusal.add(estenografia[i])
+            else:
+                dente_41.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_41.mesial.add(estenografia[i])
+            else:
+                dente_41.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_41.lingual.add(estenografia[i])
+            else:
+                dente_41.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_41.vestibular.add(estenografia[i])
+            else:
+                dente_41.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup41', args=[dente41]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup31(request, pk=None):
+    d31 = Dente.objects.get(pk=pk)
+    dente31 = d31.pk
+    print(d31)
+    dd = list(d31.distal.all())
+    do = list(d31.oclusal.all())
+    dm = list(d31.mesial.all())
+    dl = list(d31.lingual.all())
+    dv = list(d31.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente31': dente31,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-31-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup31_edit(request, pk=None):
+    d31 = Dente.objects.get(pk=pk)
+    dente31 = d31.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_31 = Dente.objects.get(pk=pk)
+        dd = list(dente_31.distal.all())
+        do = list(dente_31.oclusal.all())
+        dm = list(dente_31.mesial.all())
+        dl = list(dente_31.lingual.all())
+        dv = list(dente_31.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente31': dente31,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-31-edit.html", context)
+    if request.method == 'POST':
+        dente_31 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_31.distal.add(estenografia[i])
+            else:
+                dente_31.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_31.oclusal.add(estenografia[i])
+            else:
+                dente_31.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_31.mesial.add(estenografia[i])
+            else:
+                dente_31.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_31.lingual.add(estenografia[i])
+            else:
+                dente_31.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_31.vestibular.add(estenografia[i])
+            else:
+                dente_31.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup31', args=[dente31]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup32(request, pk=None):
+    d32 = Dente.objects.get(pk=pk)
+    dente32 = d32.pk
+    print(d32)
+    dd = list(d32.distal.all())
+    do = list(d32.oclusal.all())
+    dm = list(d32.mesial.all())
+    dl = list(d32.lingual.all())
+    dv = list(d32.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente32': dente32,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-32-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup32_edit(request, pk=None):
+    d32 = Dente.objects.get(pk=pk)
+    dente32 = d32.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_32 = Dente.objects.get(pk=pk)
+        dd = list(dente_32.distal.all())
+        do = list(dente_32.oclusal.all())
+        dm = list(dente_32.mesial.all())
+        dl = list(dente_32.lingual.all())
+        dv = list(dente_32.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente32': dente32,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-32-edit.html", context)
+    if request.method == 'POST':
+        dente_32 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_32.distal.add(estenografia[i])
+            else:
+                dente_32.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_32.oclusal.add(estenografia[i])
+            else:
+                dente_32.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_32.mesial.add(estenografia[i])
+            else:
+                dente_32.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_32.lingual.add(estenografia[i])
+            else:
+                dente_32.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_32.vestibular.add(estenografia[i])
+            else:
+                dente_32.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup32', args=[dente32]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup33(request, pk=None):
+    d33 = Dente.objects.get(pk=pk)
+    dente33 = d33.pk
+    print(d33)
+    dd = list(d33.distal.all())
+    do = list(d33.oclusal.all())
+    dm = list(d33.mesial.all())
+    dl = list(d33.lingual.all())
+    dv = list(d33.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente33': dente33,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-33-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup33_edit(request, pk=None):
+    d33 = Dente.objects.get(pk=pk)
+    dente33 = d33.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_33 = Dente.objects.get(pk=pk)
+        dd = list(dente_33.distal.all())
+        do = list(dente_33.oclusal.all())
+        dm = list(dente_33.mesial.all())
+        dl = list(dente_33.lingual.all())
+        dv = list(dente_33.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente33': dente33,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-33-edit.html", context)
+    if request.method == 'POST':
+        dente_33 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_33.distal.add(estenografia[i])
+            else:
+                dente_33.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_33.oclusal.add(estenografia[i])
+            else:
+                dente_33.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_33.mesial.add(estenografia[i])
+            else:
+                dente_33.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_33.lingual.add(estenografia[i])
+            else:
+                dente_33.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_33.vestibular.add(estenografia[i])
+            else:
+                dente_33.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup33', args=[dente33]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup34(request, pk=None):
+    d34 = Dente.objects.get(pk=pk)
+    dente34 = d34.pk
+    print(d34)
+    dd = list(d34.distal.all())
+    do = list(d34.oclusal.all())
+    dm = list(d34.mesial.all())
+    dl = list(d34.lingual.all())
+    dv = list(d34.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente34': dente34,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-34-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup34_edit(request, pk=None):
+    d34 = Dente.objects.get(pk=pk)
+    dente34 = d34.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_34 = Dente.objects.get(pk=pk)
+        dd = list(dente_34.distal.all())
+        do = list(dente_34.oclusal.all())
+        dm = list(dente_34.mesial.all())
+        dl = list(dente_34.lingual.all())
+        dv = list(dente_34.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente34': dente34,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-34-edit.html", context)
+    if request.method == 'POST':
+        dente_34 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_34.distal.add(estenografia[i])
+            else:
+                dente_34.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_34.oclusal.add(estenografia[i])
+            else:
+                dente_34.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_34.mesial.add(estenografia[i])
+            else:
+                dente_34.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_34.lingual.add(estenografia[i])
+            else:
+                dente_34.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_34.vestibular.add(estenografia[i])
+            else:
+                dente_34.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup34', args=[dente34]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup35(request, pk=None):
+    d35 = Dente.objects.get(pk=pk)
+    dente35 = d35.pk
+    print(d35)
+    dd = list(d35.distal.all())
+    do = list(d35.oclusal.all())
+    dm = list(d35.mesial.all())
+    dl = list(d35.lingual.all())
+    dv = list(d35.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente35': dente35,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-35-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup35_edit(request, pk=None):
+    d35 = Dente.objects.get(pk=pk)
+    dente35 = d35.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_35 = Dente.objects.get(pk=pk)
+        dd = list(dente_35.distal.all())
+        do = list(dente_35.oclusal.all())
+        dm = list(dente_35.mesial.all())
+        dl = list(dente_35.lingual.all())
+        dv = list(dente_35.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente35': dente35,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-35-edit.html", context)
+    if request.method == 'POST':
+        dente_35 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_35.distal.add(estenografia[i])
+            else:
+                dente_35.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_35.oclusal.add(estenografia[i])
+            else:
+                dente_35.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_35.mesial.add(estenografia[i])
+            else:
+                dente_35.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_35.lingual.add(estenografia[i])
+            else:
+                dente_35.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_35.vestibular.add(estenografia[i])
+            else:
+                dente_35.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup35', args=[dente35]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup36(request, pk=None):
+    d36 = Dente.objects.get(pk=pk)
+    dente36 = d36.pk
+    print(d36)
+    dd = list(d36.distal.all())
+    do = list(d36.oclusal.all())
+    dm = list(d36.mesial.all())
+    dl = list(d36.lingual.all())
+    dv = list(d36.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente36': dente36,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-36-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup36_edit(request, pk=None):
+    d36 = Dente.objects.get(pk=pk)
+    dente36 = d36.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_36 = Dente.objects.get(pk=pk)
+        dd = list(dente_36.distal.all())
+        do = list(dente_36.oclusal.all())
+        dm = list(dente_36.mesial.all())
+        dl = list(dente_36.lingual.all())
+        dv = list(dente_36.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente36': dente36,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-36-edit.html", context)
+    if request.method == 'POST':
+        dente_36 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_36.distal.add(estenografia[i])
+            else:
+                dente_36.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_36.oclusal.add(estenografia[i])
+            else:
+                dente_36.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_36.mesial.add(estenografia[i])
+            else:
+                dente_36.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_36.lingual.add(estenografia[i])
+            else:
+                dente_36.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_36.vestibular.add(estenografia[i])
+            else:
+                dente_36.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup36', args=[dente36]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup37(request, pk=None):
+    d37 = Dente.objects.get(pk=pk)
+    dente37 = d37.pk
+    print(d37)
+    dd = list(d37.distal.all())
+    do = list(d37.oclusal.all())
+    dm = list(d37.mesial.all())
+    dl = list(d37.lingual.all())
+    dv = list(d37.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente37': dente37,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-37-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup37_edit(request, pk=None):
+    d37 = Dente.objects.get(pk=pk)
+    dente37 = d37.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_37 = Dente.objects.get(pk=pk)
+        dd = list(dente_37.distal.all())
+        do = list(dente_37.oclusal.all())
+        dm = list(dente_37.mesial.all())
+        dl = list(dente_37.lingual.all())
+        dv = list(dente_37.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente37': dente37,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-37-edit.html", context)
+    if request.method == 'POST':
+        dente_37 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_37.distal.add(estenografia[i])
+            else:
+                dente_37.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_37.oclusal.add(estenografia[i])
+            else:
+                dente_37.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_37.mesial.add(estenografia[i])
+            else:
+                dente_37.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_37.lingual.add(estenografia[i])
+            else:
+                dente_37.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_37.vestibular.add(estenografia[i])
+            else:
+                dente_37.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup37', args=[dente37]))
+    return render(request, "pacientes/paciente_registrar2.html")
+
+
+@xframe_options_sameorigin
+def sup38(request, pk=None):
+    d38 = Dente.objects.get(pk=pk)
+    dente38 = d38.pk
+    print(d38)
+    dd = list(d38.distal.all())
+    do = list(d38.oclusal.all())
+    dm = list(d38.mesial.all())
+    dl = list(d38.lingual.all())
+    dv = list(d38.vestibular.all())
+
+    distal = []
+    oclusal = []
+    mesial = []
+    lingual = []
+    vestibular = []
+
+    for i in dd:
+        i = str(i)
+        distal.append(i)
+    for i in do:
+        i = str(i)
+        oclusal.append(i)
+    for i in dm:
+        i = str(i)
+        mesial.append(i)
+    for i in dl:
+        i = str(i)
+        lingual.append(i)
+    for i in dv:
+        i = str(i)
+        vestibular.append(i)
+    context = {
+        'distal': distal,
+        'oclusal': oclusal,
+        'mesial': mesial,
+        'lingual': lingual,
+        'vestibular': vestibular,
+        'dente38': dente38,
+    }
+    return render(request, "prontuario/Dentes/dentadura-sup-38-detail.html", context)
+
+
+@xframe_options_sameorigin
+def sup38_edit(request, pk=None):
+    d38 = Dente.objects.get(pk=pk)
+    dente38 = d38.pk
+    estenografia = []
+    for i in range(23):
+        estenografia.append(Estenografia.objects.get(pk=i + 1))
+    if request.method == 'GET':
+        dente_38 = Dente.objects.get(pk=pk)
+        dd = list(dente_38.distal.all())
+        do = list(dente_38.oclusal.all())
+        dm = list(dente_38.mesial.all())
+        dl = list(dente_38.lingual.all())
+        dv = list(dente_38.vestibular.all())
+        distal = []
+        oclusal = []
+        mesial = []
+        lingual = []
+        vestibular = []
+        for i in dd:
+            i = str(i)
+            distal.append(i)
+        for i in do:
+            i = str(i)
+            oclusal.append(i)
+        for i in dm:
+            i = str(i)
+            mesial.append(i)
+        for i in dl:
+            i = str(i)
+            lingual.append(i)
+        for i in dv:
+            i = str(i)
+            vestibular.append(i)
+        print('requisisção GET: ')
+        for i in distal:
+            print(i)
+        context = {
+            'dente38': dente38,
+            'distal': distal,
+            'oclusal': oclusal,
+            'mesial': mesial,
+            'lingual': lingual,
+            'vestibular': vestibular,
+        }
+        return render(request, "prontuario/Dentes/dentadura-sup-38-edit.html", context)
+    if request.method == 'POST':
+        dente_38 = Dente.objects.get(pk=pk)
+        distal = request.POST.getlist('distal')
+        oclusal = request.POST.getlist('oclusal')
+        mesial = request.POST.getlist('mesial')
+        lingual = request.POST.getlist('lingual')
+        vestibular = request.POST.getlist('vestibular')
+        for i in range(0, 23):
+            if str(i + 1) in distal:
+                dente_38.distal.add(estenografia[i])
+            else:
+                dente_38.distal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in oclusal:
+                dente_38.oclusal.add(estenografia[i])
+            else:
+                dente_38.oclusal.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in mesial:
+                dente_38.mesial.add(estenografia[i])
+            else:
+                dente_38.mesial.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in lingual:
+                dente_38.lingual.add(estenografia[i])
+            else:
+                dente_38.lingual.remove(estenografia[i])
+        for i in range(0, 23):
+            if str(i + 1) in vestibular:
+                dente_38.vestibular.add(estenografia[i])
+            else:
+                dente_38.vestibular.remove(estenografia[i])
+
+        messages.success(request, "Dente alterado com sucesso")
+        return HttpResponsePermanentRedirect(reverse('sup38', args=[dente38]))
     return render(request, "pacientes/paciente_registrar2.html")
 
 
