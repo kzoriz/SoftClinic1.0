@@ -115,29 +115,30 @@
                 </div>
             <hr>
             {% endfor %}
-            <div class="navegacao">
-                <nav class="naveg" style="background: #FFFFFF;">
-                    <ul class="pagination justify-content-center" >
-                        <li class="page-item " id="previus">
+            <div class="pagination justify-content-center" style="display: flex; flex-direction: row ">
+                    <div>
+                        <li class="page-item" id="previus">
                             <span class="step-links">
                                 {% if pacientes.has_previous %}
                                     <a class="page-link" href="?page={{ pacientes.previous_page_number }}">
-                                        <img src="{% static 'img/next.png' %}" alt="" style="rotate: 180deg">
+                                        <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>
                                     </a>
                                 {% endif %}
                             </span>
                         </li>
-                        <li class="page-item " id="next">
+                    </div>
+                    <div>
+                        <li class="page-item" id="next">
                             <span class="step-links">
                                 {% if pacientes.has_next %}
+
                                     <a class="page-link" href="?page={{ pacientes.next_page_number }}">
-                                    <img src="{% static 'img/next.png' %}" alt="">
+                                        <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>
                                     </a>
                                 {% endif %}
                             </span>
                         </li>
-                    </ul>
-                </nav>
+                    </div>
             </div>
         </div>
     </div>
