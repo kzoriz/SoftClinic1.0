@@ -4,6 +4,7 @@ from pacientes.views import *
 urlpatterns = [
 
     path("pacientes/", pacientes, name="pacientes"),
+    path("filtros/", filtros, name="filtros"),
     path("pacientes/registrar/", registrar_paciente, name="paciente_registrar"),
     path("pacientes/registrar-inf/", registrar_paciente_inf, name="paciente_registrar_inf"),
     path("pacientes/detalhes/<int:pk>/", paciente_detalhes, name="paciente_detalhes"),

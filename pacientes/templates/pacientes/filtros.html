@@ -1,0 +1,233 @@
+
+{% extends "pacientes/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<head>
+    <title></title>
+    <!-- Inclua o CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Inclua a biblioteca Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+</head>
+<script>
+    $(document).ready(function (){
+        var searchBtn = $('#search-btn')
+        var palavraBtn = $('#palavra')
+
+        $(searchBtn).onclick('click', function (){
+            palavraBtn.submit();
+        });
+    });
+</script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+SC:wght@700&family=Tourney:wght@700&display=swap');
+
+        .card {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        padding: 10px 20px 20px 5px;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+    }
+    .paciente_nome {
+      font-size: 20px;
+      letter-spacing: 0.64px;
+      margin-left: 40px;
+
+    }
+
+        .custom-btn {
+          width: 130px;
+          height: 40px;
+          padding: 10px 10px;
+          border: 2px solid #000;
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          display: inline-block;
+        }
+
+        .btn-margin {
+            /*margin: 0 0 0 ;*/
+
+        }
+        .bold700{
+            /*font-family: 'Bungee Shade', cursive;*/
+            font-family: 'Fira Code Medium', serif;
+            /*font-family: 'Tourney', cursive;*/
+            color: #66a1e8;
+
+        }
+        .btn-1 {
+          transition: all 0.3s ease;
+        }
+        .btn-1:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #66a1e8;
+            color: #FFFFFF;
+        }
+        .btn-2 {
+          transition: all 0.3s ease;
+        }
+        .btn-2:hover {
+           box-shadow:
+           -7px -7px 20px 0px #fff9,
+           -4px -4px 5px 0px #fff9,
+           7px 7px 20px 0px #0002,
+           4px 4px 5px 0px #0001;
+          background: #3CB371;
+            color: #FFFFFF;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success text-center" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="card shadow mb-4">
+        <div class="card-body"><br>
+            <h1 class="bold700 text-center">
+                <b>FILTROS</b>
+            </h1>
+            <form method="get" action=".">
+                {% csrf_token %}
+                <input type="radio" id="opcao1" name="opcao" value="opcao1">
+                <label for="opcao1">SEXO MASCULINO</label><br>
+
+                <input type="radio" id="opcao2" name="opcao" value="opcao2">
+                <label for="opcao2">SEXO FEMININO</label><br>
+
+                <input type="radio" id="opcao3" name="opcao" value="opcao3">
+                <label for="opcao3">RAÇA</label><br>
+
+                <input type="radio" id="opcao4" name="opcao" value="opcao4">
+                <label for="opcao4">GRAU DE INSTRUÇÃO</label><br>
+                <input type="radio" id="opcao5" name="opcao" value="opcao5">
+                <label for="opcao5">CIDADE MAIS COMUM</label><br>
+                <input type="radio" id="opcao6" name="opcao" value="opcao5">
+                <label for="opcao6">FAIXA ETÁRIA FEMININA</label><br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" value="" name="entrada">
+                    </div>
+                    <input type="submit" value="Filtrar">
+                </div>
+            </form>
+            {% if opcao == 'opcao1' %}
+            <div class="row">
+                    <div class="col container text-center">
+                        <div class="row">
+
+                                <canvas id="graficoPizza" style="max-width: 200%;"></canvas>
+
+                        </div>
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
+                        {% if most_common_variavel != VAZIO %}
+                            <a class="bold700"  style="text-decoration:none; font-size: 200%"> MAIOR OCORRÊNCIA: {{ most_common_variavel | upper}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="container text-center">
+                        <a class="bold700"  style="text-decoration:none; font-size: 300%">{{qtd1 | upper}}</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="container text-center">
+                        <span>
+                            <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent | upper}} %</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mr-1 text-right" style="">
+            </div>
+            {% for paciente in pacientes.object_list %}
+            <hr>
+                <div class="row" >
+                    <div class="" style="margin-left: 40px">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="paciente_nome bold700 text-left " >
+                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{paciente.nome | upper}}</a>
+    <!--                            <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>-->
+                            </span>
+
+                    </div>
+                </div>
+            <hr>
+            {% endfor %}
+            <div class="pagination justify-content-center" style="display: flex; flex-direction: row ">
+                    <div>
+                        <li class="page-item" id="previus">
+                            <span class="step-links">
+                                {% if pacientes.has_previous %}
+                                    <a class="page-link" href="?page={{ pacientes.previous_page_number }}">
+                                        <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>
+                                    </a>
+                                {% endif %}
+                            </span>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="page-item" id="next">
+                            <span class="step-links">
+                                {% if pacientes.has_next %}
+
+                                    <a class="page-link" href="?page={{ pacientes.next_page_number }}">
+                                        <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>
+                                    </a>
+                                {% endif %}
+                            </span>
+                        </li>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <script>
+        var ctx = document.getElementById('graficoPizza').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['MASCULINO', 'FEMININO'],
+                datasets: [{
+                    data: [{{qtd1}}, {{qtd2}}],
+                    backgroundColor: ['blue', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+
+    <!-- Inclua o JavaScript do Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock content %}
+
