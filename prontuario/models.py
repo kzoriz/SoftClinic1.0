@@ -351,7 +351,8 @@ class Dente(models.Model):
         verbose_name_plural = "Dentes"
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.prontuario, self.paciente.nome, self.nome)
+        #return '{} - {} - {}'.format(self.prontuario, self.paciente.nome, self.nome)
+        return self.paciente.nome
 
 
 class Odontograma(models.Model):

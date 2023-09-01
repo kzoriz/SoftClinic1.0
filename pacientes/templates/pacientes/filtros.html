@@ -109,31 +109,36 @@
             <h1 class="bold700 text-center">
                 <b>FILTROS</b>
             </h1>
-            <form method="get" action=".">
-                {% csrf_token %}
-                <input type="radio" id="opcao1" name="opcao" value="opcao1">
-                <label for="opcao1">SEXO MASCULINO</label><br>
-
-                <input type="radio" id="opcao2" name="opcao" value="opcao2">
-                <label for="opcao2">SEXO FEMININO</label><br>
-
-                <input type="radio" id="opcao3" name="opcao" value="opcao3">
-                <label for="opcao3">RAÇA</label><br>
-
-                <input type="radio" id="opcao4" name="opcao" value="opcao4">
-                <label for="opcao4">GRAU DE INSTRUÇÃO</label><br>
-                <input type="radio" id="opcao5" name="opcao" value="opcao5">
-                <label for="opcao5">CIDADE MAIS COMUM</label><br>
-                <input type="radio" id="opcao6" name="opcao" value="opcao5">
-                <label for="opcao6">FAIXA ETÁRIA FEMININA</label><br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" value="" name="entrada">
+            <div class="row">
+            <div class="col-md-12 content-center-m">
+                <form action="." method="get"> <!-- Substitua 'processar_formulario.php' pelo seu script de processamento -->
+                    <div class="form-group">
+                        <label for="opcao"></label>
+                        <select class="form-control" name="opcao" id="opcao">
+                            <option value=""></option>
+                            <option value="opcao1">SEXO MASCULINO</option>
+                            <option value="opcao2">SEXO FEMININO</option>
+                            <option value="opcao3">RAÇA</option>
+                            <option value="opcao4">GRAU DE INSTRUÇÃO</option>
+                            <option value="opcao5">CIDADE MAIS COMUM</option>
+                            <option value="opcao6">FAIXA ETÁRIA FEMININA</option>
+                            <option value="opcao7">FEMININO - LESAO DE CARIE PRIMARIA 18 - FAIXA ETARIA</option>
+                        </select>
                     </div>
-                    <input type="submit" value="Filtrar">
-                </div>
-            </form>
+                     <div class="d-flex justify-content-lg-end">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+                <hr>
+                <br>
+            </div>
+        </div>
             {% if opcao == 'opcao1' %}
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                    PACIENTES DE SEXO MASCULINO E A MAIOR OCORRÊNCIA
+                </a>
+            </div>
             <div class="row">
                     <div class="col container text-center">
                         <div class="row">
@@ -146,6 +151,29 @@
                         {% if most_common_variavel != VAZIO %}
                             <a class="bold700"  style="text-decoration:none; font-size: 200%"> MAIOR OCORRÊNCIA: {{ most_common_variavel | upper}}</a>
                         {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+                 {% if opcao == 'opcao7' %}
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                MULHERES COM LESÃO DE CARIE PRIMARIA NO DENTE 18 E A FAIXA ETÁRIA
+            </a>
+            </div>
+
+            <div class="row">
+                    <div class="col container text-center">
+                        <div class="row">
+
+                                <canvas id="graficoPizza" style="max-width: 200%;"></canvas>
+
+                        </div>
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
+                        {% if most_common_variavel != VAZIO %}
+                            <a class="bold700"  style="text-decoration:none; font-size: 200%"> FAIXA ETARIA: {{min}} - {{max}}</a>
+                        {% endif %}
+
                     </div>
                 </div>
             {% endif %}
@@ -171,8 +199,12 @@
                     <div class="" style="margin-left: 40px">
                             <i class="fa-solid fa-user"></i>
                             <span class="paciente_nome bold700 text-left " >
-                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{paciente.nome | upper}}</a>
+                                {% if opcao == 'opcao7' %}
+                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.paciente.pk %}" style="text-decoration:none">{{paciente.paciente.nome | upper}}</a>
     <!--                            <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>-->
+                                {% else %}
+                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{ paciente.nome | upper}}</a>
+                                {% endif%}
                             </span>
 
                     </div>
@@ -208,6 +240,7 @@
     </div>
 
 </div>
+{% if opcao == 'opcao1' %}
     <script>
         var ctx = document.getElementById('graficoPizza').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -226,7 +259,27 @@
             }
         });
     </script>
-
+{% endif %}
+{% if opcao == 'opcao7' %}
+    <script>
+        var ctx = document.getElementById('graficoPizza').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['SEM CARIE PRIMÁRIA', 'COM CARIE PRIMÁRIA'],
+                datasets: [{
+                    data: [{{qtd2}}, {{qtd1}}],
+                    backgroundColor: ['blue', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+{% endif %}
     <!-- Inclua o JavaScript do Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock content %}

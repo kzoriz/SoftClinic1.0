@@ -17,7 +17,7 @@ from prontuario.models import *
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Max, Min
 from datetime import datetime
-import matplotlib.pyplot as plt
+from django.db.models import Q
 
 
 def calcular_idade(data_nascimento):
@@ -321,6 +321,7 @@ def filtros(request):
     qtd1 = 0
     qtd2 = Paciente.objects.all().count()
     percent = qtd1 / qtd2
+    dente = Dente.objects.all()
     most_common_variavel_value = " "
     if opcao == 'opcao1':
         #todos_pacientes = Paciente.objects.all().filter(sexo_biologico="MASCULINO")
@@ -419,7 +420,71 @@ def filtros(request):
         todos_pacientes = Paciente.objects.all().filter(sexo_biologico='FEMININO')
 
     elif opcao == 'opcao7':
-        pass
+        #todos_pacientes = Paciente.objects.all().filter(sexo_biologico="FEMININO")
+        todos_pacientes1 = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
+                                               | Q(mesial__nome__icontains='lesao de carie primaria')
+                                               | Q(oclusal__nome__icontains='lesao de carie primaria')
+                                               | Q(lingual__nome__icontains='lesao de carie primaria')
+                                               | Q(vestibular__nome__icontains='lesao de carie primaria'),
+                                                paciente__sexo_biologico__icontains='feminino',
+                                                nome='18')
+        todos_pacientes = todos_pacientes1.distinct()
+        qtd1 = todos_pacientes.count()
+        qtd3 = Paciente.objects.filter(sexo_biologico='FEMININO').count()
+        print("opção 7\n")
+        qtd2 = qtd3 - qtd1
+        print(qtd1, qtd3)
+        percentual = (qtd1 / qtd3) * 100
+        percent = "{:.1f}".format(percentual)
+        print("percent ")
+        print(percent)
+        most_common_variavel = Paciente.objects.values('sexo_biologico').annotate(
+            count=Count('sexo_biologico')).order_by(
+            '-count').first()
+        # print(most_common_variavel.count())
+        if most_common_variavel:
+            most_common_variavel_value = most_common_variavel['sexo_biologico']
+        else:
+            most_common_variavel_value = None
+        opcao = 'SEXO BIOLOGICO'
+        data_atual = datetime.today()
+        data_formatada = data_atual.strftime('%Y-%m-%d')
+        data_limite = data_formatada
+        data_maxima = todos_pacientes.filter(paciente__data_nascimento__lt=data_limite).aggregate(Max('paciente__data_nascimento'))[
+            'paciente__data_nascimento__max']
+        data_minima = Paciente.objects.filter(data_nascimento__lt=data_limite).aggregate(Min('data_nascimento'))[
+            'data_nascimento__min']
+
+        print("idade minima: ", calcular_idade(data_maxima))
+        print("idade maxima: ", calcular_idade(data_minima))
+        opcao = 'opcao7'
+        paginator = Paginator(todos_pacientes, 25)  # Mostra 25 contatos por página
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        # Se o page request (9999) está fora da lista, mostre a última página.
+        try:
+            pacientes = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            pacientes = paginator.page(paginator.num_pages)
+        context = {
+            "nome_pagina": "PACIENTES REGISTRADOS",
+            #"todos_pacientes": todos_pacientes,
+            "pacientes": pacientes,
+            "qtd1": qtd1,
+            "qtd2": qtd2,
+            "percent": percent,
+            "opcao": opcao,
+            "entrada": entrada,
+            "min": calcular_idade(data_maxima),
+            "max": calcular_idade(data_minima),
+            'most_common_variavel': most_common_variavel_value,
+
+        }
+
+        return render(request, "pacientes/filtros.html", context)
     else:
         todos_pacientes = Paciente.objects.all()
         qtd1 = todos_pacientes.count()
