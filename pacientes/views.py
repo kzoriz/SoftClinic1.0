@@ -421,23 +421,44 @@ def filtros(request):
 
     elif opcao == 'opcao7':
         #todos_pacientes = Paciente.objects.all().filter(sexo_biologico="FEMININO")
-        todos_pacientes1 = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
+
+        #DADOS FEMININO
+        pacientes_femininos = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
                                                | Q(mesial__nome__icontains='lesao de carie primaria')
                                                | Q(oclusal__nome__icontains='lesao de carie primaria')
                                                | Q(lingual__nome__icontains='lesao de carie primaria')
                                                | Q(vestibular__nome__icontains='lesao de carie primaria'),
                                                 paciente__sexo_biologico__icontains='feminino',
                                                 nome='18')
-        todos_pacientes = todos_pacientes1.distinct()
-        qtd1 = todos_pacientes.count()
-        qtd3 = Paciente.objects.filter(sexo_biologico='FEMININO').count()
-        print("opção 7\n")
-        qtd2 = qtd3 - qtd1
-        print(qtd1, qtd3)
-        percentual = (qtd1 / qtd3) * 100
-        percent = "{:.1f}".format(percentual)
-        print("percent ")
-        print(percent)
+        pacientes_femininos = pacientes_femininos.distinct()
+
+        qtd_fem_s = pacientes_femininos.count()
+        qtd_fem_total = Paciente.objects.filter(sexo_biologico='FEMININO').count()
+        #print("opção 7\n")
+        qtd_fem_n = qtd_fem_total - qtd_fem_s
+        #print(qtd_fem_s, qtd_fem_total)
+        percentual = (qtd_fem_s / qtd_fem_total) * 100
+        percent_fem_s = "{:.1f}".format(percentual)
+        #print("percent ")
+        #print(percent_fem_s)
+
+        #DADOS MASCULINO
+
+        pacientes_masculinos = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
+                                                   | Q(mesial__nome__icontains='lesao de carie primaria')
+                                                   | Q(oclusal__nome__icontains='lesao de carie primaria')
+                                                   | Q(lingual__nome__icontains='lesao de carie primaria')
+                                                   | Q(vestibular__nome__icontains='lesao de carie primaria'),
+                                                   paciente__sexo_biologico__icontains='MASCULINO',
+                                                   nome='18')
+        pacientes_masculinos = pacientes_masculinos.distinct()
+        qtd_masc_s = pacientes_masculinos.count()
+        qtd_masc_total = Paciente.objects.filter(sexo_biologico='MASCULINO').count()
+        qtd_masc_n = qtd_masc_total - qtd_masc_s
+        percentual_masc = (qtd_masc_s / qtd_masc_total) * 100
+        percent_masc_s = "{:.1f}".format(percentual_masc)
+
+        # MAIOR OCORRENCIA
         most_common_variavel = Paciente.objects.values('sexo_biologico').annotate(
             count=Count('sexo_biologico')).order_by(
             '-count').first()
@@ -446,19 +467,132 @@ def filtros(request):
             most_common_variavel_value = most_common_variavel['sexo_biologico']
         else:
             most_common_variavel_value = None
-        opcao = 'SEXO BIOLOGICO'
+
+        #FAIXA ETARIA FEMININA
+
         data_atual = datetime.today()
         data_formatada = data_atual.strftime('%Y-%m-%d')
         data_limite = data_formatada
-        data_maxima = todos_pacientes.filter(paciente__data_nascimento__lt=data_limite).aggregate(Max('paciente__data_nascimento'))[
+        data_maxima = pacientes_femininos.filter(paciente__data_nascimento__lt=data_limite).aggregate(Max('paciente__data_nascimento'))[
             'paciente__data_nascimento__max']
         data_minima = Paciente.objects.filter(data_nascimento__lt=data_limite).aggregate(Min('data_nascimento'))[
             'data_nascimento__min']
-
+        print(data_maxima)
+        datas_fem = [paciente.paciente.data_nascimento for paciente in pacientes_femininos]
+        print(datas_fem, type(datas_fem[0]))
+        jovem_fem = []
+        adulto_fem = []
+        idoso_fem = []
+        for i in range(len(pacientes_femininos)):
+            #data_string = datas[i].strftime("%Y-%m-%d")
+            idade = calcular_idade(datas_fem[i])
+            if idade < 20:
+                jovem_fem.append(idade)
+            elif 20 <= idade < 60:
+                adulto_fem.append(idade)
+            else:
+                idoso_fem.append(idade)
+        print(len(jovem_fem), len(adulto_fem),  len(idoso_fem))
+        #print(data_string)
         print("idade minima: ", calcular_idade(data_maxima))
         print("idade maxima: ", calcular_idade(data_minima))
+
+        #RAÇA FEMININA
+        racas_fem = [paciente.paciente.raca for paciente in pacientes_femininos]
+        amarelo_fem = []
+        indigena_fem = []
+        branco_fem = []
+        pardo_fem = []
+        ndn_fem = []
+        for i in range(len(racas_fem)):
+
+            if racas_fem[i] =='AMARELO':
+                amarelo_fem.append(racas_fem[i])
+            elif racas_fem[i] == 'INDIGENA':
+                indigena_fem.append(racas_fem[i])
+            elif racas_fem[i] == 'BRANCO':
+                branco_fem.append(racas_fem[i])
+            elif racas_fem[i] == 'PARDO':
+                pardo_fem.append(racas_fem[i])
+            else:
+                ndn_fem.append(racas_fem[i])
+        print("raças femininas", amarelo_fem, indigena_fem, branco_fem, pardo_fem, ndn_fem)
+
+        #ESTADO CIVIL FEMININO
+
+        estado_civil_fem = [paciente.paciente.estado_civil for paciente in pacientes_femininos]
+        casado_fem = []
+        solteiro_fem = []
+        divorciado_fem = []
+        viuvo_fem = []
+        separado_fem = []
+        # for i in range(len(estado_civil_fem)):
+        #     if separado_fem[i] =='SEPARADO(A)':
+        #         separado_fem.append(estado_civil_fem[i])
+        #     elif estado_civil_fem[i] == 'INDIGENA':
+        #         indigena_fem.append(racas_fem[i])
+        #     elif racas_fem[i] == 'BRANCO':
+        #         branco_fem.append(racas_fem[i])
+        #     elif racas_fem[i] == 'PARDO':
+        #         pardo_fem.append(racas_fem[i])
+        #     else:
+        #         pass
+        # print("raças femininas", amarelo_fem, indigena_fem, branco_fem, pardo_fem)
+
+
+        #FAIXA ETARIA MASCULINA
+
+        # data_atual = datetime.today()
+        # data_formatada = data_atual.strftime('%Y-%m-%d')
+        # data_limite = data_formatada
+        # data_maxima = pacientes_masculinos.filter(paciente__data_nascimento__lt=data_limite).aggregate(
+        #     Max('paciente__data_nascimento'))[
+        #     'paciente__data_nascimento__max']
+        # data_minima = Paciente.objects.filter(data_nascimento__lt=data_limite).aggregate(Min('data_nascimento'))[
+        #     'data_nascimento__min']
+        # print(data_maxima)
+        datas_masc = [paciente.paciente.data_nascimento for paciente in pacientes_masculinos]
+        print(datas_masc, type(datas_masc[0]))
+        jovem_masc = []
+        adulto_masc = []
+        idoso_masc = []
+        for i in range(len(pacientes_masculinos)):
+            # data_string = datas[i].strftime("%Y-%m-%d")
+            idade = calcular_idade(datas_masc[i])
+            if idade < 20:
+                jovem_masc.append(idade)
+            elif 20 <= idade < 60:
+                adulto_masc.append(idade)
+            else:
+                idoso_masc.append(idade)
+        print(len(jovem_masc), len(adulto_masc), len(idoso_masc))
+        # print(data_string)
+        print("idade minima: ", calcular_idade(data_maxima))
+        print("idade maxima: ", calcular_idade(data_minima))
+
+        # RAÇA MASCULINO
+        racas_masc = [paciente.paciente.raca for paciente in pacientes_masculinos]
+        amarelo_masc = []
+        indigena_masc = []
+        branco_masc = []
+        pardo_masc = []
+        ndn_masc = []
+        for i in range(len(racas_masc)):
+
+            if racas_masc[i] == 'AMARELO':
+                amarelo_masc.append(racas_masc[i])
+            elif racas_masc[i] == 'INDIGENA':
+                indigena_masc.append(racas_masc[i])
+            elif racas_masc[i] == 'BRANCO':
+                branco_masc.append(racas_masc[i])
+            elif racas_masc[i] == 'PARDO':
+                pardo_masc.append(racas_masc[i])
+            else:
+                ndn_masc.append(racas_masc[i])
+        print("raças masculino", amarelo_masc, indigena_masc, branco_masc, pardo_masc, ndn_masc)
+
         opcao = 'opcao7'
-        paginator = Paginator(todos_pacientes, 25)  # Mostra 25 contatos por página
+        paginator = Paginator(pacientes_femininos, 25)  # Mostra 25 contatos por página
         try:
             page = int(request.GET.get('page', '1'))
         except ValueError:
@@ -473,9 +607,29 @@ def filtros(request):
             "nome_pagina": "PACIENTES REGISTRADOS",
             #"todos_pacientes": todos_pacientes,
             "pacientes": pacientes,
-            "qtd1": qtd1,
-            "qtd2": qtd2,
-            "percent": percent,
+            "qtd_fem_s": qtd_fem_s,
+            "qtd_fem_n": qtd_fem_n,
+            "percent_fem": percent_fem_s,
+            "qtd_masc_s": qtd_masc_s,
+            "qtd_masc_n": qtd_masc_n,
+            "percent_masc": percent_masc_s,
+            "jovem_fem": len(jovem_fem),
+            "adulto_fem": len(adulto_fem),
+            "idoso_fem": len(idoso_fem),
+            "amarelo_fem": len(amarelo_fem),
+            "branco_fem": len(branco_fem),
+            "pardo_fem": len(pardo_fem),
+            "indigena_fem": len(indigena_fem),
+            "ndn_fem": len(ndn_fem),
+            "jovem_masc": len(jovem_masc),
+            "adulto_masc": len(adulto_masc),
+            "idoso_masc": len(idoso_masc),
+            "amarelo_masc": len(amarelo_masc),
+            "branco_masc": len(branco_masc),
+            "pardo_masc": len(pardo_masc),
+            "indigena_masc": len(indigena_masc),
+            "ndn_masc": len(ndn_masc),
+
             "opcao": opcao,
             "entrada": entrada,
             "min": calcular_idade(data_maxima),

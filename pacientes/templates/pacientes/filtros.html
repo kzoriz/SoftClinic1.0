@@ -122,7 +122,7 @@
                             <option value="opcao4">GRAU DE INSTRUÇÃO</option>
                             <option value="opcao5">CIDADE MAIS COMUM</option>
                             <option value="opcao6">FAIXA ETÁRIA FEMININA</option>
-                            <option value="opcao7">FEMININO - LESAO DE CARIE PRIMARIA 18 - FAIXA ETARIA</option>
+                            <option value="opcao7">LESAO DE CARIE PRIMARIA DENTE 18</option>
                         </select>
                     </div>
                      <div class="d-flex justify-content-lg-end">
@@ -157,42 +157,77 @@
                  {% if opcao == 'opcao7' %}
             <div class="text-center">
                  <a class="bold700"  style="text-decoration:none; font-size: 200%">
-                MULHERES COM LESÃO DE CARIE PRIMARIA NO DENTE 18 E A FAIXA ETÁRIA
+                LESÃO DE CARIE PRIMARIA NO DENTE 18
             </a>
             </div>
 
             <div class="row">
-                    <div class="col container text-center">
+                    <div class="col-md-6 container text-center">
+                        <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="LESAO_CARIE_PRIMARIA_FEMININO" style="max-width: 200%;"></canvas>
+                        </div>
+                         <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">PERCENTUAL FEMININO</a>
+                        <hr>
+                        <div class="container text-center">
+                            <span>
+                                <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent_fem | upper}} %</a>
+                            </span>
+                        </div>
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
+<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
+                        <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FAIXA ETÁRIA FEMININA</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="FAIXA_ETARIA_FEMININO" style="max-width: 200%;"></canvas>
+                        </div>
+                        <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ETNIA FEMININA</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="ETNIA_FEMININO" style="max-width: 200%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6 container text-center">
+                        <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                        <hr>
                         <div class="row">
 
-                                <canvas id="graficoPizza" style="max-width: 200%;"></canvas>
+                                <canvas id="LESAO_CARIE_PRIMARIA_MASCULINO" style="max-width: 200%;"></canvas>
 
                         </div>
 <!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
 <!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
-                        {% if most_common_variavel != VAZIO %}
-                            <a class="bold700"  style="text-decoration:none; font-size: 200%"> FAIXA ETARIA: {{min}} - {{max}}</a>
-                        {% endif %}
+
+                        <hr>
+                            <a class="bold700"  style="text-decoration:none; font-size: 200%">PERCENTUAL MASCULINO</a>
+                        <hr>
+                         <div class="container text-center">
+                            <span>
+                                <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent_masc | upper}} %</a>
+                            </span>
+                        </div>
+                            <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FAIXA ETÁRIA MASCULINO</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="FAIXA_ETARIA_MASCULINO" style="max-width: 200%;"></canvas>
+                        </div>
+                        <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ETNIA MASCULINO</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="ETNIA_MASCULINO" style="max-width: 200%;"></canvas>
+                        </div>
 
                     </div>
                 </div>
             {% endif %}
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="container text-center">
-                        <a class="bold700"  style="text-decoration:none; font-size: 300%">{{qtd1 | upper}}</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="container text-center">
-                        <span>
-                            <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent | upper}} %</a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="mr-1 text-right" style="">
-            </div>
             {% for paciente in pacientes.object_list %}
             <hr>
                 <div class="row" >
@@ -262,14 +297,104 @@
 {% endif %}
 {% if opcao == 'opcao7' %}
     <script>
-        var ctx = document.getElementById('graficoPizza').getContext('2d');
+        var ctx = document.getElementById('LESAO_CARIE_PRIMARIA_FEMININO').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: ['SEM CARIE PRIMÁRIA', 'COM CARIE PRIMÁRIA'],
                 datasets: [{
-                    data: [{{qtd2}}, {{qtd1}}],
+                    data: [{{qtd_fem_n}}, {{qtd_fem_s}}],
                     backgroundColor: ['blue', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('LESAO_CARIE_PRIMARIA_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['SEM CARIE PRIMÁRIA', 'COM CARIE PRIMÁRIA'],
+                datasets: [{
+                    data: [{{qtd_masc_n}}, {{qtd_masc_s}}],
+                    backgroundColor: ['blue', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('FAIXA_ETARIA_FEMININO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['JOVEM', 'ADULTO', 'IDOSO'],
+                datasets: [{
+                    data: [{{jovem_fem}}, {{adulto_fem}}, {{idoso_fem}}],
+                    backgroundColor: ['green', 'orange', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+        <script>
+        var ctx = document.getElementById('FAIXA_ETARIA_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['JOVEM', 'ADULTO', 'IDOSO'],
+                datasets: [{
+                    data: [{{jovem_masc}}, {{adulto_masc}}, {{idoso_masc}}],
+                    backgroundColor: ['green', 'orange', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+<script>
+        var ctx = document.getElementById('ETNIA_FEMININO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['BRANCO', 'PARDO', 'INDIGENA', 'AMARELO', 'N.D.N'],
+                datasets: [{
+                    data: [{{branco_fem}}, {{pardo_fem}}, {{indigena_fem}},{{amarelo_fem}}, {{ndn_fem}}],
+                    backgroundColor: ['green', 'orange', 'red','blue', 'violet']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('ETNIA_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['BRANCO', 'PARDO', 'INDIGENA', 'AMARELO','N.D.N'],
+                datasets: [{
+                    data: [{{branco_masc}}, {{pardo_masc}}, {{indigena_masc}},{{amarelo_masc}}, {{ndn_masc}}],
+                    backgroundColor: ['green', 'orange', 'red','blue', 'violet']
                 }]
             },
             options: {
