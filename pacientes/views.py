@@ -526,18 +526,51 @@ def filtros(request):
         divorciado_fem = []
         viuvo_fem = []
         separado_fem = []
-        # for i in range(len(estado_civil_fem)):
-        #     if separado_fem[i] =='SEPARADO(A)':
-        #         separado_fem.append(estado_civil_fem[i])
-        #     elif estado_civil_fem[i] == 'INDIGENA':
-        #         indigena_fem.append(racas_fem[i])
-        #     elif racas_fem[i] == 'BRANCO':
-        #         branco_fem.append(racas_fem[i])
-        #     elif racas_fem[i] == 'PARDO':
-        #         pardo_fem.append(racas_fem[i])
-        #     else:
-        #         pass
-        # print("raças femininas", amarelo_fem, indigena_fem, branco_fem, pardo_fem)
+        ec_ndn_fem = []
+        print("estado civil feminino",estado_civil_fem)
+        for i in range(len(estado_civil_fem)):
+            if estado_civil_fem[i] =='SEPARADO(A)':
+                separado_fem.append(estado_civil_fem[i])
+            elif estado_civil_fem[i] == 'DIVORCIADO(A)':
+                divorciado_fem.append(estado_civil_fem[i])
+            elif estado_civil_fem[i] == 'CASADO(A)':
+                casado_fem.append(estado_civil_fem[i])
+            elif estado_civil_fem[i] == 'SOLTEIRO(A)':
+                solteiro_fem.append(estado_civil_fem[i])
+            elif estado_civil_fem[i] == 'VIUVO(A)':
+                viuvo_fem.append(estado_civil_fem[i])
+            else:
+                ec_ndn_fem.append(estado_civil_fem[i])
+
+        print("estado civil fem**", separado_fem, solteiro_fem, casado_fem, viuvo_fem, divorciado_fem, ec_ndn_fem)
+
+        #CIDADES FEMININO
+
+        cidades_fem = [paciente.paciente.cidade for paciente in pacientes_femininos]
+        cidades_fem.append('Cardoso Alegre')
+        print("cidades fem ",cidades_fem)
+        # Converter para um conjunto (set) para remover duplicados
+        cidades_fem_set = set(cidades_fem)
+
+        # Converter de volta para uma lista
+        cidades_fem_lista = list(cidades_fem_set)
+
+        print(" lista sem duplicatas cidades fem", cidades_fem_lista, type(cidades_fem_lista))
+        ocorrencias_cidades_fem = []
+        for i in range(len(cidades_fem_lista)):
+            ocorrencias_fem = cidades_fem.count(cidades_fem_lista[i])
+            ocorrencias_cidades_fem.append(ocorrencias_fem)
+        print("ocorrencia cidades fem ", ocorrencias_cidades_fem)
+        cidades_fem_lista_str = str(cidades_fem_lista)
+        ocorrencias_cidades_fem_str = str(ocorrencias_cidades_fem)
+        print(cidades_fem_lista_str, type(cidades_fem_lista_str))
+        print(ocorrencias_cidades_fem_str, type(ocorrencias_cidades_fem_str))
+
+        valores = [10, 20, 30, 40]
+        rotulos = ['Categoria 1', 'Categoria 2', 'Categoria 3','Categoria 4']
+
+
+
 
 
         #FAIXA ETARIA MASCULINA
@@ -591,6 +624,32 @@ def filtros(request):
                 ndn_masc.append(racas_masc[i])
         print("raças masculino", amarelo_masc, indigena_masc, branco_masc, pardo_masc, ndn_masc)
 
+        #ESTADO CIVIL MASCULINO
+
+        estado_civil_masc = [paciente.paciente.estado_civil for paciente in pacientes_masculinos]
+        casado_masc = []
+        solteiro_masc = []
+        divorciado_masc = []
+        viuvo_masc = []
+        separado_masc = []
+        ec_ndn_masc = []
+        print("estado civil masculino",estado_civil_masc)
+        for i in range(len(estado_civil_masc)):
+            if estado_civil_masc[i] =='SEPARADO(A)':
+                separado_masc.append(estado_civil_masc[i])
+            elif estado_civil_masc[i] == 'DIVORCIADO(A)':
+                divorciado_masc.append(estado_civil_masc[i])
+            elif estado_civil_masc[i] == 'CASADO(A)':
+                casado_masc.append(estado_civil_masc[i])
+            elif estado_civil_masc[i] == 'SOLTEIRO(A)':
+                solteiro_masc.append(estado_civil_masc[i])
+            elif estado_civil_masc[i] == 'VIUVO(A)':
+                viuvo_masc.append(estado_civil_masc[i])
+            else:
+                ec_ndn_masc.append(estado_civil_masc[i])
+
+        print("estado civil masc**", separado_masc, solteiro_masc, casado_masc, viuvo_masc, divorciado_masc, ec_ndn_masc)
+
         opcao = 'opcao7'
         paginator = Paginator(pacientes_femininos, 25)  # Mostra 25 contatos por página
         try:
@@ -613,22 +672,45 @@ def filtros(request):
             "qtd_masc_s": qtd_masc_s,
             "qtd_masc_n": qtd_masc_n,
             "percent_masc": percent_masc_s,
+
             "jovem_fem": len(jovem_fem),
             "adulto_fem": len(adulto_fem),
             "idoso_fem": len(idoso_fem),
+
             "amarelo_fem": len(amarelo_fem),
             "branco_fem": len(branco_fem),
             "pardo_fem": len(pardo_fem),
             "indigena_fem": len(indigena_fem),
             "ndn_fem": len(ndn_fem),
+
+            "soteiro_fem": len(solteiro_fem),
+            "casado_fem": len(casado_fem),
+            "divorciado_fem": len(divorciado_fem),
+            "viuvo_fem": len(viuvo_fem),
+            "separado_fem": len(separado_fem),
+            "ec_ndn_fem": len(ec_ndn_fem),
+
+            "cidades_fem": cidades_fem_lista,
+            "ocorrencias_fem": ocorrencias_cidades_fem,
+            'dados_grafico': valores,
+            'labels_grafico': rotulos,
+
             "jovem_masc": len(jovem_masc),
             "adulto_masc": len(adulto_masc),
             "idoso_masc": len(idoso_masc),
+
             "amarelo_masc": len(amarelo_masc),
             "branco_masc": len(branco_masc),
             "pardo_masc": len(pardo_masc),
             "indigena_masc": len(indigena_masc),
             "ndn_masc": len(ndn_masc),
+
+            "solteiro_masc": len(solteiro_masc),
+            "casado_masc": len(casado_masc),
+            "divorciado_masc": len(divorciado_masc),
+            "viuvo_masc": len(viuvo_masc),
+            "separado_masc": len(separado_masc),
+            "ec_ndn_masc": len(ec_ndn_masc),
 
             "opcao": opcao,
             "entrada": entrada,

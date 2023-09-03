@@ -2,14 +2,22 @@
 {% extends "pacientes/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load json_tag %}
 
 {% block content %}
 <head>
     <title></title>
     <!-- Inclua o CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <!-- Inclua a biblioteca Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Inclua a biblioteca Chart.js Plugin Labels -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-labels@2.0.1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels@0.1.4/dist/chartjs-plugin-piechart-outlabels.min.js" integrity="sha256-yVxLw9A3MN0xzvzu6ByJRFAGgGH1ALIfgfuMURm3Bnc=" crossorigin="anonymous"></script>-->
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <script>
     $(document).ready(function (){
@@ -191,6 +199,19 @@
                         <div class="row">
                                 <canvas id="ETNIA_FEMININO" style="max-width: 200%;"></canvas>
                         </div>
+                           <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL FEMININO</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="ESTADO_CIVIL_FEMININO" style="max-width: 200%;"></canvas>
+                        </div>
+                          <a class="bold700"  style="text-decoration:none; font-size: 200%">CIDADES FEMININO</a>
+
+                        <hr>
+
+                                <canvas id="CIDADES_FEMININO" style="max-width: 200%;"></canvas>
+<!--                            <svg width="10%"  id="grafico"></svg>-->
+
                     </div>
                     <div class="col-md-6 container text-center">
                         <hr>
@@ -223,6 +244,13 @@
                         <hr>
                         <div class="row">
                                 <canvas id="ETNIA_MASCULINO" style="max-width: 200%;"></canvas>
+                        </div>
+                               <hr>
+                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL MASCULINO</a>
+                        <hr>
+                        <div class="row">
+                                <canvas id="ESTADO_CIVIL_MASCULINO" style="max-width: 200%;"></canvas>
+
                         </div>
 
                     </div>
@@ -404,8 +432,107 @@
             }
         });
     </script>
+    <script>
+        var ctx = document.getElementById('ESTADO_CIVIL_FEMININO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['SOLTEIRO', 'CASADO', 'SEPARADO', 'DIVORCIADO', 'VIUVO','NDN'],
+                datasets: [{
+                    data: [{{solteiro_fem}}, {{casado_fem}}, {{separado_fem}},{{divorciado_fem}}, {{viuvo_fem}}, {{ec_ndn_fem}}],
+                    backgroundColor: ['green', 'orange', 'red','blue', 'violet', 'yellow']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+    <script>
+
+        var ctx = document.getElementById('ESTADO_CIVIL_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['SOLTEIRO', 'CASADO', 'SEPARADO', 'DIVORCIADO', 'VIUVO','NDN'],
+                datasets: [{
+                    data: [{{solteiro_masc}}, {{casado_masc}}, {{separado_masc}},{{divorciado_masc}}, {{viuvo_masc}}, {{ec_ndn_masc}}],
+                    backgroundColor: ['green', 'orange', 'red','blue', 'violet', 'yellow']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+
+    <script type="application/javascript">
+        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');
+        var rotulos = JSON.parse('{{ labels_grafico |safe }}');
+        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');
+        console.log('{{ labels_grafico}}');
+        console.log('{{ dados_grafico}}');
+
+        var data = {
+            labels: rotulos,
+            datasets: [{
+                data: JSON.parse('{{ dados_grafico |safe }}'),  // Usando os dados passados dinamicamente
+                backgroundColor: ['red', 'yellow', 'orange', 'pink']
+            }]
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+        });
+        // Dados dinâmicos da lista passados pelo Django
+        // var dados = {{ ocorrencias_fem|safe }};
+        // var rotulos = {{ cidades_fem|safe }};
+        //
+        //
+        // var largura = 300;
+        // var altura = 300;
+        // var raio = Math.min(largura, altura) / 2;
+        //
+        // var svg = d3.select("#grafico")
+        //     .attr("width", largura)
+        //     .attr("height", altura)
+        //     .append("g")
+        //     .attr("transform", "translate(" + largura / 2 + "," + altura / 2 + ")");
+        //
+        // var cor = d3.scaleOrdinal(d3.schemeCategory10);
+        //
+        // var arco = d3.arc()
+        //     .outerRadius(raio - 10)
+        //     .innerRadius(0);
+        //
+        // var pizza = d3.pie()
+        //     .sort(null)
+        //     .value(function(d) { return d; });
+        //
+        // var g = svg.selectAll(".arc")
+        //     .data(pizza(dados))
+        //     .enter().append("g")
+        //     .attr("class", "arc");
+        //
+        // g.append("path")
+        //     .attr("d", arco)
+        //     .style("fill", function(d, i) { return cor(i); });
+        //
+        // g.append("text")
+        //     .attr("transform", function(d) { return "translate(" + arco.centroid(d) + ")"; })
+        //     .attr("dy", ".35em")
+        //     .style("text-anchor", "middle")
+        //     .text(function(d, i) { return rotulos[i]; });
+    </script>
 {% endif %}
     <!-- Inclua o JavaScript do Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 {% endblock content %}
 
