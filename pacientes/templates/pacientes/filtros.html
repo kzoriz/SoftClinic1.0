@@ -199,18 +199,20 @@
                         <div class="row">
                                 <canvas id="ETNIA_FEMININO" style="max-width: 200%;"></canvas>
                         </div>
-                           <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL FEMININO</a>
+                        <hr>
+                            <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL FEMININO</a>
                         <hr>
                         <div class="row">
-                                <canvas id="ESTADO_CIVIL_FEMININO" style="max-width: 200%;"></canvas>
+                            <canvas id="ESTADO_CIVIL_FEMININO" style="max-width: 200%;"></canvas>
                         </div>
-                          <a class="bold700"  style="text-decoration:none; font-size: 200%">CIDADES FEMININO</a>
-
                         <hr>
-
-                                <canvas id="CIDADES_FEMININO" style="max-width: 200%;"></canvas>
+                          <a class="bold700"  style="text-decoration:none; font-size: 200%">GRAU INSTRUÇÃO FEMININO</a>
+                        <hr>
+                        <div class="row">
+                            <canvas id="GRAU_INSTRUÇÃO_FEMININO" style="max-width: 200%;"></canvas>
 <!--                            <svg width="10%"  id="grafico"></svg>-->
+                        </div>
+
 
                     </div>
                     <div class="col-md-6 container text-center">
@@ -470,64 +472,88 @@
         });
     </script>
 
-    <script type="application/javascript">
-        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');
-        var rotulos = JSON.parse('{{ labels_grafico |safe }}');
-        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');
-        console.log('{{ labels_grafico}}');
-        console.log('{{ dados_grafico}}');
+<!--    <script type="application/javascript">-->
+<!--        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');-->
+<!--        var rotulos = JSON.parse('{{ labels_grafico |safe }}');-->
+<!--        var ctx = document.getElementById('CIDADES_FEMININO').getContext('2d');-->
+<!--        console.log('{{ labels_grafico}}');-->
+<!--        console.log('{{ dados_grafico}}');-->
 
-        var data = {
-            labels: rotulos,
-            datasets: [{
-                data: JSON.parse('{{ dados_grafico |safe }}'),  // Usando os dados passados dinamicamente
-                backgroundColor: ['red', 'yellow', 'orange', 'pink']
-            }]
-        };
+<!--        var data = {-->
+<!--            labels: rotulos,-->
+<!--            datasets: [{-->
+<!--                data: JSON.parse('{{ dados_grafico |safe }}'),  // Usando os dados passados dinamicamente-->
+<!--                backgroundColor: ['red', 'yellow', 'orange', 'pink']-->
+<!--            }]-->
+<!--        };-->
 
+<!--        var myChart = new Chart(ctx, {-->
+<!--            type: 'pie',-->
+<!--            data: data,-->
+<!--        });-->
+<!--        // Dados dinâmicos da lista passados pelo Django-->
+<!--        // var dados = {{ ocorrencias_fem|safe }};-->
+<!--        // var rotulos = {{ cidades_fem|safe }};-->
+<!--        //-->
+<!--        //-->
+<!--        // var largura = 300;-->
+<!--        // var altura = 300;-->
+<!--        // var raio = Math.min(largura, altura) / 2;-->
+<!--        //-->
+<!--        // var svg = d3.select("#grafico")-->
+<!--        //     .attr("width", largura)-->
+<!--        //     .attr("height", altura)-->
+<!--        //     .append("g")-->
+<!--        //     .attr("transform", "translate(" + largura / 2 + "," + altura / 2 + ")");-->
+<!--        //-->
+<!--        // var cor = d3.scaleOrdinal(d3.schemeCategory10);-->
+<!--        //-->
+<!--        // var arco = d3.arc()-->
+<!--        //     .outerRadius(raio - 10)-->
+<!--        //     .innerRadius(0);-->
+<!--        //-->
+<!--        // var pizza = d3.pie()-->
+<!--        //     .sort(null)-->
+<!--        //     .value(function(d) { return d; });-->
+<!--        //-->
+<!--        // var g = svg.selectAll(".arc")-->
+<!--        //     .data(pizza(dados))-->
+<!--        //     .enter().append("g")-->
+<!--        //     .attr("class", "arc");-->
+<!--        //-->
+<!--        // g.append("path")-->
+<!--        //     .attr("d", arco)-->
+<!--        //     .style("fill", function(d, i) { return cor(i); });-->
+<!--        //-->
+<!--        // g.append("text")-->
+<!--        //     .attr("transform", function(d) { return "translate(" + arco.centroid(d) + ")"; })-->
+<!--        //     .attr("dy", ".35em")-->
+<!--        //     .style("text-anchor", "middle")-->
+<!--        //     .text(function(d, i) { return rotulos[i]; });-->
+<!--    </script>-->
+<script>
+        var ctx = document.getElementById('GRAU_INSTRUÇÃO_FEMININO').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
-            data: data,
+            data: {
+                labels: ['ANALFABETO', '5º ANO INCOMPLETO', '5º COMPLETO', 'FUNDAMENTAL INCOMPLETO',
+                    'FUNDAMENTAL COMPLETO','MEDIO INCOMPLETO', 'MEDIO COMPLETO', 'SUPERIOR INCOMPLETO',
+                'SUPERIOR COMPLETO', 'MESTRADO', 'DOUTORADO', 'NDN'],
+                datasets: [{
+                    data: [{{analfabeto_fem}}, {{q5_incompleto_fem}}, {{q5_completo_fem}},{{s6_9_fundamental_fem}},
+                            {{fundamental_completo_fem}},
+                            {{medio_incompleto_fem}},{{medio_completo_fem}}, {{superior_incompleto_fem}},
+                            {{superior_completo_fem}}, {{mestrado_fem}}, {{doutorado_fem}}, {{gi_ndn_fem}}],
+                    backgroundColor: ['#6A5ACD', '#836FFF', '#191970','#000080', '#0000CD', '#6495ED', '#008B8B',
+                    '#98FB98', '#ADFF2F', '#B8860B', '#D2691E']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
         });
-        // Dados dinâmicos da lista passados pelo Django
-        // var dados = {{ ocorrencias_fem|safe }};
-        // var rotulos = {{ cidades_fem|safe }};
-        //
-        //
-        // var largura = 300;
-        // var altura = 300;
-        // var raio = Math.min(largura, altura) / 2;
-        //
-        // var svg = d3.select("#grafico")
-        //     .attr("width", largura)
-        //     .attr("height", altura)
-        //     .append("g")
-        //     .attr("transform", "translate(" + largura / 2 + "," + altura / 2 + ")");
-        //
-        // var cor = d3.scaleOrdinal(d3.schemeCategory10);
-        //
-        // var arco = d3.arc()
-        //     .outerRadius(raio - 10)
-        //     .innerRadius(0);
-        //
-        // var pizza = d3.pie()
-        //     .sort(null)
-        //     .value(function(d) { return d; });
-        //
-        // var g = svg.selectAll(".arc")
-        //     .data(pizza(dados))
-        //     .enter().append("g")
-        //     .attr("class", "arc");
-        //
-        // g.append("path")
-        //     .attr("d", arco)
-        //     .style("fill", function(d, i) { return cor(i); });
-        //
-        // g.append("text")
-        //     .attr("transform", function(d) { return "translate(" + arco.centroid(d) + ")"; })
-        //     .attr("dy", ".35em")
-        //     .style("text-anchor", "middle")
-        //     .text(function(d, i) { return rotulos[i]; });
     </script>
 {% endif %}
     <!-- Inclua o JavaScript do Bootstrap -->

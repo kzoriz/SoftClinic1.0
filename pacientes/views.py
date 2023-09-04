@@ -569,6 +569,64 @@ def filtros(request):
         valores = [10, 20, 30, 40]
         rotulos = ['Categoria 1', 'Categoria 2', 'Categoria 3','Categoria 4']
 
+        #GRAU INSTRUÇÃO FEMININA
+
+        grau_instrucao_fem = [paciente.paciente.grau_instrucao for paciente in pacientes_femininos]
+        analfabeto_fem = []
+        q5_incompleto_fem = []
+        q5_completo_fem = []
+        s6_9_fundamental_fem = []
+        fundamental_completo_fem = []
+        medio_incompleto_fem = []
+        medio_completo_fem = []
+        superior_incompleto_fem = []
+        superior_completo_fem = []
+        mestrado_fem = []
+        doutorado_fem = []
+        gi_ndn_fem = []
+        print("estado GRAU INSTRUÇÃO feminino", grau_instrucao_fem)
+        for i in range(len(grau_instrucao_fem)):
+            if grau_instrucao_fem[i] =='ANALFABETO':
+                analfabeto_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == '5º ANO INCOMPLETO':
+                q5_incompleto_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == '5º ANO COMPLETO':
+                q5_completo_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'FUNDAMENTAL INCOMPLETO':
+                s6_9_fundamental_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'FUNDAMENTAL COMPLETO':
+                fundamental_completo_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'MEDIO INCOMPLETO':
+                medio_incompleto_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'MEDIO COMPLETO':
+                medio_completo_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'SUPERIOR INCOMPLETO':
+                superior_incompleto_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'SUPERIOR COMPLETO':
+                superior_completo_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'MESTRADO':
+                mestrado_fem.append(grau_instrucao_fem[i])
+            elif grau_instrucao_fem[i] == 'DOUTORADO':
+                doutorado_fem.append(grau_instrucao_fem[i])
+            else:
+                gi_ndn_fem.append(grau_instrucao_fem[i])
+
+        print("grau intrução fem**",
+            analfabeto_fem,
+            q5_incompleto_fem,
+            q5_completo_fem,
+            s6_9_fundamental_fem,
+            fundamental_completo_fem,
+            medio_incompleto_fem,
+            medio_completo_fem,
+            superior_incompleto_fem,
+            superior_completo_fem,
+            mestrado_fem ,
+            doutorado_fem,
+            gi_ndn_fem,
+            )
+
+
 
 
 
@@ -694,6 +752,19 @@ def filtros(request):
             "ocorrencias_fem": ocorrencias_cidades_fem,
             'dados_grafico': valores,
             'labels_grafico': rotulos,
+
+            'analfabeto_fem': len(analfabeto_fem),
+            'q5_incompleto_fem': len(q5_incompleto_fem),
+            'q5_completo_fem': len(q5_completo_fem),
+            's6_9_fundamental_fem': len(s6_9_fundamental_fem),
+            'fundamental_completo_fem': len(fundamental_completo_fem),
+            'medio_incompleto_fem': len(medio_incompleto_fem),
+            'medio_completo_fem': len(medio_completo_fem),
+            'superior_incompleto_fem': len(superior_incompleto_fem),
+            'superior_completo_fem': len(superior_completo_fem),
+            'mestrado_fem': len(mestrado_fem),
+            'doutorado_fem': len(doutorado_fem),
+            'gi_ndn_fem': len(gi_ndn_fem),
 
             "jovem_masc": len(jovem_masc),
             "adulto_masc": len(adulto_masc),
