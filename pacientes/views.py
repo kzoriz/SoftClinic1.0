@@ -23,7 +23,7 @@ from django.db.models import Q
 def calcular_idade(data_nascimento):
     data_atual = datetime.now()
     idade = data_atual.year - data_nascimento.year - (
-                (data_atual.month, data_atual.day) < (data_nascimento.month, data_nascimento.day))
+            (data_atual.month, data_atual.day) < (data_nascimento.month, data_nascimento.day))
     return idade
 
 
@@ -323,41 +323,203 @@ def filtros(request):
     percent = qtd1 / qtd2
     dente = Dente.objects.all()
     most_common_variavel_value = " "
-    if opcao == 'opcao1':
-        #todos_pacientes = Paciente.objects.all().filter(sexo_biologico="MASCULINO")
-        masculino = Paciente.objects.all().filter(sexo_biologico="MASCULINO")
-        feminino = Paciente.objects.all().filter(sexo_biologico="FEMININO")
+    if opcao == 'opcao1':  # PACIENTES COM ANTECEDENTES FAMILIARES
+        pacientes_com = InfSaudeSistemica.objects.all().exclude(antecedentes_familiares="N.D.N")
+        todos_pacientes = InfSaudeSistemica.objects.all()
+        pacientes_masc_com = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO").exclude(antecedentes_familiares="N.D.N").count()
+        pacientes_masc_sem = InfSaudeSistemica.objects.all().filter(paciente__sexo_biologico__icontains="MASCULINO",
+                                                                    antecedentes_familiares="N.D.N").count()
+        pacientes_masc_glaucoma = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="Glaucoma").count()
 
-        #qtd1 = todos_pacientes.count()
-        qtd1 = masculino.count()
-        qtd2 = feminino.count()
-        total = Paciente.objects.all().count()
-        percent = (qtd1*100 / total)
-        print(qtd1, qtd2, percent)
-        most_common_variavel = Paciente.objects.values('sexo_biologico').annotate(
-            count=Count('sexo_biologico')).order_by(
-            '-count').first()
-        # print(most_common_variavel.count())
-        if most_common_variavel:
-            most_common_variavel_value = most_common_variavel['sexo_biologico']
-        else:
-            most_common_variavel_value = None
+        pacientes_masc_parada_cardiaca = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="Parada cardíaca").count()
+
+        pacientes_masc_avc = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="AVC").count()
+
+        pacientes_masc_hipertensao = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="hipertensão").count()
+
+        pacientes_masc_infarto = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="Infarto").count()
+
+        pacientes_masc_diabetes = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="diabetes").count()
+
+        pacientes_masc_cancer_boca = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="Câncer de boca").count()
+
+        pacientes_masc_huntington = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO",
+            antecedentes_familiares__icontains="Doença de Huntington").count()
+
+        pacientes_fem_com = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO").exclude(antecedentes_familiares="N.D.N").count()
+        pacientes_fem_sem = InfSaudeSistemica.objects.all().filter(paciente__sexo_biologico__icontains="FEMININO",
+                                                                   antecedentes_familiares="N.D.N").count()
+
+        pacientes_fem_glaucoma = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="Glaucoma").count()
+
+        pacientes_fem_parada_cardiaca = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="Parada cardíaca").count()
+
+        pacientes_fem_avc = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="AVC").count()
+
+        pacientes_fem_hipertensao = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="hipertensão").count()
+
+        pacientes_fem_infarto = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="Infarto").count()
+
+        pacientes_fem_diabetes = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="diabetes").count()
+
+        pacientes_fem_cancer_boca = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="Câncer de boca").count()
+
+        pacientes_fem_huntington = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO",
+            antecedentes_familiares__icontains="Doença de Huntington").count()
+
+        # FAIXA ETARIA FEMININA
+
+        # data_atual = datetime.today()
+        # data_formatada = data_atual.strftime('%Y-%m-%d')
+        # data_limite = data_formatada
+        # data_maxima = pacientes_fem_com.filter(paciente__data_nascimento__lt=data_limite).aggregate(
+        #     Max('paciente__data_nascimento'))[
+        #     'paciente__data_nascimento__max']
+        # data_minima = Paciente.objects.filter(data_nascimento__lt=data_limite).aggregate(Min('data_nascimento'))[
+        #     'data_nascimento__min']
+        # print(data_maxima)
+        pacientes_feminino = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="FEMININO").exclude(antecedentes_familiares="N.D.N")
+
+        datas_fem = [paciente.paciente.data_nascimento for paciente in pacientes_feminino]
+
+        print(datas_fem, type(datas_fem[0]))
+        jovem_fem = []
+        adulto_fem = []
+        idoso_fem = []
+        for i in range(len(pacientes_feminino)):
+            # data_string = datas[i].strftime("%Y-%m-%d")
+            idade = calcular_idade(datas_fem[i])
+            if idade < 20:
+                jovem_fem.append(idade)
+            elif 20 <= idade < 60:
+                adulto_fem.append(idade)
+            else:
+                idoso_fem.append(idade)
+        print(len(jovem_fem), len(adulto_fem), len(idoso_fem))
+
+        pacientes_masculino = InfSaudeSistemica.objects.all().filter(
+            paciente__sexo_biologico__icontains="MASCULINO").exclude(antecedentes_familiares="N.D.N")
+
+        datas_masc = [paciente.paciente.data_nascimento for paciente in pacientes_masculino]
+
+        print(datas_masc, type(datas_masc[0]))
+        jovem_masc = []
+        adulto_masc = []
+        idoso_masc = []
+        for i in range(len(pacientes_masculino)):
+            # data_string = datas[i].strftime("%Y-%m-%d")
+            idade = calcular_idade(datas_masc[i])
+            if idade < 20:
+                jovem_masc.append(idade)
+            elif 20 <= idade < 60:
+                adulto_masc.append(idade)
+            else:
+                idoso_masc.append(idade)
+        print(len(jovem_masc), len(adulto_masc), len(idoso_masc))
+
+        print("pacientes masc com \n", pacientes_masc_com)
+        print("pacientes masc sem \n", pacientes_masc_sem)
+        print("pacientes fem com \n", pacientes_fem_com)
+        print("pacientes fem sem \n", pacientes_fem_sem)
+
+        todos_pacientes_count = todos_pacientes.count()
+        pacientes_com_count = pacientes_com.count()
+        pacientes_sem_count = todos_pacientes_count - pacientes_com_count
+        print("pacientes_com e sem", pacientes_com_count, pacientes_sem_count)
+        # qtd1 = masculino.count()
+        # qtd2 = feminino.count()
+        # total = Paciente.objects.all().count()
+        # percent = (qtd1*100 / total)
+        # print(qtd1, qtd2, percent)
+        # most_common_variavel = Paciente.objects.values('sexo_biologico').annotate(
+        #     count=Count('sexo_biologico')).order_by(
+        #     '-count').first()
+        # # print(most_common_variavel.count())
+        # if most_common_variavel:
+        #     most_common_variavel_value = most_common_variavel['sexo_biologico']
+        # else:
+        #     most_common_variavel_value = None
         opcao = 'opcao1'
         context = {
-            "nome_pagina": "PACIENTES REGISTRADOS",
-            "todos_pacientes": masculino,
-            #"pacientes": pacientes,
-            "qtd1": qtd1,
-            "qtd2": qtd2,
-            "total": total,
-            "percent": percent,
+            "pacientes_sem_count": pacientes_sem_count,
+            "pacientes_com_count": pacientes_com_count,
+
+            "pacientes_masc_com": pacientes_masc_com,
+            "pacientes_masc_sem": pacientes_masc_sem,
+
+            "pacientes_masc_glaucoma": pacientes_masc_glaucoma,
+            "pacientes_masc_parada_cardiaca": pacientes_masc_parada_cardiaca,
+            "pacientes_masc_avc": pacientes_masc_avc,
+            "pacientes_masc_diabetes": pacientes_masc_diabetes,
+            "pacientes_masc_hipertensao": pacientes_masc_hipertensao,
+            "pacientes_masc_infarto": pacientes_masc_infarto,
+            "pacientes_masc_cancer_boca": pacientes_masc_cancer_boca,
+            "pacientes_masc_huntington": pacientes_masc_huntington,
+
+            "jovem_masc": len(jovem_masc),
+            "adulto_masc": len(adulto_masc),
+            "idoso_masc": len(idoso_masc),
+
+            "pacientes_fem_com": pacientes_fem_com,
+            "pacientes_fem_sem": pacientes_fem_sem,
+
+            "pacientes_fem_glaucoma": pacientes_fem_glaucoma,
+            "pacientes_fem_parada_cardiaca": pacientes_fem_parada_cardiaca,
+            "pacientes_fem_avc": pacientes_fem_avc,
+            "pacientes_fem_diabetes": pacientes_fem_diabetes,
+            "pacientes_fem_hipertensao": pacientes_fem_hipertensao,
+            "pacientes_fem_infarto": pacientes_fem_infarto,
+            "pacientes_fem_cancer_boca": pacientes_fem_cancer_boca,
+            "pacientes_fem_huntington": pacientes_fem_huntington,
+
+            "jovem_fem": len(jovem_fem),
+            "adulto_fem": len(adulto_fem),
+            "idoso_fem": len(idoso_fem),
+
+            # "qtd1": qtd1,
+            # "qtd2": qtd2,
+            # "total": total,
+            # "percent": percent,
             "opcao": opcao,
-            "entrada": entrada,
-            'most_common_variavel': most_common_variavel_value,
+            # "entrada": entrada,
+            # 'most_common_variavel': most_common_variavel_value,
 
         }
         return render(request, "pacientes/filtros.html", context)
-    elif opcao == 'opcao2':
+    elif opcao == 'opcao7':
         todos_pacientes = Paciente.objects.all().filter(sexo_biologico="FEMININO")
         qtd1 = todos_pacientes.count()
         qtd2 = Paciente.objects.all().count()
@@ -419,38 +581,38 @@ def filtros(request):
     elif opcao == 'opcao6':
         todos_pacientes = Paciente.objects.all().filter(sexo_biologico='FEMININO')
 
-    elif opcao == 'opcao7':
-        #todos_pacientes = Paciente.objects.all().filter(sexo_biologico="FEMININO")
+    elif opcao == 'opcao2':
+        # todos_pacientes = Paciente.objects.all().filter(sexo_biologico="FEMININO")
 
-        #DADOS FEMININO
+        # DADOS FEMININO
         pacientes_femininos = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
-                                               | Q(mesial__nome__icontains='lesao de carie primaria')
-                                               | Q(oclusal__nome__icontains='lesao de carie primaria')
-                                               | Q(lingual__nome__icontains='lesao de carie primaria')
-                                               | Q(vestibular__nome__icontains='lesao de carie primaria'),
-                                                paciente__sexo_biologico__icontains='feminino',
-                                                nome='18')
-        pacientes_femininos = pacientes_femininos.distinct()
-
-        qtd_fem_s = pacientes_femininos.count()
-        qtd_fem_total = Paciente.objects.filter(sexo_biologico='FEMININO').count()
-        #print("opção 7\n")
-        qtd_fem_n = qtd_fem_total - qtd_fem_s
-        #print(qtd_fem_s, qtd_fem_total)
-        percentual = (qtd_fem_s / qtd_fem_total) * 100
-        percent_fem_s = "{:.1f}".format(percentual)
-        #print("percent ")
-        #print(percent_fem_s)
-
-        #DADOS MASCULINO
-
-        pacientes_masculinos = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
                                                    | Q(mesial__nome__icontains='lesao de carie primaria')
                                                    | Q(oclusal__nome__icontains='lesao de carie primaria')
                                                    | Q(lingual__nome__icontains='lesao de carie primaria')
                                                    | Q(vestibular__nome__icontains='lesao de carie primaria'),
-                                                   paciente__sexo_biologico__icontains='MASCULINO',
+                                                   paciente__sexo_biologico__icontains='feminino',
                                                    nome='18')
+        pacientes_femininos = pacientes_femininos.distinct()
+
+        qtd_fem_s = pacientes_femininos.count()
+        qtd_fem_total = Paciente.objects.filter(sexo_biologico='FEMININO').count()
+        # print("opção 7\n")
+        qtd_fem_n = qtd_fem_total - qtd_fem_s
+        # print(qtd_fem_s, qtd_fem_total)
+        percentual = (qtd_fem_s / qtd_fem_total) * 100
+        percent_fem_s = "{:.1f}".format(percentual)
+        # print("percent ")
+        # print(percent_fem_s)
+
+        # DADOS MASCULINO
+
+        pacientes_masculinos = Dente.objects.filter(Q(distal__nome__icontains='lesao de carie primaria')
+                                                    | Q(mesial__nome__icontains='lesao de carie primaria')
+                                                    | Q(oclusal__nome__icontains='lesao de carie primaria')
+                                                    | Q(lingual__nome__icontains='lesao de carie primaria')
+                                                    | Q(vestibular__nome__icontains='lesao de carie primaria'),
+                                                    paciente__sexo_biologico__icontains='MASCULINO',
+                                                    nome='18')
         pacientes_masculinos = pacientes_masculinos.distinct()
         qtd_masc_s = pacientes_masculinos.count()
         qtd_masc_total = Paciente.objects.filter(sexo_biologico='MASCULINO').count()
@@ -468,12 +630,13 @@ def filtros(request):
         else:
             most_common_variavel_value = None
 
-        #FAIXA ETARIA FEMININA
+        # FAIXA ETARIA FEMININA
 
         data_atual = datetime.today()
         data_formatada = data_atual.strftime('%Y-%m-%d')
         data_limite = data_formatada
-        data_maxima = pacientes_femininos.filter(paciente__data_nascimento__lt=data_limite).aggregate(Max('paciente__data_nascimento'))[
+        data_maxima = pacientes_femininos.filter(paciente__data_nascimento__lt=data_limite).aggregate(
+            Max('paciente__data_nascimento'))[
             'paciente__data_nascimento__max']
         data_minima = Paciente.objects.filter(data_nascimento__lt=data_limite).aggregate(Min('data_nascimento'))[
             'data_nascimento__min']
@@ -484,7 +647,7 @@ def filtros(request):
         adulto_fem = []
         idoso_fem = []
         for i in range(len(pacientes_femininos)):
-            #data_string = datas[i].strftime("%Y-%m-%d")
+            # data_string = datas[i].strftime("%Y-%m-%d")
             idade = calcular_idade(datas_fem[i])
             if idade < 20:
                 jovem_fem.append(idade)
@@ -492,12 +655,12 @@ def filtros(request):
                 adulto_fem.append(idade)
             else:
                 idoso_fem.append(idade)
-        print(len(jovem_fem), len(adulto_fem),  len(idoso_fem))
-        #print(data_string)
+        print(len(jovem_fem), len(adulto_fem), len(idoso_fem))
+        # print(data_string)
         print("idade minima: ", calcular_idade(data_maxima))
         print("idade maxima: ", calcular_idade(data_minima))
 
-        #RAÇA FEMININA
+        # RAÇA FEMININA
         racas_fem = [paciente.paciente.raca for paciente in pacientes_femininos]
         amarelo_fem = []
         indigena_fem = []
@@ -506,7 +669,7 @@ def filtros(request):
         ndn_fem = []
         for i in range(len(racas_fem)):
 
-            if racas_fem[i] =='AMARELO':
+            if racas_fem[i] == 'AMARELO':
                 amarelo_fem.append(racas_fem[i])
             elif racas_fem[i] == 'INDIGENA':
                 indigena_fem.append(racas_fem[i])
@@ -518,7 +681,7 @@ def filtros(request):
                 ndn_fem.append(racas_fem[i])
         print("raças femininas", amarelo_fem, indigena_fem, branco_fem, pardo_fem, ndn_fem)
 
-        #ESTADO CIVIL FEMININO
+        # ESTADO CIVIL FEMININO
 
         estado_civil_fem = [paciente.paciente.estado_civil for paciente in pacientes_femininos]
         casado_fem = []
@@ -527,9 +690,9 @@ def filtros(request):
         viuvo_fem = []
         separado_fem = []
         ec_ndn_fem = []
-        print("estado civil feminino",estado_civil_fem)
+        print("estado civil feminino", estado_civil_fem)
         for i in range(len(estado_civil_fem)):
-            if estado_civil_fem[i] =='SEPARADO(A)':
+            if estado_civil_fem[i] == 'SEPARADO(A)':
                 separado_fem.append(estado_civil_fem[i])
             elif estado_civil_fem[i] == 'DIVORCIADO(A)':
                 divorciado_fem.append(estado_civil_fem[i])
@@ -544,11 +707,11 @@ def filtros(request):
 
         print("estado civil fem**", separado_fem, solteiro_fem, casado_fem, viuvo_fem, divorciado_fem, ec_ndn_fem)
 
-        #CIDADES FEMININO
+        # CIDADES FEMININO
 
         cidades_fem = [paciente.paciente.cidade for paciente in pacientes_femininos]
         cidades_fem.append('Cardoso Alegre')
-        print("cidades fem ",cidades_fem)
+        print("cidades fem ", cidades_fem)
         # Converter para um conjunto (set) para remover duplicados
         cidades_fem_set = set(cidades_fem)
 
@@ -567,15 +730,13 @@ def filtros(request):
         print(ocorrencias_cidades_fem_str, type(ocorrencias_cidades_fem_str))
 
         valores = [10, 20, 30, 40]
-        rotulos = ['Categoria 1', 'Categoria 2', 'Categoria 3','Categoria 4']
+        rotulos = ['Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4']
 
-        #GRAU INSTRUÇÃO FEMININA
+        # GRAU INSTRUÇÃO FEMININA
 
         grau_instrucao_fem = [paciente.paciente.grau_instrucao for paciente in pacientes_femininos]
         analfabeto_fem = []
-        q5_incompleto_fem = []
-        q5_completo_fem = []
-        s6_9_fundamental_fem = []
+        fundamental_incompleto_fem = []
         fundamental_completo_fem = []
         medio_incompleto_fem = []
         medio_completo_fem = []
@@ -586,14 +747,10 @@ def filtros(request):
         gi_ndn_fem = []
         print("estado GRAU INSTRUÇÃO feminino", grau_instrucao_fem)
         for i in range(len(grau_instrucao_fem)):
-            if grau_instrucao_fem[i] =='ANALFABETO':
+            if grau_instrucao_fem[i] == 'ANALFABETO':
                 analfabeto_fem.append(grau_instrucao_fem[i])
-            elif grau_instrucao_fem[i] == '5º ANO INCOMPLETO':
-                q5_incompleto_fem.append(grau_instrucao_fem[i])
-            elif grau_instrucao_fem[i] == '5º ANO COMPLETO':
-                q5_completo_fem.append(grau_instrucao_fem[i])
             elif grau_instrucao_fem[i] == 'FUNDAMENTAL INCOMPLETO':
-                s6_9_fundamental_fem.append(grau_instrucao_fem[i])
+                fundamental_incompleto_fem.append(grau_instrucao_fem[i])
             elif grau_instrucao_fem[i] == 'FUNDAMENTAL COMPLETO':
                 fundamental_completo_fem.append(grau_instrucao_fem[i])
             elif grau_instrucao_fem[i] == 'MEDIO INCOMPLETO':
@@ -612,26 +769,68 @@ def filtros(request):
                 gi_ndn_fem.append(grau_instrucao_fem[i])
 
         print("grau intrução fem**",
-            analfabeto_fem,
-            q5_incompleto_fem,
-            q5_completo_fem,
-            s6_9_fundamental_fem,
-            fundamental_completo_fem,
-            medio_incompleto_fem,
-            medio_completo_fem,
-            superior_incompleto_fem,
-            superior_completo_fem,
-            mestrado_fem ,
-            doutorado_fem,
-            gi_ndn_fem,
-            )
+              analfabeto_fem,
+              fundamental_incompleto_fem,
+              fundamental_completo_fem,
+              medio_incompleto_fem,
+              medio_completo_fem,
+              superior_incompleto_fem,
+              superior_completo_fem,
+              mestrado_fem,
+              doutorado_fem,
+              gi_ndn_fem,
+              )
 
+        # GRAU INSTRUÇÃO MASCULINO
 
+        grau_instrucao_masc = [paciente.paciente.grau_instrucao for paciente in pacientes_masculinos]
+        analfabeto_masc = []
+        fundamental_incompleto_masc = []
+        fundamental_completo_masc = []
+        medio_incompleto_masc = []
+        medio_completo_masc = []
+        superior_incompleto_masc = []
+        superior_completo_masc = []
+        mestrado_masc = []
+        doutorado_masc = []
+        gi_ndn_masc = []
+        print("GRAU INSTRUÇÃO MASCULINO", grau_instrucao_masc)
+        for i in range(len(grau_instrucao_masc)):
+            if grau_instrucao_masc[i] == 'ANALFABETO':
+                analfabeto_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'FUNDAMENTAL INCOMPLETO':
+                fundamental_incompleto_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'FUNDAMENTAL COMPLETO':
+                fundamental_completo_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'MEDIO INCOMPLETO':
+                medio_incompleto_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'MEDIO COMPLETO':
+                medio_completo_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'SUPERIOR INCOMPLETO':
+                superior_incompleto_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'SUPERIOR COMPLETO':
+                superior_completo_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'MESTRADO':
+                mestrado_masc.append(grau_instrucao_masc[i])
+            elif grau_instrucao_masc[i] == 'DOUTORADO':
+                doutorado_masc.append(grau_instrucao_masc[i])
+            else:
+                gi_ndn_masc.append(grau_instrucao_masc[i])
 
+        print("grau intrução masc**",
+              analfabeto_masc,
+              fundamental_incompleto_masc,
+              fundamental_completo_masc,
+              medio_incompleto_masc,
+              medio_completo_masc,
+              superior_incompleto_masc,
+              superior_completo_masc,
+              mestrado_masc,
+              doutorado_masc,
+              gi_ndn_masc,
+              )
 
-
-
-        #FAIXA ETARIA MASCULINA
+        # FAIXA ETARIA MASCULINA
 
         # data_atual = datetime.today()
         # data_formatada = data_atual.strftime('%Y-%m-%d')
@@ -682,7 +881,7 @@ def filtros(request):
                 ndn_masc.append(racas_masc[i])
         print("raças masculino", amarelo_masc, indigena_masc, branco_masc, pardo_masc, ndn_masc)
 
-        #ESTADO CIVIL MASCULINO
+        # ESTADO CIVIL MASCULINO
 
         estado_civil_masc = [paciente.paciente.estado_civil for paciente in pacientes_masculinos]
         casado_masc = []
@@ -691,9 +890,9 @@ def filtros(request):
         viuvo_masc = []
         separado_masc = []
         ec_ndn_masc = []
-        print("estado civil masculino",estado_civil_masc)
+        print("estado civil masculino", estado_civil_masc)
         for i in range(len(estado_civil_masc)):
-            if estado_civil_masc[i] =='SEPARADO(A)':
+            if estado_civil_masc[i] == 'SEPARADO(A)':
                 separado_masc.append(estado_civil_masc[i])
             elif estado_civil_masc[i] == 'DIVORCIADO(A)':
                 divorciado_masc.append(estado_civil_masc[i])
@@ -706,9 +905,10 @@ def filtros(request):
             else:
                 ec_ndn_masc.append(estado_civil_masc[i])
 
-        print("estado civil masc**", separado_masc, solteiro_masc, casado_masc, viuvo_masc, divorciado_masc, ec_ndn_masc)
+        print("estado civil masc**", separado_masc, solteiro_masc, casado_masc, viuvo_masc, divorciado_masc,
+              ec_ndn_masc)
 
-        opcao = 'opcao7'
+        opcao = 'opcao2'
         paginator = Paginator(pacientes_femininos, 25)  # Mostra 25 contatos por página
         try:
             page = int(request.GET.get('page', '1'))
@@ -722,7 +922,7 @@ def filtros(request):
             pacientes = paginator.page(paginator.num_pages)
         context = {
             "nome_pagina": "PACIENTES REGISTRADOS",
-            #"todos_pacientes": todos_pacientes,
+            # "todos_pacientes": todos_pacientes,
             "pacientes": pacientes,
             "qtd_fem_s": qtd_fem_s,
             "qtd_fem_n": qtd_fem_n,
@@ -754,9 +954,7 @@ def filtros(request):
             'labels_grafico': rotulos,
 
             'analfabeto_fem': len(analfabeto_fem),
-            'q5_incompleto_fem': len(q5_incompleto_fem),
-            'q5_completo_fem': len(q5_completo_fem),
-            's6_9_fundamental_fem': len(s6_9_fundamental_fem),
+            'fundamental_incompleto_fem': len(fundamental_incompleto_fem),
             'fundamental_completo_fem': len(fundamental_completo_fem),
             'medio_incompleto_fem': len(medio_incompleto_fem),
             'medio_completo_fem': len(medio_completo_fem),
@@ -782,6 +980,17 @@ def filtros(request):
             "viuvo_masc": len(viuvo_masc),
             "separado_masc": len(separado_masc),
             "ec_ndn_masc": len(ec_ndn_masc),
+
+            'analfabeto_masc': len(analfabeto_masc),
+            'fundamental_incompleto_masc': len(fundamental_incompleto_masc),
+            'fundamental_completo_masc': len(fundamental_completo_masc),
+            'medio_incompleto_masc': len(medio_incompleto_masc),
+            'medio_completo_masc': len(medio_completo_masc),
+            'superior_incompleto_masc': len(superior_incompleto_masc),
+            'superior_completo_masc': len(superior_completo_masc),
+            'mestrado_masc': len(mestrado_masc),
+            'doutorado_masc': len(doutorado_masc),
+            'gi_ndn_masc': len(gi_ndn_masc),
 
             "opcao": opcao,
             "entrada": entrada,
@@ -820,4 +1029,4 @@ def filtros(request):
 
     }
     return render(request, "pacientes/filtros.html", context)
-#comentario
+# comentario

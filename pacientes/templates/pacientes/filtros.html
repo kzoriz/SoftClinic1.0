@@ -1,4 +1,3 @@
-
 {% extends "pacientes/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
@@ -103,7 +102,7 @@
             color: #FFFFFF;
         }
     </style>
-    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static '/vendor/fontawesome-free/css/all.min.css' %}">
 <div class="container">
     {% if messages %}
         {% for message in messages %}
@@ -124,13 +123,13 @@
                         <label for="opcao"></label>
                         <select class="form-control" name="opcao" id="opcao">
                             <option value=""></option>
-                            <option value="opcao1">SEXO MASCULINO</option>
-                            <option value="opcao2">SEXO FEMININO</option>
+                            <option value="opcao1">ANTECEDENTES FAMILIARES</option>
+                            <option value="opcao2">LESAO DE CARIE PRIMARIA DENTE 18</option>
                             <option value="opcao3">RAÇA</option>
                             <option value="opcao4">GRAU DE INSTRUÇÃO</option>
                             <option value="opcao5">CIDADE MAIS COMUM</option>
                             <option value="opcao6">FAIXA ETÁRIA FEMININA</option>
-                            <option value="opcao7">LESAO DE CARIE PRIMARIA DENTE 18</option>
+                            <option value="opcao7"></option>
                         </select>
                     </div>
                      <div class="d-flex justify-content-lg-end">
@@ -138,183 +137,397 @@
                     </div>
                 </form>
                 <hr>
-                <br>
             </div>
         </div>
             {% if opcao == 'opcao1' %}
             <div class="text-center">
                  <a class="bold700"  style="text-decoration:none; font-size: 200%">
-                    PACIENTES DE SEXO MASCULINO E A MAIOR OCORRÊNCIA
+                    ANTECEDENTES FAMILIARES ENTRE TODOS OS PACIENTES
                 </a>
+                <hr>
+                <br>
             </div>
             <div class="row">
                     <div class="col container text-center">
                         <div class="row">
-
-                                <canvas id="graficoPizza" style="max-width: 200%;"></canvas>
-
+                                <canvas id="ANTECENDENTES_FAMILIARES_GERAL" style="max-width: 200%;"></canvas>
                         </div>
 <!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
 <!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
                         {% if most_common_variavel != VAZIO %}
-                            <a class="bold700"  style="text-decoration:none; font-size: 200%"> MAIOR OCORRÊNCIA: {{ most_common_variavel | upper}}</a>
+                            <a class="bold700"  style="text-decoration:none; font-size: 200%">...</a>
                         {% endif %}
                     </div>
+            </div>
+                <div class="text-center">
+                    <hr>
+                     <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                        ANTECEDENTES FAMILIARES POR SEXO BIOLOGICO
+                    </a>
                 </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="ANTECEDENTES_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="ANTECEDENTES_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                    <hr>
+                     <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                        TIPO DE DOENÇA DOS PACIENTES COM ANTECENDENTES FAMILIARES POR SEXO BIOLÓGICO
+                    </a>
+                </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="TIPO_ANTECEDENTES_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="TIPO_ANTECEDENTES_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                    <hr>
+                     <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                        FAIXA ETÁRIA DOS PACIENTES COM ANTECENDENTES FAMILIARES POR SEXO BIOLÓGICO
+                    </a>
+                </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="FAIXA_ETARIA_ANTECEDENTES_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <hr>
+                    <div class="row">
+                                <canvas id="FAIXA_ETARIA_ANTECEDENTES_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                </div>
+            </div>
             {% endif %}
-                 {% if opcao == 'opcao7' %}
+                 {% if opcao == 'opcao2' %}
             <div class="text-center">
                  <a class="bold700"  style="text-decoration:none; font-size: 200%">
-                LESÃO DE CARIE PRIMARIA NO DENTE 18
+                PACIENTES COM LESÃO DE CARIE PRIMARIA NO DENTE 18 POR SEXO BIOLÓGICO
             </a>
             </div>
-
             <div class="row">
-                    <div class="col-md-6 container text-center">
-                        <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="LESAO_CARIE_PRIMARIA_FEMININO" style="max-width: 200%;"></canvas>
-                        </div>
-                         <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">PERCENTUAL FEMININO</a>
-                        <hr>
-                        <div class="container text-center">
-                            <span>
-                                <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent_fem | upper}} %</a>
-                            </span>
-                        </div>
-<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
-<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
-                        <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FAIXA ETÁRIA FEMININA</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="FAIXA_ETARIA_FEMININO" style="max-width: 200%;"></canvas>
-                        </div>
-                        <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ETNIA FEMININA</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="ETNIA_FEMININO" style="max-width: 200%;"></canvas>
-                        </div>
-                        <hr>
-                            <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL FEMININO</a>
-                        <hr>
-                        <div class="row">
-                            <canvas id="ESTADO_CIVIL_FEMININO" style="max-width: 200%;"></canvas>
-                        </div>
-                        <hr>
-                          <a class="bold700"  style="text-decoration:none; font-size: 200%">GRAU INSTRUÇÃO FEMININO</a>
-                        <hr>
-                        <div class="row">
-                            <canvas id="GRAU_INSTRUÇÃO_FEMININO" style="max-width: 200%;"></canvas>
-<!--                            <svg width="10%"  id="grafico"></svg>-->
-                        </div>
-
-
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO {{percent_fem | upper}} %</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="LESAO_CARIE_PRIMARIA_FEMININO" style="max-width: 200%;"></canvas>
                     </div>
-                    <div class="col-md-6 container text-center">
-                        <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
-                        <hr>
-                        <div class="row">
-
-                                <canvas id="LESAO_CARIE_PRIMARIA_MASCULINO" style="max-width: 200%;"></canvas>
-
-                        </div>
-<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{opcao | upper}} : </a>-->
-<!--                        <a class="bold700"  style="text-decoration:none; font-size: 200%">{{entrada | upper}}</a>-->
-
-                        <hr>
-                            <a class="bold700"  style="text-decoration:none; font-size: 200%">PERCENTUAL MASCULINO</a>
-                        <hr>
-                         <div class="container text-center">
-                            <span>
-                                <a class="bold700"  style="text-decoration:none; font-size: 300%">{{percent_masc | upper}} %</a>
-                            </span>
-                        </div>
-                            <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">FAIXA ETÁRIA MASCULINO</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="FAIXA_ETARIA_MASCULINO" style="max-width: 200%;"></canvas>
-                        </div>
-                        <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ETNIA MASCULINO</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="ETNIA_MASCULINO" style="max-width: 200%;"></canvas>
-                        </div>
-                               <hr>
-                        <a class="bold700"  style="text-decoration:none; font-size: 200%">ESTADO CIVIL MASCULINO</a>
-                        <hr>
-                        <div class="row">
-                                <canvas id="ESTADO_CIVIL_MASCULINO" style="max-width: 200%;"></canvas>
-
-                        </div>
-
-                    </div>
+                    <hr>
                 </div>
-            {% endif %}
-            {% for paciente in pacientes.object_list %}
-            <hr>
-                <div class="row" >
-                    <div class="" style="margin-left: 40px">
-                            <i class="fa-solid fa-user"></i>
-                            <span class="paciente_nome bold700 text-left " >
-                                {% if opcao == 'opcao7' %}
-                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.paciente.pk %}" style="text-decoration:none">{{paciente.paciente.nome | upper}}</a>
-    <!--                            <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>-->
-                                {% else %}
-                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{ paciente.nome | upper}}</a>
-                                {% endif%}
-                            </span>
-
+                 <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO {{percent_masc | upper}} %</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="LESAO_CARIE_PRIMARIA_MASCULINO" style="max-width: 200%;"></canvas>
                     </div>
+                    <hr>
                 </div>
-            <hr>
-            {% endfor %}
-            <div class="pagination justify-content-center" style="display: flex; flex-direction: row ">
-                    <div>
-                        <li class="page-item" id="previus">
-                            <span class="step-links">
-                                {% if pacientes.has_previous %}
-                                    <a class="page-link" href="?page={{ pacientes.previous_page_number }}">
-                                        <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>
-                                    </a>
-                                {% endif %}
-                            </span>
-                        </li>
-                    </div>
-                    <div>
-                        <li class="page-item" id="next">
-                            <span class="step-links">
-                                {% if pacientes.has_next %}
-
-                                    <a class="page-link" href="?page={{ pacientes.next_page_number }}">
-                                        <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>
-                                    </a>
-                                {% endif %}
-                            </span>
-                        </li>
-                    </div>
             </div>
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                    FAIXA ETARIA DOS PACIENTES COM CARIE PRIMARIA NO DENTE 18 POR SEXO BIOLÓGICO
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININA</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="FAIXA_ETARIA_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="FAIXA_ETARIA_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                    ETNIA DOS PACIENTES COM CARIE PRIMARIA NO DENTE 18 POR SEXO BIOLÓGICO
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININA</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="ETNIA_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="ETNIA_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                    ESTADO CIVIL DOS PACIENTES COM CARIE PRIMARIA NO DENTE 18 POR SEXO BIOLÓGICO
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="ESTADO_CIVIL_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="ESTADO_CIVIL_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="text-center">
+                 <a class="bold700"  style="text-decoration:none; font-size: 200%">
+                    GRAU DE INSTRUÇÃO DOS PACIENTES COM CARIE PRIMARIA NO DENTE 18 POR SEXO BIOLÓGICO
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">FEMININO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="GRAU_INSTRUÇÃO_FEMININO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6 container text-center">
+                    <br>
+                    <a class="bold700"  style="text-decoration:none; font-size: 200%">MASCULINO</a>
+                    <br>
+                    <div class="row">
+                            <canvas id="GRAU_INSTRUÇÃO_MASCULINO" style="max-width: 200%;"></canvas>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+            {% endif %}
+<!--            {% for paciente in pacientes.object_list %}-->
+<!--            <hr>-->
+<!--                <div class="row" >-->
+<!--                    <div class="" style="margin-left: 40px">-->
+<!--                            <i class="fa-solid fa-user"></i>-->
+<!--                            <span class="paciente_nome bold700 text-left " >-->
+<!--                                {% if opcao == 'opcao7' %}-->
+<!--                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.paciente.pk %}" style="text-decoration:none">{{paciente.paciente.nome | upper}}</a>-->
+<!--    &lt;!&ndash;                            <span class="paciente_valor"><span>{{paciente.created_at | date:'d/m/Y'}}</span></span>&ndash;&gt;-->
+<!--                                {% else %}-->
+<!--                                <a class="bold700" href="{% url 'paciente_detalhes' paciente.pk %}" style="text-decoration:none">{{ paciente.nome | upper}}</a>-->
+<!--                                {% endif%}-->
+<!--                            </span>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            <hr>-->
+<!--            {% endfor %}-->
+<!--            <div class="pagination justify-content-center" style="display: flex; flex-direction: row ">-->
+<!--                    <div>-->
+<!--                        <li class="page-item" id="previus">-->
+<!--                            <span class="step-links">-->
+<!--                                {% if pacientes.has_previous %}-->
+<!--                                    <a class="page-link" href="?page={{ pacientes.previous_page_number }}">-->
+<!--                                        <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>-->
+<!--                                    </a>-->
+<!--                                {% endif %}-->
+<!--                            </span>-->
+<!--                        </li>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <li class="page-item" id="next">-->
+<!--                            <span class="step-links">-->
+<!--                                {% if pacientes.has_next %}-->
+
+<!--                                    <a class="page-link" href="?page={{ pacientes.next_page_number }}">-->
+<!--                                        <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>-->
+<!--                                    </a>-->
+<!--                                {% endif %}-->
+<!--                            </span>-->
+<!--                        </li>-->
+<!--                    </div>-->
+<!--            </div>-->
         </div>
     </div>
 
 </div>
 {% if opcao == 'opcao1' %}
+<script>
+    var ctx = document.getElementById('ANTECENDENTES_FAMILIARES_GERAL').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['COM ANTECEDENTES FAMILIARES', 'SEM ANTECEDENTES FAMILIARES'],
+            datasets: [{
+                data: [{{pacientes_com_count}}, {{pacientes_sem_count}}],
+                backgroundColor: ['blue', 'red']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('ANTECEDENTES_MASCULINO').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['COM ANTECEDENTES', 'SEM ANTECEDENTES'],
+            datasets: [{
+                data: [{{pacientes_masc_com}}, {{pacientes_masc_sem}}],
+                backgroundColor: ['blue', 'red']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('ANTECEDENTES_FEMININO').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['COM ANTECEDENTES', 'SEM ANTECEDENTES'],
+            datasets: [{
+                data: [{{pacientes_fem_com}}, {{pacientes_fem_sem}}],
+                backgroundColor: ['blue', 'red']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('TIPO_ANTECEDENTES_MASCULINO').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['GLAUCOMA', 'PARADA CARDIACA', 'AVC', 'DIABETES', 'HIPERTENSÃO', 'INFARTO', 'CANCER DE BOCA',
+            'DOENÇA DE HUNTINGTON'],
+            datasets: [{
+                data: [{{pacientes_masc_glaucoma}}, {{pacientes_masc_parada_cardiaca}}, {{pacientes_masc_avc}},
+    {{pacientes_masc_diabetes}}, {{pacientes_masc_hipertensao}}, {{pacientes_masc_infarto}},
+    {{pacientes_masc_cancer_boca}}, {{pacientes_masc_huntington}}],
+                backgroundColor: ['red', 'blue', 'green','gray', 'orange', 'violet', 'yellow',
+                'pink']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('TIPO_ANTECEDENTES_FEMININO').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['GLAUCOMA', 'PARADA CARDIACA', 'AVC', 'DIABETES', 'HIPERTENSÃO', 'INFARTO', 'CANCER DE BOCA',
+            'DOENÇA DE HUNTINGTON'],
+            datasets: [{
+                data: [{{pacientes_fem_glaucoma}}, {{pacientes_fem_parada_cardiaca}}, {{pacientes_fem_avc}},
+    {{pacientes_fem_diabetes}}, {{pacientes_fem_hipertensao}}, {{pacientes_fem_infarto}},
+    {{pacientes_fem_cancer_boca}}, {{pacientes_fem_huntington}}],
+                backgroundColor: ['red', 'blue', 'green','gray', 'orange', 'violet', 'yellow',
+                'pink']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+        }
+    });
+</script>
     <script>
-        var ctx = document.getElementById('graficoPizza').getContext('2d');
+        var ctx = document.getElementById('FAIXA_ETARIA_ANTECEDENTES_FEMININO').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['MASCULINO', 'FEMININO'],
+                labels: ['JOVEM', 'ADULTO', 'IDOSO'],
                 datasets: [{
-                    data: [{{qtd1}}, {{qtd2}}],
-                    backgroundColor: ['blue', 'red']
+                    data: [{{jovem_fem}}, {{adulto_fem}}, {{idoso_fem}}],
+                    backgroundColor: ['green', 'orange', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+        <script>
+        var ctx = document.getElementById('FAIXA_ETARIA_ANTECEDENTES_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['JOVEM', 'ADULTO', 'IDOSO'],
+                datasets: [{
+                    data: [{{jovem_masc}}, {{adulto_masc}}, {{idoso_masc}}],
+                    backgroundColor: ['green', 'orange', 'red']
                 }]
             },
             options: {
@@ -325,7 +538,7 @@
         });
     </script>
 {% endif %}
-{% if opcao == 'opcao7' %}
+{% if opcao == 'opcao2' %}
     <script>
         var ctx = document.getElementById('LESAO_CARIE_PRIMARIA_FEMININO').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -536,16 +749,40 @@
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['ANALFABETO', '5º ANO INCOMPLETO', '5º COMPLETO', 'FUNDAMENTAL INCOMPLETO',
+                labels: ['ANALFABETO', 'FUNDAMENTAL INCOMPLETO',
                     'FUNDAMENTAL COMPLETO','MEDIO INCOMPLETO', 'MEDIO COMPLETO', 'SUPERIOR INCOMPLETO',
                 'SUPERIOR COMPLETO', 'MESTRADO', 'DOUTORADO', 'NDN'],
                 datasets: [{
-                    data: [{{analfabeto_fem}}, {{q5_incompleto_fem}}, {{q5_completo_fem}},{{s6_9_fundamental_fem}},
+                    data: [{{analfabeto_fem}}, {{fundamental_incompleto_fem}},
                             {{fundamental_completo_fem}},
                             {{medio_incompleto_fem}},{{medio_completo_fem}}, {{superior_incompleto_fem}},
                             {{superior_completo_fem}}, {{mestrado_fem}}, {{doutorado_fem}}, {{gi_ndn_fem}}],
-                    backgroundColor: ['#6A5ACD', '#836FFF', '#191970','#000080', '#0000CD', '#6495ED', '#008B8B',
-                    '#98FB98', '#ADFF2F', '#B8860B', '#D2691E']
+                    backgroundColor: ['red', 'blue', 'green','gray', 'orange', 'violet', 'yellow',
+                    'pink', 'purple']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1  // Pode ajustar esse valor para controlar a relação largura/altura
+            }
+        });
+    </script>
+<script>
+        var ctx = document.getElementById('GRAU_INSTRUÇÃO_MASCULINO').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['ANALFABETO', 'FUNDAMENTAL INCOMPLETO',
+                    'FUNDAMENTAL COMPLETO','MEDIO INCOMPLETO', 'MEDIO COMPLETO', 'SUPERIOR INCOMPLETO',
+                'SUPERIOR COMPLETO', 'MESTRADO', 'DOUTORADO', 'NDN'],
+                datasets: [{
+                    data: [{{analfabeto_masc}}, {{fundamental_incompleto_masc}},
+                            {{fundamental_completo_masc}},
+                            {{medio_incompleto_masc}},{{medio_completo_masc}}, {{superior_incompleto_masc}},
+                            {{superior_completo_masc}}, {{mestrado_masc}}, {{doutorado_masc}}, {{gi_ndn_masc}}],
+                    backgroundColor: ['red', 'blue', 'green','gray', 'orange', 'violet', 'yellow',
+                    'pink', 'purple']
                 }]
             },
             options: {

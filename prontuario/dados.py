@@ -39,7 +39,7 @@ def grau_instruncao_random():
         'ANALFABETO',
         'FUNDAMENTAL INCOMPLETO',
         'FUNDAMENTAL COMPLETO',
-        'MÉDIO INCOMPLETO',
+        'MEDIO INCOMPLETO',
         'MEDIO COMPLETO',
         'SUPERIOR INCOMPLETO',
         'SUPERIOR COMPLETO',
